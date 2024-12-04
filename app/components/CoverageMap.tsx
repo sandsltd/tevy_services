@@ -35,50 +35,15 @@ const createPulsingMarker = (map: mapboxgl.Map): CustomImageInterface => {
     },
 
     render: function() {
-      if (!this.context) return false
+      if (!this.context) return false;
 
-      const duration = 2000
-      const t = (performance.now() % duration) / duration
+      const imageData = this.context.getImageData(0, 0, this.width, this.height);
+      const buffer = new Uint8Array(imageData.data.length);
+      buffer.set(imageData.data);
+      this.data = buffer;
 
-      const radius = (size / 2) * 0.3
-      const outerRadius = (size / 2) * 0.7 * t + radius
-
-      // Draw outer circle
-      this.context.clearRect(0, 0, this.width, this.height)
-      this.context.beginPath()
-      this.context.arc(
-        this.width / 2,
-        this.height / 2,
-        outerRadius,
-        0,
-        Math.PI * 2
-      )
-      this.context.fillStyle = `rgba(62, 121, 127, ${1 - t})`
-      this.context.fill()
-
-      // Draw inner circle
-      this.context.beginPath()
-      this.context.arc(
-        this.width / 2,
-        this.height / 2,
-        radius,
-        0,
-        Math.PI * 2
-      )
-      this.context.fillStyle = 'rgba(62, 121, 127, 1)'
-      this.context.strokeStyle = 'white'
-      this.context.lineWidth = 2 + 4 * (1 - t)
-      this.context.fill()
-      this.context.stroke()
-
-      // Update this image's data with data from the canvas
-      this.data = new Uint8Array(this.context.getImageData(0, 0, this.width, this.height).data.buffer)
-
-      // Keep the map repainting
-      map.triggerRepaint()
-
-      // Return `true` to let the map know that the image was updated
-      return true
+      map.triggerRepaint();
+      return true;
     }
   }
 
