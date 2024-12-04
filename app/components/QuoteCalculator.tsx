@@ -206,7 +206,14 @@ export default function QuoteCalculator() {
     if (quote.wheelCount && quote.step === 1) setQuote(prev => ({ ...prev, step: 2 }))
     if (quote.damageLevel && quote.step === 2) setQuote(prev => ({ ...prev, step: 3 }))
     if (quote.serviceSpeed && quote.location && quote.step === 3) setQuote(prev => ({ ...prev, step: 4 }))
-  }, [quote.wheelSize, quote.wheelCount, quote.damageLevel, quote.serviceSpeed, quote.location])
+  }, [
+    quote.wheelSize, 
+    quote.wheelCount, 
+    quote.damageLevel, 
+    quote.serviceSpeed, 
+    quote.location, 
+    quote.step
+  ])
 
   const isComplete = () => {
     return quote.wheelSize && 

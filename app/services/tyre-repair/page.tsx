@@ -1,11 +1,10 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import Navigation from '../../components/Navigation'
 import Footer from '../../components/Footer'
 import dynamic from 'next/dynamic'
 import { 
-  Wrench, 
   CheckCircle2, 
   ArrowRight,
   Star,

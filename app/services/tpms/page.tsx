@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import Navigation from '../../components/Navigation'
 import Footer from '../../components/Footer'
@@ -12,7 +12,6 @@ import {
   Clock,
   Shield,
   Phone,
-  MessageSquare,
   ChevronDown,
   AlertTriangle,
   Settings
