@@ -77,7 +77,17 @@ const getPopupContent = (location: string, coverage: CoverageType, coordinates: 
   `
 }
 
-const createPulsingMarker = (map: mapboxgl.Map) => {
+// Add type definition
+type CustomImageInterface = {
+  width: number;
+  height: number;
+  data: Uint8Array;
+  onAdd: () => void;
+  render: () => boolean;
+  context: CanvasRenderingContext2D | null;
+}
+
+const createPulsingMarker = (map: mapboxgl.Map): CustomImageInterface => {
   const size = 180
   const pulsingDot = {
     width: size,
