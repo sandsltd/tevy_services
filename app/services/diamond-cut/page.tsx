@@ -19,7 +19,6 @@ import {
   MoveHorizontal,
   Phone,
   MessageSquare,
-  Search
 } from 'lucide-react'
 import QuoteCalculator from '../../components/QuoteCalculator'
 import dynamic from 'next/dynamic'

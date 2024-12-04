@@ -2,8 +2,10 @@
 import { useEffect, useRef, useState } from 'react'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import { COVERAGE_AREA } from '../constants/coverage'
-import { MapPin as LocationIcon } from 'lucide-react'
+import { MOBILE_COVERAGE, WHEEL_COLLECTION_COVERAGE } from '../constants/coverage'
+import { MapPin, Clock } from 'lucide-react'
+import * as turf from '@turf/turf'
+import ServiceBooking from './ServiceBooking'
 
 const MARSH_BARTON: [number, number] = [-3.5239, 50.7070]
 const PRIMARY_RADIUS = 45 // 45km primary zone
@@ -97,6 +99,154 @@ function debounce<T extends (...args: any[]) => any>(
   };
 }
 
+// Update coverage checking function
+const checkCoverage = (coordinates: [number, number]): CoverageType[] => {
+  const point = turf.point(coordinates)
+  const coverageAreas: CoverageType[] = []
+  
+  if (turf.booleanPointInPolygon(point, MOBILE_COVERAGE)) {
+    coverageAreas.push('mobile')
+  }
+  if (turf.booleanPointInPolygon(point, WHEEL_COLLECTION_COVERAGE)) {
+    coverageAreas.push('wheel-collection')
+  }
+  
+  return coverageAreas.length > 0 ? coverageAreas : ['outside']
+}
+
+// Update CoverageType
+type CoverageType = 'mobile' | 'wheel-collection' | 'outside'
+
+// Add this CSS style along with the pulsingDotStyle
+const popupStyle = `
+  .mapboxgl-popup-content {
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(62, 121, 127, 0.3);
+    color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+  .mapboxgl-popup-close-button {
+    color: white;
+    font-size: 16px;
+    padding: 4px 8px;
+  }
+  .mapboxgl-popup-tip {
+    border-top-color: rgba(0, 0, 0, 0.85) !important;
+    border-bottom-color: rgba(0, 0, 0, 0.85) !important;
+  }
+`
+
+// Update the getPopupContent function
+const getPopupContent = (location: string, coverageTypes: CoverageType[], coordinates: [number, number]) => {
+  const distanceMiles = Math.round(turf.distance(MARSH_BARTON, coordinates, { units: 'kilometers' }) * 0.621371)
+  
+  const driveTimeMinutes = Math.round((distanceMiles / 40) * 60)
+  const driveTimeText = driveTimeMinutes > 60 
+    ? `${Math.floor(driveTimeMinutes / 60)}h ${driveTimeMinutes % 60}m`
+    : `${driveTimeMinutes}m`
+
+  const servicesInfo = {
+    mobile: {
+      title: "✓ Premium Mobile Service Available",
+      description: "Professional on-site diamond cut wheel repair and alloy wheel polishing service at your location",
+      bgColor: "rgba(62, 121, 127, 0.2)"
+    },
+    'wheel-collection': {
+      title: "✓ Collection & Delivery Services",
+      services: [
+        {
+          title: "Alloy Wheel Services",
+          description: "Collection & delivery service for diamond cutting and custom painting",
+          bgColor: "rgba(255, 107, 107, 0.15)"
+        },
+        {
+          title: "Tyre Services",
+          description: "Collection & delivery service for tyre fitting and repairs",
+          bgColor: "rgba(255, 107, 107, 0.15)"
+        }
+      ],
+      bgColor: "rgba(255, 107, 107, 0.2)"
+    },
+    outside: {
+      title: "Outside Service Area",
+      description: "Contact us to discuss custom service options for your location",
+      bgColor: "rgba(255, 255, 255, 0.1)"
+    }
+  }
+
+  const servicesContent = coverageTypes.map(type => {
+    if (type === 'wheel-collection') {
+      const services = servicesInfo[type].services.map(service => `
+        <div style="background: ${service.bgColor}" class="p-3 rounded-lg">
+          <p class="text-sm font-semibold text-white">✓ ${service.title}</p>
+          <p class="text-sm text-gray-200">${service.description}</p>
+        </div>
+      `).join('')
+
+      return `
+        <div class="flex flex-col gap-2">
+          <p class="text-sm font-semibold text-white mb-1">${servicesInfo[type].title}</p>
+          ${services}
+        </div>
+      `
+    }
+
+    return `
+      <div style="background: ${servicesInfo[type].bgColor}" class="p-3 rounded-lg">
+        <p class="text-sm font-semibold text-white">${servicesInfo[type].title}</p>
+        <p class="text-sm text-gray-200">${servicesInfo[type].description}</p>
+      </div>
+    `
+  }).join('')
+
+  return `
+    <div class="flex flex-col gap-4">
+      <div>
+        <h3 class="text-xl font-semibold text-white">${location}</h3>
+        <div class="flex flex-col gap-1.5 mt-2">
+          <div class="flex items-center gap-2 text-sm">
+            <svg class="w-4 h-4 text-[#3E797F]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span class="text-gray-300">${distanceMiles} miles from workshop</span>
+          </div>
+          <div class="flex items-center gap-2 text-sm">
+            <svg class="w-4 h-4 text-[#3E797F]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span class="text-gray-300">Estimated ${driveTimeText} drive time</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2">
+        ${servicesContent}
+      </div>
+      <button
+        id="getQuoteBtn"
+        data-location="${location}"
+        data-distance="${distanceMiles}"
+        data-services='${JSON.stringify(coverageTypes)}'
+        class="w-full px-4 py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-semibold transition-colors"
+      >
+        Get Quote
+      </button>
+    </div>
+  `
+}
+
+// Add this CSS animation at the top of the file after the imports
+const pulsingDotStyle = `
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+`
+
 export default function CoverageMap() {
   const mapContainer = useRef<HTMLDivElement>(null)
   const map = useRef<mapboxgl.Map | null>(null)
@@ -104,6 +254,13 @@ export default function CoverageMap() {
   const [searchResults, setSearchResults] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [showInitialOverlay, setShowInitialOverlay] = useState(true)
+  const [showQuoteCalculator, setShowQuoteCalculator] = useState(false)
+  const [quoteLocation, setQuoteLocation] = useState<{
+    name: string
+    distance: number
+    services: CoverageType[]
+  } | null>(null)
 
   // Move handleSearch before debouncedSearch
   const handleSearch = async (query: string) => {
@@ -158,24 +315,67 @@ export default function CoverageMap() {
         bearing: -10
       })
 
-      // Wait for map to load before adding layers
       newMap.on('load', () => {
         console.log('Map loaded successfully')
         
         try {
-          // Add coverage area
-          newMap.addSource('coverage-area', {
+          // Add mobile service coverage area
+          newMap.addSource('mobile-coverage', {
             type: 'geojson',
-            data: COVERAGE_AREA
+            data: MOBILE_COVERAGE
           })
 
+          // Add collection/delivery coverage area
+          newMap.addSource('collection-coverage', {
+            type: 'geojson',
+            data: WHEEL_COLLECTION_COVERAGE
+          })
+
+          // Add mobile coverage area fill
           newMap.addLayer({
-            id: 'coverage-gradient',
+            id: 'mobile-coverage-fill',
             type: 'fill',
-            source: 'coverage-area',
+            source: 'mobile-coverage',
             paint: {
               'fill-color': '#3E797F',
               'fill-opacity': 0.2
+            }
+          })
+
+          // Add mobile coverage area border
+          newMap.addLayer({
+            id: 'mobile-coverage-border',
+            type: 'line',
+            source: 'mobile-coverage',
+            paint: {
+              'line-color': '#3E797F',
+              'line-width': 2,
+              'line-opacity': 0.8,
+              'line-blur': 3
+            }
+          })
+
+          // Add collection coverage area fill
+          newMap.addLayer({
+            id: 'collection-coverage-fill',
+            type: 'fill',
+            source: 'collection-coverage',
+            paint: {
+              'fill-color': '#FF6B6B',
+              'fill-opacity': 0.2
+            }
+          })
+
+          // Add collection coverage area border
+          newMap.addLayer({
+            id: 'collection-coverage-border',
+            type: 'line',
+            source: 'collection-coverage',
+            paint: {
+              'line-color': '#7F3E3E',
+              'line-width': 2,
+              'line-opacity': 0.8,
+              'line-blur': 3
             }
           })
 
@@ -223,8 +423,29 @@ export default function CoverageMap() {
     }
   }, [])
 
+  // Replace the popup click handler with this simpler version
+  useEffect(() => {
+    const handleQuoteClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.id === 'getQuoteBtn') {
+        const btn = target as HTMLButtonElement;
+        setQuoteLocation({
+          name: btn.dataset.location || '',
+          distance: parseInt(btn.dataset.distance || '0'),
+          services: JSON.parse(btn.dataset.services || '[]')
+        });
+        setShowQuoteCalculator(true);
+      }
+    };
+
+    document.addEventListener('click', handleQuoteClick);
+    return () => document.removeEventListener('click', handleQuoteClick);
+  }, []);
+
   return (
     <div className="relative">
+      <style>{pulsingDotStyle}</style>
+      <style>{popupStyle}</style>
       {/* Search Box */}
       <div className="absolute top-4 left-4 right-4 z-10 max-w-md mx-auto">
         <div className="relative">
@@ -252,7 +473,7 @@ export default function CoverageMap() {
               <div className="animate-spin rounded-full h-4 w-4 border-2 border-[#3E797F] border-t-transparent"></div>
             ) : (
               <>
-                <LocationIcon className="w-4 h-4" />
+                <MapPin className="w-4 h-4" />
                 <span className="text-sm">Locate Me</span>
               </>
             )}
@@ -268,21 +489,51 @@ export default function CoverageMap() {
                 onClick={() => {
                   if (map.current && result.center) {
                     const [lng, lat] = result.center
+                    const coordinates: [number, number] = [lng, lat]
                     
-                    map.current.flyTo({
-                      center: [lng, lat],
-                      zoom: 13,
-                      duration: 2000
-                    })
+                    // Clear existing markers
+                    const markers = document.getElementsByClassName('mapboxgl-marker')
+                    while(markers.length > 0){
+                      markers[0].remove()
+                    }
 
-                    // Add a marker at the selected location
+                    // Add new marker
                     new mapboxgl.Marker({
                       color: '#3E797F'
                     })
-                      .setLngLat([lng, lat])
+                      .setLngLat(coordinates)
                       .addTo(map.current)
 
-                    // Clear search results
+                    // Remove existing popups
+                    const popups = document.getElementsByClassName('mapboxgl-popup')
+                    while(popups.length > 0){
+                      popups[0].remove()
+                    }
+
+                    // Check coverage and create popup
+                    const coverage = checkCoverage(coordinates)
+                    const popupContent = document.createElement('div')
+                    popupContent.innerHTML = getPopupContent(result.place_name, coverage, coordinates)
+
+                    // Add popup
+                    new mapboxgl.Popup({
+                      closeButton: true,
+                      className: 'coverage-popup',
+                      maxWidth: '320px',
+                      offset: 25
+                    })
+                      .setLngLat(coordinates)
+                      .setDOMContent(popupContent)
+                      .addTo(map.current)
+
+                    // Adjust map view
+                    map.current.flyTo({
+                      center: [lng - 0.02, lat], // Offset to make room for popup
+                      zoom: 12,
+                      duration: 2000
+                    })
+
+                    // Clear search
                     setSearchResults([])
                     setSearchQuery('')
                   }
@@ -298,10 +549,82 @@ export default function CoverageMap() {
 
       {/* Map Container */}
       <div className="relative w-full h-[600px] rounded-2xl overflow-hidden">
-        <div 
-          ref={mapContainer} 
-          className="absolute inset-0"
-        />
+        <div ref={mapContainer} className="absolute inset-0" />
+        
+        {/* Initial Overlay */}
+        {showInitialOverlay && (
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center">
+            <div className="max-w-md text-center p-8">
+              <h3 className="text-2xl font-bold mb-4">Check Service Availability</h3>
+              <p className="text-gray-300 mb-6">
+                Enter your location or click anywhere on the map to check which services are available in your area
+              </p>
+              <div className="flex flex-col gap-4">
+                <button
+                  onClick={() => setShowInitialOverlay(false)}
+                  className="px-6 py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2"
+                >
+                  <MapPin className="w-5 h-5" />
+                  Start Now
+                </button>
+                <button
+                  onClick={() => {
+                    setShowInitialOverlay(false)
+                    // Add geolocation request here if you want
+                    if (navigator.geolocation) {
+                      navigator.geolocation.getCurrentPosition((position) => {
+                        if (map.current) {
+                          const coords: [number, number] = [position.coords.longitude, position.coords.latitude]
+                          map.current.flyTo({
+                            center: coords,
+                            zoom: 12,
+                            duration: 2000
+                          })
+                        }
+                      })
+                    }
+                  }}
+                  className="px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2"
+                >
+                  <MapPin className="w-5 h-5" />
+                  Use My Location
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Legend - moved higher and added workshop marker */}
+        <div className="absolute bottom-16 left-4 bg-black/80 backdrop-blur-sm p-4 rounded-lg border border-[#3E797F]/30">
+          <style>{pulsingDotStyle}</style>
+          <h3 className="text-sm font-semibold mb-3">Service Areas</h3>
+          <div className="space-y-2.5">
+            {/* Workshop Location with animation */}
+            <div className="flex items-center gap-2 border-b border-[#3E797F]/20 pb-2 mb-2">
+              <div className="relative">
+                <div 
+                  className="w-4 h-4 rounded-full bg-[#3E797F]"
+                  style={{ animation: 'pulse 2s ease-in-out infinite' }}
+                />
+                <div 
+                  className="absolute inset-0 rounded-full ring-2 ring-white/20"
+                  style={{ animation: 'pulse 2s ease-in-out infinite' }}
+                />
+              </div>
+              <span className="text-sm">Workshop (Marsh Barton)</span>
+            </div>
+            
+            {/* Coverage Areas */}
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded-sm bg-[#3E797F] opacity-40"></div>
+              <span className="text-sm">Mobile Service Area</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded-sm bg-[#FF6B6B] opacity-40"></div>
+              <span className="text-sm">Collection & Delivery Area</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Add error message display */}
@@ -309,6 +632,15 @@ export default function CoverageMap() {
         <div className="absolute top-full left-0 right-0 mt-2 p-2 bg-red-500/90 backdrop-blur-sm text-white text-sm rounded-lg">
           {errorMessage}
         </div>
+      )}
+
+      {showQuoteCalculator && quoteLocation && (
+        <ServiceBooking
+          location={quoteLocation.name}
+          distance={quoteLocation.distance}
+          serviceTypes={quoteLocation.services}
+          onClose={() => setShowQuoteCalculator(false)}
+        />
       )}
     </div>
   )

@@ -6,7 +6,7 @@ import Footer from '../../components/Footer'
 import * as turf from '@turf/turf'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import { COVERAGE_AREA } from '../../constants/coverage'
+import { MOBILE_COVERAGE as COVERAGE_AREA } from '../../constants/coverage'
 import { 
   Paintbrush, 
   Palette, 
