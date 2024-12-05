@@ -758,15 +758,15 @@ const BadgeTooltip = ({ icon, label, tooltipText }: BadgeTooltipProps) => {
 
 const ServiceCard = ({ service, className, style }: ServiceCardProps) => (
   <div 
-    className={`bg-black/30 backdrop-blur-sm p-6 rounded-2xl border border-tevy-teal/20 hover:border-tevy-teal transition-all flex flex-col h-full group hover:bg-black/40 hover:transform hover:scale-[1.02] duration-300 ${className || ''}`}
+    className={`bg-[#3E797F]/10 backdrop-blur-sm p-6 rounded-2xl border border-[#3E797F]/20 hover:border-[#3E797F] transition-all flex flex-col h-full group hover:bg-[#3E797F]/20 hover:transform hover:scale-[1.02] duration-300 ${className || ''}`}
     style={style}
   >
-    <div className="text-tevy-teal mb-4 transform group-hover:scale-110 transition-transform duration-300">
+    <div className="text-[#3E797F] mb-4 transform group-hover:scale-110 transition-transform duration-300">
       <div className="w-10 h-10 flex items-center justify-center">
         {service.icon}
       </div>
     </div>
-    <h3 className="text-xl font-bold mb-3 text-white group-hover:text-tevy-teal transition-colors duration-300">
+    <h3 className="text-xl font-bold mb-3 text-[#3E797F] group-hover:text-[#3E797F]/80 transition-colors duration-300">
       {service.title}
     </h3>
     <p className="text-gray-400 mb-4 flex-grow min-h-[60px] text-sm leading-relaxed">
@@ -793,14 +793,14 @@ const ServiceCard = ({ service, className, style }: ServiceCardProps) => (
       
       <div className="flex flex-col gap-2">
         <button 
-          className="w-full bg-tevy-teal hover:bg-tevy-teal/80 px-4 py-2 rounded-full text-sm font-semibold transition-all transform hover:scale-105 flex items-center justify-center gap-2"
+          className="w-full bg-[#3E797F] hover:bg-[#3E797F]/80 px-4 py-2 rounded-full text-sm font-semibold transition-all transform hover:scale-105 flex items-center justify-center gap-2"
           onClick={() => {/* Add quote/booking logic */}}
         >
           Get Free Quote
         </button>
         
         <button 
-          className="w-full bg-transparent border border-tevy-teal hover:bg-tevy-teal/20 px-4 py-2 rounded-full text-sm font-semibold transition-all transform hover:scale-105 flex items-center justify-center gap-2 group/button"
+          className="w-full bg-transparent border border-[#3E797F] hover:bg-[#3E797F]/20 px-4 py-2 rounded-full text-sm font-semibold transition-all transform hover:scale-105 flex items-center justify-center gap-2 group/button"
         >
           Learn More
           <ArrowRight className="w-4 h-4 transform transition-transform duration-300 group-hover/button:translate-x-1" />

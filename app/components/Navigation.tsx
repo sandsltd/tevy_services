@@ -29,7 +29,7 @@ const Navigation = ({ className }: NavigationProps) => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between">
           <Link href="/" className="text-2xl font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">
-            <span className="text-tevy-teal">TEVY</span>
+            <span className="text-[#3E797F]">TEVY</span>
             <span className="text-white">SERVICES</span>
           </Link>
           

@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { X, ChevronRight, Car, Wrench, HelpCircle } from 'lucide-react'
 import imageCompression from 'browser-image-compression';
+import Image from 'next/image'
 
 interface ServiceBookingProps {
   location: string
@@ -251,7 +252,7 @@ export default function ServiceBooking({
 
     // Reset form error when changing steps
     setFormError(null)
-  }, [step])
+  }, [step, activeSteps, currentStepIndex])
 
   useEffect(() => {
     if (serviceType) {
@@ -846,10 +847,12 @@ export default function ServiceBooking({
             <div className="grid grid-cols-2 gap-2">
               {wheelPhotos.map((photo, index) => (
                 <div key={index} className="relative aspect-square rounded-lg overflow-hidden bg-black/40">
-                  <img
+                  <Image 
                     src={URL.createObjectURL(photo)}
                     alt={`Wheel ${index + 1}`}
-                    className="object-cover w-full h-full"
+                    width={500}
+                    height={300}
+                    className="w-full h-auto"
                   />
                   <button
                     onClick={() => {

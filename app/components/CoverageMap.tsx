@@ -630,7 +630,7 @@ export default function CoverageMap() {
     } catch (error) {
       console.error('Map initialization error:', error)
     }
-  }, [isInView])
+  }, [isInView, showInitialOverlay])
 
   // Replace the popup click handler with this simpler version
   useEffect(() => {
