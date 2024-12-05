@@ -212,6 +212,11 @@ export default function ServiceBooking({
   })
 
   useEffect(() => {
+    // Reset form error when changing steps
+    setFormError(null)
+  }, [step])
+
+  useEffect(() => {
     // When going back to service type selection, reset everything
     if (step === 1) {
       setServiceType(undefined)
@@ -244,15 +249,13 @@ export default function ServiceBooking({
 
     // Track completed steps to prevent data loss
     const completedSteps = new Set<number>()
+    const currentStepIndex = step - 1
     activeSteps.forEach((s, i) => {
       if (i < currentStepIndex) {
         completedSteps.add(s.id)
       }
     })
-
-    // Reset form error when changing steps
-    setFormError(null)
-  }, [step, activeSteps, currentStepIndex])
+  }, [step, activeSteps])
 
   useEffect(() => {
     if (serviceType) {
