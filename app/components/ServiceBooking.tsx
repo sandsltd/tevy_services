@@ -196,6 +196,7 @@ export default function ServiceBooking({
     notes: '',
     preferredContact: 'email' as 'email' | 'phone'
   })
+  const [showSuccess, setShowSuccess] = useState(false)
 
   useEffect(() => {
     // When going back to service type selection, reset everything
@@ -1071,45 +1072,54 @@ export default function ServiceBooking({
     setFormError(null)
     setIsSubmitting(true)
 
-    // Validate form
-    if (!contactForm.name.trim()) {
-      setFormError('Please enter your name')
-      setIsSubmitting(false)
-      return
-    }
-
-    if (!validateEmail(contactForm.email)) {
-      setFormError('Please enter a valid email address')
-      setIsSubmitting(false)
-      return
-    }
-
-    if (!validatePhone(contactForm.phone)) {
-      setFormError('Please enter a valid UK phone number')
-      setIsSubmitting(false)
-      return
-    }
-
     try {
+      // Validate form
+      if (!contactForm.name.trim()) {
+        setFormError('Please enter your name')
+        return
+      }
+
+      if (!validateEmail(contactForm.email)) {
+        setFormError('Please enter a valid email address')
+        return
+      }
+
+      if (!validatePhone(contactForm.phone)) {
+        setFormError('Please enter a valid UK phone number')
+        return
+      }
+
       // Prepare form data
-      const formData = {
+      const formData = new FormData()
+      formData.append('data', JSON.stringify({
         serviceType,
         serviceDetails,
         contact: contactForm,
         location,
         distance,
-        photos: wheelPhotos,
         noPhotosReason
+      }))
+
+      // Append photos if any
+      wheelPhotos.forEach(photo => {
+        formData.append('photos', photo)
+      })
+
+      // Send to API route
+      const response = await fetch('/api/submit-quote', {
+        method: 'POST',
+        body: formData
+      })
+
+      const result = await response.json()
+
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to submit form')
       }
 
-      // Log form data for now (replace with API call)
-      console.log('Form submitted:', formData)
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
-      // Close form on success
-      onClose()
+      // Just show success message without auto-closing
+      setShowSuccess(true)
+
     } catch (error) {
       setFormError('Failed to submit form. Please try again.')
     } finally {
@@ -1117,41 +1127,115 @@ export default function ServiceBooking({
     }
   }
 
+  // Add success overlay component
+  const SuccessOverlay = () => (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 backdrop-blur-md">
+      <div className="animate-fade-in bg-black/95 border-2 border-[#3E797F] rounded-lg p-8 max-w-md w-full text-center shadow-2xl">
+        <svg 
+          className="w-20 h-20 mx-auto mb-6 text-[#3E797F] animate-check" 
+          fill="none" 
+          viewBox="0 0 24 24" 
+          stroke="currentColor"
+        >
+          <path 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            strokeWidth={2} 
+            d="M5 13l4 4L19 7" 
+          />
+        </svg>
+        <h3 className="text-2xl font-bold mb-4 text-white">Request Received!</h3>
+        {wheelPhotos.length > 0 ? (
+          <p className="text-lg text-gray-300 mb-4">
+            Thank you for your request and photos. We'll review them and send you a detailed quote shortly.
+          </p>
+        ) : (
+          <p className="text-lg text-gray-300 mb-4">
+            Thank you for your request. Once we receive your wheel photos, we'll prepare your detailed quote.
+          </p>
+        )}
+        <p className="text-sm text-gray-400 mb-6">
+          Please check your email (including spam/junk folder) for confirmation and next steps.
+        </p>
+        {noPhotosReason === 'later' && (
+          <p className="text-sm text-gray-400 mt-4 pt-4 border-t border-[#3E797F]/30">
+            Check your email for instructions on how to send your wheel photos so we can provide your quote.
+          </p>
+        )}
+        <button
+          onClick={() => {
+            onClose()
+            // Reset all form state
+            setStep(1)
+            setServiceType(undefined)
+            setServiceDetails({
+              wheelCount: 4,
+              serviceTypes: []
+            })
+            setWheelPhotos([])
+            setNoPhotosReason('')
+            setTyreDetails({
+              vehicleType: 'car',
+              tyreCount: 4
+            })
+            setContactForm({
+              name: '',
+              email: '',
+              phone: '',
+              notes: '',
+              preferredContact: 'email'
+            })
+            setShowSuccess(false)
+          }}
+          className="mt-6 px-6 py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-semibold transition-colors"
+        >
+          Dismiss
+        </button>
+      </div>
+    </div>
+  )
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={onClose} />
       
       <div className="relative bg-black/90 w-full max-w-lg rounded-xl border border-[#3E797F]/30 overflow-hidden">
-        {/* Header */}
-        <div className="p-6 border-b border-[#3E797F]/30">
-          <button 
-            onClick={onClose}
-            className="absolute top-4 right-4 p-2 hover:bg-white/10 rounded-lg transition-colors"
-          >
-            <X className="w-5 h-5" />
-          </button>
-          <h3 className="text-xl font-bold">Request a Quote</h3>
-          <p className="text-sm text-gray-400 mt-1">{location}</p>
-        </div>
-
-        {/* Content */}
-        <div className="p-6">
-          <StepIndicator />
-          {renderStep()}
-          
-          {/* Navigation buttons */}
-          <div className="flex gap-3 mt-6 pt-6 border-t border-[#3E797F]/30">
-            {canGoBack && (
-              <button
-                onClick={() => setStep(step - 1)}
-                className="px-4 py-2 border border-[#3E797F]/30 rounded-lg hover:bg-white/5 transition-colors"
+        {showSuccess ? (
+          <SuccessOverlay />
+        ) : (
+          <>
+            {/* Header */}
+            <div className="p-6 border-b border-[#3E797F]/30">
+              <button 
+                onClick={onClose}
+                className="absolute top-4 right-4 p-2 hover:bg-white/10 rounded-lg transition-colors"
               >
-                Back
+                <X className="w-5 h-5" />
               </button>
-            )}
-            {/* Move the Continue/Submit buttons here instead of in each step */}
-          </div>
-        </div>
+              <h3 className="text-xl font-bold">Request a Quote</h3>
+              <p className="text-sm text-gray-400 mt-1">{location}</p>
+            </div>
+
+            {/* Content */}
+            <div className="p-6">
+              <StepIndicator />
+              {renderStep()}
+              
+              {/* Navigation buttons */}
+              <div className="flex gap-3 mt-6 pt-6 border-t border-[#3E797F]/30">
+                {canGoBack && (
+                  <button
+                    onClick={() => setStep(step - 1)}
+                    className="px-4 py-2 border border-[#3E797F]/30 rounded-lg hover:bg-white/5 transition-colors"
+                  >
+                    Back
+                  </button>
+                )}
+                {/* Move the Continue/Submit buttons here instead of in each step */}
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   )
