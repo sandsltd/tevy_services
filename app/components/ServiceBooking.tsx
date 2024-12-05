@@ -1060,7 +1060,7 @@ export default function ServiceBooking({
   const currentStepIndex = step - 1
 
   const StepIndicator = () => (
-    <div className="mb-6">
+    <div className="mb-6 px-2">
       <div className="flex items-center justify-between mb-2">
         {activeSteps.map((s, i) => (
           <div 
@@ -1072,9 +1072,7 @@ export default function ServiceBooking({
           >
             <button
               onClick={() => {
-                // Only allow going back to previous steps
                 if (i < currentStepIndex) {
-                  // Add confirmation for major state changes
                   if (s.type === 'service-type' && serviceDetails.serviceTypes.length > 0) {
                     if (window.confirm('Going back will reset your service selections. Continue?')) {
                       setStep(s.id)
@@ -1086,7 +1084,7 @@ export default function ServiceBooking({
               }}
               disabled={i > currentStepIndex}
               className={`
-                w-8 h-8 rounded-full flex items-center justify-center text-sm
+                w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center text-xs md:text-sm
                 transition-colors relative
                 ${i <= currentStepIndex 
                   ? 'bg-[#3E797F] text-white' 
@@ -1099,7 +1097,7 @@ export default function ServiceBooking({
               `}
             >
               {s.id}
-              <span className="absolute -bottom-6 text-xs whitespace-nowrap text-gray-400">
+              <span className="absolute -bottom-6 text-[10px] md:text-xs whitespace-nowrap text-gray-400 max-w-[60px] md:max-w-none truncate">
                 {s.title}
                 {s.optional && ' (Optional)'}
               </span>
@@ -1107,7 +1105,7 @@ export default function ServiceBooking({
             {i !== activeSteps.length - 1 && (
               <div 
                 className={`
-                  h-[2px] flex-1 mx-2
+                  h-[2px] flex-1 mx-1 md:mx-2
                   ${i < currentStepIndex 
                     ? 'bg-[#3E797F]' 
                     : 'bg-[#3E797F]/20'
@@ -1233,8 +1231,8 @@ export default function ServiceBooking({
     }
 
     return (
-      <div className="absolute inset-0 z-[60] bg-black/90 backdrop-blur-sm flex items-center justify-center">
-        <div className="max-w-sm w-full mx-auto p-6 text-center">
+      <div className="absolute inset-0 z-[60] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="max-w-[280px] md:max-w-sm w-full mx-auto text-center">
           <div className="relative w-16 h-16 mx-auto mb-4">
             <svg 
               className="animate-spin w-16 h-16 text-[#3E797F]" 
@@ -1280,7 +1278,7 @@ export default function ServiceBooking({
   // Add success overlay component
   const SuccessOverlay = () => (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 backdrop-blur-md">
-      <div className="animate-fade-in bg-black/95 border-2 border-[#3E797F] rounded-lg p-8 max-w-md w-full text-center shadow-2xl">
+      <div className="animate-fade-in bg-black/95 border-2 border-[#3E797F] rounded-lg p-6 md:p-8 max-w-[280px] md:max-w-md w-full text-center shadow-2xl">
         <svg 
           className="w-20 h-20 mx-auto mb-6 text-[#3E797F] animate-check" 
           fill="none" 
@@ -1346,30 +1344,32 @@ export default function ServiceBooking({
   )
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center md:p-4">
       <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={onClose} />
       
-      <div className="relative bg-black/90 w-full max-w-lg rounded-xl border border-[#3E797F]/30 overflow-hidden">
+      <div className="relative bg-black/90 w-full h-full md:h-auto md:max-h-[90vh] md:max-w-lg rounded-none md:rounded-xl border-0 md:border border-[#3E797F]/30 overflow-hidden flex flex-col">
         {showSuccess ? (
           <SuccessOverlay />
         ) : (
           <>
             {/* Header */}
-            <div className="p-6 border-b border-[#3E797F]/30">
+            <div className="p-4 md:p-6 border-b border-[#3E797F]/30 safe-top">
               <button 
                 onClick={onClose}
                 className="absolute top-4 right-4 p-2 hover:bg-white/10 rounded-lg transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
-              <h3 className="text-xl font-bold">Request a Quote</h3>
+              <h3 className="text-lg md:text-xl font-bold">Request a Quote</h3>
               <p className="text-sm text-gray-400 mt-1">{location}</p>
             </div>
 
             {/* Content */}
-            <div className="p-6">
-              <StepIndicator />
-              {renderStep()}
+            <div className="flex-1 overflow-y-auto">
+              <div className="p-4 md:p-6">
+                <StepIndicator />
+                {renderStep()}
+              </div>
             </div>
           </>
         )}
