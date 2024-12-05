@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { X, ChevronRight, Car, Wrench, HelpCircle } from 'lucide-react'
+import imageCompression from 'browser-image-compression';
 
 interface ServiceBookingProps {
   location: string
@@ -165,6 +166,13 @@ const validatePhoto = (file: File): { valid: boolean; error?: string } => {
   }
 
   return { valid: true }
+}
+
+// Add compression options
+const compressionOptions = {
+  maxSizeMB: 1,      // Max file size in MB
+  maxWidthOrHeight: 1920, // Max width/height in pixels
+  useWebWorker: true // Use web workers for better performance
 }
 
 export default function ServiceBooking({ 
@@ -780,65 +788,116 @@ export default function ServiceBooking({
     )
   }
 
-  const renderPhotosStep = () => {
-    const handlePhotoUpload = (files: FileList | null) => {
-      if (!files) return
+  const handlePhotoUpload = async (files: FileList | null) => {
+    if (!files) return
+    
+    const newPhotos = Array.from(files)
 
-      const newFiles = Array.from(files)
-      const validFiles: File[] = []
-      let errorMessage = ''
-
-      for (const file of newFiles) {
-        const validation = validatePhoto(file)
-        if (validation.valid) {
-          validFiles.push(file)
-        } else {
-          errorMessage = validation.error || 'Invalid photo'
-          break
-        }
-      }
-
-      if (errorMessage) {
-        setFormError(errorMessage)
-        return
-      }
-
-      setWheelPhotos(current => [...current, ...validFiles])
-      setFormError(null)
+    // Check if adding new photos would exceed the limit
+    if (wheelPhotos.length + newPhotos.length > 6) {
+      setFormError('Maximum 6 photos allowed')
+      return
     }
 
+    try {
+      setIsSubmitting(true) // Show loading state while compressing
+
+      // Process each photo
+      const processedPhotos = await Promise.all(
+        newPhotos.map(async (file) => {
+          // Validate first
+          const validation = validatePhoto(file)
+          if (!validation.valid) {
+            throw new Error(validation.error || 'Invalid photo')
+          }
+
+          // Compress the image
+          const compressedFile = await imageCompression(file, compressionOptions)
+
+          // Create a new File object with the original name
+          return new File(
+            [compressedFile], 
+            file.name, 
+            { type: compressedFile.type }
+          )
+        })
+      )
+
+      setWheelPhotos(prev => [...prev, ...processedPhotos])
+      setFormError(null)
+    } catch (error) {
+      setFormError(error instanceof Error ? error.message : 'Error processing photos')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const renderPhotosStep = () => {
     return (
       <div className="space-y-4">
         <h4 className="font-semibold">Wheel Photos</h4>
-        <div className="bg-[#3E797F]/10 border border-[#3E797F]/30 rounded-lg p-4">
-          <p className="text-base font-medium text-white">
-            Photo Guidelines:
-          </p>
-          <ul className="text-sm text-gray-300 mt-2 space-y-1">
-            <li>• Take photos in good lighting</li>
-            <li>• Show any damage or areas of concern</li>
-            <li>• Include all wheels that need work</li>
-            <li>• Maximum size: 10MB per photo</li>
-          </ul>
-        </div>
-
-        {formError && (
-          <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-500 text-sm">
-            {formError}
-          </div>
-        )}
-
+        
         {wheelPhotos.length > 0 ? (
-          <button
-            onClick={() => {
-              const currentStepIndex = activeSteps.findIndex(s => s.type === 'photos')
-              const nextStep = activeSteps[currentStepIndex + 1]
-              setStep(nextStep.id)
-            }}
-            className="w-full px-4 py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-semibold transition-colors"
-          >
-            Continue with {wheelPhotos.length} photo{wheelPhotos.length !== 1 ? 's' : ''}
-          </button>
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-2">
+              {wheelPhotos.map((photo, index) => (
+                <div key={index} className="relative aspect-square rounded-lg overflow-hidden bg-black/40">
+                  <img
+                    src={URL.createObjectURL(photo)}
+                    alt={`Wheel ${index + 1}`}
+                    className="object-cover w-full h-full"
+                  />
+                  <button
+                    onClick={() => {
+                      setWheelPhotos(photos => photos.filter((_, i) => i !== index))
+                    }}
+                    className="absolute top-2 right-2 p-1.5 bg-black/50 hover:bg-black/70 rounded-full transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            {wheelPhotos.length < 6 && (
+              <label className={`
+                block w-full p-4 border-2 border-dashed border-[#3E797F]/30 
+                rounded-lg hover:border-[#3E797F] transition-colors cursor-pointer 
+                text-center relative
+                ${isSubmitting ? 'opacity-50 cursor-wait' : ''}
+              `}>
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  className="hidden"
+                  onChange={(e) => handlePhotoUpload(e.target.files)}
+                  disabled={isSubmitting}
+                />
+                {isSubmitting ? (
+                  <span className="text-base text-gray-300">
+                    Optimizing photos...
+                  </span>
+                ) : (
+                  <span className="text-base text-gray-300">
+                    + Add More Photos ({6 - wheelPhotos.length} remaining)
+                  </span>
+                )}
+              </label>
+            )}
+
+            <button
+              onClick={() => {
+                const currentStepIndex = activeSteps.findIndex(s => s.type === 'photos')
+                const nextStep = activeSteps[currentStepIndex + 1]
+                setStep(nextStep.id)
+              }}
+              className="w-full px-4 py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-semibold transition-colors"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Processing...' : `Continue with ${wheelPhotos.length} photo${wheelPhotos.length !== 1 ? 's' : ''}`}
+            </button>
+          </div>
         ) : (
           <div className="space-y-4">
             <label className="block w-full p-8 border-2 border-dashed border-[#3E797F]/30 rounded-lg hover:border-[#3E797F] transition-colors cursor-pointer">
@@ -855,6 +914,9 @@ export default function ServiceBooking({
                 </div>
                 <p className="mt-1 text-sm text-gray-400">
                   JPG, PNG, or HEIC • Max 10MB per photo
+                </p>
+                <p className="mt-2 text-sm text-gray-400">
+                  You can add up to 6 photos
                 </p>
               </div>
             </label>
