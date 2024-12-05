@@ -169,4 +169,10 @@
   border-radius: 50%;
   z-index: -1;
   animation: marker-pulse 2s ease-in-out infinite;
+}
+
+/* Add these styles to hide the Mapbox logo and links */
+:global(.mapboxgl-ctrl-bottom-left),
+:global(.mapboxgl-ctrl-bottom-right) {
+  display: none !important;
 } 
