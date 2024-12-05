@@ -3,7 +3,7 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { MOBILE_COVERAGE, WHEEL_COLLECTION_COVERAGE } from '../constants/coverage'
-import { MapPin } from 'lucide-react'
+import { MapPin, Check, ArrowRight } from 'lucide-react'
 import * as turf from '@turf/turf'
 import ServiceBooking from './ServiceBooking'
 
@@ -190,7 +190,7 @@ const popupStyle = `
   }
 `
 
-// Update the getPopupContent function to be more compact on mobile
+// Update the getPopupContent function
 const getPopupContent = (location: string, coverageTypes: CoverageType[], coordinates: [number, number]) => {
   const distanceMiles = Math.round(turf.distance(MARSH_BARTON, coordinates, { units: 'kilometers' }) * 0.621371)
   const isMobile = window.innerWidth < 640
@@ -210,13 +210,13 @@ const getPopupContent = (location: string, coverageTypes: CoverageType[], coordi
       title: "✓ Collection & Delivery Services",
       services: [
         {
-          title: "Alloy Wheel Services",
-          description: "Collection & delivery service for diamond cutting and custom painting",
+          title: "Wheel Collection Service",
+          description: "We collect your wheels for diamond cutting and custom painting, then deliver them back to you",
           bgColor: "rgba(255, 107, 107, 0.15)"
         },
         {
-          title: "Tyre Services",
-          description: "Collection & delivery service for tyre fitting and repairs",
+          title: "Tyre Collection Service",
+          description: "We collect your tyres for fitting and repairs, then deliver them back to you",
           bgColor: "rgba(255, 107, 107, 0.15)"
         }
       ],
@@ -229,54 +229,73 @@ const getPopupContent = (location: string, coverageTypes: CoverageType[], coordi
     }
   }
 
-  // More compact layout for mobile
   const servicesContent = coverageTypes.map(type => {
     if (type === 'wheel-collection') {
       const services = servicesInfo[type].services.map(service => `
-        <div style="background: ${service.bgColor}" class="p-2 rounded-lg">
-          <p class="text-xs font-semibold text-white">✓ ${service.title}</p>
-          ${!isMobile ? `<p class="text-xs text-gray-200">${service.description}</p>` : ''}
+        <div class="p-3 border border-[#3E797F]/20 rounded-lg">
+          <div class="flex items-center gap-2 text-[#3E797F]">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <h4 class="text-sm font-bold">${service.title}</h4>
+          </div>
+          ${!isMobile ? `<p class="mt-1 text-xs text-gray-400 pl-6">${service.description}</p>` : ''}
         </div>
       `).join('')
 
       return `
-        <div class="flex flex-col gap-1.5">
-          <p class="text-xs font-semibold text-white">${servicesInfo[type].title}</p>
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center gap-2 text-[#3E797F] mb-1">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 8h-9"></path>
+              <path d="M20 12h-9"></path>
+              <path d="M20 16h-9"></path>
+              <path d="M4 8h1"></path>
+              <path d="M4 12h1"></path>
+              <path d="M4 16h1"></path>
+            </svg>
+            <h3 class="text-sm font-bold">${servicesInfo[type].title}</h3>
+          </div>
           ${services}
         </div>
       `
     }
 
     return `
-      <div style="background: ${servicesInfo[type].bgColor}" class="p-2 rounded-lg">
-        <p class="text-xs font-semibold text-white">${servicesInfo[type].title}</p>
-        ${!isMobile ? `<p class="text-xs text-gray-200">${servicesInfo[type].description}</p>` : ''}
+      <div class="p-3 border border-[#3E797F]/20 rounded-lg">
+        <div class="flex items-center gap-2 text-[#3E797F]">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <h4 class="text-sm font-bold">${servicesInfo[type].title}</h4>
+        </div>
+        ${!isMobile ? `<p class="mt-1 text-xs text-gray-400 pl-6">${servicesInfo[type].description}</p>` : ''}
       </div>
     `
   }).join('')
 
   return `
-    <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-4">
       <div>
-        <h3 class="text-base font-semibold text-white">${location}</h3>
-        <div class="flex flex-wrap gap-2 mt-2 text-xs text-gray-300">
-          <div class="flex items-center gap-1">
-            <svg class="w-3 h-3 text-[#3E797F]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <h2 class="text-lg font-bold text-white">${location}</h2>
+        <div class="flex flex-wrap gap-3 mt-2 text-xs text-gray-400">
+          <div class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-[#3E797F]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
               <circle cx="12" cy="10" r="3"></circle>
             </svg>
-            ${distanceMiles}mi
+            <span class="font-medium">${distanceMiles} miles</span> from workshop
           </div>
-          <div class="flex items-center gap-1">
-            <svg class="w-3 h-3 text-[#3E797F]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <div class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-[#3E797F]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10"></circle>
               <polyline points="12 6 12 12 16 14"></polyline>
             </svg>
-            ${driveTimeText}
+            <span class="font-medium">${driveTimeText}</span> drive time
           </div>
         </div>
       </div>
-      <div class="flex flex-col gap-1.5">
+      <div class="flex flex-col gap-2">
         ${servicesContent}
       </div>
       <button
@@ -284,7 +303,7 @@ const getPopupContent = (location: string, coverageTypes: CoverageType[], coordi
         data-location="${location}"
         data-distance="${distanceMiles}"
         data-services='${JSON.stringify(coverageTypes)}'
-        class="w-full px-3 py-2 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-medium text-sm transition-colors"
+        class="w-full px-4 py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-bold text-sm transition-colors"
       >
         Get Quote
       </button>
@@ -366,7 +385,8 @@ export default function CoverageMap() {
         zoom: 9,
         attributionControl: false,
         pitch: 50,
-        bearing: -10
+        bearing: -10,
+        renderWorldCopies: false
       })
 
       newMap.on('load', () => {
@@ -498,16 +518,14 @@ export default function CoverageMap() {
 
   // Memoize the click handler
   const handleLocationSelect = useCallback((result: any) => {
-    if (!map.current || !result.center) return;
+    if (!map.current || !result.center) return
     
     const [lng, lat] = result.center
     const coordinates: [number, number] = [lng, lat]
     
     // Clear existing markers
     const markers = document.getElementsByClassName('mapboxgl-marker')
-    while(markers.length > 0){
-      markers[0].remove()
-    }
+    Array.from(markers).forEach(marker => marker.remove())
 
     // Add new marker
     new mapboxgl.Marker({
@@ -524,7 +542,6 @@ export default function CoverageMap() {
           box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3);
         `
         
-        // Add pulsing ring effect
         const ring = document.createElement('div')
         ring.style.cssText = `
           position: absolute;
@@ -538,7 +555,6 @@ export default function CoverageMap() {
           pointer-events: none;
         `
         el.appendChild(ring)
-        
         return el
       })()
     })
@@ -547,9 +563,7 @@ export default function CoverageMap() {
 
     // Remove existing popups
     const popups = document.getElementsByClassName('mapboxgl-popup')
-    while(popups.length > 0){
-      popups[0].remove()
-    }
+    Array.from(popups).forEach(popup => popup.remove())
 
     // Check coverage and create popup
     const coverage = checkCoverage(coordinates)
@@ -559,10 +573,11 @@ export default function CoverageMap() {
     // Add popup
     new mapboxgl.Popup({
       closeButton: true,
-      className: 'coverage-popup',
+      className: 'coverage-popup custom-dark-popup',
       maxWidth: window.innerWidth < 640 ? '90vw' : '320px',
       offset: window.innerWidth < 640 ? [0, -15] : 25,
-      anchor: window.innerWidth < 640 ? 'bottom' : 'left'
+      anchor: window.innerWidth < 640 ? 'bottom' : 'left',
+      focusAfterOpen: false
     })
       .setLngLat(coordinates)
       .setDOMContent(popupContent)
@@ -580,18 +595,30 @@ export default function CoverageMap() {
     // Clear search
     setSearchResults([])
     setSearchQuery('')
-  }, [map]) // Only depends on map ref
+  }, [map])
 
   return (
     <div className="relative">
-      <style>{pulsingDotStyle}</style>
-      <style>{popupStyle}</style>
+      <style>
+        {`
+          .custom-dark-popup .mapboxgl-popup-content {
+            background: rgba(0, 0, 0, 0.95) !important;
+            color: white !important;
+          }
+          .custom-dark-popup .mapboxgl-popup-tip {
+            border-top-color: rgba(0, 0, 0, 0.95) !important;
+            border-bottom-color: rgba(0, 0, 0, 0.95) !important;
+          }
+        `}
+      </style>
+      
       {/* Search Box */}
       <div className="absolute top-4 left-4 right-4 z-10 max-w-md mx-auto">
         <div className="relative">
           <input
             type="text"
             value={searchQuery}
+            disabled={showInitialOverlay}
             onChange={(e) => {
               const value = e.target.value;
               setSearchQuery(value);
@@ -602,7 +629,7 @@ export default function CoverageMap() {
               }
             }}
             placeholder="Enter your postcode or town..."
-            className="w-full px-4 py-2.5 md:py-3 pl-4 pr-20 md:pr-24 bg-black/80 backdrop-blur-sm border border-[#3E797F]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#3E797F] transition-colors text-sm md:text-base"
+            className="w-full px-4 py-2.5 md:py-3 pl-4 pr-20 md:pr-24 bg-black/80 backdrop-blur-sm border border-[#3E797F]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#3E797F] transition-colors text-sm md:text-base disabled:opacity-50 disabled:cursor-not-allowed"
           />
           
           <button
@@ -633,94 +660,13 @@ export default function CoverageMap() {
                 onClick={(e) => {
                   e.preventDefault()
                   e.stopPropagation()
-                  
-                  if (map.current && result.center) {
-                    const [lng, lat] = result.center
-                    const coordinates: [number, number] = [lng, lat]
-                    
-                    // Clear existing markers
-                    const markers = document.getElementsByClassName('mapboxgl-marker')
-                    while(markers.length > 0){
-                      markers[0].remove()
-                    }
-
-                    // Add new marker
-                    new mapboxgl.Marker({
-                      element: (() => {
-                        const el = document.createElement('div')
-                        el.className = 'custom-marker'
-                        el.style.cssText = `
-                          width: 24px;
-                          height: 24px;
-                          border-radius: 50%;
-                          background: #8B5CF6;
-                          border: 2px solid white;
-                          position: relative;
-                          box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3);
-                        `
-                        
-                        // Add pulsing ring effect
-                        const ring = document.createElement('div')
-                        ring.style.cssText = `
-                          position: absolute;
-                          top: -4px;
-                          left: -4px;
-                          right: -4px;
-                          bottom: -4px;
-                          border-radius: 50%;
-                          border: 2px solid #8B5CF6;
-                          animation: marker-pulse 2s ease-in-out infinite;
-                          pointer-events: none;
-                        `
-                        el.appendChild(ring)
-                        
-                        return el
-                      })()
-                    })
-                      .setLngLat(coordinates)
-                      .addTo(map.current)
-
-                    // Remove existing popups
-                    const popups = document.getElementsByClassName('mapboxgl-popup')
-                    while(popups.length > 0){
-                      popups[0].remove()
-                    }
-
-                    // Check coverage and create popup
-                    const coverage = checkCoverage(coordinates)
-                    const popupContent = document.createElement('div')
-                    popupContent.innerHTML = getPopupContent(result.place_name, coverage, coordinates)
-
-                    // Add popup
-                    new mapboxgl.Popup({
-                      closeButton: true,
-                      className: 'coverage-popup',
-                      maxWidth: window.innerWidth < 640 ? '90vw' : '320px',
-                      offset: window.innerWidth < 640 ? [0, -15] : 25,
-                      anchor: window.innerWidth < 640 ? 'bottom' : 'left'
-                    })
-                      .setLngLat(coordinates)
-                      .setDOMContent(popupContent)
-                      .addTo(map.current)
-
-                    // Adjust map view based on screen size
-                    const isMobile = window.innerWidth < 640
-                    map.current.flyTo({
-                      center: isMobile ? coordinates : [lng - 0.02, lat],
-                      zoom: isMobile ? 11 : 12,
-                      duration: 2000,
-                      padding: isMobile ? { bottom: 200 } : { left: 200 }
-                    })
-
-                    // Clear search
-                    setSearchResults([])
-                    setSearchQuery('')
-                  }
+                  handleLocationSelect(result)
                 }}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault()
-                    e.currentTarget.click()
+                    e.stopPropagation()
+                    handleLocationSelect(result)
                   }
                 }}
                 className="block w-full px-3 md:px-4 py-2.5 md:py-3 text-left hover:bg-[#3E797F]/20 text-white text-xs md:text-sm border-b border-[#3E797F]/20 last:border-0 transition-colors cursor-pointer"
@@ -733,55 +679,63 @@ export default function CoverageMap() {
       </div>
 
       {/* Map Container */}
-      <div className="relative w-full h-[600px] rounded-2xl overflow-hidden">
-        <div ref={mapContainer} className="absolute inset-0" />
+      <div className="relative w-full h-[600px] rounded-2xl overflow-hidden bg-black">
+        <div ref={mapContainer} className="absolute inset-0 bg-black" />
         
         {/* Initial Overlay */}
         {showInitialOverlay && (
-          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-            <div className="max-w-[280px] md:max-w-md text-center p-6 md:p-8">
-              <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">Check Service Availability</h3>
-              <p className="text-sm md:text-base text-gray-300 mb-6">
-                Enter your location or click anywhere on the map to check which services are available in your area
-              </p>
-              <div className="flex flex-col gap-3 md:gap-4">
-                <button
-                  onClick={() => setShowInitialOverlay(false)}
-                  className="px-4 md:px-6 py-2.5 md:py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2 text-sm md:text-base"
-                >
-                  <MapPin className="w-4 h-4 md:w-5 md:h-5" />
-                  Start Now
-                </button>
-                <button
-                  onClick={() => {
-                    setShowInitialOverlay(false)
-                    // Add geolocation request here if you want
-                    if (navigator.geolocation) {
-                      navigator.geolocation.getCurrentPosition((position) => {
-                        if (map.current) {
-                          const coords: [number, number] = [position.coords.longitude, position.coords.latitude]
-                          map.current.flyTo({
-                            center: coords,
-                            zoom: 12,
-                            duration: 2000
-                          })
-                        }
-                      })
-                    }
-                  }}
-                  className="px-4 md:px-6 py-2.5 md:py-3 bg-white/10 hover:bg-white/20 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2 text-sm md:text-base"
-                >
-                  <MapPin className="w-4 h-4 md:w-5 md:h-5" />
-                  Use My Location
-                </button>
+          <div className="absolute inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
+            <div className="max-w-[320px] md:max-w-md text-center p-6 md:p-8">
+              <div className="mb-3">
+                <div className="flex items-center justify-center gap-2 text-[#3E797F] mb-4">
+                  <MapPin className="w-6 h-6 md:w-8 md:h-8" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-bold mb-2">Get Your Free Quote</h3>
+                <div className="h-1 w-20 bg-[#3E797F] mx-auto rounded-full mb-4"></div>
               </div>
+              
+              <div className="space-y-4 mb-6">
+                <p className="text-base md:text-lg text-white/90">
+                  Find out which premium services are available in your area
+                </p>
+                <ul className="text-sm md:text-base text-gray-300 space-y-2">
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-[#3E797F]" />
+                    Mobile Diamond Cutting Service
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-[#3E797F]" />
+                    Collection & Delivery Options
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-[#3E797F]" />
+                    Instant Service Availability Check
+                  </li>
+                </ul>
+              </div>
+
+              <button
+                onClick={() => {
+                  setShowInitialOverlay(false)
+                  // Focus the search input after a short delay to allow transition
+                  setTimeout(() => {
+                    const searchInput = document.querySelector('input[type="text"]') as HTMLInputElement
+                    if (searchInput) searchInput.focus()
+                  }, 100)
+                }}
+                className="w-full px-4 md:px-6 py-3 md:py-4 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-semibold transition-all transform hover:scale-105 flex items-center justify-center gap-2 text-base md:text-lg shadow-lg"
+              >
+                Check Your Area Now
+                <ArrowRight className="w-5 h-5" />
+              </button>
             </div>
           </div>
         )}
 
         {/* Legend - moved higher and added workshop marker */}
         <div className="absolute bottom-16 left-4 bg-black/80 backdrop-blur-sm p-3 md:p-4 rounded-lg border border-[#3E797F]/30 text-xs md:text-sm">
-          <style>{pulsingDotStyle}</style>
+          {/* Remove these style tags */}
+          {/* <style>{pulsingDotStyle}</style> */}
           <h3 className="text-sm font-semibold mb-3">Service Areas</h3>
           <div className="space-y-2.5">
             {/* Workshop Location with animation */}
