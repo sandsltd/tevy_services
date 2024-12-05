@@ -6,7 +6,7 @@ import {
   Diamond, 
   Paintbrush, 
   Car, 
-  Disc, 
+  Disc,  
   Wrench, 
   Gauge, 
   Phone, 
