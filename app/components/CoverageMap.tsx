@@ -973,31 +973,31 @@ export default function CoverageMap() {
         
         {showInitialOverlay && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            {/* Left side overlay - allow pointer events on this */}
-            <div className="absolute left-0 top-0 bottom-0 w-[450px] bg-gradient-to-r from-black/95 via-black/90 to-transparent p-8 flex flex-col pointer-events-auto">
-              <div className="flex-1 flex flex-col justify-center space-y-6">
-                <div className="space-y-3">
-                  <h2 className="text-4xl font-bold">
+            {/* Left side overlay - updated for mobile */}
+            <div className="absolute left-0 top-0 bottom-0 w-full md:w-[450px] bg-gradient-to-r from-black/95 via-black/90 to-transparent md:to-transparent p-4 md:p-8 flex flex-col pointer-events-auto">
+              <div className="flex-1 flex flex-col justify-center space-y-4 md:space-y-6">
+                <div className="space-y-2 md:space-y-3">
+                  <h2 className="text-2xl md:text-4xl font-bold">
                     <span className="text-[#3E797F]">Interactive</span><br/>
                     Coverage Map
                   </h2>
-                  <p className="text-lg text-white/80">
+                  <p className="text-base md:text-lg text-white/80">
                     Discover our premium mobile and collection services available in your area
                   </p>
                 </div>
 
-                <div className="space-y-4 max-w-sm">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-black/40 p-3 rounded-lg border border-[#3E797F]/30">
-                      <div className="flex items-center gap-2">
+                <div className="space-y-3 md:space-y-4 w-full md:max-w-sm">
+                  <div className="grid grid-cols-2 gap-2 md:gap-3">
+                    <div className="bg-black/40 p-2 md:p-3 rounded-lg border border-[#3E797F]/30">
+                      <div className="flex items-center gap-1.5 md:gap-2">
                         <div className="w-2 h-2 rounded-sm bg-[#3E797F]" />
-                        <span className="text-sm">Mobile Service</span>
+                        <span className="text-xs md:text-sm">Mobile Service</span>
                       </div>
                     </div>
-                    <div className="bg-black/40 p-3 rounded-lg border border-[#3E797F]/30">
-                      <div className="flex items-center gap-2">
+                    <div className="bg-black/40 p-2 md:p-3 rounded-lg border border-[#3E797F]/30">
+                      <div className="flex items-center gap-1.5 md:gap-2">
                         <div className="w-2 h-2 rounded-sm bg-[#FF6B6B]" />
-                        <span className="text-sm">Collection Area</span>
+                        <span className="text-xs md:text-sm">Collection Area</span>
                       </div>
                     </div>
                   </div>
@@ -1005,7 +1005,7 @@ export default function CoverageMap() {
                   <input
                     type="text"
                     placeholder="Enter your postcode or town..."
-                    className="w-full px-4 py-3 bg-white/10 border border-[#3E797F]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#3E797F]"
+                    className="w-full px-3 md:px-4 py-2.5 md:py-3 bg-white/10 border border-[#3E797F]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#3E797F] text-sm md:text-base"
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
                   
@@ -1014,30 +1014,30 @@ export default function CoverageMap() {
                       setShowInitialOverlay(false)
                       setShowLegend(true)
                     }}
-                    className="w-full px-6 py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 text-base shadow-lg group"
+                    className="w-full px-4 md:px-6 py-2.5 md:py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 text-sm md:text-base shadow-lg group"
                   >
                     Check Your Area
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
               </div>
 
-              {/* Floating info box */}
-              <div className="absolute bottom-8 left-8 right-8">
-                <div className="bg-black/40 p-4 rounded-lg border border-[#3E797F]/30">
-                  <div className="flex items-center gap-2 text-[#3E797F] mb-2">
-                    <MapPin className="w-4 h-4" />
-                    <span className="font-semibold text-white">Workshop Location</span>
+              {/* Floating info box - mobile optimized */}
+              <div className="absolute bottom-4 md:bottom-8 left-4 right-4 md:left-8 md:right-8">
+                <div className="bg-black/40 p-3 md:p-4 rounded-lg border border-[#3E797F]/30">
+                  <div className="flex items-center gap-2 text-[#3E797F] mb-1 md:mb-2">
+                    <MapPin className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                    <span className="font-semibold text-white text-sm md:text-base">Workshop Location</span>
                   </div>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-xs md:text-sm text-gray-400">
                     Main facility in Marsh Barton, Exeter with mobile coverage across the South West
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Right side interaction hint - allow pointer events on this */}
-            <div className="absolute right-8 bottom-8 bg-black/40 p-4 rounded-lg border border-[#3E797F]/30 flex items-center gap-3 animate-pulse pointer-events-auto">
+            {/* Right side interaction hint - hide on mobile */}
+            <div className="hidden md:flex absolute right-8 bottom-8 bg-black/40 p-4 rounded-lg border border-[#3E797F]/30 items-center gap-3 animate-pulse pointer-events-auto">
               <div className="w-10 h-10 rounded-full bg-[#3E797F]/20 flex items-center justify-center">
                 <MousePointer className="w-5 h-5 text-[#3E797F]" />
               </div>
@@ -1048,32 +1048,32 @@ export default function CoverageMap() {
           </div>
         )}
 
-        {/* Legend with visibility control */}
-        <div className={`absolute bottom-16 left-4 bg-black/80 backdrop-blur-sm p-3 md:p-4 rounded-lg border border-[#3E797F]/30 text-xs md:text-sm transition-all duration-500 ${showLegend ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
-          <h3 className="text-sm font-semibold mb-3">Service Areas</h3>
-          <div className="space-y-2.5">
+        {/* Legend - mobile optimized */}
+        <div className={`absolute bottom-4 md:bottom-16 left-4 right-4 md:right-auto bg-black/80 backdrop-blur-sm p-3 md:p-4 rounded-lg border border-[#3E797F]/30 text-xs md:text-sm transition-all duration-500 ${showLegend ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
+          <h3 className="text-sm font-semibold mb-2 md:mb-3">Service Areas</h3>
+          <div className="grid grid-cols-3 md:grid-cols-1 gap-2 md:space-y-2.5">
             {/* Workshop Location */}
-            <div className="flex items-center gap-2 border-b border-[#3E797F]/20 pb-2 mb-2">
-              <div className="relative w-4 h-4 rounded-full bg-[#3E797F]" />
-              <span className="text-sm">Workshop (Marsh Barton)</span>
+            <div className="flex items-center gap-1.5 md:gap-2 md:border-b md:border-[#3E797F]/20 md:pb-2 md:mb-2">
+              <div className="relative w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#3E797F]" />
+              <span className="text-xs md:text-sm">Workshop</span>
             </div>
             
             {/* Coverage Areas */}
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 rounded-sm bg-[#3E797F] opacity-40" />
-              <span className="text-sm">Mobile Service Area</span>
+            <div className="flex items-center gap-1.5 md:gap-2">
+              <div className="w-3 h-3 md:w-4 md:h-4 rounded-sm bg-[#3E797F] opacity-40" />
+              <span className="text-xs md:text-sm">Mobile</span>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 rounded-sm bg-[#FF6B6B] opacity-40" />
-              <span className="text-sm">Collection & Delivery Area</span>
+            <div className="flex items-center gap-1.5 md:gap-2">
+              <div className="w-3 h-3 md:w-4 md:h-4 rounded-sm bg-[#FF6B6B] opacity-40" />
+              <span className="text-xs md:text-sm">Collection</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Add error message display */}
+      {/* Error message - mobile optimized */}
       {errorMessage && (
-        <div className="absolute top-full left-0 right-0 mt-2 p-2 bg-red-500/90 backdrop-blur-sm text-white text-sm rounded-lg">
+        <div className="fixed bottom-4 left-4 right-4 md:absolute md:top-full md:mt-2 p-2 md:p-3 bg-red-500/90 backdrop-blur-sm text-white text-xs md:text-sm rounded-lg z-50">
           {errorMessage}
         </div>
       )}

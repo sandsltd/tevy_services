@@ -20,7 +20,7 @@ import {
   Phone,
   MessageSquare,
 } from 'lucide-react'
-import QuoteCalculator from '../../components/QuoteCalculator'
+import ServiceBooking from '../../components/ServiceBooking'
 import dynamic from 'next/dynamic'
 
 type BeforeAfterImage = {
@@ -621,27 +621,8 @@ export default function DiamondCutRepair() {
         </div>
       </section>
 
-      {/* Calculate Your Quote Section */}
-      <section className="py-20 bg-black/40 backdrop-blur-sm">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
-            <span className="text-[#3E797F]">Calculate</span>{" "}
-            <span className="text-white">Your Quote</span>
-          </h2>
-          
-          <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
-            Get an instant estimate for your diamond cut alloy wheel repair.
-            Customize your service options and see pricing in real-time.
-          </p>
-
-          <div className="max-w-3xl mx-auto">
-            <QuoteCalculator />
-          </div>
-        </div>
-      </section>
-
       {/* FAQ Section with CTA */}
-      <section>
+      <section className="py-20 bg-black/40 backdrop-blur-sm">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
             <span className="text-[#3E797F]">Frequently Asked</span>{" "}
