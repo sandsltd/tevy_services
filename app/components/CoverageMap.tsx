@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { MOBILE_COVERAGE, WHEEL_COLLECTION_COVERAGE } from '../constants/coverage'
-import { MapPin, Clock } from 'lucide-react'
+import { MapPin } from 'lucide-react'
 import * as turf from '@turf/turf'
 import ServiceBooking from './ServiceBooking'
 
