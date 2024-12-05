@@ -197,6 +197,7 @@ export default function ServiceBooking({
   const [activeSteps, setActiveSteps] = useState<ServiceStep[]>(getRequiredSteps([]))
   const [formError, setFormError] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [showSuccess, setShowSuccess] = useState(false)
   const [contactForm, setContactForm] = useState({
     name: '',
     email: '',
@@ -204,7 +205,10 @@ export default function ServiceBooking({
     notes: '',
     preferredContact: 'email' as 'email' | 'phone'
   })
-  const [showSuccess, setShowSuccess] = useState(false)
+  const [submissionStatus, setSubmissionStatus] = useState({
+    stage: 'idle' as 'idle' | 'compressing' | 'uploading' | 'sending' | 'complete',
+    progress: 0
+  })
 
   useEffect(() => {
     // When going back to service type selection, reset everything
@@ -942,7 +946,8 @@ export default function ServiceBooking({
 
   const renderContactStep = () => {
     return (
-      <div className="space-y-4">
+      <div className="space-y-4 relative">
+        {isSubmitting && <LoadingOverlay status={submissionStatus} />}
         <h4 className="font-semibold">Contact Details</h4>
 
         {formError && (
@@ -1133,23 +1138,31 @@ export default function ServiceBooking({
     e.preventDefault()
     setFormError(null)
     setIsSubmitting(true)
+    setSubmissionStatus({ stage: 'compressing', progress: 0 })
 
     try {
       // Validate form
       if (!contactForm.name.trim()) {
         setFormError('Please enter your name')
+        setIsSubmitting(false)
         return
       }
 
       if (!validateEmail(contactForm.email)) {
         setFormError('Please enter a valid email address')
+        setIsSubmitting(false)
         return
       }
 
       if (!validatePhone(contactForm.phone)) {
         setFormError('Please enter a valid UK phone number')
+        setIsSubmitting(false)
         return
       }
+
+      // Start preparing data
+      setSubmissionStatus({ stage: 'compressing', progress: 20 })
+      await new Promise(resolve => setTimeout(resolve, 500)) // Small delay for UX
 
       // Prepare form data
       const formData = new FormData()
@@ -1162,10 +1175,19 @@ export default function ServiceBooking({
         noPhotosReason
       }))
 
+      setSubmissionStatus({ stage: 'uploading', progress: 40 })
+      await new Promise(resolve => setTimeout(resolve, 500)) // Small delay for UX
+
       // Append photos if any
-      wheelPhotos.forEach(photo => {
-        formData.append('photos', photo)
-      })
+      if (wheelPhotos.length > 0) {
+        setSubmissionStatus({ stage: 'uploading', progress: 60 })
+        wheelPhotos.forEach(photo => {
+          formData.append('photos', photo)
+        })
+        await new Promise(resolve => setTimeout(resolve, 500)) // Small delay for UX
+      }
+
+      setSubmissionStatus({ stage: 'sending', progress: 80 })
 
       // Send to API route
       const response = await fetch('/api/submit-quote', {
@@ -1179,14 +1201,80 @@ export default function ServiceBooking({
         throw new Error(result.error || 'Failed to submit form')
       }
 
-      // Just show success message without auto-closing
+      setSubmissionStatus({ stage: 'complete', progress: 100 })
+      await new Promise(resolve => setTimeout(resolve, 500)) // Show 100% briefly
       setShowSuccess(true)
 
     } catch (error) {
       setFormError('Failed to submit form. Please try again.')
     } finally {
       setIsSubmitting(false)
+      setSubmissionStatus({ stage: 'idle', progress: 0 })
     }
+  }
+
+  // Update the LoadingOverlay component to receive props
+  const LoadingOverlay = ({ status }: { 
+    status: { stage: 'idle' | 'compressing' | 'uploading' | 'sending' | 'complete', progress: number }
+  }) => {
+    const getStatusText = () => {
+      switch (status.stage) {
+        case 'compressing':
+          return 'Optimizing photos for upload...'
+        case 'uploading':
+          return 'Uploading photos...'
+        case 'sending':
+          return 'Sending your request...'
+        case 'complete':
+          return 'Complete!'
+        default:
+          return 'Processing...'
+      }
+    }
+
+    return (
+      <div className="absolute inset-0 z-[60] bg-black/90 backdrop-blur-sm flex items-center justify-center">
+        <div className="max-w-sm w-full mx-auto p-6 text-center">
+          <div className="relative w-16 h-16 mx-auto mb-4">
+            <svg 
+              className="animate-spin w-16 h-16 text-[#3E797F]" 
+              viewBox="0 0 24 24"
+            >
+              <circle 
+                className="opacity-25" 
+                cx="12" 
+                cy="12" 
+                r="10" 
+                stroke="currentColor" 
+                strokeWidth="4"
+                fill="none"
+              />
+              <path 
+                className="opacity-75" 
+                fill="currentColor" 
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              />
+            </svg>
+            <div 
+              className="absolute inset-0 flex items-center justify-center text-sm font-medium"
+              style={{ color: '#3E797F' }}
+            >
+              {status.progress}%
+            </div>
+          </div>
+          <p className="text-base font-medium mb-3 text-white">{getStatusText()}</p>
+          <div className="w-full bg-[#3E797F]/20 rounded-full h-1.5 mb-3">
+            <div 
+              className="bg-[#3E797F] h-1.5 rounded-full transition-all duration-500"
+              style={{ width: `${status.progress}%` }}
+            />
+          </div>
+          <p className="text-sm text-gray-400">
+            Please don't close this window
+          </p>
+        </div>
+      </div>
+    )
   }
 
   // Add success overlay component
@@ -1282,19 +1370,6 @@ export default function ServiceBooking({
             <div className="p-6">
               <StepIndicator />
               {renderStep()}
-              
-              {/* Navigation buttons */}
-              <div className="flex gap-3 mt-6 pt-6 border-t border-[#3E797F]/30">
-                {canGoBack && (
-                  <button
-                    onClick={() => setStep(step - 1)}
-                    className="px-4 py-2 border border-[#3E797F]/30 rounded-lg hover:bg-white/5 transition-colors"
-                  >
-                    Back
-                  </button>
-                )}
-                {/* Move the Continue/Submit buttons here instead of in each step */}
-              </div>
             </div>
           </>
         )}
