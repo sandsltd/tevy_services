@@ -11,7 +11,7 @@ import {
   Gauge, 
   Phone, 
   Mail, 
-  Facebook, 
+  Facebook,  
   Instagram, 
   MapPin, 
   Star, 
