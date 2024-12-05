@@ -452,6 +452,7 @@ export default function ServiceBooking({
 
         <button
           onClick={() => {
+            // Find the next step in the sequence
             const currentStepIndex = activeSteps.findIndex(s => s.type === 'wheel-service')
             const nextStep = activeSteps[currentStepIndex + 1]
             setStep(nextStep.id)
@@ -673,7 +674,11 @@ export default function ServiceBooking({
         <button
           onClick={() => {
             setServiceDetails(prev => ({ ...prev, tyreDetails }))
-            setStep(needsPhotos ? 3 : 4)
+            
+            // Find the next step in the sequence
+            const currentStepIndex = activeSteps.findIndex(s => s.type === 'tyre-service')
+            const nextStep = activeSteps[currentStepIndex + 1]
+            setStep(nextStep.id)
           }}
           className="w-full mt-4 px-4 py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-semibold transition-colors"
         >
@@ -776,14 +781,25 @@ export default function ServiceBooking({
 
         <div className="flex gap-3">
           <button
-            onClick={() => setStep(4)}
+            onClick={() => {
+              // Find the next step in the sequence
+              const currentStepIndex = activeSteps.findIndex(s => s.type === 'photos')
+              const nextStep = activeSteps[currentStepIndex + 1]
+              setStep(nextStep.id)
+            }}
             className="flex-1 px-4 py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-semibold transition-colors"
           >
             Continue
           </button>
           {wheelPhotos.length === 0 && noPhotosReason === '' && (
             <button
-              onClick={() => setNoPhotosReason('later')}
+              onClick={() => {
+                setNoPhotosReason('later')
+                // Find the next step in the sequence
+                const currentStepIndex = activeSteps.findIndex(s => s.type === 'photos')
+                const nextStep = activeSteps[currentStepIndex + 1]
+                setStep(nextStep.id)
+              }}
               className="px-4 py-3 bg-white/10 hover:bg-white/20 rounded-lg font-semibold transition-colors"
             >
               Skip for now
