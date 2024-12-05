@@ -504,8 +504,8 @@ export default function Home() {
       <section className="relative py-20 bg-black/40 backdrop-blur-sm">
         <div className="container mx-auto px-6 max-w-7xl">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-            <span className="text-[#3E797F]">Coverage</span>{" "}
-            <span className="text-white">Area</span>
+            <span className="text-[#3E797F]">Get A</span>{" "}
+            <span className="text-white">Free Quote</span>
           </h2>
           
           <div className="max-w-5xl mx-auto">
