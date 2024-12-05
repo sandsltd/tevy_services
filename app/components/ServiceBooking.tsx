@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { X, ChevronRight, Car, Wrench, HelpCircle } from 'lucide-react'
 
 interface ServiceBookingProps {
@@ -138,6 +138,35 @@ const getRequiredSteps = (selectedServices: string[]): ServiceStep[] => {
   return steps
 }
 
+// Add these constants at the top of the file
+const MAX_PHOTO_SIZE = 10 * 1024 * 1024 // 10MB
+const ALLOWED_PHOTO_TYPES = [
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/heic', // Common iPhone format
+  'image/heif'  // Common iPhone format
+]
+
+// Add this helper function
+const validatePhoto = (file: File): { valid: boolean; error?: string } => {
+  if (file.size > MAX_PHOTO_SIZE) {
+    return {
+      valid: false,
+      error: 'Photo must be smaller than 10MB'
+    }
+  }
+
+  if (!ALLOWED_PHOTO_TYPES.includes(file.type.toLowerCase())) {
+    return {
+      valid: false,
+      error: 'Please upload a JPG, PNG, or HEIC photo'
+    }
+  }
+
+  return { valid: true }
+}
+
 export default function ServiceBooking({ 
   location, 
   distance, 
@@ -158,6 +187,68 @@ export default function ServiceBooking({
   })
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null)
   const [activeSteps, setActiveSteps] = useState<ServiceStep[]>(getRequiredSteps([]))
+  const [formError, setFormError] = useState<string | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    notes: '',
+    preferredContact: 'email' as 'email' | 'phone'
+  })
+
+  useEffect(() => {
+    // When going back to service type selection, reset everything
+    if (step === 1) {
+      setServiceType(undefined)
+      setServiceDetails({
+        wheelCount: 4,
+        serviceTypes: []
+      })
+      setTyreDetails({
+        vehicleType: 'car',
+        tyreCount: 4
+      })
+      setWheelPhotos([])
+      setNoPhotosReason('')
+      setActiveSteps(getRequiredSteps([]))
+    }
+
+    // When going back to service selection, keep service type but reset details
+    if (step === 2) {
+      setServiceDetails(prev => ({
+        ...prev,
+        serviceTypes: []
+      }))
+      setTyreDetails({
+        vehicleType: 'car',
+        tyreCount: 4
+      })
+      setWheelPhotos([])
+      setNoPhotosReason('')
+    }
+
+    // Track completed steps to prevent data loss
+    const completedSteps = new Set<number>()
+    activeSteps.forEach((s, i) => {
+      if (i < currentStepIndex) {
+        completedSteps.add(s.id)
+      }
+    })
+
+    // Reset form error when changing steps
+    setFormError(null)
+  }, [step])
+
+  useEffect(() => {
+    if (serviceType) {
+      // Reset service selections when changing service type
+      setServiceDetails(prev => ({
+        ...prev,
+        serviceTypes: []
+      }))
+    }
+  }, [serviceType])
 
   const getServiceOptions = () => {
     const options = [
@@ -689,123 +780,99 @@ export default function ServiceBooking({
   }
 
   const renderPhotosStep = () => {
+    const handlePhotoUpload = (files: FileList | null) => {
+      if (!files) return
+
+      const newFiles = Array.from(files)
+      const validFiles: File[] = []
+      let errorMessage = ''
+
+      for (const file of newFiles) {
+        const validation = validatePhoto(file)
+        if (validation.valid) {
+          validFiles.push(file)
+        } else {
+          errorMessage = validation.error || 'Invalid photo'
+          break
+        }
+      }
+
+      if (errorMessage) {
+        setFormError(errorMessage)
+        return
+      }
+
+      setWheelPhotos(current => [...current, ...validFiles])
+      setFormError(null)
+    }
+
     return (
       <div className="space-y-4">
         <h4 className="font-semibold">Wheel Photos</h4>
-        <p className="text-sm text-gray-400">
-          Photos help us provide an accurate quote. Don't worry if you can't provide photos now.
-        </p>
+        <div className="bg-[#3E797F]/10 border border-[#3E797F]/30 rounded-lg p-4">
+          <p className="text-base font-medium text-white">
+            Photo Guidelines:
+          </p>
+          <ul className="text-sm text-gray-300 mt-2 space-y-1">
+            <li>• Take photos in good lighting</li>
+            <li>• Show any damage or areas of concern</li>
+            <li>• Include all wheels that need work</li>
+            <li>• Maximum size: 10MB per photo</li>
+          </ul>
+        </div>
 
-        {wheelPhotos.length > 0 ? (
-          <div className="space-y-4">
-            {/* Show uploaded photos */}
-            <div className="grid grid-cols-2 gap-2">
-              {wheelPhotos.map((photo, index) => (
-                <div key={index} className="relative aspect-square rounded-lg overflow-hidden">
-                  <img
-                    src={URL.createObjectURL(photo)}
-                    alt={`Wheel ${index + 1}`}
-                    className="object-cover w-full h-full"
-                  />
-                  <button
-                    onClick={() => setWheelPhotos(photos => photos.filter((_, i) => i !== index))}
-                    className="absolute top-2 right-2 p-1 bg-black/50 rounded-full hover:bg-black/70"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
-                </div>
-              ))}
-            </div>
-
-            {/* Add more photos button */}
-            <label className="block w-full p-3 border border-dashed border-[#3E797F]/30 rounded-lg hover:border-[#3E797F] transition-colors cursor-pointer text-center">
-              <input
-                type="file"
-                accept="image/*"
-                multiple
-                className="hidden"
-                onChange={(e) => {
-                  const newFiles = Array.from(e.target.files || [])
-                  setWheelPhotos(current => [...current, ...newFiles])
-                }}
-              />
-              <span className="text-sm text-gray-400">
-                + Add More Photos
-              </span>
-            </label>
-          </div>
-        ) : (
-          // Photo upload options
-          <div className="space-y-3">
-            <label className="block w-full p-4 border border-dashed border-[#3E797F]/30 rounded-lg hover:border-[#3E797F] transition-colors cursor-pointer">
-              <input
-                type="file"
-                accept="image/*"
-                multiple
-                className="hidden"
-                onChange={(e) => {
-                  const files = Array.from(e.target.files || [])
-                  setWheelPhotos(files)
-                }}
-              />
-              <div className="text-center">
-                <div className="mt-2 text-sm text-gray-400">
-                  Click to upload or take photos
-                </div>
-              </div>
-            </label>
-
-            {/* No photos available option */}
-            <div className="mt-4">
-              <p className="text-sm text-gray-400 mb-2">Can't provide photos?</p>
-              <select
-                value={noPhotosReason}
-                onChange={(e) => setNoPhotosReason(e.target.value)}
-                className="w-full px-4 py-2 bg-black/40 border border-[#3E797F]/30 rounded-lg focus:outline-none focus:border-[#3E797F]"
-              >
-                <option value="">Select reason</option>
-                <option value="no-camera">No camera available</option>
-                <option value="dark">Too dark to take photos</option>
-                <option value="later">Will provide photos later</option>
-                <option value="other">Other reason</option>
-              </select>
-              {noPhotosReason === 'other' && (
-                <textarea
-                  placeholder="Please explain..."
-                  className="mt-2 w-full px-4 py-2 bg-black/40 border border-[#3E797F]/30 rounded-lg focus:outline-none focus:border-[#3E797F] h-20 resize-none"
-                />
-              )}
-            </div>
+        {formError && (
+          <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-500 text-sm">
+            {formError}
           </div>
         )}
 
-        <div className="flex gap-3">
+        {wheelPhotos.length > 0 ? (
           <button
             onClick={() => {
-              // Find the next step in the sequence
               const currentStepIndex = activeSteps.findIndex(s => s.type === 'photos')
               const nextStep = activeSteps[currentStepIndex + 1]
               setStep(nextStep.id)
             }}
-            className="flex-1 px-4 py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-semibold transition-colors"
+            className="w-full px-4 py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-semibold transition-colors"
           >
-            Continue
+            Continue with {wheelPhotos.length} photo{wheelPhotos.length !== 1 ? 's' : ''}
           </button>
-          {wheelPhotos.length === 0 && noPhotosReason === '' && (
-            <button
-              onClick={() => {
-                setNoPhotosReason('later')
-                // Find the next step in the sequence
-                const currentStepIndex = activeSteps.findIndex(s => s.type === 'photos')
-                const nextStep = activeSteps[currentStepIndex + 1]
-                setStep(nextStep.id)
-              }}
-              className="px-4 py-3 bg-white/10 hover:bg-white/20 rounded-lg font-semibold transition-colors"
-            >
-              Skip for now
-            </button>
-          )}
-        </div>
+        ) : (
+          <div className="space-y-4">
+            <label className="block w-full p-8 border-2 border-dashed border-[#3E797F]/30 rounded-lg hover:border-[#3E797F] transition-colors cursor-pointer">
+              <input
+                type="file"
+                accept="image/*"
+                multiple
+                className="hidden"
+                onChange={(e) => handlePhotoUpload(e.target.files)}
+              />
+              <div className="text-center">
+                <div className="mt-2 text-base text-gray-300">
+                  Click to upload photos or use your camera
+                </div>
+                <p className="mt-1 text-sm text-gray-400">
+                  JPG, PNG, or HEIC • Max 10MB per photo
+                </p>
+              </div>
+            </label>
+
+            <div className="text-center">
+              <button
+                onClick={() => {
+                  setNoPhotosReason('later')
+                  const currentStepIndex = activeSteps.findIndex(s => s.type === 'photos')
+                  const nextStep = activeSteps[currentStepIndex + 1]
+                  setStep(nextStep.id)
+                }}
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                I'll send photos later
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     )
   }
@@ -814,53 +881,107 @@ export default function ServiceBooking({
     return (
       <div className="space-y-4">
         <h4 className="font-semibold">Contact Details</h4>
-        <form className="space-y-4" onSubmit={(e) => {
-          e.preventDefault()
-          // Handle form submission
-          console.log('Form submitted:', {
-            serviceType,
-            serviceDetails,
-            wheelPhotos,
-            noPhotosReason,
-            location,
-            distance
-          })
-        }}>
+
+        {formError && (
+          <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-500 text-sm">
+            {formError}
+          </div>
+        )}
+
+        <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Name</label>
+            <label className="block text-base font-medium text-white mb-2">Name</label>
             <input
               type="text"
+              value={contactForm.name}
+              onChange={(e) => setContactForm(prev => ({ ...prev, name: e.target.value }))}
               className="w-full px-4 py-2 bg-black/40 border border-[#3E797F]/30 rounded-lg focus:outline-none focus:border-[#3E797F]"
               required
             />
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Email</label>
+            <label className="block text-base font-medium text-white mb-2">Email</label>
             <input
               type="email"
+              value={contactForm.email}
+              onChange={(e) => setContactForm(prev => ({ ...prev, email: e.target.value }))}
               className="w-full px-4 py-2 bg-black/40 border border-[#3E797F]/30 rounded-lg focus:outline-none focus:border-[#3E797F]"
               required
             />
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Phone</label>
+            <label className="block text-base font-medium text-white mb-2">Phone</label>
             <input
               type="tel"
+              value={contactForm.phone}
+              onChange={(e) => setContactForm(prev => ({ ...prev, phone: e.target.value }))}
               className="w-full px-4 py-2 bg-black/40 border border-[#3E797F]/30 rounded-lg focus:outline-none focus:border-[#3E797F]"
               required
             />
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Additional Notes</label>
+            <label className="block text-base font-medium text-white mb-2">Preferred Contact Method</label>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => setContactForm(prev => ({ ...prev, preferredContact: 'email' }))}
+                className={`
+                  flex-1 py-2 rounded border transition-colors
+                  ${contactForm.preferredContact === 'email'
+                    ? 'border-[#3E797F] bg-[#3E797F]/10'
+                    : 'border-[#3E797F]/30 hover:border-[#3E797F] hover:bg-[#3E797F]/10'
+                  }
+                `}
+              >
+                Email
+              </button>
+              <button
+                type="button"
+                onClick={() => setContactForm(prev => ({ ...prev, preferredContact: 'phone' }))}
+                className={`
+                  flex-1 py-2 rounded border transition-colors
+                  ${contactForm.preferredContact === 'phone'
+                    ? 'border-[#3E797F] bg-[#3E797F]/10'
+                    : 'border-[#3E797F]/30 hover:border-[#3E797F] hover:bg-[#3E797F]/10'
+                  }
+                `}
+              >
+                Phone
+              </button>
+            </div>
+          </div>
+          <div>
+            <label className="block text-base font-medium text-white mb-2">Additional Notes</label>
             <textarea
+              value={contactForm.notes}
+              onChange={(e) => setContactForm(prev => ({ ...prev, notes: e.target.value }))}
               className="w-full px-4 py-2 bg-black/40 border border-[#3E797F]/30 rounded-lg focus:outline-none focus:border-[#3E797F] h-24 resize-none"
             />
           </div>
+
+          {noPhotosReason === 'later' && (
+            <div className="p-4 bg-[#3E797F]/10 border border-[#3E797F]/30 rounded-lg">
+              <p className="text-sm text-gray-300">
+                We noticed you haven't uploaded any photos yet - no worries! After submitting 
+                your quote request, we'll send you an email with simple instructions for sharing 
+                photos of your wheels. This will help us provide you with the most accurate quote 
+                for your refurbishment.
+              </p>
+            </div>
+          )}
+
           <button
             type="submit"
-            className="w-full px-4 py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-semibold transition-colors"
+            disabled={isSubmitting}
+            className={`
+              w-full px-4 py-3 rounded-lg font-semibold transition-colors
+              ${isSubmitting
+                ? 'bg-gray-600 cursor-not-allowed'
+                : 'bg-[#3E797F] hover:bg-[#3E797F]/80'
+              }
+            `}
           >
-            Submit Quote Request
+            {isSubmitting ? 'Submitting...' : 'Submit Quote Request'}
           </button>
         </form>
       </div>
@@ -885,6 +1006,13 @@ export default function ServiceBooking({
               onClick={() => {
                 // Only allow going back to previous steps
                 if (i < currentStepIndex) {
+                  // Add confirmation for major state changes
+                  if (s.type === 'service-type' && serviceDetails.serviceTypes.length > 0) {
+                    if (window.confirm('Going back will reset your service selections. Continue?')) {
+                      setStep(s.id)
+                    }
+                    return
+                  }
                   setStep(s.id)
                 }
               }}
@@ -924,6 +1052,70 @@ export default function ServiceBooking({
       </div>
     </div>
   )
+
+  // Add validation functions
+  const validateEmail = (email: string): boolean => {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return pattern.test(email)
+  }
+
+  const validatePhone = (phone: string): boolean => {
+    // UK phone number validation
+    const pattern = /^(?:(?:\+44)|(?:0))(?:\d\s?){9,10}$/
+    return pattern.test(phone.replace(/\s/g, ''))
+  }
+
+  // Add form submission handler
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setFormError(null)
+    setIsSubmitting(true)
+
+    // Validate form
+    if (!contactForm.name.trim()) {
+      setFormError('Please enter your name')
+      setIsSubmitting(false)
+      return
+    }
+
+    if (!validateEmail(contactForm.email)) {
+      setFormError('Please enter a valid email address')
+      setIsSubmitting(false)
+      return
+    }
+
+    if (!validatePhone(contactForm.phone)) {
+      setFormError('Please enter a valid UK phone number')
+      setIsSubmitting(false)
+      return
+    }
+
+    try {
+      // Prepare form data
+      const formData = {
+        serviceType,
+        serviceDetails,
+        contact: contactForm,
+        location,
+        distance,
+        photos: wheelPhotos,
+        noPhotosReason
+      }
+
+      // Log form data for now (replace with API call)
+      console.log('Form submitted:', formData)
+      
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      
+      // Close form on success
+      onClose()
+    } catch (error) {
+      setFormError('Failed to submit form. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
