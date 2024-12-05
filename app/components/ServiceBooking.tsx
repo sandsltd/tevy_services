@@ -267,7 +267,7 @@ export default function ServiceBooking({
     const options = [
       {
         id: 'workshop',
-        title: 'Workshop Service',
+        title: 'Come To Our Workshop',
         description: 'Full service range including wheel refurbishment, tyres and TPMS at our Marsh Barton workshop',
         icon: Car,
         available: true
@@ -288,7 +288,7 @@ export default function ServiceBooking({
       options.push({
         id: 'collection',
         title: 'Collection Service',
-        description: 'We collect and return your vehicle for wheel refurbishment and tyre services',
+        description: 'We collect and return for wheel refurbishment and tyre services',
         icon: Car,
         available: true
       })

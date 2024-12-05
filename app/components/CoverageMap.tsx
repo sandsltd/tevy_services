@@ -200,110 +200,86 @@ const getPopupContent = (location: string, coverageTypes: CoverageType[], coordi
     ? `${Math.floor(driveTimeMinutes / 60)}h ${driveTimeMinutes % 60}m`
     : `${driveTimeMinutes}m`
 
-  const servicesInfo = {
-    mobile: {
-      title: "✓ Premium Mobile Service Available",
-      description: "Professional on-site diamond cut wheel repair and alloy wheel polishing service at your location",
-      bgColor: "rgba(62, 121, 127, 0.2)"
-    },
-    'wheel-collection': {
-      title: "✓ Collection & Delivery Services",
-      services: [
-        {
-          title: "Wheel Collection Service",
-          description: "We collect your wheels for diamond cutting and custom painting, then deliver them back to you",
-          bgColor: "rgba(255, 107, 107, 0.15)"
-        },
-        {
-          title: "Tyre Collection Service",
-          description: "We collect your tyres for fitting and repairs, then deliver them back to you",
-          bgColor: "rgba(255, 107, 107, 0.15)"
-        }
-      ],
-      bgColor: "rgba(255, 107, 107, 0.2)"
-    },
-    outside: {
-      title: "Outside Service Area",
-      description: "Contact us to discuss custom service options for your location",
-      bgColor: "rgba(255, 255, 255, 0.1)"
-    }
-  }
-
   const servicesContent = coverageTypes.map(type => {
     if (type === 'wheel-collection') {
-      const services = servicesInfo[type].services.map(service => `
-        <div class="p-3 border border-[#3E797F]/20 rounded-lg">
+      return `
+        <div class="p-2 border border-[#3E797F]/20 rounded-lg">
           <div class="flex items-center gap-2 text-[#3E797F]">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
-            <h4 class="text-sm font-bold">${service.title}</h4>
+            <h4 class="text-sm font-bold">Collection & Delivery Available</h4>
           </div>
-          ${!isMobile ? `<p class="mt-1 text-xs text-gray-400 pl-6">${service.description}</p>` : ''}
+          <div class="mt-1 pl-6 text-xs text-gray-400">
+            • Wheel Collection for Diamond Cutting
+            • Tyre Collection & Delivery Service
+          </div>
         </div>
-      `).join('')
+      `
+    }
 
+    if (type === 'mobile') {
       return `
-        <div class="flex flex-col gap-2">
-          <div class="flex items-center gap-2 text-[#3E797F] mb-1">
+        <div class="p-2 border border-[#3E797F]/20 rounded-lg">
+          <div class="flex items-center gap-2 text-[#3E797F]">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M20 8h-9"></path>
-              <path d="M20 12h-9"></path>
-              <path d="M20 16h-9"></path>
-              <path d="M4 8h1"></path>
-              <path d="M4 12h1"></path>
-              <path d="M4 16h1"></path>
+              <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
-            <h3 class="text-sm font-bold">${servicesInfo[type].title}</h3>
+            <h4 class="text-sm font-bold">Mobile Service Available</h4>
           </div>
-          ${services}
+          <div class="mt-1 pl-6 text-xs text-gray-400">
+            • On-site Diamond Cut Repairs
+            • Mobile Wheel Polishing
+          </div>
         </div>
       `
     }
 
     return `
-      <div class="p-3 border border-[#3E797F]/20 rounded-lg">
+      <div class="p-2 border border-[#3E797F]/20 rounded-lg">
         <div class="flex items-center gap-2 text-[#3E797F]">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="20 6 9 17 4 12"></polyline>
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="16"></line>
+            <line x1="8" y1="12" x2="16" y2="12"></line>
           </svg>
-          <h4 class="text-sm font-bold">${servicesInfo[type].title}</h4>
+          <h4 class="text-sm font-bold">Outside Service Area</h4>
         </div>
-        ${!isMobile ? `<p class="mt-1 text-xs text-gray-400 pl-6">${servicesInfo[type].description}</p>` : ''}
+        <div class="mt-1 pl-6 text-xs text-gray-400">
+          Contact us to discuss options
+        </div>
       </div>
     `
   }).join('')
 
   return `
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-2">
       <div>
-        <h2 class="text-lg font-bold text-white">${location}</h2>
-        <div class="flex flex-wrap gap-3 mt-2 text-xs text-gray-400">
+        <h2 class="text-base font-bold text-white mb-2">${location}</h2>
+        <div class="flex items-center gap-3 text-xs text-gray-400">
           <div class="flex items-center gap-1.5">
-            <svg class="w-4 h-4 text-[#3E797F]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg class="w-3.5 h-3.5 text-[#3E797F]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
               <circle cx="12" cy="10" r="3"></circle>
             </svg>
-            <span class="font-medium">${distanceMiles} miles</span> from workshop
+            <span>${distanceMiles}mi</span>
           </div>
           <div class="flex items-center gap-1.5">
-            <svg class="w-4 h-4 text-[#3E797F]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg class="w-3.5 h-3.5 text-[#3E797F]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10"></circle>
               <polyline points="12 6 12 12 16 14"></polyline>
             </svg>
-            <span class="font-medium">${driveTimeText}</span> drive time
+            <span>${driveTimeText}</span>
           </div>
         </div>
       </div>
-      <div class="flex flex-col gap-2">
-        ${servicesContent}
-      </div>
+      ${servicesContent}
       <button
         id="getQuoteBtn"
         data-location="${location}"
         data-distance="${distanceMiles}"
         data-services='${JSON.stringify(coverageTypes)}'
-        class="w-full px-4 py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-bold text-sm transition-colors"
+        class="w-full px-3 py-2 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-bold text-sm transition-colors mt-1"
       >
         Get Quote
       </button>
@@ -349,7 +325,7 @@ export default function CoverageMap() {
       const response = await fetch(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query)}.json?` +
         `proximity=${MARSH_BARTON[0]},${MARSH_BARTON[1]}&` +
-        `bbox=-5.5,49.8,-2.5,51.5&` +
+        `proximity_bias=false&` +
         `types=postcode,place,locality,neighborhood&` +
         `country=gb&` +
         `limit=5&` +
@@ -381,7 +357,7 @@ export default function CoverageMap() {
       const newMap = new mapboxgl.Map({
         container: mapContainer.current,
         style: 'mapbox://styles/mapbox/dark-v11',
-        center: MARSH_BARTON,
+        center: [MARSH_BARTON[0], MARSH_BARTON[1] + 0.04],
         zoom: 9,
         attributionControl: false,
         pitch: 50,
@@ -531,7 +507,7 @@ export default function CoverageMap() {
     new mapboxgl.Marker({
       element: (() => {
         const el = document.createElement('div')
-        el.className = 'custom-marker'
+        el.className = 'mapboxgl-marker'
         el.style.cssText = `
           width: 24px;
           height: 24px;
@@ -542,19 +518,19 @@ export default function CoverageMap() {
           box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3);
         `
         
-        const ring = document.createElement('div')
-        ring.style.cssText = `
+        // Create a wrapper for the pulse effect
+        const pulseWrapper = document.createElement('div')
+        pulseWrapper.className = 'marker-pulse-wrapper'
+        pulseWrapper.style.cssText = `
           position: absolute;
-          top: -4px;
-          left: -4px;
-          right: -4px;
-          bottom: -4px;
-          border-radius: 50%;
-          border: 2px solid #8B5CF6;
-          animation: marker-pulse 2s ease-in-out infinite;
-          pointer-events: none;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100%;
+          height: 100%;
         `
-        el.appendChild(ring)
+        
+        el.appendChild(pulseWrapper)
         return el
       })()
     })
@@ -575,8 +551,8 @@ export default function CoverageMap() {
       closeButton: true,
       className: 'coverage-popup custom-dark-popup',
       maxWidth: window.innerWidth < 640 ? '90vw' : '320px',
-      offset: window.innerWidth < 640 ? [0, -15] : 25,
-      anchor: window.innerWidth < 640 ? 'bottom' : 'left',
+      offset: [0, -15],
+      anchor: 'bottom',
       focusAfterOpen: false
     })
       .setLngLat(coordinates)
@@ -585,11 +561,21 @@ export default function CoverageMap() {
 
     // Adjust map view based on screen size
     const isMobile = window.innerWidth < 640
+
+    // Calculate offsets for both latitude and longitude
+    const offsetLat = lat + (isMobile ? 0.08 : 0.06)
+    const offsetLng = lng - (isMobile ? 0.01 : 0.07) // Changed to negative to move left
+    
     map.current.flyTo({
-      center: isMobile ? coordinates : [lng - 0.02, lat],
-      zoom: isMobile ? 11 : 12,
+      center: [offsetLng, offsetLat],
+      zoom: isMobile ? 10 : 11,
       duration: 2000,
-      padding: isMobile ? { bottom: 200 } : { left: 200 }
+      padding: {
+        top: isMobile ? 50 : 100,
+        bottom: isMobile ? 400 : 300,
+        left: isMobile ? 20 : 200,
+        right: isMobile ? 20 : 200
+      }
     })
 
     // Clear search
@@ -604,6 +590,8 @@ export default function CoverageMap() {
           .custom-dark-popup .mapboxgl-popup-content {
             background: rgba(0, 0, 0, 0.95) !important;
             color: white !important;
+            max-height: 400px !important;  /* Fixed height */
+            overflow-y: auto !important;   /* Enable scrolling */
           }
           .custom-dark-popup .mapboxgl-popup-tip {
             border-top-color: rgba(0, 0, 0, 0.95) !important;

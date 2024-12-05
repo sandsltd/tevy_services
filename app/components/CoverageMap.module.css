@@ -39,17 +39,17 @@
 }
 
 @keyframes marker-pulse {
-  0% { 
+  0% {
     transform: scale(1);
-    opacity: 1;
+    opacity: 0.5;
   }
-  50% { 
-    transform: scale(1.5);
+  50% {
+    transform: scale(1.8);
     opacity: 0;
   }
-  100% { 
+  100% {
     transform: scale(1);
-    opacity: 1;
+    opacity: 0.5;
   }
 }
 
@@ -114,4 +114,59 @@
     background: rgba(0, 0, 0, 0.95) !important;
     max-height: 35vh !important;
   }
+}
+
+@keyframes marker-bounce-and-pulse {
+  0% {
+    transform: translateY(-500px) scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(20px) scale(1.1);
+    opacity: 0.7;
+  }
+  75% {
+    transform: translateY(-10px) scale(0.95);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.custom-marker {
+  animation: marker-bounce-and-pulse 1s cubic-bezier(0.28, 0.84, 0.42, 1) forwards !important;
+}
+
+.marker-ring {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  border: 2px solid #8B5CF6;
+  pointer-events: none;
+}
+
+.marker-ring-inner {
+  animation: marker-pulse 2s ease-in-out infinite !important;
+}
+
+.marker-ring-outer {
+  animation: marker-pulse 2s ease-in-out infinite 0.3s !important;
+}
+
+.marker-pulse-wrapper::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  background: rgba(139, 92, 246, 0.3);
+  border-radius: 50%;
+  z-index: -1;
+  animation: marker-pulse 2s ease-in-out infinite;
 } 
