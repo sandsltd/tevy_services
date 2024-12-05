@@ -211,6 +211,9 @@ export default function ServiceBooking({
     progress: 0
   })
 
+  const canGoBack = step > 1
+  const currentStepIndex = step - 1
+
   useEffect(() => {
     // Reset form error when changing steps
     setFormError(null)
@@ -249,7 +252,6 @@ export default function ServiceBooking({
 
     // Track completed steps to prevent data loss
     const completedSteps = new Set<number>()
-    const currentStepIndex = step - 1
     activeSteps.forEach((s, i) => {
       if (i < currentStepIndex) {
         completedSteps.add(s.id)
@@ -1061,9 +1063,6 @@ export default function ServiceBooking({
       </div>
     )
   }
-
-  const canGoBack = step > 1
-  const currentStepIndex = step - 1
 
   const StepIndicator = () => (
     <div className="mb-6 px-2">
