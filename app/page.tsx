@@ -77,9 +77,9 @@ export default function Home() {
       
       {/* Hero Section */}
       <section className="relative min-h-screen bg-black">
-        {/* Background container with overflow hidden */}
+        {/* Background container with parallax and subtle animation */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute inset-0 scale-110"> {/* Scale up container to prevent edge gaps */}
+          <div className="absolute inset-0 scale-110" ref={parallaxRef}> 
             <Image
               src="/images/hero.jpg"
               alt="Professional Wheel Restoration"
@@ -90,17 +90,24 @@ export default function Home() {
               quality={100}
               className="scale-105 animate-subtle-zoom"
             />
-            {/* Extend overlays beyond bottom edge */}
-            <div className="absolute inset-0 -bottom-8 bg-gradient-to-r from-black/90 via-black/70 to-transparent" />
-            <div className="absolute inset-0 -bottom-8 bg-gradient-to-b from-transparent via-black/80 to-black" />
+            {/* Enhanced gradient overlays with animation */}
+            <div className="absolute inset-0 -bottom-8 bg-gradient-to-r from-black/90 via-black/70 to-transparent animate-fade-in" />
+            <div className="absolute inset-0 -bottom-8 bg-gradient-to-b from-transparent via-black/80 to-black animate-fade-in delay-300" />
+            
+            {/* Add subtle floating particles */}
+            <div className="absolute inset-0 opacity-30">
+              <div className="absolute w-2 h-2 bg-[#3E797F] rounded-full animate-float-1" style={{ top: '20%', left: '10%' }} />
+              <div className="absolute w-2 h-2 bg-[#3E797F] rounded-full animate-float-2" style={{ top: '60%', left: '80%' }} />
+              <div className="absolute w-2 h-2 bg-[#3E797F] rounded-full animate-float-3" style={{ top: '40%', left: '60%' }} />
+            </div>
           </div>
         </div>
         
         <div className="relative h-full flex items-center">
-          <div className="container mx-auto px-6 animate-fade-in mt-[140px] md:mt-[120px]">
+          <div className="container mx-auto px-6 animate-fade-in mt-[100px] md:mt-[80px]">
             <div className="max-w-4xl">
-              {/* Trust Badge with reduced spacing */}
-              <div className="flex items-center gap-3 mb-8 animate-fade-in-up mt-[100px] md:mt-[80px]">
+              {/* Trust Badge with slightly increased spacing */}
+              <div className="flex items-center gap-3 mb-6 animate-fade-in-up mt-[80px] md:mt-[60px]">
                 <div className="flex items-center gap-1">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 text-[#3E797F] fill-[#3E797F]" />
@@ -110,7 +117,7 @@ export default function Home() {
               </div>
 
               {/* Main Heading with adjusted spacing */}
-              <h1 className="mb-6">
+              <h1 className="mb-4">
                 <span className="text-4xl md:text-6xl lg:text-7xl font-bold block animate-slide-up">
                   <span className="text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Alloy Wheel</span>{" "}
                   <span className="text-[#3E797F] drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Refurbishment</span>{" "}
@@ -121,53 +128,33 @@ export default function Home() {
                 </span>
               </h1>
               
-              <p className="text-lg md:text-xl mb-8 text-gray-200 max-w-3xl animate-fade-in-up delay-300 font-medium leading-relaxed">
+              <p className="text-lg md:text-xl mb-6 text-gray-200 max-w-3xl animate-fade-in-up delay-300 font-medium leading-relaxed">
                 Specialists in diamond cut restoration, with additional services including custom paint finishes and wheel repairs. Professional service at your location or our Marsh Barton facility, delivering premium alloy wheel solutions across the South West.
               </p>
 
-              {/* Service Types with refined styling */}
-              <div className="flex flex-wrap gap-3 mb-8 animate-fade-in-up delay-300">
-                <span className="group px-6 py-3 rounded-2xl bg-black/40 text-base border border-[#3E797F]/20 text-white hover:bg-black/50 transition-all duration-300 flex items-center gap-3 backdrop-blur-sm">
-                  <span>Diamond Cut Refurbishment</span>
-                  <svg className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-all" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5" />
-                  </svg>
-                </span>
-
-                <span className="group px-6 py-3 rounded-2xl bg-black/40 text-base border border-[#3E797F]/20 text-white hover:bg-black/50 transition-all duration-300 flex items-center gap-3 backdrop-blur-sm">
-                  <span>Custom Paint Finishes</span>
-                  <svg className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-all" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128m0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42" />
-                  </svg>
-                </span>
-
-                <span className="group px-6 py-3 rounded-2xl bg-black/40 text-base border border-[#3E797F]/20 text-white hover:bg-black/50 transition-all duration-300 flex items-center gap-3 backdrop-blur-sm">
-                  <span>Wheel Repairs</span>
-                  <svg className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-all" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75a4.5 4.5 0 0 1-4.884 4.484c-1.076-.091-2.264.071-2.95.904l-7.152 8.684a2.548 2.548 0 1 1-3.586-3.586l8.684-7.152c.833-.686.995-1.874.904-2.95a4.5 4.5 0 0 1 6.336-4.486l-3.276 3.276a3.004 3.004 0 0 0 2.25 2.25l3.276-3.276c.256.565.398 1.192.398 1.852Z" />
-                  </svg>
-                </span>
-
-                <span className="group px-6 py-3 rounded-2xl bg-black/40 text-base border border-[#3E797F]/20 text-white hover:bg-black/50 transition-all duration-300 flex items-center gap-3 backdrop-blur-sm">
-                  <span>TPMS Diagnostics</span>
-                  <svg className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-all" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-                  </svg>
-                </span>
+              {/* Service Types with hover effects and animations */}
+              <div className="flex flex-wrap gap-3 mb-6 animate-fade-in-up delay-300">
+                {services.map((service, index) => (
+                  <span 
+                    key={service.title}
+                    className="group px-6 py-3 rounded-2xl bg-black/40 text-base border border-[#3E797F]/20 text-white hover:bg-black/50 transition-all duration-300 flex items-center gap-3 backdrop-blur-sm hover:transform hover:scale-105"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    <span>{service.title}</span>
+                    <div className="relative">
+                      {service.icon}
+                      <div className="absolute inset-0 bg-[#3E797F] blur-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+                    </div>
+                  </span>
+                ))}
               </div>
 
-              {/* CTAs with premium styling */}
-              <div className="flex flex-col sm:flex-row gap-6 animate-fade-in-up delay-500 mb-32">
-                <button className="group relative bg-[#3E797F] px-10 py-5 rounded-lg text-xl font-medium transition-all duration-300 flex items-center justify-center gap-3 min-w-[280px] overflow-hidden hover:shadow-[0_0_20px_rgba(62,121,127,0.3)] border border-[#3E797F]">
-                  {/* Gradient overlay for shimmer effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
-                  {/* Button content */}
-                  <span className="relative z-10 tracking-wide">Get Your Free Quote</span>
+              {/* Enhanced CTA buttons */}
+              <div className="flex flex-col sm:flex-row gap-6 animate-fade-in-up delay-500 mb-24">
+                <button className="group relative bg-[#3E797F] px-10 py-5 rounded-lg text-xl font-medium transition-all duration-300 flex items-center justify-center gap-3 min-w-[280px] overflow-hidden hover:shadow-[0_0_30px_rgba(62,121,127,0.3)]">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
+                  <span className="relative z-10">Get Your Free Quote</span>
                   <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300 relative z-10" />
-                  
-                  {/* Subtle border glow */}
-                  <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#3E797F] blur-xl -z-10" />
                 </button>
 
                 <button 
@@ -198,26 +185,12 @@ export default function Home() {
             <span className="text-tevy-teal">Our</span> Services
           </h2>
           
-          {/* Primary Services - 2 columns */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 mb-8">
-            {services.slice(0, 2).map((service, index) => (
+          {/* Services Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((service, index) => (
               <ServiceCard 
-                key={index} 
-                service={service} 
-                className="animate-fade-in-up"
-                style={{ animationDelay: `${index * 150}ms` }}
-              />
-            ))}
-          </div>
-
-          {/* Secondary Services - 3 columns */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
-            {services.slice(2).map((service, index) => (
-              <ServiceCard 
-                key={index + 2} 
-                service={service} 
-                className="animate-fade-in-up"
-                style={{ animationDelay: `${(index + 2) * 150}ms` }}
+                key={index}
+                service={service}
               />
             ))}
           </div>
@@ -649,14 +622,14 @@ export default function Home() {
 
 const services: Service[] = [
   {
-    title: "Diamond Cut Alloy Wheel Refurbishment",
-    description: "State-of-the-art diamond cutting service at our Marsh Barton facility. We restore damaged alloy wheels to their original finish with precision and care.",
+    title: "Diamond Cut Refurbishment",
+    description: "State-of-the-art CNC lathe diamond cutting service at our Marsh Barton facility. We restore damaged alloy wheels to their original factory finish with precision and care.",
     icon: <Diamond className="w-8 h-8" />,
     availability: { garage: true, mobile: true }
   },
   {
     title: "Painted Alloys & Colour Changes",
-    description: "Full wheel repainting service including colour changes and custom finishes. Perfect for updating your car's look or restoring wheels to factory finish.",
+    description: "Full wheel repainting service including custom colour changes and finishes. Perfect for updating your car's look or restoring wheels to factory finish.",
     icon: <Paintbrush className="w-8 h-8" />,
     availability: { garage: true, mobile: true }
   },
@@ -667,14 +640,14 @@ const services: Service[] = [
     availability: { garage: true, mobile: false }
   },
   {
-    title: "Puncture Repairs",
-    description: "Quick and reliable puncture repair service following British Standard guidelines. We assess, repair, and test to ensure your tyre is safe and roadworthy at our workshop.",
+    title: "Tyre Repair",
+    description: "Quick and reliable puncture repair service following British Standard guidelines. We assess, repair, and test to ensure your tyre is safe and roadworthy.",
     icon: <Wrench className="w-8 h-8" />,
-    availability: { garage: true, mobile: false }
+    availability: { garage: true, mobile: true }
   },
   {
-    title: "TPMS Service & Diagnostic",
-    description: "Complete tyre pressure monitoring solutions. We service and repair all types of TPMS systems to keep your vehicle safe and compliant at our Marsh Barton facility.",
+    title: "TPMS Service",
+    description: "Complete tyre pressure monitoring solutions. We diagnose, repair, and program all types of TPMS systems to keep your vehicle safe and compliant.",
     icon: <Gauge className="w-8 h-8" />,
     availability: { garage: true, mobile: false }
   }

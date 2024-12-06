@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react'
 import { X, ChevronRight, Car, Wrench, HelpCircle } from 'lucide-react'
 import imageCompression from 'browser-image-compression';
 import Image from 'next/image'
+import { db } from '@/lib/firebase'
+import { collection, addDoc, serverTimestamp, getDocs } from 'firebase/firestore'
+import { FirebaseError } from 'firebase/app'
 
 interface ServiceBookingProps {
   location: string
@@ -174,6 +177,19 @@ const compressionOptions = {
   maxSizeMB: 1,      // Max file size in MB
   maxWidthOrHeight: 1920, // Max width/height in pixels
   useWebWorker: true // Use web workers for better performance
+}
+
+interface QuoteData {
+  location: string
+  distance: number
+  service: string
+  wheelCount: number
+  wheelSize?: string
+  name: string
+  email: string
+  phone: string
+  notes?: string
+  preferredContact?: string
 }
 
 export default function ServiceBooking({ 
@@ -1139,80 +1155,103 @@ export default function ServiceBooking({
   // Add form submission handler
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setFormError(null)
-    setIsSubmitting(true)
-    setSubmissionStatus({ stage: 'compressing', progress: 0 })
-
+    
     try {
-      // Validate form
-      if (!contactForm.name.trim()) {
-        setFormError('Please enter your name')
-        setIsSubmitting(false)
-        return
-      }
+      console.log('Starting submission...')
+      setIsSubmitting(true)
+      setFormError(null)
 
+      // Validate form data
       if (!validateEmail(contactForm.email)) {
         setFormError('Please enter a valid email address')
-        setIsSubmitting(false)
         return
       }
 
       if (!validatePhone(contactForm.phone)) {
         setFormError('Please enter a valid UK phone number')
-        setIsSubmitting(false)
         return
       }
 
-      // Start preparing data
-      setSubmissionStatus({ stage: 'compressing', progress: 20 })
-      await new Promise(resolve => setTimeout(resolve, 500)) // Small delay for UX
-
-      // Prepare form data
-      const formData = new FormData()
-      formData.append('data', JSON.stringify({
-        serviceType,
-        serviceDetails,
-        contact: contactForm,
+      // Create quote data
+      const quoteData = {
         location,
         distance,
-        noPhotosReason
-      }))
+        service: serviceType,
+        wheelCount: serviceDetails.wheelCount,
+        wheelSize: tyreDetails?.tyreSize || null,
+        name: contactForm.name,
+        email: contactForm.email,
+        phone: contactForm.phone,
+        notes: contactForm.notes || '',
+        preferredContact: contactForm.preferredContact,
+        createdAt: serverTimestamp(),
+        status: 'pending',
+        serviceTypes: serviceDetails.serviceTypes,
+        tyreDetails: {
+          vehicleType: tyreDetails.vehicleType,
+          tyreCount: tyreDetails.tyreCount,
+          tyreSize: tyreDetails.tyreSize || null,
+          wheelsOnly: tyreDetails.wheelsOnly || false,
+          currentTyres: tyreDetails.currentTyres || '',
+          preferredBrands: tyreDetails.preferredBrands || ''
+        },
+        hasPhotos: wheelPhotos.length > 0,
+        photoCount: wheelPhotos.length,
+        submittedAt: new Date().toISOString()
+      }
 
-      setSubmissionStatus({ stage: 'uploading', progress: 40 })
-      await new Promise(resolve => setTimeout(resolve, 500)) // Small delay for UX
+      // Save to Firestore
+      try {
+        const quotesRef = collection(db, 'quotes')
+        const docRef = await addDoc(quotesRef, quoteData)
+        console.log('Quote saved successfully with ID:', docRef.id)
 
-      // Append photos if any
-      if (wheelPhotos.length > 0) {
-        setSubmissionStatus({ stage: 'uploading', progress: 60 })
+        // Prepare email data
+        const formData = new FormData()
+        formData.append('data', JSON.stringify({
+          serviceType,
+          serviceDetails,
+          contact: {
+            name: contactForm.name,
+            email: contactForm.email,
+            phone: contactForm.phone,
+            preferredContact: contactForm.preferredContact,
+            notes: contactForm.notes
+          },
+          location,
+          distance,
+          noPhotosReason: noPhotosReason || null
+        }))
+
+        // Add photos if any
         wheelPhotos.forEach(photo => {
           formData.append('photos', photo)
         })
-        await new Promise(resolve => setTimeout(resolve, 500)) // Small delay for UX
+
+        // Send emails
+        const emailResponse = await fetch('/api/submit-quote', {
+          method: 'POST',
+          body: formData
+        })
+
+        if (!emailResponse.ok) {
+          console.warn('Email notification failed, but quote was saved')
+        }
+
+        setShowSuccess(true)
+      } catch (error) {
+        console.error('Submission error:', error)
+        if (error instanceof FirebaseError) {
+          setFormError(`Database error: ${error.code}`)
+        } else {
+          setFormError('Failed to save quote. Please try again.')
+        }
       }
-
-      setSubmissionStatus({ stage: 'sending', progress: 80 })
-
-      // Send to API route
-      const response = await fetch('/api/submit-quote', {
-        method: 'POST',
-        body: formData
-      })
-
-      const result = await response.json()
-
-      if (!result.success) {
-        throw new Error(result.error || 'Failed to submit form')
-      }
-
-      setSubmissionStatus({ stage: 'complete', progress: 100 })
-      await new Promise(resolve => setTimeout(resolve, 500)) // Show 100% briefly
-      setShowSuccess(true)
-
     } catch (error) {
-      setFormError('Failed to submit form. Please try again.')
+      console.error('Submission error:', error)
+      setFormError('An error occurred. Please try again.')
     } finally {
       setIsSubmitting(false)
-      setSubmissionStatus({ stage: 'idle', progress: 0 })
     }
   }
 
@@ -1282,71 +1321,84 @@ export default function ServiceBooking({
 
   // Add success overlay component
   const SuccessOverlay = () => (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 backdrop-blur-md">
-      <div className="animate-fade-in bg-black/95 border-2 border-[#3E797F] rounded-lg p-6 md:p-8 max-w-[280px] md:max-w-md w-full text-center shadow-2xl">
-        <svg 
-          className="w-20 h-20 mx-auto mb-6 text-[#3E797F] animate-check" 
-          fill="none" 
-          viewBox="0 0 24 24" 
-          stroke="currentColor"
-        >
-          <path 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            strokeWidth={2} 
-            d="M5 13l4 4L19 7" 
-          />
-        </svg>
-        <h3 className="text-2xl font-bold mb-4 text-white">Request Received!</h3>
-        {wheelPhotos.length > 0 ? (
-          <p className="text-lg text-gray-300 mb-4">
-            Thank you for your request and photos. We'll review them and send you a detailed quote shortly.
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+      <div className="bg-black/90 border border-[#3E797F]/30 rounded-xl p-8 max-w-md w-full mx-4">
+        <div className="text-center">
+          <div className="w-16 h-16 bg-[#3E797F]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg 
+              className="w-8 h-8 text-[#3E797F]" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M5 13l4 4L19 7" 
+              />
+            </svg>
+          </div>
+          <h3 className="text-xl font-semibold mb-2">Quote Submitted!</h3>
+          <p className="text-gray-400 mb-6">
+            We'll get back to you shortly with a detailed quote.
           </p>
-        ) : (
-          <p className="text-lg text-gray-300 mb-4">
-            Thank you for your request. Once we receive your wheel photos, we'll prepare your detailed quote.
-          </p>
-        )}
-        <p className="text-sm text-gray-400 mb-6">
-          Please check your email (including spam/junk folder) for confirmation and next steps.
-        </p>
-        {noPhotosReason === 'later' && (
-          <p className="text-sm text-gray-400 mt-4 pt-4 border-t border-[#3E797F]/30">
-            Check your email for instructions on how to send your wheel photos so we can provide your quote.
-          </p>
-        )}
-        <button
-          onClick={() => {
-            onClose()
-            // Reset all form state
-            setStep(1)
-            setServiceType(undefined)
-            setServiceDetails({
-              wheelCount: 4,
-              serviceTypes: []
-            })
-            setWheelPhotos([])
-            setNoPhotosReason('')
-            setTyreDetails({
-              vehicleType: 'car',
-              tyreCount: 4
-            })
-            setContactForm({
-              name: '',
-              email: '',
-              phone: '',
-              notes: '',
-              preferredContact: 'email'
-            })
-            setShowSuccess(false)
-          }}
-          className="mt-6 px-6 py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-semibold transition-colors"
-        >
-          Dismiss
-        </button>
+          <button
+            onClick={onClose}
+            className="bg-[#3E797F] text-white px-6 py-2 rounded-lg hover:bg-[#3E797F]/80"
+          >
+            Close
+          </button>
+        </div>
       </div>
     </div>
   )
+
+  // Add this test function inside your ServiceBooking component
+  const testFirebase = async () => {
+    console.log('Testing Firebase connection...')
+    try {
+      // Try to write a test document
+      const testData = {
+        test: true,
+        timestamp: new Date().toISOString()
+      }
+      
+      console.log('DB instance:', db)
+      console.log('Writing test data:', testData)
+      
+      const testRef = collection(db, 'test')
+      const testDoc = await addDoc(testRef, testData)
+      
+      console.log('Test document written with ID:', testDoc.id)
+      
+      // Try to read it back
+      const querySnapshot = await getDocs(collection(db, 'test'))
+      console.log('Found', querySnapshot.size, 'test documents')
+      
+      return true
+    } catch (error) {
+      console.error('Firebase test failed:', error)
+      return false
+    }
+  }
+
+  useEffect(() => {
+    const testConnection = async () => {
+      try {
+        const testRef = collection(db, 'test')
+        const testDoc = await addDoc(testRef, {
+          test: true,
+          timestamp: serverTimestamp()
+        })
+        console.log('Firebase connection test successful:', testDoc.id)
+      } catch (error) {
+        console.error('Firebase connection test failed:', error)
+      }
+    }
+
+    testConnection()
+  }, [])
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center md:p-4">
