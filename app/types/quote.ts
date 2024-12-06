@@ -20,6 +20,10 @@ export interface Quote {
     currentTyres?: string
     preferredBrands?: string
   }
+  wheelDetails?: {
+    size?: string
+    paintColor?: string
+  }
   hasPhotos?: boolean
   photoCount?: number
   distance?: number

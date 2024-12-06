@@ -20,6 +20,8 @@ type ServiceDetails = {
   serviceTypes: string[]
   preferredDate?: Date
   tyreDetails?: TyreDetails
+  wheelSize?: string
+  paintColor?: string
 }
 
 type VehicleType = 'car' | 'van' | 'motorbike'
@@ -540,6 +542,8 @@ export default function ServiceBooking({
       })
       .join(' & ')
 
+    const hasPaintService = serviceDetails.serviceTypes.includes('painted')
+
     return (
       <div className="space-y-4">
         <h4 className="font-semibold">Wheel Refurbishment Details</h4>
@@ -576,8 +580,82 @@ export default function ServiceBooking({
           </div>
         </div>
 
+        {/* Wheel Size */}
+        <div>
+          <label htmlFor="wheel-size" className="block text-base font-medium text-white mb-2 flex items-center gap-2">
+            Wheel Size
+            <HelpIcon 
+              id="wheel-size" 
+              activeTooltip={activeTooltip}
+              setActiveTooltip={setActiveTooltip}
+            >
+              <p>Please specify your wheel size (e.g., 17", 18", 19", etc.)</p>
+              <p className="mt-1 text-sm">You can usually find this:</p>
+              <ul className="list-disc pl-4 mt-1 text-sm">
+                <li>On the side of your current tyres</li>
+                <li>In your vehicle handbook</li>
+                <li>Inside your door frame</li>
+              </ul>
+            </HelpIcon>
+          </label>
+          <input
+            id="wheel-size"
+            type="text"
+            placeholder={'e.g., 17"'}
+            value={serviceDetails.wheelSize || ''}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setServiceDetails(prev => ({ ...prev, wheelSize: e.target.value }));
+            }}
+            className="w-full px-4 py-2 bg-black/40 border border-[#3E797F]/30 rounded-lg focus:outline-none focus:border-[#3E797F]"
+            required
+          />
+        </div>
+
+        {/* Paint Color - Only show if painted service is selected */}
+        {hasPaintService && (
+          <div>
+            <label htmlFor="paint-color" className="block text-base font-medium text-white mb-2 flex items-center gap-2">
+              Desired Paint Color
+              <HelpIcon 
+                id="paint-color" 
+                activeTooltip={activeTooltip}
+                setActiveTooltip={setActiveTooltip}
+              >
+                <p>Please specify your desired paint color.</p>
+                <p className="mt-1 text-sm">You can:</p>
+                <ul className="list-disc pl-4 mt-1 text-sm">
+                  <li>Specify an exact color code</li>
+                  <li>Describe the color (e.g., "Gloss Black")</li>
+                  <li>Request a match to your vehicle's color</li>
+                </ul>
+              </HelpIcon>
+            </label>
+            <input
+              id="paint-color"
+              type="text"
+              placeholder="e.g., Gloss Black, Shadow Chrome, etc."
+              value={serviceDetails.paintColor || ''}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setServiceDetails(prev => ({ ...prev, paintColor: e.target.value }));
+              }}
+              className="w-full px-4 py-2 bg-black/40 border border-[#3E797F]/30 rounded-lg focus:outline-none focus:border-[#3E797F]"
+              required
+            />
+          </div>
+        )}
+
         <button
           onClick={() => {
+            // Validate required fields
+            if (!serviceDetails.wheelSize) {
+              setFormError('Please specify your wheel size')
+              return
+            }
+            if (hasPaintService && !serviceDetails.paintColor) {
+              setFormError('Please specify your desired paint color')
+              return
+            }
+            
             // Find the next step in the sequence
             const currentStepIndex = activeSteps.findIndex(s => s.type === 'wheel-service')
             const nextStep = activeSteps[currentStepIndex + 1]
@@ -1173,12 +1251,15 @@ export default function ServiceBooking({
       }
 
       // Create quote data
-      const quoteData = {
+      const quoteData = { 
         location,
         distance,
         service: serviceType,
         wheelCount: serviceDetails.wheelCount,
-        wheelSize: tyreDetails?.tyreSize || null,
+        wheelDetails: {
+          size: serviceDetails.wheelSize,
+          paintColor: serviceDetails.paintColor
+        },
         name: contactForm.name,
         email: contactForm.email,
         phone: contactForm.phone,
@@ -1210,7 +1291,13 @@ export default function ServiceBooking({
         const formData = new FormData()
         formData.append('data', JSON.stringify({
           serviceType,
-          serviceDetails,
+          serviceDetails: {
+            ...serviceDetails,
+            wheelDetails: {
+              size: serviceDetails.wheelSize,
+              paintColor: serviceDetails.paintColor
+            }
+          },
           contact: {
             name: contactForm.name,
             email: contactForm.email,

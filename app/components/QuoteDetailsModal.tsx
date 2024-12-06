@@ -11,6 +11,20 @@ export default function QuoteDetailsModal({ quote, onClose, onStatusChange }: Qu
   if (!quote) return null
 
   // Debug logging
+  console.log('Quote data:', {
+    id: quote.id,
+    wheelDetails: quote.wheelDetails,
+    wheelCount: quote.wheelCount,
+    tyreDetails: quote.tyreDetails,
+    serviceTypes: quote.serviceTypes,
+    service: quote.service,
+    preferredContact: quote.preferredContact,
+    notes: quote.notes,
+    createdAt: quote.createdAt,
+    submittedAt: quote.submittedAt
+  })
+
+  // Debug logging
   console.log('Full quote data:', JSON.stringify(quote, null, 2))
   console.log('Quote details:', {
     wheelCount: quote.wheelCount,
@@ -148,8 +162,14 @@ export default function QuoteDetailsModal({ quote, onClose, onStatusChange }: Qu
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-400">Wheel Size</label>
-                <div className="mt-1 text-white text-lg">{formatValue(quote.wheelSize)}</div>
+                <div className="mt-1 text-white text-lg">{formatValue(quote.wheelDetails?.size)}</div>
               </div>
+              {quote.wheelDetails?.paintColor && (
+                <div className="col-span-2">
+                  <label className="block text-sm font-medium text-gray-400">Paint Color</label>
+                  <div className="mt-1 text-white text-lg">{formatValue(quote.wheelDetails.paintColor)}</div>
+                </div>
+              )}
               <div className="col-span-2">
                 <label className="block text-sm font-medium text-gray-400">Photos</label>
                 <div className="mt-1 text-white text-lg">
@@ -184,14 +204,19 @@ export default function QuoteDetailsModal({ quote, onClose, onStatusChange }: Qu
                     : 'Not specified'}
                 </div>
               </div>
+              {quote.tyreDetails?.currentTyres && (
+                <div className="col-span-2">
+                  <label className="block text-sm font-medium text-gray-400">Notes about tyres</label>
+                  <div className="mt-1 text-white text-lg whitespace-pre-wrap">{quote.tyreDetails.currentTyres}</div>
+                </div>
+              )}
+              {quote.tyreDetails?.preferredBrands && (
+                <div className="col-span-2">
+                  <label className="block text-sm font-medium text-gray-400">Preferred Tyre Brands</label>
+                  <div className="mt-1 text-white text-lg whitespace-pre-wrap">{quote.tyreDetails.preferredBrands}</div>
+                </div>
+              )}
             </div>
-
-            {quote.tyreDetails?.currentTyres && (
-              <div className="mt-4">
-                <label className="block text-sm font-medium text-gray-400">Notes about tyres</label>
-                <div className="mt-1 text-white text-lg whitespace-pre-wrap">{quote.tyreDetails.currentTyres}</div>
-              </div>
-            )}
           </Section>
 
           {/* Additional Notes */}

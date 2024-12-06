@@ -151,7 +151,18 @@ export default function Home() {
 
               {/* Enhanced CTA buttons */}
               <div className="flex flex-col sm:flex-row gap-6 animate-fade-in-up delay-500 mb-24">
-                <button className="group relative bg-[#3E797F] px-10 py-5 rounded-lg text-xl font-medium transition-all duration-300 flex items-center justify-center gap-3 min-w-[280px] overflow-hidden hover:shadow-[0_0_30px_rgba(62,121,127,0.3)]">
+                <button 
+                  onClick={() => {
+                    const coverageSection = document.getElementById('coverage');
+                    if (coverageSection) {
+                      coverageSection.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                      });
+                    }
+                  }}
+                  className="group relative bg-[#3E797F] px-10 py-5 rounded-lg text-xl font-medium transition-all duration-300 flex items-center justify-center gap-3 min-w-[280px] overflow-hidden hover:shadow-[0_0_30px_rgba(62,121,127,0.3)]"
+                >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
                   <span className="relative z-10">Get Your Free Quote</span>
                   <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300 relative z-10" />
@@ -474,7 +485,7 @@ export default function Home() {
       </section>
 
       {/* Coverage Area Section */}
-      <section className="relative py-20 bg-black/40 backdrop-blur-sm">
+      <section id="coverage" className="relative py-20 bg-black/40 backdrop-blur-sm">
         <div className="container mx-auto px-6 max-w-7xl">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
             <span className="text-[#3E797F]">Get A</span>{" "}

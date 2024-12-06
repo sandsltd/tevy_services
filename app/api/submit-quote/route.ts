@@ -163,6 +163,18 @@ const getAdminEmailContent = (data: any): string => {
               <td style="padding: 8px 0; color: #333;">${serviceDetails.wheelCount}</td>
             </tr>
           ` : ''}
+          ${serviceDetails.wheelDetails?.size ? `
+            <tr>
+              <td style="padding: 8px 0; color: #666;">Wheel Size:</td>
+              <td style="padding: 8px 0; color: #333;">${serviceDetails.wheelDetails.size}</td>
+            </tr>
+          ` : ''}
+          ${serviceDetails.wheelDetails?.paintColor && serviceDetails.serviceTypes.includes('painted') ? `
+            <tr>
+              <td style="padding: 8px 0; color: #666;">Paint Color:</td>
+              <td style="padding: 8px 0; color: #333;">${serviceDetails.wheelDetails.paintColor}</td>
+            </tr>
+          ` : ''}
         </table>
       </div>
 
@@ -194,7 +206,7 @@ const getAdminEmailContent = (data: any): string => {
             ` : ''}
             ${serviceDetails.tyreDetails.currentTyres ? `
               <tr>
-                <td style="padding: 8px 0; color: #666;">Additional Info:</td>
+                <td style="padding: 8px 0; color: #666;">Notes about tyres:</td>
                 <td style="padding: 8px 0; color: #333;">${serviceDetails.tyreDetails.currentTyres}</td>
               </tr>
             ` : ''}

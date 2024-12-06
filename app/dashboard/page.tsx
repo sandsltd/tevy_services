@@ -230,8 +230,10 @@ export default function Dashboard() {
             status: data.status || 'pending',
             notes: data.notes,
             wheelCount: data.wheelCount,
-            wheelSize: data.wheelSize,
-            preferredContact: data.preferredContact,
+            wheelDetails: data.wheelDetails ? {
+              size: data.wheelDetails.size,
+              paintColor: data.wheelDetails.paintColor
+            } : undefined,
             tyreDetails: data.tyreDetails ? {
               vehicleType: data.tyreDetails.vehicleType,
               tyreCount: data.tyreDetails.tyreCount,
@@ -243,7 +245,8 @@ export default function Dashboard() {
             hasPhotos: data.hasPhotos,
             photoCount: data.photoCount,
             distance: data.distance,
-            submittedAt: data.submittedAt
+            submittedAt: data.submittedAt,
+            preferredContact: data.preferredContact
           })
         })
 
