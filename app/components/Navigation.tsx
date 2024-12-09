@@ -67,7 +67,7 @@ const Navigation = ({ className }: NavigationProps) => {
               </button>
               
               {/* Desktop Dropdown Menu */}
-              <div className="absolute top-full right-0 mt-2 w-80 bg-black/95 backdrop-blur-sm border border-[#3E797F]/20 rounded-xl overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 shadow-xl">
+              <div className="absolute top-full right-0 mt-2 w-80 bg-black border border-[#3E797F]/20 rounded-xl overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 shadow-xl">
                 <div className="p-2 space-y-1">
                   <Link 
                     href="/services/diamond-cut"
@@ -162,7 +162,7 @@ const Navigation = ({ className }: NavigationProps) => {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden fixed inset-0 top-[72px] bg-black/95 backdrop-blur-sm">
-            <div className="p-6 space-y-6">
+            <div className="p-6 space-y-6 bg-black">
               {/* Mobile Phone Number */}
               <a 
                 href="tel:07572634898"

@@ -120,73 +120,51 @@ type CoverageType = 'mobile' | 'wheel-collection' | 'outside'
 
 // Add these animations to the popupStyle constant
 const popupStyle = `
-  @keyframes popup-bounce {
-    0% { transform: translateY(10px); opacity: 0; }
-    50% { transform: translateY(-5px); }
-    100% { transform: translateY(0); opacity: 1; }
-  }
-
-  @keyframes marker-drop {
-    0% { transform: translateY(-200px); }
-    60% { transform: translateY(20px); }
-    80% { transform: translateY(-10px); }
-    100% { transform: translateY(0); }
-  }
-
-  @keyframes marker-pulse {
-    0% { 
-      transform: scale(1);
-      opacity: 1;
-    }
-    50% { 
-      transform: scale(1.5);
-      opacity: 0;
-    }
-    100% { 
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-
   .mapboxgl-popup {
-    animation: popup-bounce 0.5s ease-out;
+    z-index: 1000;
   }
-
+  
   .mapboxgl-popup-content {
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(8px);
+    background: black !important;
+    color: white !important;
+    padding: 0.75rem !important;
+    border-radius: 0.75rem !important;
     border: 1px solid rgba(62, 121, 127, 0.3);
+    width: calc(100vw - 2rem) !important;
+    max-width: 320px !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .mapboxgl-popup-tip {
+    display: none;
+  }
+
+  .mapboxgl-popup-close-button {
     color: white;
-    padding: 1rem;
-    border-radius: 0.5rem;
+    font-size: 20px;
+    padding: 4px 8px;
+    right: 4px;
+    top: 4px;
   }
 
-  .mapboxgl-marker {
-    animation: marker-drop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  }
-
-  .mapboxgl-marker::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    right: -50%;
-    bottom: -50%;
-    background: rgba(62, 121, 127, 0.3);
-    border-radius: 50%;
-    z-index: -1;
-    animation: marker-pulse 2s ease-in-out infinite;
+  .mapboxgl-popup-close-button:hover {
+    background: rgba(62, 121, 127, 0.2);
+    border-radius: 4px;
   }
 
   @media (max-width: 640px) {
     .mapboxgl-popup {
-      max-width: 85vw !important;
-      width: 85vw !important;
       position: fixed !important;
-      bottom: 85px !important;
-      left: 50% !important;
-      transform: translateX(-50%) !important;
-      animation: popup-bounce 0.5s ease-out;
+      left: 1rem !important;
+      right: 1rem !important;
+      bottom: 5rem !important;
+      top: auto !important;
+      transform: none !important;
+    }
+    
+    .mapboxgl-popup-content {
+      width: 100% !important;
+      margin: 0 auto;
     }
   }
 `
@@ -198,15 +176,15 @@ const getPopupContent = (location: string, coverageTypes: CoverageType[], coordi
   // If location is outside service areas
   if (coverageTypes.includes('outside')) {
     return `
-      <div class="flex flex-col gap-3">
-        <div class="bg-[#3E797F]/20 p-3 rounded-lg">
-          <h3 class="font-bold text-lg">${location}</h3>
-          <p class="text-sm text-gray-300">Outside Service Area</p>
-          <div class="flex items-center gap-2 mt-2">
+      <div class="flex flex-col gap-3 text-white">
+        <div class="bg-[#1A1A1A] p-4 rounded-lg border border-[#3E797F]/30">
+          <h3 class="font-bold text-xl text-[#3E797F] mb-2">${location}</h3>
+          <p class="text-white/90 font-medium mb-2">Outside Service Area</p>
+          <div class="flex items-center gap-2 mb-2">
             <div class="w-2 h-2 rounded-full bg-[#3E797F]"></div>
-            <span class="text-sm">Workshop Service Available</span>
+            <span class="text-white/80">Workshop Service Available</span>
           </div>
-          <p class="text-xs text-gray-400 mt-2">
+          <p class="text-sm text-white/60">
             Please visit our workshop in Marsh Barton, Exeter for our full range of services
           </p>
         </div>
@@ -226,14 +204,14 @@ const getPopupContent = (location: string, coverageTypes: CoverageType[], coordi
 
   // For locations within service areas
   return `
-    <div class="flex flex-col gap-3">
-      <div class="bg-[#3E797F]/20 p-3 rounded-lg">
-        <h3 class="font-bold text-lg">${location}</h3>
-        <p class="text-sm text-gray-300">Available Services:</p>
+    <div class="flex flex-col gap-3 text-white">
+      <div class="bg-[#1A1A1A] p-4 rounded-lg border border-[#3E797F]/30">
+        <h3 class="font-bold text-xl text-[#3E797F] mb-2">${location}</h3>
+        <p class="text-white/90 font-medium mb-2">Available Services:</p>
         ${coverageTypes.map(type => `
-          <div class="flex items-center gap-2 mt-2">
+          <div class="flex items-center gap-2 mb-2">
             <div class="w-2 h-2 rounded-full bg-[#3E797F]"></div>
-            <span class="text-sm">${type === 'mobile' ? 'Mobile Service' : 'Collection Service'}</span>
+            <span class="text-white/80">${type === 'mobile' ? 'Mobile Service' : 'Collection Service'}</span>
           </div>
         `).join('')}
       </div>
@@ -888,200 +866,78 @@ export default function CoverageMap() {
   return (
     <div className="relative w-full h-full">
       {/* Search Input Container */}
-      <div className="absolute top-4 left-4 right-4 z-50 w-full max-w-md mx-auto">
-        <div className="bg-black/90 backdrop-blur-sm border border-[#3E797F] rounded-xl p-3 md:p-4">
-          <div className="text-center mb-2 md:mb-3">
-            <h3 className="text-lg md:text-2xl font-bold">Get Your Free Quote</h3>
-            <p className="text-xs md:text-sm text-gray-400 mt-1">Enter your postcode or click anywhere on the map</p>
-          </div>
-          
-          <div className="flex flex-col md:flex-row gap-2">
-            <input
-              type="text"
-              aria-label="Search location"
-              placeholder="Enter your postcode..."
-              role="searchbox"
-              className="w-full md:flex-1 bg-black/50 px-3 md:px-4 py-2 md:py-2.5 rounded-lg border-2 border-[#3E797F]/30 text-sm focus:outline-none"
-              value={searchQuery}
-              onChange={(e) => {
-                const value = e.target.value;
-                setSearchQuery(value);
-                // Remove overlay and instructions when user starts typing
-                if (showInitialOverlay) {
-                  setShowInitialOverlay(false);
-                  setShowLegend(true);
-                }
-                if (value.length >= 2) {
-                  debouncedSearch(value);
-                } else {
-                  setSearchResults([]);
-                }
-              }}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  handleSearch(searchQuery)
-                }
-              }}
-            />
-            <button 
-              onClick={() => handleSearch(searchQuery)}
-              className="w-full md:w-auto bg-[#3E797F] px-3 md:px-4 py-2 md:py-2.5 rounded-lg font-medium hover:bg-[#3E797F]/80 transition-all flex items-center justify-center gap-2 text-sm whitespace-nowrap hover:scale-105"
-            >
-              <MapPin className="w-4 h-4" />
-              <span className="md:hidden">Search</span>
-              <span className="hidden md:inline">Check Coverage</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Search Results - Mobile Optimized */}
-      {searchResults.length > 0 && (
-        <div className="absolute top-[160px] md:top-[180px] left-4 right-4 md:max-w-md mx-auto bg-black/90 backdrop-blur-sm border border-[#3E797F]/30 rounded-lg overflow-hidden z-50">
-          {searchResults.map((result, index) => (
-            <button
-              key={index}
-              onClick={() => handleLocationSelect(result)}
-              className="w-full px-4 py-3 text-left text-sm md:text-base hover:bg-[#3E797F]/20 border-b border-[#3E797F]/20 last:border-0"
-            >
-              {result.place_name}
-            </button>
-          ))}
-        </div>
-      )}
-
-      {/* Initial Overlay - Mobile Optimized */}
-      {showInitialOverlay && (
-        <div className="absolute inset-0 md:left-0 md:right-auto md:w-[500px] bg-gradient-to-r from-black/95 via-black/90 to-transparent p-4 md:p-8 flex flex-col pointer-events-auto">
-          <div className="flex-1 flex flex-col justify-center space-y-4 md:space-y-6">
-            <div className="space-y-2 md:space-y-3">
-              <h2 className="text-3xl md:text-5xl font-bold">
-                <span className="text-[#3E797F]">Interactive</span><br/>
-                <span className="text-white">Coverage Map</span>
-              </h2>
-              <p className="text-base md:text-lg text-white/80">
-                Discover our premium mobile and collection services available in your area
-              </p>
+      <div className="absolute top-0 left-0 right-0 z-50">
+        <div className="bg-black border-b border-[#3E797F]/30 p-4">
+          <div className="max-w-sm mx-auto space-y-4">
+            <div>
+              <h3 className="text-xl font-bold text-center">Get Your Free Quote</h3>
+              <p className="text-sm text-gray-400 text-center mt-1">Enter your postcode or click map</p>
             </div>
-
-            <div className="space-y-3 md:space-y-4 w-full max-w-sm">
-              <div className="grid grid-cols-2 gap-2 md:gap-3">
-                <div className="bg-black/40 p-2 md:p-3 rounded-lg border border-[#3E797F]/30">
-                  <div className="flex items-center gap-1.5 md:gap-2">
-                    <div className="w-2 h-2 rounded-sm bg-[#3E797F]" />
-                    <span className="text-xs md:text-sm">Mobile Service</span>
-                  </div>
-                </div>
-                <div className="bg-black/40 p-2 md:p-3 rounded-lg border border-[#3E797F]/30">
-                  <div className="flex items-center gap-1.5 md:gap-2">
-                    <div className="w-2 h-2 rounded-sm bg-[#FF6B6B]" />
-                    <span className="text-xs md:text-sm">Collection Area</span>
-                  </div>
-                </div>
-              </div>
-              
-              <button
-                onClick={handleCloseOverlay}
-                className="w-full px-4 md:px-6 py-3 md:py-4 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 text-base md:text-lg shadow-lg group relative overflow-hidden"
+            
+            <div className="flex gap-2">
+              <input
+                type="text"
+                placeholder="Enter postcode..."
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  if (e.target.value.length >= 2) {
+                    debouncedSearch(e.target.value);
+                  }
+                }}
+                className="flex-1 bg-black/50 px-4 py-3 rounded-lg border border-[#3E797F]/30 text-sm focus:outline-none"
+              />
+              <button 
+                onClick={() => handleSearch(searchQuery)}
+                className="bg-[#3E797F] px-4 py-2 rounded-lg font-medium hover:bg-[#3E797F]/80 transition-all flex items-center gap-2"
               >
-                <span className="relative z-10">Get Free Quote</span>
-                <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+                <MapPin className="w-5 h-5" />
+                <span className="md:hidden">Go</span>
+                <span className="hidden md:inline">Check Coverage</span>
               </button>
             </div>
           </div>
         </div>
-      )}
 
-      {/* Legend - Mobile Optimized */}
-      <div className={`absolute bottom-4 left-4 right-4 md:right-auto md:w-auto bg-black/90 backdrop-blur-sm p-3 md:p-4 rounded-lg border border-[#3E797F]/30 transition-all duration-500 shadow-lg ${showLegend ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
-        <h3 className="text-xs md:text-sm font-semibold mb-2 md:mb-3">Service Areas</h3>
-        <div className="flex md:block justify-around items-center space-y-0 md:space-y-2.5">
-          <div className="flex items-center gap-2">
-            <div className="relative w-3 md:w-4 h-3 md:h-4 rounded-full bg-[#3E797F] shadow-md" />
-            <span className="text-xs md:text-sm">Workshop</span>
+        {/* Search Results */}
+        {searchResults.length > 0 && (
+          <div className="absolute w-full bg-black border-b border-[#3E797F]/30">
+            {searchResults.map((result, index) => (
+              <button
+                key={index}
+                onClick={() => handleLocationSelect(result)}
+                className="w-full px-4 py-3 text-left hover:bg-[#3E797F]/20 border-b border-[#3E797F]/20 last:border-0"
+              >
+                {result.place_name}
+              </button>
+            ))}
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 md:w-4 h-3 md:h-4 rounded-sm bg-[#3E797F] opacity-40 shadow-md" />
-            <span className="text-xs md:text-sm">Mobile</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 md:w-4 h-3 md:h-4 rounded-sm bg-[#FF6B6B] opacity-40 shadow-md" />
-            <span className="text-xs md:text-sm">Collection</span>
+        )}
+      </div>
+
+      {/* Legend */}
+      <div className={`absolute bottom-0 left-0 right-0 bg-black border-t border-[#3E797F]/30 p-4 transition-all duration-500 ${showLegend ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <div className="max-w-sm mx-auto">
+          <div className="grid grid-cols-2 gap-2">
+            <div className="bg-black/40 p-2 rounded-lg border border-[#3E797F]/30">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-sm bg-[#3E797F]" />
+                <span className="text-sm">Mobile Service</span>
+              </div>
+            </div>
+            <div className="bg-black/40 p-2 rounded-lg border border-[#3E797F]/30">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-sm bg-[#FF6B6B]" />
+                <span className="text-sm">Collection Area</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Map Container */}
-      <div className="relative w-full h-[400px] md:h-[600px] rounded-2xl overflow-hidden bg-black">
-        {!isInView ? (
-          <div className="absolute inset-0 flex items-center justify-center bg-black">
-            <div className="w-10 h-10 border-2 border-[#3E797F] border-t-transparent rounded-full animate-spin" />
-          </div>
-        ) : null}
-        <div ref={mapContainer} className="absolute inset-0 bg-black" />
-        
-        {showInitialOverlay && (
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="absolute left-0 top-0 bottom-0 w-full md:w-[500px] bg-gradient-to-r from-black/95 via-black/90 to-transparent p-8 flex flex-col pointer-events-auto">
-              <div className="flex-1 flex flex-col justify-center space-y-6">
-                <div className="space-y-3">
-                  <h2 className="text-4xl md:text-5xl font-bold">
-                    <span className="text-[#3E797F]">Interactive</span><br/>
-                    <span className="text-white">Coverage Map</span>
-                  </h2>
-                  <p className="text-lg text-white/80">
-                    Discover our premium mobile and collection services available in your area
-                  </p>
-                </div>
-
-                <div className="space-y-4 w-full max-w-sm">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-black/40 p-2 md:p-3 rounded-lg border border-[#3E797F]/30">
-                      <div className="flex items-center gap-1.5 md:gap-2">
-                        <div className="w-2 h-2 rounded-sm bg-[#3E797F]" />
-                        <span className="text-xs md:text-sm">Mobile Service</span>
-                      </div>
-                    </div>
-                    <div className="bg-black/40 p-2 md:p-3 rounded-lg border border-[#3E797F]/30">
-                      <div className="flex items-center gap-1.5 md:gap-2">
-                        <div className="w-2 h-2 rounded-sm bg-[#FF6B6B]" />
-                        <span className="text-xs md:text-sm">Collection Area</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <button
-                    onClick={handleCloseOverlay}
-                    className="w-full px-6 py-4 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 text-lg shadow-lg group relative overflow-hidden"
-                  >
-                    <span className="relative z-10">Get Free Quote</span>
-                    <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Legend - mobile optimized */}
-        <div className={`absolute bottom-4 left-4 bg-black/90 backdrop-blur-sm p-4 rounded-lg border border-[#3E797F]/30 transition-all duration-500 shadow-lg ${showLegend ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
-          <h3 className="text-sm font-semibold mb-3">Service Areas</h3>
-          <div className="space-y-2.5">
-            <div className="flex items-center gap-2">
-              <div className="relative w-4 h-4 rounded-full bg-[#3E797F] shadow-md" />
-              <span className="text-sm">Workshop</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 rounded-sm bg-[#3E797F] opacity-40 shadow-md" />
-              <span className="text-sm">Mobile Service</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 rounded-sm bg-[#FF6B6B] opacity-40 shadow-md" />
-              <span className="text-sm">Collection Area</span>
-            </div>
-          </div>
-        </div>
+      <div className="w-full h-[100vh] bg-black">
+        <div ref={mapContainer} className="w-full h-full" />
       </div>
 
       {/* Error message - mobile optimized */}
