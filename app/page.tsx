@@ -22,13 +22,15 @@ import {
   ArrowRight, 
   ImageIcon, 
   ChevronDown, 
-  Truck 
+  Truck, 
+  CheckCircle2 
 } from 'lucide-react'
 import { contactInfo } from './constants/contact'
 import Footer from './components/Footer'
 import { useReversibleVideo } from './hooks/useReversibleVideo'
 import dynamic from 'next/dynamic'
 import MapWrapper from './components/MapWrapper'
+import Link from 'next/link'
 
 type ServiceAvailability = {
   garage: boolean;
@@ -40,6 +42,7 @@ type Service = {
   description: string;
   icon: React.ReactNode;
   availability: ServiceAvailability;
+  path: string;
 }
 
 type ServiceCardProps = {
@@ -427,32 +430,23 @@ export default function Home() {
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="w-full h-[600px] md:h-[700px]">
-              <iframe
-                src="https://www.tiktok.com/embed/v2/7440110610072767776?autoplay=1&loop=1&rel=0&music_info=0&description=0&controls=0"
-                style={{ width: '100%', height: '100%', maxWidth: '605px', minHeight: '700px' }}
-                allow="autoplay"
-                allowFullScreen
-              ></iframe>
-            </div>
-            
-            <div className="w-full h-[600px] md:h-[700px]">
-              <iframe
-                src="https://www.tiktok.com/embed/v2/7439728086691712288?autoplay=1&loop=1&rel=0&music_info=0&description=0&controls=0"
-                style={{ width: '100%', height: '100%', maxWidth: '605px', minHeight: '700px' }}
-                allow="autoplay"
-                allowFullScreen
-              ></iframe>
-            </div>
-            
-            <div className="w-full h-[600px] md:h-[700px]">
-              <iframe
-                src="https://www.tiktok.com/embed/v2/7437948698501319968?autoplay=1&loop=1&rel=0&music_info=0&description=0&controls=0"
-                style={{ width: '100%', height: '100%', maxWidth: '605px', minHeight: '700px' }}
-                allow="autoplay"
-                allowFullScreen
-              ></iframe>
-            </div>
+            {[
+              '/images/services/beforeafter_tevyservces_alloywheels.mp4',
+              '/images/services/beforeafter_tevyservces_alloywheels_2.mp4',
+              '/images/services/beforeafter_tevyservces_alloywheels_3.mp4'
+            ].map((videoSrc, index) => (
+              <div key={index} className="w-full h-[600px] md:h-[700px] relative rounded-xl overflow-hidden bg-black/20">
+                <video
+                  className="absolute inset-0 w-full h-full object-cover"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                >
+                  <source src={videoSrc} type="video/mp4" />
+                </video>
+              </div>
+            ))}
           </div>
 
           {/* Follow CTA */}
@@ -492,7 +486,7 @@ export default function Home() {
           
           <div className="text-center mb-12">
             <p className="text-lg md:text-xl text-gray-300 mb-4">
-              Enter your postcode or click the map to get an instant quote
+              Click the map to get an instant quote
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-400">
               <div className="flex items-center gap-2">
@@ -510,26 +504,9 @@ export default function Home() {
             </div>
           </div>
           
-          {/* Map Container with clearer call-to-action */}
-          <div className="relative">
-            <div className="absolute top-4 left-4 right-4 z-10 flex justify-center">
-              <div className="bg-black/80 backdrop-blur-sm border border-[#3E797F]/30 rounded-xl p-2 max-w-md w-full">
-                <div className="flex">
-                  <input
-                    type="text"
-                    placeholder="Enter your postcode..."
-                    className="flex-1 bg-transparent px-4 py-3 text-white placeholder-gray-400 focus:outline-none"
-                  />
-                  <button className="bg-[#3E797F] px-6 py-2 rounded-lg font-medium hover:bg-[#3E797F]/80 transition-colors">
-                    Get Quote
-                  </button>
-                </div>
-              </div>
-            </div>
-            
-            <div className="w-full h-[600px] rounded-2xl overflow-hidden">
-              <MapWrapper />
-            </div>
+          {/* Map Container */}
+          <div className="w-full h-[600px] rounded-2xl overflow-hidden">
+            <MapWrapper />
           </div>
           
           <div className="mt-8 text-center space-y-2">
@@ -543,92 +520,51 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="py-20 bg-black/40 backdrop-blur-sm" id="contact">
+      {/* Still have questions? CTA */}
+      <section className="py-20 bg-black/40 backdrop-blur-sm">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16">
-            <span className="text-[#3E797F]">Contact</span>{" "}
-            <span className="text-white">Us</span>
-          </h2>
+          <div className="max-w-2xl mx-auto bg-black/20 border border-[#3E797F]/20 rounded-2xl p-8">
+            <h3 className="text-2xl font-bold mb-4 text-center">Still Have Questions?</h3>
+            
+            <p className="text-gray-400 mb-8 text-center">
+              Our wheel specialists are here to help. Get expert advice about your specific requirements.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a 
+                href="tel:07572634898" 
+                className="flex items-center justify-center gap-2 px-6 py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg transition-all"
+              >
+                <Phone className="w-5 h-5" />
+                <span>Call Us Now</span>
+              </a>
+              
+              <button 
+                onClick={() => {
+                  const coverageSection = document.getElementById('coverage');
+                  if (coverageSection) {
+                    coverageSection.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
+                  }
+                }}
+                className="flex items-center justify-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg transition-all"
+              >
+                <MapPin className="w-5 h-5" />
+                <span>Get a Quote</span>
+              </button>
+            </div>
 
-          <div className="max-w-5xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12">
-              {/* Contact Information */}
-              <div className="space-y-8">
-                <h3 className="text-2xl font-bold text-white mb-6">Get In Touch</h3>
-                
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <Phone className="w-5 h-5 text-[#3E797F] mt-1" />
-                    <div>
-                      <p className="font-semibold text-white">Call Us</p>
-                      <a href={`tel:${contactInfo.phone}`} className="text-gray-300 hover:text-[#3E797F] transition-colors">
-                        {contactInfo.phone}
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <Mail className="w-5 h-5 text-[#3E797F] mt-1" />
-                    <div>
-                      <p className="font-semibold text-white">Email Us</p>
-                      <a href={`mailto:${contactInfo.email}`} className="text-gray-300 hover:text-[#3E797F] transition-colors">
-                        {contactInfo.email}
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <MapPin className="w-5 h-5 text-[#3E797F] mt-1" />
-                    <div>
-                      <p className="font-semibold text-white">Workshop Location</p>
-                      <p className="text-gray-300">Marsh Barton, Exeter</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex gap-4 pt-4">
-                  <a href="#" className="text-[#3E797F] hover:text-white transition-colors">
-                    <Facebook className="w-6 h-6" />
-                  </a>
-                  <a href="#" className="text-[#3E797F] hover:text-white transition-colors">
-                    <Instagram className="w-6 h-6" />
-                  </a>
-                </div>
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+              <div className="flex items-center justify-center gap-2 text-gray-400">
+                <Clock className="w-4 h-4" />
+                <span>Response within 2 hours</span>
               </div>
-
-              {/* Contact Form */}
-              <div className="bg-black/20 p-8 rounded-2xl border border-[#3E797F]/20">
-                <h3 className="text-2xl font-bold text-white mb-6">Send Us a Message</h3>
-                <form className="space-y-4">
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Your Name"
-                      className="w-full px-4 py-3 bg-black/40 border border-[#3E797F]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#3E797F] transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="email"
-                      placeholder="Your Email"
-                      className="w-full px-4 py-3 bg-black/40 border border-[#3E797F]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#3E797F] transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <textarea
-                      placeholder="Your Message"
-                      rows={4}
-                      className="w-full px-4 py-3 bg-black/40 border border-[#3E797F]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#3E797F] transition-colors resize-none"
-                    ></textarea>
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full bg-[#3E797F] hover:bg-[#3E797F]/80 px-6 py-3 rounded-lg text-white font-semibold transition-colors"
-                  >
-                    Send Message
-                  </button>
-                </form>
+              
+              <div className="flex items-center justify-center gap-2 text-gray-400">
+                <CheckCircle2 className="w-4 h-4" />
+                <span>No obligation quote</span>
               </div>
             </div>
           </div>
@@ -646,31 +582,36 @@ const services: Service[] = [
     title: "Diamond Cut Refurbishment",
     description: "State-of-the-art CNC lathe diamond cutting service at our Marsh Barton facility. We restore damaged alloy wheels to their original factory finish with precision and care.",
     icon: <Diamond className="w-8 h-8" />,
-    availability: { garage: true, mobile: true }
+    availability: { garage: true, mobile: true },
+    path: "/services/diamond-cut"
   },
   {
     title: "Painted Alloys & Colour Changes",
     description: "Full wheel repainting service including custom colour changes and finishes. Perfect for updating your car's look or restoring wheels to factory finish.",
     icon: <Paintbrush className="w-8 h-8" />,
-    availability: { garage: true, mobile: true }
+    availability: { garage: true, mobile: true },
+    path: "/services/painted-alloys"
   },
   {
     title: "Tyre Replacement",
     description: "Professional tyre fitting and replacement service. We supply and fit all major tyre brands, with competitive pricing and expert fitting at our Marsh Barton facility.",
     icon: <Disc className="w-8 h-8" />,
-    availability: { garage: true, mobile: false }
+    availability: { garage: true, mobile: false },
+    path: "/services/tyre-replacment"
   },
   {
     title: "Tyre Repair",
     description: "Quick and reliable puncture repair service following British Standard guidelines. We assess, repair, and test to ensure your tyre is safe and roadworthy.",
     icon: <Wrench className="w-8 h-8" />,
-    availability: { garage: true, mobile: true }
+    availability: { garage: true, mobile: false },
+    path: "/services/tyre-repair"
   },
   {
     title: "TPMS Service",
     description: "Complete tyre pressure monitoring solutions. We diagnose, repair, and program all types of TPMS systems to keep your vehicle safe and compliant.",
     icon: <Gauge className="w-8 h-8" />,
-    availability: { garage: true, mobile: false }
+    availability: { garage: true, mobile: false },
+    path: "/services/tpms"
   }
 ]
 
@@ -788,17 +729,26 @@ const ServiceCard = ({ service, className, style }: ServiceCardProps) => (
       <div className="flex flex-col gap-2">
         <button 
           className="w-full bg-[#3E797F] hover:bg-[#3E797F]/80 px-4 py-2 rounded-full text-sm font-semibold transition-all transform hover:scale-105 flex items-center justify-center gap-2"
-          onClick={() => {/* Add quote/booking logic */}}
+          onClick={() => {
+            const coverageSection = document.getElementById('coverage');
+            if (coverageSection) {
+              coverageSection.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }
+          }}
         >
           Get Free Quote
         </button>
         
-        <button 
+        <Link 
+          href={service.path}
           className="w-full bg-transparent border border-[#3E797F] hover:bg-[#3E797F]/20 px-4 py-2 rounded-full text-sm font-semibold transition-all transform hover:scale-105 flex items-center justify-center gap-2 group/button"
         >
           Learn More
           <ArrowRight className="w-4 h-4 transform transition-transform duration-300 group-hover/button:translate-x-1" />
-        </button>
+        </Link>
       </div>
     </div>
   </div>

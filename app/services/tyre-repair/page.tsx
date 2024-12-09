@@ -104,9 +104,9 @@ export default function TyreRepairExeter() {
 
             {/* Emergency Notice */}
             <div className="bg-[#3E797F]/10 border border-[#3E797F] rounded-xl p-4 mb-8">
-              <div className="flex items-center gap-2 text-[#3E797F] mb-2">
-                <AlertTriangle className="w-5 h-5" />
-                <span className="font-semibold">Got a Puncture?</span>
+              <div className="flex items-center gap-2 mb-2">
+                <AlertTriangle className="w-5 h-5 text-red-500 animate-warning-flash" />
+                <span className="font-semibold text-red-500 animate-warning-flash">Got a Puncture?</span>
               </div>
               <p className="text-gray-400 text-sm">
                 Visit our workshop in Marsh Barton for quick, professional tyre repairs. 
@@ -140,10 +140,21 @@ export default function TyreRepairExeter() {
                 className="group bg-[#3E797F] hover:bg-[#3E797F]/80 px-8 py-4 rounded-lg text-lg font-semibold transition-all flex items-center justify-center gap-2"
               >
                 <Phone className="w-5 h-5" />
-                <span>Call Now</span>
+                <span>Get Free Quote</span>
               </a>
               
-              <button className="bg-white/10 hover:bg-white/20 px-8 py-4 rounded-lg text-lg font-semibold transition-all">
+              <button 
+                onClick={() => {
+                  const mapSection = document.getElementById('coverage');
+                  if (mapSection) {
+                    mapSection.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
+                  }
+                }}
+                className="bg-white/10 hover:bg-white/20 px-8 py-4 rounded-lg text-lg font-semibold transition-all"
+              >
                 Workshop Location
               </button>
             </div>
@@ -313,7 +324,7 @@ export default function TyreRepairExeter() {
       </section>
 
       {/* Workshop Location */}
-      <section className="py-20 bg-black/40 backdrop-blur-sm">
+      <section id="coverage" className="py-20 bg-black/40 backdrop-blur-sm">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
             <span className="text-[#3E797F]">Workshop</span>{" "}
@@ -325,8 +336,9 @@ export default function TyreRepairExeter() {
             <div className="bg-[#3E797F]/10 border border-[#3E797F] rounded-xl p-6 mb-12 text-center">
               <h3 className="text-xl font-semibold mb-2">Workshop Service Only</h3>
               <p className="text-gray-400">
-                All tyre repairs are performed at our fully-equipped Marsh Barton facility. 
-                We do not offer mobile repair services to ensure the highest quality and safety standards.
+                Our professional tyre fitting service is available exclusively at our 
+                fully-equipped Marsh Barton facility. We do not offer mobile tyre fitting, 
+                ensuring the highest quality service and safety standards.
               </p>
             </div>
 

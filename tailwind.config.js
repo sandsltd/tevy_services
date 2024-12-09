@@ -68,6 +68,16 @@ module.exports = {
             transform: 'translateY(0)'
           }
         },
+        'warning-flash': {
+          '0%, 100%': { 
+            opacity: '1',
+            color: 'rgb(239, 68, 68)' // red-500
+          },
+          '50%': { 
+            opacity: '0.5',
+            color: 'rgb(220, 38, 38)' // red-600
+          }
+        },
       },
       animation: {
         'fade-in': 'fade-in 0.6s ease-out',
@@ -79,6 +89,7 @@ module.exports = {
         'pulse-warning': 'pulse-warning 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         bounce: 'bounce 1s infinite',
         'star-wave': 'star-wave 4s ease-in-out infinite',
+        'warning-flash': 'warning-flash 2s ease-in-out infinite',
       }
     }
   },

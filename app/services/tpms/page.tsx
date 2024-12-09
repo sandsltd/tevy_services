@@ -136,13 +136,28 @@ export default function TPMSService() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="group bg-[#3E797F] hover:bg-[#3E797F]/80 px-8 py-4 rounded-lg text-lg font-semibold transition-all flex items-center justify-center gap-2">
+              <a 
+                href={`tel:${contactInfo.phone}`}
+                className="group bg-[#3E797F] hover:bg-[#3E797F]/80 px-8 py-4 rounded-lg text-lg font-semibold transition-all flex items-center justify-center gap-2"
+              >
+                <Phone className="w-5 h-5" />
                 <span>Book TPMS Service</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
+              </a>
               
-              <button className="bg-white/10 hover:bg-white/20 px-8 py-4 rounded-lg text-lg font-semibold transition-all">
-                Learn More
+              <button 
+                onClick={() => {
+                  const mapSection = document.getElementById('workshop-location');
+                  if (mapSection) {
+                    mapSection.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
+                  }
+                }}
+                className="bg-white/10 hover:bg-white/20 px-8 py-4 rounded-lg text-lg font-semibold transition-all flex items-center justify-center gap-2"
+              >
+                <span>Get Free Quote</span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>
