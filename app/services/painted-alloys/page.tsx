@@ -24,6 +24,7 @@ import {
 } from 'lucide-react'
 import { contactInfo } from '../../constants/contact'
 import dynamic from 'next/dynamic'
+import BeforeAfterSlider from '../../components/BeforeAfterSlider'
 
 const DynamicCoverageMap = dynamic(() => import('../../components/MapWrapper'), {
   ssr: false,
@@ -532,7 +533,7 @@ export default function PaintedAlloys() {
       <section className="relative min-h-[80vh] flex items-center">
         <div className="absolute inset-0">
           <Image
-            src="/images/services/custom_alloy_wheel_painting_exeter.png"
+            src="/images/services/painting-alloy-wheels.jpg"
             alt="Custom Alloy Wheel Painting in Exeter"
             fill
             className="object-cover object-center"
@@ -900,38 +901,33 @@ export default function PaintedAlloys() {
             <span className="text-[#3E797F]">Before</span> & After
           </h2>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((item) => (
-              <div key={item} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="relative h-[200px] rounded-lg overflow-hidden">
-                    <Image
-                      src={`/images/gallery/before-${item}.jpg`}
-                      alt="Before Wheel Restoration"
-                      fill
-                      className="object-cover"
-                    />
-                    <div className="absolute bottom-2 left-2 bg-black/70 px-2 py-1 rounded text-sm">
-                      Before
-                    </div>
-                  </div>
-                  <div className="relative h-[200px] rounded-lg overflow-hidden">
-                    <Image
-                      src={`/images/gallery/after-${item}.jpg`}
-                      alt="After Wheel Restoration"
-                      fill
-                      className="object-cover"
-                    />
-                    <div className="absolute bottom-2 left-2 bg-[#3E797F]/70 px-2 py-1 rounded text-sm">
-                      After
-                    </div>
-                  </div>
-                </div>
-                <p className="text-sm text-gray-400 text-center">
-                  Complete wheel restoration and custom paint finish
-                </p>
-              </div>
-            ))}
+          <div className="max-w-2xl mx-auto">
+            <BeforeAfterSlider
+              before="/images/gallery/diamond-cut-before-1.jpg"
+              after="/images/gallery/diamond-cut-after-1.jpg"
+              title="SEAT Alloy Wheel Paint"
+              description="Full refurbishment back to original colour"
+              damage="Faded and weathered paint finish"
+            />
+          </div>
+
+          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
+              <div className="text-3xl font-bold text-[#3E797F] mb-2">100%</div>
+              <div className="text-sm text-gray-400">Customer Satisfaction</div>
+            </div>
+            <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
+              <div className="text-3xl font-bold text-[#3E797F] mb-2">10+</div>
+              <div className="text-sm text-gray-400">Years Experience</div>
+            </div>
+            <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
+              <div className="text-3xl font-bold text-[#3E797F] mb-2">5/5</div>
+              <div className="text-sm text-gray-400">Average Rating</div>
+            </div>
+            <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
+              <div className="text-3xl font-bold text-[#3E797F] mb-2">100%</div>
+              <div className="text-sm text-gray-400">Quality Guarantee</div>
+            </div>
           </div>
         </div>
       </section>
@@ -1031,37 +1027,55 @@ export default function PaintedAlloys() {
       {/* Color Options */}
       <section className="py-20">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16">
+          <h2 className="text-4xl font-bold text-center mb-8">
             <span className="text-[#3E797F]">Colour</span> Options
           </h2>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              "Gloss Black",
-              "Shadow Chrome",
-              "Gunmetal Grey",
-              "Bronze Gold",
-              "Candy Red",
-              "Pearl White",
-              "Midnight Blue",
-              "Custom Colors"
-            ].map((color, index) => (
-              <div 
-                key={index}
-                className="aspect-square relative rounded-2xl overflow-hidden group cursor-pointer"
-              >
-                <Image
-                  src={`/images/colors/${color.toLowerCase().replace(' ', '-')}.jpg`} // You'll need these images
-                  alt={color}
-                  fill
-                  className="object-cover transition-transform group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4">
-                  <h3 className="text-lg font-semibold">{color}</h3>
-                </div>
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="text-xl text-gray-300 mb-8">
+              Whatever colour you envision for your wheels, we can make it happen. Our professional colour matching service ensures we can recreate any shade perfectly.
+            </p>
+
+            <div className="bg-[#3E797F]/5 border border-[#3E797F]/20 rounded-2xl p-8 mb-8">
+              <h3 className="text-2xl font-semibold mb-4">Most Popular Choices</h3>
+              <div className="grid md:grid-cols-3 gap-6">
+                {[
+                  {
+                    name: "Gun Metal Grey",
+                    description: "A timeless classic that suits any vehicle"
+                  },
+                  {
+                    name: "Dark Anthracite",
+                    description: "Deep, rich finish with a premium feel"
+                  },
+                  {
+                    name: "Light Anthracite",
+                    description: "Subtle sophistication with modern appeal"
+                  }
+                ].map((color, index) => (
+                  <div 
+                    key={index}
+                    className="p-6 bg-black/20 rounded-xl border border-[#3E797F]/10"
+                  >
+                    <h4 className="text-lg font-semibold text-[#3E797F] mb-2">{color.name}</h4>
+                    <p className="text-gray-400">{color.description}</p>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            <div className="bg-black/20 p-8 rounded-2xl border border-[#3E797F]/20">
+              <h3 className="text-2xl font-semibold mb-4">Custom Colours Available</h3>
+              <p className="text-gray-300 mb-6">
+                Looking for something specific? We can match any colour you desire - from factory original shades to custom finishes. Our expert team uses advanced colour matching technology to ensure perfect results.
+              </p>
+              <a 
+                href="#contact"
+                className="inline-flex items-center justify-center px-6 py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg text-white font-semibold transition-colors"
+              >
+                Discuss Your Colour Options
+              </a>
+            </div>
           </div>
         </div>
       </section>

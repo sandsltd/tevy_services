@@ -66,7 +66,7 @@ export default function TyresExeter() {
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0">
             <Image
-              src="/images/services/tyres-hero.jpg"
+              src="/images/services/tyres_exeter.jpg"
               alt="Professional Tyre Fitting Service in Exeter"
               fill
               className="object-cover object-center scale-105 animate-subtle-zoom"
@@ -125,7 +125,18 @@ export default function TyresExeter() {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
               
-              <button className="bg-white/10 hover:bg-white/20 px-8 py-4 rounded-lg text-lg font-semibold transition-all">
+              <button 
+                onClick={() => {
+                  const brandsSection = document.getElementById('tyre-brands');
+                  if (brandsSection) {
+                    brandsSection.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
+                  }
+                }}
+                className="bg-white/10 hover:bg-white/20 px-8 py-4 rounded-lg text-lg font-semibold transition-all"
+              >
                 View Tyre Range
               </button>
             </div>
@@ -234,7 +245,18 @@ export default function TyresExeter() {
                   </li>
                 </ul>
 
-                <button className="bg-[#3E797F] hover:bg-[#3E797F]/80 px-6 py-3 rounded-lg text-white font-semibold transition-colors flex items-center gap-2">
+                <button 
+                  onClick={() => {
+                    const mapSection = document.getElementById('workshop-location');
+                    if (mapSection) {
+                      mapSection.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                      });
+                    }
+                  }}
+                  className="bg-[#3E797F] hover:bg-[#3E797F]/80 px-6 py-3 rounded-lg text-white font-semibold transition-colors flex items-center gap-2"
+                >
                   <span>Get Motorcycle Tyre Quote</span>
                   <ArrowRight className="w-5 h-5" />
                 </button>
@@ -243,8 +265,8 @@ export default function TyresExeter() {
               <div className="md:w-1/3">
                 <div className="relative aspect-square rounded-xl overflow-hidden">
                   <Image
-                    src="/images/services/motorcycle-tyre.jpg"
-                    alt="Motorcycle Tyre Fitting Service"
+                    src="/images/services/motorcycle_tyre_fitting_exeter.png"
+                    alt="Motorcycle Tyre Fitting Service in Exeter"
                     fill
                     className="object-cover"
                   />
@@ -255,8 +277,98 @@ export default function TyresExeter() {
         </div>
       </section>
 
+      {/* Featured Brand - Maxxis */}
+      <section className="py-20">
+        <div className="container mx-auto px-6">
+          <div className="max-w-5xl mx-auto bg-[#3E797F]/5 border border-[#3E797F]/20 rounded-2xl p-8 md:p-12">
+            <div className="flex flex-col md:flex-row gap-8 items-center">
+              <div className="md:w-1/3">
+                <div className="bg-black/20 p-8 rounded-xl border border-[#3E797F]/20">
+                  <Image
+                    src="/images/tyre_brands/maxxis_tyres.png"
+                    alt="Maxxis Tyres"
+                    width={300}
+                    height={150}
+                    className="w-full"
+                  />
+                </div>
+              </div>
+
+              <div className="md:w-2/3">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                  <span className="text-[#3E797F]">Featured Brand:</span>{" "}
+                  <span className="text-white">Maxxis Tyres</span>
+                </h2>
+
+                <div className="space-y-6">
+                  <p className="text-gray-300 text-lg">
+                    We're proud to recommend Maxxis tyres for their exceptional value and unique customer-friendly policies.
+                  </p>
+
+                  <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
+                    <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                      <Shield className="w-5 h-5 text-[#3E797F]" />
+                      Pro-Rata Warranty
+                    </h3>
+                    <p className="text-gray-400">
+                      Maxxis offers a unique wear-based replacement policy - you only pay for the wear on your tyres. 
+                      This means if your tyres need replacing early, you'll only be charged for the tread you've used.
+                    </p>
+                  </div>
+
+                  <ul className="grid md:grid-cols-2 gap-4">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-[#3E797F] mt-1" />
+                      <span className="text-gray-300">
+                        Fair pricing based on actual tyre wear
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-[#3E797F] mt-1" />
+                      <span className="text-gray-300">
+                        High-performance compounds
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-[#3E797F] mt-1" />
+                      <span className="text-gray-300">
+                        Excellent wet weather grip
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-[#3E797F] mt-1" />
+                      <span className="text-gray-300">
+                        Extended tread life guarantee
+                      </span>
+                    </li>
+                  </ul>
+
+                  <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                    <button 
+                      onClick={() => {
+                        const mapSection = document.getElementById('workshop-location');
+                        if (mapSection) {
+                          mapSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                          });
+                        }
+                      }}
+                      className="flex items-center justify-center gap-2 px-6 py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg text-white font-semibold transition-colors w-full"
+                    >
+                      <span>Get Maxxis Tyre Quote</span>
+                      <ArrowRight className="w-5 h-5" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Brands We Stock */}
-      <section className="py-20 bg-black/40 backdrop-blur-sm">
+      <section id="tyre-brands" className="py-20 bg-black/40 backdrop-blur-sm">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-6">
             <span className="text-[#3E797F]">Premium</span>{" "}
@@ -269,30 +381,68 @@ export default function TyresExeter() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              "Michelin",
-              "Bridgestone",
-              "Continental",
-              "Pirelli",
-              "Goodyear",
-              "Dunlop",
-              "Hankook",
-              "Falken"
+              {
+                name: "Michelin",
+                image: "/images/tyre_brands/michelin_tyres.png",
+                url: "https://www.michelin.co.uk"
+              },
+              {
+                name: "Bridgestone",
+                image: "/images/tyre_brands/bridgestone_tyres.png",
+                url: "https://www.bridgestone.co.uk"
+              },
+              {
+                name: "Continental",
+                image: "/images/tyre_brands/continental_tyres.png",
+                url: "https://www.continental-tyres.co.uk"
+              },
+              {
+                name: "Pirelli",
+                image: "/images/tyre_brands/pirelli_tyres.png",
+                url: "https://www.pirelli.com/tyres/en-gb"
+              },
+              {
+                name: "Goodyear",
+                image: "/images/tyre_brands/goodyear_tyres.png",
+                url: "https://www.goodyear.eu/en_gb"
+              },
+              {
+                name: "Dunlop",
+                image: "/images/tyre_brands/dunlop_tyres.png",
+                url: "https://www.dunlop.eu/en_gb"
+              },
+              {
+                name: "Hankook",
+                image: "/images/tyre_brands/jankook_tyres.png",
+                url: "https://www.hankooktire.com/uk"
+              },
+              {
+                name: "Falken",
+                image: "/images/tyre_brands/falken_tyres.png",
+                url: "https://www.falkentyre.com/en"
+              }
             ].map((brand, index) => (
-              <div key={index} className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20 flex items-center justify-center">
+              <a
+                key={index}
+                href={brand.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20 flex items-center justify-center hover:bg-black/30 transition-all group"
+              >
                 <Image
-                  src={`/images/brands/${brand.toLowerCase()}.png`}
-                  alt={`${brand} Tyres`}
+                  src={brand.image}
+                  alt={`${brand.name} Tyres`}
                   width={160}
                   height={80}
-                  className="opacity-80 hover:opacity-100 transition-opacity"
+                  className="opacity-80 group-hover:opacity-100 transition-opacity"
                 />
-              </div>
+              </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Pricing Tables */}
+      {/* Pricing Section */}
       <section className="py-20">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-6">
@@ -301,92 +451,62 @@ export default function TyresExeter() {
           </h2>
           
           <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
-            Transparent pricing for all our tyre services, with options to suit every budget.
+            We offer competitive pricing across our full range of tyres, with options to suit every budget.
+            Contact us today for a personalized quote.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {[
-              {
-                name: "Budget",
-                price: "From £45",
-                description: "Quality tyres at affordable prices",
-                features: [
-                  "Economy brand tyres",
-                  "New valve included",
-                  "Wheel balancing",
-                  "Tyre disposal"
-                ]
-              },
-              {
-                name: "Premium",
-                price: "From £80",
-                description: "High-performance tyres",
-                features: [
-                  "Premium brand tyres",
-                  "Enhanced grip & handling",
-                  "Longer lifespan",
-                  "Superior wet performance",
-                  "Free nitrogen inflation"
-                ],
-                highlighted: true
-              },
-              {
-                name: "Commercial",
-                price: "From £70",
-                description: "Van & light commercial",
-                features: [
-                  "Heavy duty tyres",
-                  "Load rated options",
-                  "Commercial warranty",
-                  "Fleet service available"
-                ]
-              }
-            ].map((plan, index) => (
-              <div 
-                key={index}
-                className={`relative p-8 rounded-2xl border backdrop-blur-sm
-                  ${plan.highlighted 
-                    ? 'border-[#3E797F] bg-[#3E797F]/10' 
-                    : 'border-[#3E797F]/20 bg-black/20'
-                  }
-                `}
-              >
-                {plan.highlighted && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#3E797F] px-4 py-1 rounded-full text-sm">
-                    Most Popular
-                  </div>
-                )}
-                <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                <div className="mb-4">
-                  <span className="text-3xl font-bold">{plan.price}</span>
-                  <span className="text-gray-400 text-sm ml-2">per tyre</span>
+          <div className="max-w-3xl mx-auto bg-[#3E797F]/5 border border-[#3E797F]/20 rounded-2xl p-8 md:p-12">
+            <div className="text-center space-y-6">
+              <h3 className="text-2xl font-bold">Get Your Free Quote Today</h3>
+              
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
+                  <Shield className="w-8 h-8 text-[#3E797F] mx-auto mb-4" />
+                  <h4 className="font-semibold mb-2">Budget Options</h4>
+                  <p className="text-sm text-gray-400">Quality tyres at affordable prices</p>
                 </div>
-                <p className="text-gray-400 mb-6">{plan.description}</p>
-                <ul className="space-y-3 mb-8">
-                  {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-center gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-[#3E797F]" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <button 
-                  className={`w-full py-3 rounded-lg transition-colors ${
-                    plan.highlighted
-                      ? 'bg-[#3E797F] hover:bg-[#3E797F]/80'
-                      : 'bg-white/10 hover:bg-white/20'
-                  }`}
-                >
-                  Get Quote
-                </button>
+                
+                <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
+                  <Star className="w-8 h-8 text-[#3E797F] mx-auto mb-4" />
+                  <h4 className="font-semibold mb-2">Premium Brands</h4>
+                  <p className="text-sm text-gray-400">High-performance tyre options</p>
+                </div>
+                
+                <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
+                  <CheckCircle2 className="w-8 h-8 text-[#3E797F] mx-auto mb-4" />
+                  <h4 className="font-semibold mb-2">Price Match</h4>
+                  <p className="text-sm text-gray-400">Competitive pricing guaranteed</p>
+                </div>
               </div>
-            ))}
+
+              <div className="pt-6">
+                <button 
+                  onClick={() => {
+                    const mapSection = document.getElementById('workshop-location');
+                    if (mapSection) {
+                      mapSection.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                      });
+                    }
+                  }}
+                  className="flex items-center justify-center gap-2 px-8 py-4 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg text-lg font-semibold transition-colors mx-auto"
+                >
+                  <span>Get Your Free Quote</span>
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+                
+                <p className="text-sm text-gray-400 mt-4">
+                  Fast response • No obligation • Best price guaranteed
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Workshop Location */}
-      <section className="py-20 bg-black/40 backdrop-blur-sm">
+      <section id="workshop-location" className="py-20 bg-black/40 backdrop-blur-sm">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
             <span className="text-[#3E797F]">Workshop</span>{" "}
@@ -421,9 +541,9 @@ export default function TyresExeter() {
                 <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
                   <h3 className="font-semibold mb-2">Opening Hours</h3>
                   <p className="text-sm text-gray-400">
-                    Mon-Fri: 8:30am - 5:30pm<br />
-                    Saturday: 9am - 4pm<br />
-                    Sunday: Closed
+                    Mon-Fri: 9:00am - 5:30pm<br />
+                    Saturday / Sunday: Closed
+                  
                   </p>
                 </div>
                 

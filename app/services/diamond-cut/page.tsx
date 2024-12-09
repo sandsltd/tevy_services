@@ -19,9 +19,11 @@ import {
   MoveHorizontal,
   Phone,
   MessageSquare,
+  MapPin,
 } from 'lucide-react'
 import ServiceBooking from '../../components/ServiceBooking'
 import dynamic from 'next/dynamic'
+import BeforeAfterSlider from '../../components/BeforeAfterSlider'
 
 type BeforeAfterImage = {
   id: string
@@ -30,63 +32,6 @@ type BeforeAfterImage = {
   before: string
   after: string
   damage: string
-}
-
-const BeforeAfterSlider = ({ before, after }: { before: string; after: string }) => {
-  const [position, setPosition] = useState(50)
-  const [isDragging, setIsDragging] = useState(false)
-
-  const handleMove = (e: React.MouseEvent | React.TouchEvent) => {
-    if (!isDragging) return
-    
-    const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect()
-    const x = 'touches' in e ? e.touches[0].clientX - rect.left : e.clientX - rect.left
-    const pos = Math.min(Math.max((x / rect.width) * 100, 0), 100)
-    setPosition(pos)
-  }
-
-  return (
-    <div 
-      className="relative h-full w-full cursor-ew-resize select-none"
-      onMouseDown={() => setIsDragging(true)}
-      onMouseUp={() => setIsDragging(false)}
-      onMouseLeave={() => setIsDragging(false)}
-      onMouseMove={handleMove}
-      onTouchStart={() => setIsDragging(true)}
-      onTouchEnd={() => setIsDragging(false)}
-      onTouchMove={handleMove}
-    >
-      <div className="absolute inset-0 select-none">
-        <Image
-          src={after}
-          alt="After restoration"
-          fill
-          className="object-cover select-none"
-          draggable="false"
-        />
-      </div>
-      <div 
-        className="absolute inset-0 overflow-hidden select-none"
-        style={{ width: `${position}%` }}
-      >
-        <Image
-          src={before}
-          alt="Before restoration"
-          fill
-          className="object-cover select-none"
-          draggable="false"
-        />
-      </div>
-      <div 
-        className="absolute top-0 bottom-0 w-1 bg-[#3E797F] cursor-ew-resize select-none"
-        style={{ left: `${position}%` }}
-      >
-        <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-[#3E797F] border-2 border-white flex items-center justify-center select-none">
-          <MoveHorizontal className="w-4 h-4 text-white" />
-        </div>
-      </div>
-    </div>
-  )
 }
 
 const FAQItem = ({ question, answer }: { question: string; answer: string | React.ReactNode }) => {
@@ -125,8 +70,6 @@ const DynamicCoverageMap = dynamic(() => import('../../components/MapWrapper'), 
 
 export default function DiamondCutRepair() {
   const parallaxRef = useRef<HTMLDivElement>(null)
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const [showVideo, setShowVideo] = useState(false)
 
   // Scroll handler
   useEffect(() => {
@@ -149,12 +92,13 @@ export default function DiamondCutRepair() {
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0">
             <Image
-              src="/images/services/diamond-cut-hero.jpg"
+              src="/images/services/diamond-cut-alloy-repair_2.jpg"
               alt="Professional Diamond Cut Alloy Wheel Repair Process"
               fill
-              className="object-cover object-center scale-105 animate-subtle-zoom"
+              className="object-cover object-[center_35%]"
               priority
               quality={100}
+              sizes="100vw"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black" />
@@ -170,7 +114,7 @@ export default function DiamondCutRepair() {
                   <Star key={i} className="w-5 h-5 text-[#3E797F] fill-[#3E797F]" />
                 ))}
               </div>
-              <span className="text-white/80 text-sm">Over 2,000+ Wheels Restored</span>
+              <span className="text-white/80 text-sm">Over 3,000+ Wheels Restored</span>
             </div>
 
             {/* SEO-Optimized H1 */}
@@ -211,26 +155,45 @@ export default function DiamondCutRepair() {
               <div className="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-[#3E797F]/20">
                 <div className="flex items-center gap-2 mb-2">
                   <CheckCircle2 className="w-5 h-5 text-[#3E797F]" />
-                  <span className="font-semibold">6 Month Warranty</span>
+                  <span className="font-semibold">Quality Guaranteed</span>
                 </div>
-                <p className="text-sm text-gray-400">Guaranteed quality and durability</p>
+                <p className="text-sm text-gray-400">100% satisfaction guaranteed</p>
               </div>
             </div>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="group bg-[#3E797F] hover:bg-[#3E797F]/80 px-8 py-4 rounded-lg text-lg font-semibold transition-all flex items-center justify-center gap-2 relative overflow-hidden">
-                <span className="relative z-10">Get Free Assessment</span>
+              <button 
+                onClick={() => {
+                  const coverageSection = document.getElementById('coverage');
+                  if (coverageSection) {
+                    coverageSection.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
+                  }
+                }}
+                className="group bg-[#3E797F] hover:bg-[#3E797F]/80 px-8 py-4 rounded-lg text-lg font-semibold transition-all flex items-center justify-center gap-2 relative overflow-hidden"
+              >
+                <span className="relative z-10">Get Free Quote</span>
                 <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </button>
               
               <button 
-                onClick={() => setShowVideo(true)}
+                onClick={() => {
+                  const coverageSection = document.getElementById('coverage');
+                  if (coverageSection) {
+                    coverageSection.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
+                  }
+                }}
                 className="group bg-white/10 hover:bg-white/20 px-8 py-4 rounded-lg text-lg font-semibold transition-all flex items-center justify-center gap-2"
               >
-                <Play className="w-5 h-5" />
-                Watch Process
+                <MapPin className="w-5 h-5" />
+                <span>Check Coverage</span>
               </button>
             </div>
 
@@ -253,7 +216,7 @@ export default function DiamondCutRepair() {
 
             <div className="prose prose-invert max-w-none">
               <p className="text-lg text-gray-300 leading-relaxed mb-6">
-                Diamond cut alloy wheel repair is a precision process that utilizes state-of-the-art CNC lathe technology to restore damaged wheels to their original factory specification. Unlike traditional refurbishment methods, our diamond cutting process removes a thin layer of alloy to create a perfectly smooth surface with the distinctive bright finish that makes diamond cut alloys so desirable.
+                Diamond cut alloy wheel repair is a precision process that utilises state-of-the-art CNC lathe technology to restore damaged wheels to their original factory specification. Unlike traditional refurbishment methods, our diamond cutting process removes a thin layer of alloy to create a perfectly smooth surface with the distinctive bright finish that makes diamond cut alloys so desirable.
               </p>
 
               <div className="bg-black/20 border border-[#3E797F]/20 rounded-xl p-6 mb-8">
@@ -284,6 +247,46 @@ export default function DiamondCutRepair() {
           </div>
         </div>
       </section>
+
+      {/* Get Quote CTA Section */}
+      <div className="mt-16 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          <span className="text-[#3E797F]">Get Your</span>{" "}
+          <span className="text-white">Free Quote</span>
+        </h2>
+        
+        <p className="text-gray-400 mb-8">
+          Professional diamond cut alloy wheel repair with guaranteed results. 
+          Contact us today for a no-obligation quote.
+        </p>
+
+        <button 
+          onClick={() => {
+            const coverageSection = document.getElementById('coverage');
+            if (coverageSection) {
+              coverageSection.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }
+          }}
+          className="group bg-[#3E797F] hover:bg-[#3E797F]/80 px-8 py-4 rounded-lg text-lg font-semibold transition-all flex items-center justify-center gap-2 mx-auto"
+        >
+          <span>Get Free Quote</span>
+          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+        </button>
+
+        <div className="mt-8 flex items-center justify-center gap-8">
+          <div className="flex items-center gap-2">
+            <Clock className="w-5 h-5 text-[#3E797F]" />
+            <span className="text-sm text-gray-400">Same-day response</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-5 h-5 text-[#3E797F]" />
+            <span className="text-sm text-gray-400">No obligation</span>
+          </div>
+        </div>
+      </div>
 
       {/* Diamond Cutting Process Section */}
       <section className="py-20">
@@ -398,48 +401,14 @@ export default function DiamondCutRepair() {
             Drag the slider to compare before and after results.
           </p>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {[
-              {
-                id: '1',
-                title: 'BMW M-Sport Diamond Cut Restoration',
-                description: 'Complete diamond cut refurbishment with powder coat base',
-                before: '/images/gallery/diamond-cut-before-1.jpg',
-                after: '/images/gallery/diamond-cut-after-1.jpg',
-                damage: 'Kerb damage and corrosion'
-              },
-              {
-                id: '2',
-                title: 'Audi RS Diamond Cut Repair',
-                description: 'Full face diamond cut restoration',
-                before: '/images/gallery/diamond-cut-before-2.jpg',
-                after: '/images/gallery/diamond-cut-after-2.jpg',
-                damage: 'Lacquer peel and surface corrosion'
-              }
-            ].map((example) => (
-              <div 
-                key={example.id}
-                className="bg-black/20 rounded-xl border border-[#3E797F]/20 overflow-hidden group"
-              >
-                <div className="relative aspect-square">
-                  <BeforeAfterSlider 
-                    before={example.before}
-                    after={example.after}
-                  />
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                    <h3 className="text-xl font-bold mb-2">{example.title}</h3>
-                    <p className="text-gray-300 text-sm">{example.description}</p>
-                  </div>
-                  <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full text-sm flex items-center gap-2">
-                    <Camera className="w-4 h-4" />
-                    <span>Before & After</span>
-                  </div>
-                  <div className="absolute top-4 right-4 bg-[#3E797F]/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm">
-                    {example.damage}
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div className="max-w-2xl mx-auto">
+            <BeforeAfterSlider
+              before="/images/gallery/diamond-cut-before-2.jpg"
+              after="/images/gallery/diamond-cut-after-2.jpg"
+              title="Ford Diamond Cut Restoration"
+              description="Full face diamond cut refurbishment"
+              damage="Lacquer peel and surface corrosion"
+            />
           </div>
 
           {/* Gallery Stats */}
@@ -449,179 +418,50 @@ export default function DiamondCutRepair() {
               <div className="text-sm text-gray-400">Customer Satisfaction</div>
             </div>
             <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
-              <div className="text-3xl font-bold text-[#3E797F] mb-2">2,500+</div>
-              <div className="text-sm text-gray-400">Photos in Gallery</div>
+              <div className="text-3xl font-bold text-[#3E797F] mb-2">10+</div>
+              <div className="text-sm text-gray-400">Years Experience</div>
             </div>
             <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
-              <div className="text-3xl font-bold text-[#3E797F] mb-2">4.9/5</div>
+              <div className="text-3xl font-bold text-[#3E797F] mb-2">5/5</div>
               <div className="text-sm text-gray-400">Average Rating</div>
             </div>
             <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
-              <div className="text-3xl font-bold text-[#3E797F] mb-2">100%</div>
+              <div className="text-3xl font-bold text-[#3E797F] mb-2">Quality Finish Guaranteed to Manufacturer Standards</div>
               <div className="text-sm text-gray-400">Quality Guarantee</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section className="py-20">
+      {/* Coverage Area Section */}
+      <section id="coverage" className="py-20 bg-black/40 backdrop-blur-sm">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
-            <span className="text-[#3E797F]">Transparent</span>{" "}
-            <span className="text-white">Pricing</span>
+            <span className="text-[#3E797F]">Get Your</span>{" "}
+            <span className="text-white">Free Quote</span>
           </h2>
           
           <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
-            Professional diamond cut alloy wheel repair with guaranteed results. 
-            Choose the package that best suits your needs.
+            Get an instant quote for your diamond cut alloy wheel repair. 
+            Check our coverage area below to see if we service your location.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {[
-              {
-                name: "Single Wheel",
-                price: "£120",
-                description: "Perfect for individual wheel repair",
-                features: [
-                  "Full diamond cut restoration",
-                  "Powder coat base layer",
-                  "Premium lacquer protection",
-                  "24-hour turnaround",
-                  "12-month warranty"
-                ],
-                highlighted: false
-              },
-              {
-                name: "Full Set",
-                price: "£399",
-                description: "Most popular choice",
-                features: [
-                  "4 wheels fully restored",
-                  "Priority service",
-                  "Free wheel balancing",
-                  "Premium powder coating",
-                  "24-month warranty",
-                  "Free collection & delivery"
-                ],
-                highlighted: true
-              },
-              {
-                name: "Custom Finish",
-                price: "From £499",
-                description: "Bespoke design service",
-                features: [
-                  "Custom color options",
-                  "Two-tone finishes",
-                  "Premium diamond cutting",
-                  "Ceramic coating option",
-                  "36-month warranty",
-                  "Lifetime support"
-                ],
-                highlighted: false
-              }
-            ].map((plan, index) => (
-              <div 
-                key={index}
-                className={`relative bg-black/20 rounded-2xl border ${
-                  plan.highlighted 
-                    ? 'border-[#3E797F] shadow-[0_0_20px_rgba(62,121,127,0.2)]' 
-                    : 'border-[#3E797F]/20'
-                } p-8 flex flex-col`}
-              >
-                {plan.highlighted && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#3E797F] px-4 py-1 rounded-full text-sm font-medium">
-                    Most Popular
-                  </div>
-                )}
-
-                <div className="mb-8">
-                  <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                  <div className="flex items-baseline gap-2 mb-4">
-                    <span className="text-4xl font-bold">{plan.price}</span>
-                    <span className="text-gray-400">per service</span>
-                  </div>
-                  <p className="text-gray-400">{plan.description}</p>
-                </div>
-
-                <ul className="space-y-4 mb-8 flex-grow">
-                  {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-[#3E797F]" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <button 
-                  className={`w-full py-4 px-6 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 ${
-                    plan.highlighted
-                      ? 'bg-[#3E797F] hover:bg-[#3E797F]/80'
-                      : 'bg-white/10 hover:bg-white/20'
-                  }`}
-                >
-                  Get Started
-                  <ArrowRight className="w-5 h-5" />
-                </button>
-              </div>
-            ))}
-          </div>
-
-          {/* Additional Services */}
-          <div className="mt-16 max-w-3xl mx-auto">
-            <h3 className="text-2xl font-bold text-center mb-8">Additional Services</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {[
-                {
-                  service: "Ceramic Coating",
-                  price: "£49 per wheel"
-                },
-                {
-                  service: "Custom Color Match",
-                  price: "£30 per wheel"
-                },
-                {
-                  service: "TPMS Service",
-                  price: "£15 per sensor"
-                },
-                {
-                  service: "Wheel Balancing",
-                  price: "£10 per wheel"
-                },
-                {
-                  service: "Express Service",
-                  price: "+50% surcharge"
-                },
-                {
-                  service: "Mobile Service",
-                  price: "From £50"
-                }
-              ].map((item, index) => (
-                <div 
-                  key={index}
-                  className="bg-black/20 p-4 rounded-xl border border-[#3E797F]/20"
-                >
-                  <div className="font-semibold mb-1">{item.service}</div>
-                  <div className="text-sm text-gray-400">{item.price}</div>
-                </div>
-              ))}
+          <div className="max-w-5xl mx-auto">
+            {/* Map Container */}
+            <div className="w-full h-[600px] rounded-2xl overflow-hidden">
+              <DynamicCoverageMap />
             </div>
-          </div>
-
-          {/* Price Match Promise */}
-          <div className="mt-16 text-center">
-            <div className="inline-flex items-center gap-2 bg-[#3E797F]/10 px-4 py-2 rounded-full">
-              <Shield className="w-5 h-5 text-[#3E797F]" />
-              <span className="text-sm">Price Match Promise</span>
+            
+            <div className="mt-8">
+              <p className="text-sm text-gray-400 text-center">
+                * Coverage area may vary. Please contact us for specific location availability.
+              </p>
             </div>
-            <p className="mt-4 text-gray-400 max-w-xl mx-auto">
-              Found a better price? We'll match any legitimate quote from a certified diamond cut specialist.
-            </p>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section with CTA */}
+      {/* FAQ Section */}
       <section className="py-20 bg-black/40 backdrop-blur-sm">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
@@ -680,16 +520,17 @@ export default function DiamondCutRepair() {
             />
             
             <FAQItem 
-              question="What's included in the warranty?"
+              question="What quality guarantee do you provide?"
               answer={
                 <div className="space-y-2">
-                  <p>Our 6-month warranty covers:</p>
+                  <p>Our commitment to quality includes:</p>
                   <ul className="list-disc pl-6 space-y-1">
-                    <li>Manufacturing defects</li>
-                    <li>Lacquer peeling or bubbling</li>
-                    <li>Corrosion under the clear coat</li>
-                    <li>Finish imperfections</li>
+                    <li>Thorough quality control checks</li>
+                    <li>Post-service inspection</li>
+                    <li>Customer satisfaction follow-up</li>
+                    <li>Support if any issues arise</li>
                   </ul>
+                  <p>We ensure you're completely satisfied with the finish of your wheels.</p>
                 </div>
               }
             />
@@ -706,7 +547,7 @@ export default function DiamondCutRepair() {
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a 
-                  href="tel:+441234567890" 
+                  href="tel:07572634898" 
                   className="flex items-center justify-center gap-2 px-6 py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg transition-all"
                 >
                   <Phone className="w-5 h-5" />
@@ -714,10 +555,18 @@ export default function DiamondCutRepair() {
                 </a>
                 
                 <button 
-                  onClick={() => window.location.href = '#quote-calculator'}
+                  onClick={() => {
+                    const coverageSection = document.getElementById('coverage');
+                    if (coverageSection) {
+                      coverageSection.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                      });
+                    }
+                  }}
                   className="flex items-center justify-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg transition-all"
                 >
-                  <MessageSquare className="w-5 h-5" />
+                  <MapPin className="w-5 h-5" />
                   <span>Get a Quote</span>
                 </button>
               </div>
@@ -733,50 +582,6 @@ export default function DiamondCutRepair() {
                   <span>No obligation quote</span>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Coverage Area Section */}
-      <section className="py-20 bg-black/40 backdrop-blur-sm">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
-            <span className="text-[#3E797F]">Service</span>{" "}
-            <span className="text-white">Coverage Area</span>
-          </h2>
-          
-          <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
-            We offer mobile wheel repair services across the South West, with our main diamond cutting facility located in Marsh Barton, Exeter.
-          </p>
-
-          <div className="max-w-5xl mx-auto">
-            {/* Map Container */}
-            <div className="w-full h-[600px] rounded-2xl overflow-hidden">
-              <DynamicCoverageMap />
-            </div>
-            
-            <div className="mt-8">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
-                  <h3 className="font-semibold mb-2">Workshop Service</h3>
-                  <p className="text-sm text-gray-400">Diamond cutting available at our Marsh Barton facility</p>
-                </div>
-                
-                <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
-                  <h3 className="font-semibold mb-2">Mobile Service</h3>
-                  <p className="text-sm text-gray-400">Available within 45-mile radius for wheel collection</p>
-                </div>
-                
-                <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
-                  <h3 className="font-semibold mb-2">Free Collection</h3>
-                  <p className="text-sm text-gray-400">Free collection & delivery for full sets</p>
-                </div>
-              </div>
-
-              <p className="text-sm text-gray-400 text-center mt-6">
-                * Coverage area may vary. Please contact us for specific location availability.
-              </p>
             </div>
           </div>
         </div>

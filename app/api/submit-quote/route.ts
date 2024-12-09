@@ -26,7 +26,6 @@ const getCustomerEmailContent = (name: string, hasPhotos: boolean): string => {
       `}
       <p style="color: #666; font-size: 14px; margin-bottom: 20px; padding: 12px; background: #f9f9f9; border-radius: 4px;">
         <strong>Note:</strong> Please add <strong>info@tevyservices.co.uk</strong> to your contacts to ensure our emails reach your inbox. 
-        If you don't receive this confirmation email, please check your spam/junk folder.
       </p>
   `
 

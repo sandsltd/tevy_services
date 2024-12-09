@@ -21,7 +21,8 @@ import {
   Building2, 
   ArrowRight, 
   ImageIcon, 
-  ChevronDown 
+  ChevronDown, 
+  Truck 
 } from 'lucide-react'
 import { contactInfo } from './constants/contact'
 import Footer from './components/Footer'
@@ -46,15 +47,6 @@ type ServiceCardProps = {
   className?: string;
   style?: React.CSSProperties;
 }
-
-const DynamicQuoteWizard = dynamic(() => import('./components/QuoteWizard'), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full min-h-[400px] rounded-2xl bg-black/20 flex items-center justify-center">
-      <div className="animate-spin rounded-full h-8 w-8 border-2 border-[#3E797F] border-t-transparent"></div>
-    </div>
-  )
-})
 
 export default function Home() {
   const parallaxRef = useRef<HTMLDivElement>(null)
@@ -110,13 +102,16 @@ export default function Home() {
               <div className="flex items-center gap-3 mb-6 animate-fade-in-up mt-[80px] md:mt-[60px]">
                 <div className="flex items-center gap-1">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-[#3E797F] fill-[#3E797F]" />
+                    <Star 
+                      key={i} 
+                      className={`w-5 h-5 text-[#3E797F] fill-[#3E797F] animate-star-wave`}
+                      style={{ animationDelay: `${i * 0.1}s` }}
+                    />
                   ))}
                 </div>
                 <span className="text-white/80 text-sm">5.0 on Google</span>
               </div>
 
-              {/* Main Heading with adjusted spacing */}
               <h1 className="mb-4">
                 <span className="text-4xl md:text-6xl lg:text-7xl font-bold block animate-slide-up">
                   <span className="text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Alloy Wheel</span>{" "}
@@ -127,30 +122,31 @@ export default function Home() {
                   Restoring South West Alloys Since 2020
                 </span>
               </h1>
-              
-              <p className="text-lg md:text-xl mb-6 text-gray-200 max-w-3xl animate-fade-in-up delay-300 font-medium leading-relaxed">
-                Specialists in diamond cut restoration, with additional services including custom paint finishes and wheel repairs. Professional service at your location or our Marsh Barton facility, delivering premium alloy wheel solutions across the South West.
+
+              <p className="text-lg md:text-xl mb-8 text-gray-200 max-w-3xl animate-fade-in-up delay-300 font-medium leading-relaxed">
+                Specialists in diamond cut restoration, with additional services including custom paint finishes and wheel repairs. Professional service at your location or our Marsh Barton facility.
               </p>
 
-              {/* Service Types with hover effects and animations */}
-              <div className="flex flex-wrap gap-3 mb-6 animate-fade-in-up delay-300">
-                {services.map((service, index) => (
-                  <span 
-                    key={service.title}
-                    className="group px-6 py-3 rounded-2xl bg-black/40 text-base border border-[#3E797F]/20 text-white hover:bg-black/50 transition-all duration-300 flex items-center gap-3 backdrop-blur-sm hover:transform hover:scale-105"
-                    style={{ animationDelay: `${index * 100}ms` }}
-                  >
-                    <span>{service.title}</span>
-                    <div className="relative">
-                      {service.icon}
-                      <div className="absolute inset-0 bg-[#3E797F] blur-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
-                    </div>
-                  </span>
-                ))}
+              {/* Service Types */}
+              <div className="grid grid-cols-2 gap-4 mb-8 animate-fade-in-up delay-300">
+                <div className="p-4 bg-black/40 backdrop-blur-sm border border-[#3E797F]/30 rounded-lg">
+                  <h3 className="font-bold flex items-center gap-2 text-[#3E797F]">
+                    <Truck className="w-5 h-5" />
+                    Mobile Service
+                  </h3>
+                  <p className="text-sm text-gray-300 mt-1">We come to you across the South West</p>
+                </div>
+                <div className="p-4 bg-black/40 backdrop-blur-sm border border-[#3E797F]/30 rounded-lg">
+                  <h3 className="font-bold flex items-center gap-2 text-[#3E797F]">
+                    <Car className="w-5 h-5" />
+                    Collection Service
+                  </h3>
+                  <p className="text-sm text-gray-300 mt-1">We collect and deliver your wheels</p>
+                </div>
               </div>
 
-              {/* Enhanced CTA buttons */}
-              <div className="flex flex-col sm:flex-row gap-6 animate-fade-in-up delay-500 mb-24">
+              {/* Primary CTA */}
+              <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-500">
                 <button 
                   onClick={() => {
                     const coverageSection = document.getElementById('coverage');
@@ -165,14 +161,14 @@ export default function Home() {
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
                   <span className="relative z-10">Get Your Free Quote</span>
-                  <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300 relative z-10" />
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300 relative z-10" />
                 </button>
 
                 <button 
                   onClick={() => {
-                    const servicesSection = document.getElementById('services');
-                    if (servicesSection) {
-                      servicesSection.scrollIntoView({ 
+                    const coverageSection = document.getElementById('coverage');
+                    if (coverageSection) {
+                      coverageSection.scrollIntoView({ 
                         behavior: 'smooth',
                         block: 'start'
                       });
@@ -180,8 +176,8 @@ export default function Home() {
                   }}
                   className="group bg-black/40 backdrop-blur-sm px-10 py-5 rounded-lg text-xl font-medium transition-all duration-300 flex items-center justify-center gap-3 border border-[#3E797F]/20 hover:border-[#3E797F] min-w-[280px] hover:bg-black/60"
                 >
-                  <span className="relative z-10">Explore Our Services</span>
-                  <ChevronDown className="w-5 h-5 transform group-hover:translate-y-1 transition-transform duration-300 relative z-10" />
+                  <span className="relative z-10">Check Coverage</span>
+                  <MapPin className="w-5 h-5 animate-bounce relative z-10" />
                 </button>
               </div>
             </div>
@@ -253,14 +249,14 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-3">
                   <Check className="text-[#3E797F] w-5 h-5" />
-                  <span>24-hour turnaround on most services</span>
+                  <span>Fast Service Times</span>
                 </div>
               </div>
 
               {/* Stats Section */}
               <div className="grid grid-cols-3 gap-6 mt-8 mb-8">
                 <div className="text-center p-4 bg-black/30 rounded-xl border border-[#3E797F]/20 hover:border-[#3E797F] transition-all">
-                  <div className="text-3xl font-bold text-[#3E797F] mb-2">500+</div>
+                  <div className="text-3xl font-bold text-[#3E797F] mb-2">3000+</div>
                   <div className="text-sm text-gray-400">Wheels Restored</div>
                 </div>
                 <div className="text-center p-4 bg-black/30 rounded-xl border border-[#3E797F]/20 hover:border-[#3E797F] transition-all">
@@ -274,8 +270,19 @@ export default function Home() {
               </div>
 
               {/* CTA Button */}
-              <button className="w-full bg-[#3E797F] hover:bg-[#3E797F]/90 px-8 py-4 rounded-full text-lg font-semibold transition-all transform hover:scale-105 flex items-center justify-center gap-2 mt-8">
-                Book Your Service
+              <button 
+                onClick={() => {
+                  const coverageSection = document.getElementById('coverage');
+                  if (coverageSection) {
+                    coverageSection.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
+                  }
+                }}
+                className="w-full bg-[#3E797F] hover:bg-[#3E797F]/90 px-8 py-4 rounded-full text-lg font-semibold transition-all transform hover:scale-105 flex items-center justify-center gap-2"
+              >
+                Get a Free Quote
                 <ArrowRight className="w-5 h-5" />
               </button>
             </div>
@@ -353,16 +360,16 @@ export default function Home() {
               <div className="text-gray-400">Google Rating</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-[#3E797F] mb-2">100+</div>
+              <div className="text-4xl font-bold text-[#3E797F] mb-2">1000+</div>
               <div className="text-gray-400">Happy Customers</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-[#3E797F] mb-2">500+</div>
+              <div className="text-4xl font-bold text-[#3E797F] mb-2">3000+</div>
               <div className="text-gray-400">Wheels Restored</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-[#3E797F] mb-2">24h</div>
-              <div className="text-gray-400">Quick Turnaround</div>
+              <div className="text-4xl font-bold text-[#3E797F] mb-2">Quick</div>
+              <div className="text-gray-400">Turnaround Times</div>
             </div>
           </div>
 
@@ -465,50 +472,73 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-[#3E797F]">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-6">South West's Premier Mobile Wheel Repair Service</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Professional mobile wheel repairs across the South West, with same-day service and 24-hour 
-            turnaround at our Marsh Barton facility. Quality service at your convenience.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-black hover:bg-[#706F6F] px-8 py-4 rounded-full text-lg font-semibold transition-all transform hover:scale-105">
-              Book Mobile Service
-            </button>
-            <button className="bg-transparent border-2 border-black hover:bg-black/10 px-8 py-4 rounded-full text-lg font-semibold transition-all transform hover:scale-105">
-              Visit Our Workshop
-            </button>
-          </div>
-        </div>
-      </section>
-
       {/* Coverage Area Section */}
       <section id="coverage" className="relative py-20 bg-black/40 backdrop-blur-sm">
         <div className="container mx-auto px-6 max-w-7xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-            <span className="text-[#3E797F]">Get A</span>{" "}
-            <span className="text-white">Free Quote</span>
+          {/* Trust Badge */}
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="flex items-center gap-1">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-5 h-5 text-[#3E797F] fill-[#3E797F]" />
+              ))}
+            </div>
+            <span className="text-white/80 text-sm">5.0 on Google</span>
+          </div>
+
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+            <span className="text-white">Get Your</span>{" "}
+            <span className="text-[#3E797F]">Free Quote</span>
           </h2>
           
-          <div className="max-w-5xl mx-auto">
-            <div className="mb-8 text-center">
-              <p className="text-lg md:text-xl text-gray-300">
-                Providing mobile wheel repair services across the South West, with our main facility located in Marsh Barton, Exeter.
-              </p>
+          <div className="text-center mb-12">
+            <p className="text-lg md:text-xl text-gray-300 mb-4">
+              Enter your postcode or click the map to get an instant quote
+            </p>
+            <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-400">
+              <div className="flex items-center gap-2">
+                <Check className="w-4 h-4 text-[#3E797F]" />
+                <span>Instant pricing</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="w-4 h-4 text-[#3E797F]" />
+                <span>Check coverage</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="w-4 h-4 text-[#3E797F]" />
+                <span>Mobile & collection options</span>
+              </div>
+            </div>
+          </div>
+          
+          {/* Map Container with clearer call-to-action */}
+          <div className="relative">
+            <div className="absolute top-4 left-4 right-4 z-10 flex justify-center">
+              <div className="bg-black/80 backdrop-blur-sm border border-[#3E797F]/30 rounded-xl p-2 max-w-md w-full">
+                <div className="flex">
+                  <input
+                    type="text"
+                    placeholder="Enter your postcode..."
+                    className="flex-1 bg-transparent px-4 py-3 text-white placeholder-gray-400 focus:outline-none"
+                  />
+                  <button className="bg-[#3E797F] px-6 py-2 rounded-lg font-medium hover:bg-[#3E797F]/80 transition-colors">
+                    Get Quote
+                  </button>
+                </div>
+              </div>
             </div>
             
-            {/* Map Container */}
             <div className="w-full h-[600px] rounded-2xl overflow-hidden">
               <MapWrapper />
             </div>
-            
-            <div className="mt-8 text-center">
-              <p className="text-sm text-gray-400">
-                * Coverage area may vary. Please contact us for specific location availability.
-              </p>
-            </div>
+          </div>
+          
+          <div className="mt-8 text-center space-y-2">
+            <p className="text-sm text-gray-400">
+              * Coverage area includes Exeter, Teignmouth, Torquay and surrounding areas
+            </p>
+            <p className="text-sm text-[#3E797F]">
+              Click anywhere on the map to check coverage and get a quote
+            </p>
           </div>
         </div>
       </section>
@@ -569,7 +599,7 @@ export default function Home() {
 
               {/* Contact Form */}
               <div className="bg-black/20 p-8 rounded-2xl border border-[#3E797F]/20">
-                <h3 className="text-2xl font-bold text-white mb-6">Request a Quote</h3>
+                <h3 className="text-2xl font-bold text-white mb-6">Send Us a Message</h3>
                 <form className="space-y-4">
                   <div>
                     <input
@@ -601,26 +631,6 @@ export default function Home() {
                 </form>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Quote Wizard Section */}
-      <section className="py-20 bg-black/40 backdrop-blur-sm">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16">
-            <span className="text-[#3E797F]">Get Your</span>{" "}
-            <span className="text-white">Quote</span>
-          </h2>
-          
-          <div className="max-w-3xl mx-auto">
-            <div className="mb-8 text-center">
-              <p className="text-lg text-gray-300">
-                Get an instant quote for your wheel refurbishment. Our step-by-step process makes it easy to specify exactly what you need.
-              </p>
-            </div>
-            
-            <DynamicQuoteWizard />
           </div>
         </div>
       </section>

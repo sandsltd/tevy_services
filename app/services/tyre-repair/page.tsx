@@ -65,17 +65,18 @@ export default function TyreRepairExeter() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen bg-black">
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0">
           <div className="absolute inset-0">
             <Image
-              src="/images/services/tyre-repair-hero.jpg"
+              src="/images/services/tyre_repair_exeter.jpg"
               alt="Professional Tyre Repair Service in Exeter"
               fill
-              className="object-cover object-center scale-105 animate-subtle-zoom"
+              className="object-cover object-center"
               priority
               quality={100}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black" />
+            <div className="absolute right-0 w-[100px] h-full bg-black" />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black" />
           </div>
         </div>
@@ -274,7 +275,7 @@ export default function TyreRepairExeter() {
               <div>
                 <h3 className="text-2xl font-bold mb-6">Standard Repair</h3>
                 <div className="mb-4">
-                  <span className="text-4xl font-bold">£25</span>
+                  <span className="text-4xl font-bold">From £25</span>
                   <span className="text-gray-400 ml-2">per repair</span>
                 </div>
                 <ul className="space-y-3 mb-8">
@@ -339,9 +340,8 @@ export default function TyreRepairExeter() {
                 <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
                   <h3 className="font-semibold mb-2">Opening Hours</h3>
                   <p className="text-sm text-gray-400">
-                    Mon-Fri: 8:30am - 5:30pm<br />
-                    Saturday: 9am - 4pm<br />
-                    Sunday: Closed
+                    Mon-Fri: 09:00am - 5:30pm<br />
+                    Saturday / Sunday: Closed
                   </p>
                 </div>
                 
@@ -416,89 +416,6 @@ export default function TyreRepairExeter() {
                 </div>
               }
             />
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section className="py-20 bg-black/40 backdrop-blur-sm" id="contact">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16">
-            <span className="text-[#3E797F]">Contact</span>{" "}
-            <span className="text-white">Us</span>
-          </h2>
-
-          <div className="max-w-5xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12">
-              {/* Contact Information */}
-              <div className="space-y-8">
-                <h3 className="text-2xl font-bold text-white mb-6">Workshop Contact</h3>
-                
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <Phone className="w-5 h-5 text-[#3E797F] mt-1" />
-                    <div>
-                      <p className="font-semibold text-white">Call Our Workshop</p>
-                      <a href={`tel:${contactInfo.phone}`} className="text-gray-300 hover:text-[#3E797F] transition-colors">
-                        {contactInfo.phone}
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <Clock className="w-5 h-5 text-[#3E797F] mt-1" />
-                    <div>
-                      <p className="font-semibold text-white">Opening Hours</p>
-                      <p className="text-gray-300">
-                        Mon-Fri: 8:30am - 5:30pm<br />
-                        Saturday: 9am - 4pm
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="bg-[#3E797F]/10 p-4 rounded-lg border border-[#3E797F]/20">
-                    <p className="text-sm text-gray-300">
-                      <strong>Workshop Service Only:</strong> All tyre repairs are performed at our 
-                      fully-equipped Marsh Barton facility for your safety.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Contact Form */}
-              <div className="bg-black/20 p-8 rounded-2xl border border-[#3E797F]/20">
-                <h3 className="text-2xl font-bold text-white mb-6">Get in Touch</h3>
-                <form className="space-y-4">
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Your Name"
-                      className="w-full px-4 py-3 bg-black/40 border border-[#3E797F]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#3E797F] transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="email"
-                      placeholder="Your Email"
-                      className="w-full px-4 py-3 bg-black/40 border border-[#3E797F]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#3E797F] transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <textarea
-                      placeholder="Tell us about your tyre problem..."
-                      rows={4}
-                      className="w-full px-4 py-3 bg-black/40 border border-[#3E797F]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#3E797F] transition-colors resize-none"
-                    ></textarea>
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full bg-[#3E797F] hover:bg-[#3E797F]/80 px-6 py-3 rounded-lg text-white font-semibold transition-colors"
-                  >
-                    Send Message
-                  </button>
-                </form>
-              </div>
-            </div>
           </div>
         </div>
       </section>

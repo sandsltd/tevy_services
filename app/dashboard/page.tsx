@@ -10,7 +10,8 @@ import {
   Tooltip,
   Line,
   Bar,
-  Pie
+  Pie,
+  LabelList
 } from 'recharts'
 import { 
   Users, 
@@ -35,8 +36,8 @@ interface DashboardAnalytics {
     [key: string]: number
   }
   locationBreakdown: {
-    location: string
-    count: number
+    name: string
+    value: number
   }[]
   conversionMetrics: {
     totalVisitors: number
@@ -64,6 +65,15 @@ interface DashboardAnalytics {
     [key: string]: number
   }
   quotes: Quote[]
+  coverageAnalytics: {
+    mobileCoverage: number
+    collectionCoverage: number
+    outsideZone: number
+    coverageBreakdown: {
+      name: string
+      value: number
+    }[]
+  }
 }
 
 const StatusBadge = ({ status }: { status: Quote['status'] }) => {
@@ -110,7 +120,13 @@ export default function Dashboard() {
       'tpms': 0
     },
     wheelCounts: {},
-    quotes: []
+    quotes: [],
+    coverageAnalytics: {
+      mobileCoverage: 0,
+      collectionCoverage: 0,
+      outsideZone: 0,
+      coverageBreakdown: []
+    }
   })
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -179,12 +195,12 @@ export default function Dashboard() {
             console.warn('Quote missing serviceTypes:', doc.id)
           }
 
-          // Location breakdown
+          // Location breakdown - Clean up and standardize location names
           if (data.location) {
-            const location = data.location.split(',')[0] // Get first part of location
+            // Split location and take first meaningful part (usually city/town name)
+            const locationParts = data.location.split(',')
+            const location = locationParts[0].trim()
             locations[location] = (locations[location] || 0) + 1
-          } else {
-            console.warn('Quote missing location:', doc.id)
           }
 
           // Service preferences
@@ -280,14 +296,51 @@ export default function Dashboard() {
           }
         })
 
+        // Add coverage tracking
+        const coverageStats = {
+          mobileCoverage: 0,
+          collectionCoverage: 0,
+          outsideZone: 0,
+          byDistance: {
+            '0-10': 0,
+            '11-20': 0,
+            '21-30': 0,
+            '31-40': 0,
+            '40+': 0
+          }
+        }
+
+        quotes.forEach(quote => {
+          // Track coverage zones
+          if (quote.serviceTypes.includes('mobile')) {
+            coverageStats.mobileCoverage++
+          }
+          if (quote.service === 'collection') {
+            coverageStats.collectionCoverage++
+          }
+          
+          // Track distance ranges
+          if (quote.distance) {
+            const distance = quote.distance
+            if (distance <= 10) coverageStats.byDistance['0-10']++
+            else if (distance <= 20) coverageStats.byDistance['11-20']++
+            else if (distance <= 30) coverageStats.byDistance['21-30']++
+            else if (distance <= 40) coverageStats.byDistance['31-40']++
+            else coverageStats.byDistance['40+']++
+          }
+        })
+
         setAnalytics({
           totalQuotes: querySnapshot.size,
           quotesThisMonth: monthSnapshot.size,
           serviceTypeBreakdown: serviceTypes,
-          locationBreakdown: Object.entries(locations).map(([name, value]) => ({
-            location: name,
-            count: value
-          })),
+          locationBreakdown: Object.entries(locations)
+            .map(([location, count]) => ({
+              name: location,  // Changed from 'location' to 'name' to match BarChart requirements
+              value: count     // Changed from 'count' to 'value' to match BarChart requirements
+            }))
+            .sort((a, b) => b.value - a.value) // Optional: sort by count descending
+            .slice(0, 10),    // Optional: limit to top 10 locations
           conversionMetrics: {
             totalVisitors: querySnapshot.size * 5,
             quoteRequests: querySnapshot.size,
@@ -301,7 +354,16 @@ export default function Dashboard() {
           vehicleTypes,
           specificServices,
           wheelCounts,
-          quotes: quotes.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+          quotes: quotes.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime()),
+          coverageAnalytics: {
+            mobileCoverage: coverageStats.mobileCoverage,
+            collectionCoverage: coverageStats.collectionCoverage,
+            outsideZone: coverageStats.outsideZone,
+            coverageBreakdown: Object.entries(coverageStats.byDistance).map(([range, count]) => ({
+              name: range,
+              value: count
+            }))
+          }
         })
       } catch (error) {
         console.error('Failed to fetch analytics:', error)
@@ -430,6 +492,39 @@ export default function Dashboard() {
               <Bar dataKey="value" fill="#3E797F" />
             </BarChart>
           </ResponsiveContainer>
+        </ChartCard>
+
+        <ChartCard title="Coverage Distribution">
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={analytics?.coverageAnalytics.coverageBreakdown || []}>
+              <XAxis 
+                dataKey="name" 
+                label={{ value: 'Distance (miles)', position: 'bottom' }} 
+              />
+              <YAxis label={{ value: 'Number of Quotes', angle: -90, position: 'insideLeft' }} />
+              <Tooltip />
+              <Bar dataKey="value" fill="#3E797F">
+                <LabelList dataKey="value" position="top" />
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+          
+          <div className="grid grid-cols-3 gap-4 mt-4 text-sm">
+            <div className="bg-black/20 p-3 rounded-lg">
+              <div className="text-[#3E797F] font-bold">{analytics?.coverageAnalytics.mobileCoverage}</div>
+              <div className="text-gray-400">Mobile Service</div>
+            </div>
+            <div className="bg-black/20 p-3 rounded-lg">
+              <div className="text-[#3E797F] font-bold">{analytics?.coverageAnalytics.collectionCoverage}</div>
+              <div className="text-gray-400">Collection Service</div>
+            </div>
+            <div className="bg-black/20 p-3 rounded-lg">
+              <div className="text-[#3E797F] font-bold">
+                {((analytics?.coverageAnalytics.mobileCoverage || 0) / (analytics?.totalQuotes || 1) * 100).toFixed(1)}%
+              </div>
+              <div className="text-gray-400">Coverage Rate</div>
+            </div>
+          </div>
         </ChartCard>
       </div>
 

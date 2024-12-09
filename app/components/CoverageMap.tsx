@@ -6,6 +6,7 @@ import { MOBILE_COVERAGE, WHEEL_COLLECTION_COVERAGE } from '../constants/coverag
 import { MapPin, Check, ArrowRight, Truck, Wrench, Info, MousePointer } from 'lucide-react'
 import * as turf from '@turf/turf'
 import ServiceBooking from './ServiceBooking'
+import styles from './CoverageMap.module.css'
 
 const MARSH_BARTON: [number, number] = [-3.5239, 50.7070]
 const PRIMARY_RADIUS = 45 // 45km primary zone
@@ -193,95 +194,58 @@ const popupStyle = `
 // Update the getPopupContent function
 const getPopupContent = (location: string, coverageTypes: CoverageType[], coordinates: [number, number]) => {
   const distanceMiles = Math.round(turf.distance(MARSH_BARTON, coordinates, { units: 'kilometers' }) * 0.621371)
-  const isMobile = window.innerWidth < 640
   
-  const driveTimeMinutes = Math.round((distanceMiles / 40) * 60)
-  const driveTimeText = driveTimeMinutes > 60 
-    ? `${Math.floor(driveTimeMinutes / 60)}h ${driveTimeMinutes % 60}m`
-    : `${driveTimeMinutes}m`
-
-  const servicesContent = coverageTypes.map(type => {
-    if (type === 'wheel-collection') {
-      return `
-        <div class="p-2 border border-[#3E797F]/20 rounded-lg">
-          <div class="flex items-center gap-2 text-[#3E797F]">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            <h4 class="text-sm font-bold">Collection & Delivery Available</h4>
-          </div>
-          <div class="mt-1 pl-6 text-xs text-gray-400">
-            • Wheel Collection for Diamond Cutting
-            • Tyre Collection & Delivery Service
-          </div>
-        </div>
-      `
-    }
-
-    if (type === 'mobile') {
-      return `
-        <div class="p-2 border border-[#3E797F]/20 rounded-lg">
-          <div class="flex items-center gap-2 text-[#3E797F]">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            <h4 class="text-sm font-bold">Mobile Service Available</h4>
-          </div>
-          <div class="mt-1 pl-6 text-xs text-gray-400">
-            • On-site Diamond Cut Repairs
-            • Mobile Wheel Polishing
-          </div>
-        </div>
-      `
-    }
-
+  // If location is outside service areas
+  if (coverageTypes.includes('outside')) {
     return `
-      <div class="p-2 border border-[#3E797F]/20 rounded-lg">
-        <div class="flex items-center gap-2 text-[#3E797F]">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="8" x2="12" y2="16"></line>
-            <line x1="8" y1="12" x2="16" y2="12"></line>
-          </svg>
-          <h4 class="text-sm font-bold">Outside Service Area</h4>
+      <div class="flex flex-col gap-3">
+        <div class="bg-[#3E797F]/20 p-3 rounded-lg">
+          <h3 class="font-bold text-lg">${location}</h3>
+          <p class="text-sm text-gray-300">Outside Service Area</p>
+          <div class="flex items-center gap-2 mt-2">
+            <div class="w-2 h-2 rounded-full bg-[#3E797F]"></div>
+            <span class="text-sm">Workshop Service Available</span>
+          </div>
+          <p class="text-xs text-gray-400 mt-2">
+            Please visit our workshop in Marsh Barton, Exeter for our full range of services
+          </p>
         </div>
-        <div class="mt-1 pl-6 text-xs text-gray-400">
-          Contact us to discuss options
-        </div>
+
+        <button
+          id="getQuoteBtn"
+          data-location="${location}"
+          data-distance="${distanceMiles}"
+          data-services='${JSON.stringify(coverageTypes)}'
+          class="w-full px-4 py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg text-white font-bold transition-colors"
+        >
+          Get Workshop Quote
+        </button>
       </div>
     `
-  }).join('')
+  }
 
+  // For locations within service areas
   return `
-    <div class="flex flex-col gap-2">
-      <div>
-        <h2 class="text-base font-bold text-white mb-2">${location}</h2>
-        <div class="flex items-center gap-3 text-xs text-gray-400">
-          <div class="flex items-center gap-1.5">
-            <svg class="w-3.5 h-3.5 text-[#3E797F]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-            <span>${distanceMiles}mi</span>
+    <div class="flex flex-col gap-3">
+      <div class="bg-[#3E797F]/20 p-3 rounded-lg">
+        <h3 class="font-bold text-lg">${location}</h3>
+        <p class="text-sm text-gray-300">Available Services:</p>
+        ${coverageTypes.map(type => `
+          <div class="flex items-center gap-2 mt-2">
+            <div class="w-2 h-2 rounded-full bg-[#3E797F]"></div>
+            <span class="text-sm">${type === 'mobile' ? 'Mobile Service' : 'Collection Service'}</span>
           </div>
-          <div class="flex items-center gap-1.5">
-            <svg class="w-3.5 h-3.5 text-[#3E797F]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"></circle>
-              <polyline points="12 6 12 12 16 14"></polyline>
-            </svg>
-            <span>${driveTimeText}</span>
-          </div>
-        </div>
+        `).join('')}
       </div>
-      ${servicesContent}
+
       <button
         id="getQuoteBtn"
         data-location="${location}"
         data-distance="${distanceMiles}"
         data-services='${JSON.stringify(coverageTypes)}'
-        class="w-full px-3 py-2 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-bold text-sm transition-colors mt-1"
+        class="w-full px-4 py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg text-white font-bold transition-colors"
       >
-        Get Quote
+        Get Instant Quote
       </button>
     </div>
   `
@@ -303,7 +267,7 @@ export default function CoverageMap() {
   const [searchResults, setSearchResults] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
-  const [showInitialOverlay, setShowInitialOverlay] = useState(true)
+  const [showSearchTooltip, setShowSearchTooltip] = useState(false)
   const [showQuoteCalculator, setShowQuoteCalculator] = useState(false)
   const [quoteLocation, setQuoteLocation] = useState<{
     name: string
@@ -315,12 +279,20 @@ export default function CoverageMap() {
   const [isInView, setIsInView] = useState(false)
   const observerRef = useRef<IntersectionObserver | null>(null)
   const [isLocating, setIsLocating] = useState(false)
+  const [showInitialOverlay, setShowInitialOverlay] = useState(true)
+  const [mapLoadingState, setMapLoadingState] = useState<'loading' | 'loaded' | 'error'>('loading')
 
   // Move handleSearch before debouncedSearch
   const handleSearch = async (query: string) => {
     if (!query) {
       setSearchResults([])
       return
+    }
+
+    // Remove overlay if still showing
+    if (showInitialOverlay) {
+      setShowInitialOverlay(false)
+      setShowLegend(true)
     }
 
     setIsLoading(true)
@@ -365,7 +337,7 @@ export default function CoverageMap() {
           observerRef.current?.disconnect()
         }
       },
-      { threshold: 0.2 } // Trigger when 20% of the element is visible
+      { threshold: 0.2 }
     )
 
     // Start observing the map container
@@ -389,6 +361,7 @@ export default function CoverageMap() {
       })
 
       newMap.on('load', () => {
+        setMapLoadingState('loaded')
         console.log('Map loaded successfully')
         
         try {
@@ -411,7 +384,8 @@ export default function CoverageMap() {
             source: 'mobile-coverage',
             paint: {
               'fill-color': '#3E797F',
-              'fill-opacity': 0.2
+              'fill-opacity': 0.3,
+              'fill-outline-color': '#3E797F'
             }
           })
 
@@ -485,26 +459,27 @@ export default function CoverageMap() {
           console.error('Error adding layers:', err)
         }
 
-        // Initial animation sequence
-        setTimeout(() => {
-          setAnimationPhase('zooming')
-          newMap.flyTo({
-            center: [MARSH_BARTON[0], MARSH_BARTON[1] + 0.04],
-            zoom: 9,
-            duration: 3000,
-            pitch: 50,
-            bearing: -10,
-            essential: true,
-            easing: (t) => {
-              return t * (2 - t) // Ease out quad
-            }
-          })
-          
-          // Set animation phase to ready after the fly animation duration
+        // Only do initial animation if not selecting a location from search
+        if (!searchResults.length) {
           setTimeout(() => {
-            setAnimationPhase('ready')
-          }, 3000)
-        }, 1000)
+            setAnimationPhase('zooming')
+            newMap.flyTo({
+              center: [MARSH_BARTON[0], MARSH_BARTON[1] + 0.04],
+              zoom: 9,
+              duration: 3000,
+              pitch: 50,
+              bearing: -10,
+              essential: true,
+              easing: (t) => {
+                return t * (2 - t)
+              }
+            })
+            
+            setTimeout(() => {
+              setAnimationPhase('ready')
+            }, 3000)
+          }, 1000)
+        }
 
         // Add click interaction
         newMap.on('click', (e) => {
@@ -514,7 +489,7 @@ export default function CoverageMap() {
           if (showInitialOverlay) {
             setShowInitialOverlay(false)
             setShowLegend(true)
-            return // Return after closing overlay on first click
+            return
           }
           
           // Clear existing markers
@@ -591,18 +566,18 @@ export default function CoverageMap() {
 
               // Adjust map view
               const isMobile = window.innerWidth < 640
-              const offsetLat = coordinates[1] + (isMobile ? 0.08 : 0.06)
-              const offsetLng = coordinates[0] - (isMobile ? 0.01 : 0.07)
+              const offsetLat = coordinates[1] + (isMobile ? 0.18 : 0.06)
+              const offsetLng = coordinates[0] - (isMobile ? 0.15 : 0.07)
               
               newMap.flyTo({
                 center: [offsetLng, offsetLat],
                 zoom: isMobile ? 10 : 11,
                 duration: 2000,
                 padding: {
-                  top: isMobile ? 50 : 100,
-                  bottom: isMobile ? 400 : 300,
-                  left: isMobile ? 20 : 200,
-                  right: isMobile ? 20 : 200
+                  top: isMobile ? 200 : 250,
+                  bottom: isMobile ? 200 : 250,
+                  left: isMobile ? 400 : 800,
+                  right: isMobile ? 20 : 20
                 }
               })
             })
@@ -614,6 +589,10 @@ export default function CoverageMap() {
         // Add cursor style changes
         newMap.on('mouseenter', ['mobile-coverage-fill', 'collection-coverage-fill'], () => {
           newMap.getCanvas().style.cursor = 'pointer'
+          // Show tooltip
+          const tooltip = document.createElement('div')
+          tooltip.className = 'map-tooltip'
+          tooltip.innerHTML = 'Click to get quote'
         })
 
         newMap.on('mouseleave', ['mobile-coverage-fill', 'collection-coverage-fill'], () => {
@@ -621,14 +600,25 @@ export default function CoverageMap() {
         })
       })
 
+      newMap.on('error', (e) => {
+        console.error('Map error:', e)
+        setMapLoadingState('error')
+        setErrorMessage('Failed to load map. Please refresh the page.')
+      })
+
       map.current = newMap
 
       return () => {
-        map.current?.remove()
+        if (map.current) {
+          map.current.remove()
+          map.current = null
+        }
         observerRef.current?.disconnect()
       }
     } catch (error) {
       console.error('Map initialization error:', error)
+      setMapLoadingState('error')
+      setErrorMessage('Failed to initialize map. Please refresh the page.')
     }
   }, [isInView, showInitialOverlay])
 
@@ -722,18 +712,18 @@ export default function CoverageMap() {
     const isMobile = window.innerWidth < 640
 
     // Calculate offsets for both latitude and longitude
-    const offsetLat = lat + (isMobile ? 0.08 : 0.06)
-    const offsetLng = lng - (isMobile ? 0.01 : 0.07) // Changed to negative to move left
+    const offsetLat = lat + (isMobile ? 0.06 : 0.06)
+    const offsetLng = lng + (isMobile ? 0.09 : 0.10)
     
     map.current.flyTo({
       center: [offsetLng, offsetLat],
       zoom: isMobile ? 10 : 11,
       duration: 2000,
       padding: {
-        top: isMobile ? 50 : 100,
-        bottom: isMobile ? 400 : 300,
-        left: isMobile ? 20 : 200,
-        right: isMobile ? 20 : 200
+        top: isMobile ? 200 : 250,
+        bottom: isMobile ? 200 : 250,
+        left: isMobile ? 400 : 900,
+        right: isMobile ? 20 : 20
       }
     })
 
@@ -834,18 +824,18 @@ export default function CoverageMap() {
 
             // Adjust map view
             const isMobile = window.innerWidth < 640
-            const offsetLat = coordinates[1] + (isMobile ? 0.08 : 0.06)
-            const offsetLng = coordinates[0] - (isMobile ? 0.01 : 0.07)
+            const offsetLat = coordinates[1] + (isMobile ? 0.18 : 0.06)
+            const offsetLng = coordinates[0] - (isMobile ? 0.15 : 0.07)
             
             mapInstance.flyTo({
               center: [offsetLng, offsetLat],
               zoom: isMobile ? 10 : 11,
               duration: 2000,
               padding: {
-                top: isMobile ? 50 : 100,
-                bottom: isMobile ? 400 : 300,
-                left: isMobile ? 20 : 200,
-                right: isMobile ? 20 : 200
+                top: isMobile ? 200 : 150,
+                bottom: isMobile ? 200 : 250,
+                left: isMobile ? 20 : 400,
+                right: isMobile ? 20 : 100
               }
             })
 
@@ -873,94 +863,138 @@ export default function CoverageMap() {
     )
   }
 
+  // Update the overlay close handler
+  const handleCloseOverlay = () => {
+    setShowInitialOverlay(false);
+    setShowLegend(true);
+    // Show tooltip after a short delay
+    setTimeout(() => {
+      setShowSearchTooltip(true);
+      // Hide tooltip after 5 seconds
+      setTimeout(() => {
+        setShowSearchTooltip(false);
+      }, 5000);
+    }, 500);
+  };
+
+  // Optimize marker creation with memoization
+  const createMarker = useCallback((coordinates: [number, number]) => {
+    const el = document.createElement('div')
+    el.className = 'mapboxgl-marker custom-marker'
+    // ... marker styling ...
+    return new mapboxgl.Marker({ element: el })
+  }, [])
+
   return (
-    <div className="relative">
+    <div className={`relative ${styles.mapContainer}`} role="region" aria-label="Coverage Map">
       <style>
         {`
           .custom-dark-popup .mapboxgl-popup-content {
             background: rgba(0, 0, 0, 0.95) !important;
             color: white !important;
-            max-height: 400px !important;  /* Fixed height */
-            overflow-y: auto !important;   /* Enable scrolling */
+            max-height: 400px !important;
+            overflow-y: auto !important;
           }
           .custom-dark-popup .mapboxgl-popup-tip {
             border-top-color: rgba(0, 0, 0, 0.95) !important;
             border-bottom-color: rgba(0, 0, 0, 0.95) !important;
           }
+          @keyframes tooltip-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+          }
+          @keyframes tooltip-fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          @keyframes subtle-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(62, 121, 127, 0.4); }
+            50% { box-shadow: 0 0 20px 0 rgba(62, 121, 127, 0.2); }
+          }
+
+          @keyframes subtle-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-2px); }
+          }
+
+          .postcode-input-container {
+            animation: subtle-bounce 3s ease-in-out infinite;
+          }
+
+          .postcode-input {
+            animation: subtle-glow 2s ease-in-out infinite;
+            transition: all 0.3s ease;
+          }
+
+          .postcode-input:focus {
+            border-color: #3E797F;
+            box-shadow: 0 0 0 2px rgba(62, 121, 127, 0.2);
+            transform: scale(1.01);
+          }
         `}
       </style>
       
-      {/* Search Box */}
-      <div className="absolute top-4 left-4 right-4 z-50 max-w-md mx-auto">
-        <div className="relative">
-          <input
-            type="text"
-            value={searchQuery}
-            disabled={showInitialOverlay}
-            onChange={(e) => {
-              const value = e.target.value;
-              setSearchQuery(value);
-              if (value.length >= 2) {
-                debouncedSearch(value);
-              } else {
-                setSearchResults([]);
-              }
-            }}
-            placeholder="Enter your postcode or town..."
-            className="w-full px-4 py-2.5 md:py-3 pl-4 pr-20 md:pr-24 bg-black/80 backdrop-blur-sm border border-[#3E797F]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#3E797F] transition-colors text-sm md:text-base disabled:opacity-50 disabled:cursor-not-allowed"
-          />
-          
-          <button
-            type="button"
-            disabled={isLoading || isLocating}
-            onClick={(e) => {
-              e.preventDefault()
-              e.stopPropagation()
-              handleLocateMe()
-            }}
-            className="absolute right-2 md:right-3 top-1/2 -translate-y-1/2 px-2 md:px-3 py-1 md:py-1.5 bg-[#3E797F]/20 hover:bg-[#3E797F]/30 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-colors flex items-center gap-1"
-          >
-            {isLocating ? (
-              <div className="animate-spin rounded-full h-4 w-4 border-2 border-[#3E797F] border-t-transparent"></div>
-            ) : (
-              <>
-                <MapPin className="w-4 h-4" />
-                <span className="text-xs md:text-sm">Locate</span>
-              </>
-            )}
-          </button>
-        </div>
-
-        {/* Search Results */}
-        {searchResults.length > 0 && (
-          <div 
-            className="absolute top-full left-0 right-0 mt-2 bg-black/90 backdrop-blur-sm border border-[#3E797F]/30 rounded-lg overflow-hidden max-h-[40vh] overflow-y-auto"
-          >
-            {searchResults.map((result, index) => (
-              <div
-                key={index}
-                role="button"
-                tabIndex={0}
-                onClick={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  handleLocationSelect(result)
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    e.stopPropagation()
-                    handleLocationSelect(result)
-                  }
-                }}
-                className="block w-full px-3 md:px-4 py-2.5 md:py-3 text-left hover:bg-[#3E797F]/20 text-white text-xs md:text-sm border-b border-[#3E797F]/20 last:border-0 transition-colors cursor-pointer"
-              >
-                {result.place_name}
-              </div>
-            ))}
+      {/* Search Bar */}
+      <div className="absolute top-4 right-4 z-50 w-full max-w-md postcode-input-container">
+        <div className="bg-black/90 backdrop-blur-sm border border-[#3E797F] rounded-xl p-4">
+          <div className="text-center mb-3">
+            <h3 className="text-2xl font-bold">Get Your Free Quote</h3>
+            <p className="text-sm text-gray-400 mt-1">Enter your postcode or click anywhere on the map</p>
           </div>
-        )}
+          
+          <div className="flex gap-2 relative">
+            <input
+              type="text"
+              aria-label="Search location"
+              placeholder="Enter your postcode..."
+              role="searchbox"
+              className="postcode-input flex-1 bg-black/50 px-4 py-2.5 rounded-lg border-2 border-[#3E797F]/30 text-sm focus:outline-none"
+              value={searchQuery}
+              onChange={(e) => {
+                const value = e.target.value;
+                setSearchQuery(value);
+                // Remove overlay and instructions when user starts typing
+                if (showInitialOverlay) {
+                  setShowInitialOverlay(false);
+                  setShowLegend(true);
+                }
+                if (value.length >= 2) {
+                  debouncedSearch(value);
+                } else {
+                  setSearchResults([]);
+                }
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleSearch(searchQuery)
+                }
+              }}
+            />
+            <button 
+              onClick={() => handleSearch(searchQuery)}
+              className="bg-[#3E797F] px-4 py-2.5 rounded-lg font-medium hover:bg-[#3E797F]/80 transition-all flex items-center gap-2 text-sm whitespace-nowrap hover:scale-105"
+            >
+              <MapPin className="w-4 h-4" />
+              Check Coverage
+            </button>
+          </div>
+        </div>
       </div>
+
+      {/* Search Results */}
+      {searchResults.length > 0 && (
+        <div className="absolute w-full mt-2 bg-black/90 backdrop-blur-sm border border-[#3E797F]/30 rounded-lg overflow-hidden">
+          {searchResults.map((result, index) => (
+            <button
+              key={index}
+              onClick={() => handleLocationSelect(result)}
+              className="w-full px-4 py-3 text-left hover:bg-[#3E797F]/20 border-b border-[#3E797F]/20 last:border-0"
+            >
+              {result.place_name}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Map Container */}
       <div className="relative w-full h-[600px] rounded-2xl overflow-hidden bg-black">
@@ -973,21 +1007,20 @@ export default function CoverageMap() {
         
         {showInitialOverlay && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            {/* Left side overlay - updated for mobile */}
-            <div className="absolute left-0 top-0 bottom-0 w-full md:w-[450px] bg-gradient-to-r from-black/95 via-black/90 to-transparent md:to-transparent p-4 md:p-8 flex flex-col pointer-events-auto">
-              <div className="flex-1 flex flex-col justify-center space-y-4 md:space-y-6">
-                <div className="space-y-2 md:space-y-3">
-                  <h2 className="text-2xl md:text-4xl font-bold">
+            <div className="absolute left-0 top-0 bottom-0 w-full md:w-[500px] bg-gradient-to-r from-black/95 via-black/90 to-transparent p-8 flex flex-col pointer-events-auto">
+              <div className="flex-1 flex flex-col justify-center space-y-6">
+                <div className="space-y-3">
+                  <h2 className="text-4xl md:text-5xl font-bold">
                     <span className="text-[#3E797F]">Interactive</span><br/>
-                    Coverage Map
+                    <span className="text-white">Coverage Map</span>
                   </h2>
-                  <p className="text-base md:text-lg text-white/80">
+                  <p className="text-lg text-white/80">
                     Discover our premium mobile and collection services available in your area
                   </p>
                 </div>
 
-                <div className="space-y-3 md:space-y-4 w-full md:max-w-sm">
-                  <div className="grid grid-cols-2 gap-2 md:gap-3">
+                <div className="space-y-4 w-full max-w-sm">
+                  <div className="grid grid-cols-2 gap-3">
                     <div className="bg-black/40 p-2 md:p-3 rounded-lg border border-[#3E797F]/30">
                       <div className="flex items-center gap-1.5 md:gap-2">
                         <div className="w-2 h-2 rounded-sm bg-[#3E797F]" />
@@ -1001,71 +1034,36 @@ export default function CoverageMap() {
                       </div>
                     </div>
                   </div>
-
-                  <input
-                    type="text"
-                    placeholder="Enter your postcode or town..."
-                    className="w-full px-3 md:px-4 py-2.5 md:py-3 bg-white/10 border border-[#3E797F]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#3E797F] text-sm md:text-base"
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                  />
                   
                   <button
-                    onClick={() => {
-                      setShowInitialOverlay(false)
-                      setShowLegend(true)
-                    }}
-                    className="w-full px-4 md:px-6 py-2.5 md:py-3 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 text-sm md:text-base shadow-lg group"
+                    onClick={handleCloseOverlay}
+                    className="w-full px-6 py-4 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 text-lg shadow-lg group relative overflow-hidden"
                   >
-                    Check Your Area
-                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
+                    <span className="relative z-10">Get Free Quote</span>
+                    <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   </button>
                 </div>
               </div>
-
-              {/* Floating info box - mobile optimized */}
-              <div className="absolute bottom-4 md:bottom-8 left-4 right-4 md:left-8 md:right-8">
-                <div className="bg-black/40 p-3 md:p-4 rounded-lg border border-[#3E797F]/30">
-                  <div className="flex items-center gap-2 text-[#3E797F] mb-1 md:mb-2">
-                    <MapPin className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                    <span className="font-semibold text-white text-sm md:text-base">Workshop Location</span>
-                  </div>
-                  <p className="text-xs md:text-sm text-gray-400">
-                    Main facility in Marsh Barton, Exeter with mobile coverage across the South West
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Right side interaction hint - hide on mobile */}
-            <div className="hidden md:flex absolute right-8 bottom-8 bg-black/40 p-4 rounded-lg border border-[#3E797F]/30 items-center gap-3 animate-pulse pointer-events-auto">
-              <div className="w-10 h-10 rounded-full bg-[#3E797F]/20 flex items-center justify-center">
-                <MousePointer className="w-5 h-5 text-[#3E797F]" />
-              </div>
-              <span className="text-sm text-white/80">
-                Interact with the map to explore coverage
-              </span>
             </div>
           </div>
         )}
 
         {/* Legend - mobile optimized */}
-        <div className={`absolute bottom-4 md:bottom-16 left-4 right-4 md:right-auto bg-black/80 backdrop-blur-sm p-3 md:p-4 rounded-lg border border-[#3E797F]/30 text-xs md:text-sm transition-all duration-500 ${showLegend ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
-          <h3 className="text-sm font-semibold mb-2 md:mb-3">Service Areas</h3>
-          <div className="grid grid-cols-3 md:grid-cols-1 gap-2 md:space-y-2.5">
-            {/* Workshop Location */}
-            <div className="flex items-center gap-1.5 md:gap-2 md:border-b md:border-[#3E797F]/20 md:pb-2 md:mb-2">
-              <div className="relative w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#3E797F]" />
-              <span className="text-xs md:text-sm">Workshop</span>
+        <div className={`absolute bottom-4 left-4 bg-black/90 backdrop-blur-sm p-4 rounded-lg border border-[#3E797F]/30 transition-all duration-500 shadow-lg ${showLegend ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
+          <h3 className="text-sm font-semibold mb-3">Service Areas</h3>
+          <div className="space-y-2.5">
+            <div className="flex items-center gap-2">
+              <div className="relative w-4 h-4 rounded-full bg-[#3E797F] shadow-md" />
+              <span className="text-sm">Workshop</span>
             </div>
-            
-            {/* Coverage Areas */}
-            <div className="flex items-center gap-1.5 md:gap-2">
-              <div className="w-3 h-3 md:w-4 md:h-4 rounded-sm bg-[#3E797F] opacity-40" />
-              <span className="text-xs md:text-sm">Mobile</span>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded-sm bg-[#3E797F] opacity-40 shadow-md" />
+              <span className="text-sm">Mobile Service</span>
             </div>
-            <div className="flex items-center gap-1.5 md:gap-2">
-              <div className="w-3 h-3 md:w-4 md:h-4 rounded-sm bg-[#FF6B6B] opacity-40" />
-              <span className="text-xs md:text-sm">Collection</span>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded-sm bg-[#FF6B6B] opacity-40 shadow-md" />
+              <span className="text-sm">Collection Area</span>
             </div>
           </div>
         </div>

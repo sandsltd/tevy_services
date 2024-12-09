@@ -66,18 +66,19 @@ export default function TPMSService() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen bg-black">
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0">
           <div className="absolute inset-0">
             <Image
-              src="/images/services/tpms-hero.jpg"
+              src="/images/services/tmps_exeter.jpg"
               alt="Professional TPMS Service and Diagnostics"
               fill
-              className="object-cover object-center scale-105 animate-subtle-zoom"
+              className="object-cover object-center"
               priority
               quality={100}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/20" />
+            <div className="absolute right-0 w-[50px] h-full bg-black/20" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black" />
           </div>
         </div>
 
@@ -104,9 +105,9 @@ export default function TPMSService() {
 
             {/* MOT Notice */}
             <div className="bg-[#3E797F]/10 border border-[#3E797F] rounded-xl p-4 mb-8">
-              <div className="flex items-center gap-2 text-[#3E797F] mb-2">
-                <AlertTriangle className="w-5 h-5" />
-                <span className="font-semibold">TPMS Warning Light On?</span>
+              <div className="flex items-center gap-2 mb-2">
+                <AlertTriangle className="w-5 h-5 text-yellow-500 animate-pulse-warning" />
+                <span className="font-semibold text-yellow-500">TPMS Warning Light On?</span>
               </div>
               <p className="text-gray-400 text-sm">
                 A faulty TPMS system can cause an MOT failure. Visit our workshop for 
@@ -324,48 +325,53 @@ export default function TPMSService() {
           </h2>
           
           <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
-            Transparent pricing for all TPMS services, with no hidden costs.
+            We offer competitive pricing for all TPMS services. Contact us today for a personalized quote.
           </p>
 
-          <div className="max-w-4xl mx-auto bg-black/20 p-8 rounded-2xl border border-[#3E797F]/20">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-2xl font-bold mb-6">Service Options</h3>
-                <div className="space-y-6">
-                  <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="font-semibold">TPMS Diagnostic Check</span>
-                      <span className="text-[#3E797F]">£20</span>
-                    </div>
-                    <p className="text-sm text-gray-400">Full system diagnostic scan and report</p>
-                  </div>
-                  
-                  <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="font-semibold">Valve Service Kit</span>
-                      <span className="text-[#3E797F]">£15</span>
-                    </div>
-                    <p className="text-sm text-gray-400">Per wheel, including fitting</p>
-                  </div>
-                  
-                  <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="font-semibold">New TPMS Sensor</span>
-                      <span className="text-[#3E797F]">From £45</span>
-                    </div>
-                    <p className="text-sm text-gray-400">Including programming and fitting</p>
-                  </div>
+          <div className="max-w-3xl mx-auto bg-[#3E797F]/5 border border-[#3E797F]/20 rounded-2xl p-8 md:p-12">
+            <div className="text-center space-y-6">
+              <h3 className="text-2xl font-bold">Get Your Free Quote Today</h3>
+              
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
+                  <Shield className="w-8 h-8 text-[#3E797F] mx-auto mb-4" />
+                  <h4 className="font-semibold mb-2">Diagnostics</h4>
+                  <p className="text-sm text-gray-400">Full system diagnostic scan</p>
+                </div>
+                
+                <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
+                  <Gauge className="w-8 h-8 text-[#3E797F] mx-auto mb-4" />
+                  <h4 className="font-semibold mb-2">Sensor Service</h4>
+                  <p className="text-sm text-gray-400">Including programming</p>
+                </div>
+                
+                <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
+                  <Settings className="w-8 h-8 text-[#3E797F] mx-auto mb-4" />
+                  <h4 className="font-semibold mb-2">System Reset</h4>
+                  <p className="text-sm text-gray-400">Full calibration service</p>
                 </div>
               </div>
 
-              <div className="bg-[#3E797F]/10 p-6 rounded-xl">
-                <h4 className="font-semibold mb-4">Important Information</h4>
-                <ul className="space-y-3 text-sm text-gray-400">
-                  <li>• Diagnostic fee waived with repair</li>
-                  <li>• All sensors fully programmed</li>
-                  <li>• 12-month warranty on sensors</li>
-                  <li>• MOT-compliant service</li>
-                </ul>
+              <div className="pt-6">
+                <button 
+                  onClick={() => {
+                    const mapSection = document.getElementById('workshop-location');
+                    if (mapSection) {
+                      mapSection.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                      });
+                    }
+                  }}
+                  className="flex items-center justify-center gap-2 px-8 py-4 bg-[#3E797F] hover:bg-[#3E797F]/80 rounded-lg text-lg font-semibold transition-colors mx-auto"
+                >
+                  <span>Get Your Free Quote</span>
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+                
+                <p className="text-sm text-gray-400 mt-4">
+                  Fast response • No obligation • Best price guaranteed
+                </p>
               </div>
             </div>
           </div>
@@ -373,7 +379,7 @@ export default function TPMSService() {
       </section>
 
       {/* Workshop Location */}
-      <section className="py-20">
+      <section id="workshop-location" className="py-20 bg-black/40 backdrop-blur-sm">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
             <span className="text-[#3E797F]">Workshop</span>{" "}
@@ -385,14 +391,23 @@ export default function TPMSService() {
             <div className="bg-[#3E797F]/10 border border-[#3E797F] rounded-xl p-6 mb-12 text-center">
               <h3 className="text-xl font-semibold mb-2">Workshop Service Only</h3>
               <p className="text-gray-400">
-                All TPMS services are performed at our fully-equipped facility in Unit 63, Yeoford Way, 
-                Marsh Barton (EX2 8LB). By appointment only.
+                All TPMS services are performed at our fully-equipped Marsh Barton facility. 
+                We do not offer mobile TPMS services to ensure accurate diagnostics and programming.
               </p>
             </div>
 
+            <div className="mb-8 text-center">
+              <p className="text-lg md:text-xl text-gray-300">
+                Visit our state-of-the-art workshop in Marsh Barton, Exeter. 
+                Equipped with professional TPMS diagnostic and programming equipment.
+              </p>
+            </div>
+            
             {/* Map Container */}
-            <div className="w-full h-[600px] rounded-2xl overflow-hidden">
-              <DynamicCoverageMap />
+            <div className="relative w-full h-[600px] rounded-2xl overflow-hidden">
+              <div className="absolute inset-0">
+                <DynamicCoverageMap />
+              </div>
             </div>
             
             <div className="mt-8">
@@ -400,27 +415,25 @@ export default function TPMSService() {
                 <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
                   <h3 className="font-semibold mb-2">Opening Hours</h3>
                   <p className="text-sm text-gray-400">
-                    Mon-Fri: 8:30am - 5:30pm<br />
-                    Saturday: 9am - 4pm<br />
-                    Sunday: Closed
+                    Mon-Fri: 9:00am - 5:30pm<br />
+                    Saturday / Sunday: Closed
                   </p>
                 </div>
                 
                 <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
                   <h3 className="font-semibold mb-2">Workshop Address</h3>
                   <p className="text-sm text-gray-400">
-                    Unit 63, Yeoford Way<br />
-                    Marsh Barton, Exeter<br />
-                    EX2 8LB<br />
-                    <span className="text-[#3E797F]">By Appointment Only</span>
+                    Marsh Barton Trading Estate<br />
+                    Exeter, Devon<br />
+                    Free customer parking available
                   </p>
                 </div>
                 
                 <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
-                  <h3 className="font-semibold mb-2">Equipment</h3>
+                  <h3 className="font-semibold mb-2">Facilities</h3>
                   <p className="text-sm text-gray-400">
-                    Professional TPMS tools<br />
-                    Diagnostic equipment<br />
+                    Professional TPMS equipment<br />
+                    Diagnostic tools<br />
                     Programming capabilities
                   </p>
                 </div>
@@ -478,96 +491,6 @@ export default function TPMSService() {
               question="How long does a TPMS service take?"
               answer="A standard TPMS diagnostic check takes about 30 minutes. If sensor replacement is needed, it typically takes 45-60 minutes for a full set. We aim to complete most TPMS services within the same day."
             />
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section className="py-20" id="contact">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16">
-            <span className="text-[#3E797F]">Book Your</span>{" "}
-            <span className="text-white">TPMS Service</span>
-          </h2>
-
-          <div className="max-w-5xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12">
-              {/* Contact Information */}
-              <div className="space-y-8">
-                <h3 className="text-2xl font-bold text-white mb-6">Workshop Contact</h3>
-                
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <Phone className="w-5 h-5 text-[#3E797F] mt-1" />
-                    <div>
-                      <p className="font-semibold text-white">Call Our Workshop</p>
-                      <a href={`tel:${contactInfo.phone}`} className="text-gray-300 hover:text-[#3E797F] transition-colors">
-                        {contactInfo.phone}
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <Clock className="w-5 h-5 text-[#3E797F] mt-1" />
-                    <div>
-                      <p className="font-semibold text-white">Opening Hours</p>
-                      <p className="text-gray-300">
-                        Mon-Fri: 8:30am - 5:30pm<br />
-                        Saturday: 9am - 4pm
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="bg-[#3E797F]/10 p-4 rounded-lg border border-[#3E797F]/20">
-                    <p className="text-sm text-gray-300">
-                      <strong>Workshop Service Only:</strong> All TPMS services are performed at our 
-                      Marsh Barton facility (Unit 63, Yeoford Way, EX2 8LB). By appointment only.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Contact Form */}
-              <div className="bg-black/20 p-8 rounded-2xl border border-[#3E797F]/20">
-                <h3 className="text-2xl font-bold text-white mb-6">Book TPMS Service</h3>
-                <form className="space-y-4">
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Your Name"
-                      className="w-full px-4 py-3 bg-black/40 border border-[#3E797F]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#3E797F] transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="email"
-                      placeholder="Your Email"
-                      className="w-full px-4 py-3 bg-black/40 border border-[#3E797F]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#3E797F] transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Vehicle Registration"
-                      className="w-full px-4 py-3 bg-black/40 border border-[#3E797F]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#3E797F] transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <textarea
-                      placeholder="Tell us about your TPMS issue..."
-                      rows={4}
-                      className="w-full px-4 py-3 bg-black/40 border border-[#3E797F]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#3E797F] transition-colors resize-none"
-                    ></textarea>
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full bg-[#3E797F] hover:bg-[#3E797F]/80 px-6 py-3 rounded-lg text-white font-semibold transition-colors"
-                  >
-                    Book Service
-                  </button>
-                </form>
-              </div>
-            </div>
           </div>
         </div>
       </section>

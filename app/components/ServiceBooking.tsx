@@ -1258,7 +1258,10 @@ export default function ServiceBooking({
         wheelCount: serviceDetails.wheelCount,
         wheelDetails: {
           size: serviceDetails.wheelSize,
-          paintColor: serviceDetails.paintColor
+          // Only include paintColor if a painting service was selected
+          ...(serviceDetails.serviceTypes.includes('painted') && {
+            paintColor: serviceDetails.paintColor
+          })
         },
         name: contactForm.name,
         email: contactForm.email,
