@@ -61,8 +61,11 @@ module.exports = {
           '0%, 100%': { 
             transform: 'translateY(0)'
           },
-          '50%': { 
+          '10%': { 
             transform: 'translateY(-10px)'
+          },
+          '20%, 90%': { 
+            transform: 'translateY(0)'
           }
         },
       },
@@ -75,7 +78,7 @@ module.exports = {
         'subtle-zoom': 'subtleZoom 20s ease-in-out infinite',
         'pulse-warning': 'pulse-warning 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         bounce: 'bounce 1s infinite',
-        'star-wave': 'star-wave 1.5s ease-in-out infinite',
+        'star-wave': 'star-wave 4s ease-in-out infinite',
       }
     }
   },

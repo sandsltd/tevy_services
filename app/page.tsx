@@ -105,7 +105,7 @@ export default function Home() {
                     <Star 
                       key={i} 
                       className={`w-5 h-5 text-[#3E797F] fill-[#3E797F] animate-star-wave`}
-                      style={{ animationDelay: `${i * 0.1}s` }}
+                      style={{ animationDelay: `${i * 0.15}s` }}
                     />
                   ))}
                 </div>
