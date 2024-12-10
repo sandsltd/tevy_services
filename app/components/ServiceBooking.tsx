@@ -403,8 +403,13 @@ export default function ServiceBooking({
               `}
               onClick={() => {
                 // Immediately set the service type without needing a second click
-                setServiceType(option.id)
-                setServiceDetails(prev => ({ ...prev, serviceType: option.id }))
+                setServiceType(option.id as ServiceType)
+                const newSteps: ServiceStep[] = [
+                  { id: 1, type: 'service-type', title: 'Service Type' },
+                  { id: 2, type: 'service-selection', title: 'Select Services' }
+                ]
+                setActiveSteps(newSteps)
+                setStep(2)
               }}
             >
               <div className="flex items-center justify-between">
@@ -1534,5 +1539,4 @@ export default function ServiceBooking({
       </div>
     </div>
   )
-} 
 } 
