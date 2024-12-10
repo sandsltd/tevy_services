@@ -401,15 +401,7 @@ export default function DiamondCutRepair() {
             Drag the slider to compare before and after results.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <BeforeAfterSlider
-              before="/images/gallery/diamond-cut-before-2.jpg"
-              after="/images/gallery/diamond-cut-after-2.jpg"
-              title="Ford Diamond Cut Restoration"
-              description="Full face diamond cut refurbishment"
-              showLabels={false}
-            />
-
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             <BeforeAfterSlider
               before="/images/services/diamond_before.jpg"
               after="/images/services/diamond_after.jpg"
@@ -522,7 +514,7 @@ export default function DiamondCutRepair() {
             
             <FAQItem 
               question="How long does a diamond cut finish last?"
-              answer="With proper care, a diamond cut finish can last several years. We recommend our ceramic coating option for maximum protection. Regular cleaning and avoiding harsh chemicals will help maintain the finish. All our work comes with a 12-month warranty as standard."
+              answer="With proper care, a diamond cut finish can last several years. Regular cleaning and avoiding harsh chemicals will help maintain the finish. We recommend using pH neutral wheel cleaners and avoiding automatic car washes to protect your diamond cut wheels."
             />
             
             <FAQItem 
@@ -532,7 +524,7 @@ export default function DiamondCutRepair() {
             
             <FAQItem 
               question="Do you offer a mobile service?"
-              answer="Yes, we offer a mobile service within our coverage area for an additional fee. However, diamond cutting must be performed at our workshop due to the specialized equipment required. We provide free collection and delivery for full sets."
+              answer="Yes! We're proud to be one of the few providers in the area with a mobile CNC lathe service. Our specialized mobile unit brings our precision diamond cutting equipment directly to your location, offering the same exceptional quality as our workshop service but with added convenience. This unique service saves you time and hassle while maintaining the highest standards of wheel refurbishment."
             />
             
             <FAQItem 
