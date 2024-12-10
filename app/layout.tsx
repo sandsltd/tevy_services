@@ -1,6 +1,7 @@
 import React from 'react'
 import './globals.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export const metadata = {
   title: 'Tevy Services',
@@ -21,6 +22,7 @@ export default function RootLayout({
         <div suppressHydrationWarning>
           {children}
         </div>
+        <SpeedInsights />
       </body>
     </html>
   )
