@@ -2,13 +2,12 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Diamond Cut Alloy Wheel Repair | Professional CNC Service',
-  description: 'Expert diamond cut alloy wheel repair using state-of-the-art CNC lathe technology. Factory-grade finish with powder coating and lacquer protection to prevent corrosion. Same-day service available.',
+  description: 'Expert diamond cut alloy wheel repair using state-of-the-art CNC lathe technology. Factory-grade finish with premium lacquer protection. Same-day service available.',
   keywords: [
     'diamond cut alloy wheel repair',
     'diamond cut wheel refurbishment',
     'alloy wheel restoration',
     'diamond cutting service',
-    'powder coat finish',
     'CNC lathe repair',
     'wheel corrosion prevention',
     'factory finish repair',
@@ -17,7 +16,7 @@ export const metadata: Metadata = {
   ].join(', '),
   openGraph: {
     title: 'Diamond Cut Alloy Wheel Repair | CNC Lathe Technology',
-    description: 'Professional diamond cut wheel repair using state-of-the-art CNC technology. Factory-grade finish with powder coating and lacquer protection.',
+    description: 'Professional diamond cut wheel repair using state-of-the-art CNC technology. Factory-grade finish with premium lacquer protection.',
     images: [
       {
         url: '/images/services/diamond-cut-hero.jpg',

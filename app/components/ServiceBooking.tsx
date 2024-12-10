@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { X, ChevronRight, Car, Wrench, HelpCircle } from 'lucide-react'
 import imageCompression from 'browser-image-compression';
 import Image from 'next/image'
@@ -232,6 +232,16 @@ export default function ServiceBooking({
   const canGoBack = step > 1
   const currentStepIndex = step - 1
 
+  // Add this ref for the content container
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  // Add this effect to handle scrolling when steps change
+  useEffect(() => {
+    if (contentRef.current) {
+      contentRef.current.scrollTo(0, 0)
+    }
+  }, [currentStepIndex])
+
   useEffect(() => {
     // Reset form error when changing steps
     setFormError(null)
@@ -378,39 +388,40 @@ export default function ServiceBooking({
 
   const renderServiceTypeStep = () => {
     return (
-      <div className="space-y-4">
-        <h4 className="font-semibold">Select Service Type</h4>
+      <div>
+        <h4 className="text-lg font-semibold mb-4">How would you like your service?</h4>
         <div className="space-y-3">
           {getServiceOptions().map((option) => (
             <button
               key={option.id}
-              onClick={() => {
-                setServiceType(option.id as ServiceType)
-                const newSteps: ServiceStep[] = [
-                  { id: 1, type: 'service-type' as StepType, title: 'Service Type' },
-                  { id: 2, type: 'service-selection' as StepType, title: 'Select Services' }
-                ]
-                setActiveSteps(newSteps)
-                setStep(2)
-              }}
-              disabled={!option.available}
               className={`
                 w-full p-4 rounded-lg border text-left transition-colors
-                ${option.available 
-                  ? 'border-[#3E797F]/30 hover:border-[#3E797F] hover:bg-[#3E797F]/10' 
-                  : 'border-gray-800 opacity-50 cursor-not-allowed'
+                ${serviceType === option.id
+                  ? 'border-[#3E797F] bg-[#3E797F]/10'
+                  : 'border-[#3E797F]/30 hover:border-[#3E797F] hover:bg-[#3E797F]/10'
                 }
               `}
+              onClick={() => {
+                // Immediately set the service type without needing a second click
+                setServiceType(option.id)
+                setServiceDetails(prev => ({ ...prev, serviceType: option.id }))
+              }}
             >
-              <div className="flex justify-between items-center">
+              <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <option.icon className="w-5 h-5 text-[#3E797F]" />
+                  <div className="p-2 bg-[#3E797F]/10 rounded-lg">
+                    <option.icon className="w-5 h-5 text-[#3E797F]" />
+                  </div>
                   <div>
-                    <h5 className="font-semibold">{option.title}</h5>
-                    <p className="text-sm text-gray-400 mt-1">{option.description}</p>
+                    <div className="font-medium">{option.title}</div>
+                    <div className="text-sm text-gray-400">{option.description}</div>
                   </div>
                 </div>
-                <ChevronRight className="w-5 h-5 text-gray-500" />
+                <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${
+                  serviceType === option.id ? 'border-[#3E797F] bg-[#3E797F]/10' : 'border-[#3E797F]/30'
+                }`}>
+                  {serviceType === option.id && <div className="w-3 h-3 rounded-full bg-[#3E797F]" />}
+                </div>
               </div>
             </button>
           ))}
@@ -1511,8 +1522,8 @@ export default function ServiceBooking({
               <p className="text-sm text-gray-400 mt-1">{location}</p>
             </div>
 
-            {/* Content */}
-            <div className="flex-1 overflow-y-auto">
+            {/* Content - Add ref here */}
+            <div ref={contentRef} className="flex-1 overflow-y-auto scroll-smooth">
               <div className="p-4 md:p-6">
                 <StepIndicator />
                 {renderStep()}
@@ -1523,4 +1534,5 @@ export default function ServiceBooking({
       </div>
     </div>
   )
+} 
 } 

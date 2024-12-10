@@ -141,13 +141,13 @@ export default function DiamondCutRepair() {
                   <Shield className="w-5 h-5 text-[#3E797F]" />
                   <span className="font-semibold">Corrosion Protection</span>
                 </div>
-                <p className="text-sm text-gray-400">Advanced powder coating & lacquer system</p>
+                <p className="text-sm text-gray-400">Premium lacquer protection system</p>
               </div>
               
               <div className="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-[#3E797F]/20">
                 <div className="flex items-center gap-2 mb-2">
                   <Clock className="w-5 h-5 text-[#3E797F]" />
-                  <span className="font-semibold">24-Hour Service</span>
+                  <span className="font-semibold">Fast Service</span>
                 </div>
                 <p className="text-sm text-gray-400">Quick turnaround without compromising quality</p>
               </div>
@@ -231,7 +231,7 @@ export default function DiamondCutRepair() {
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="w-5 h-5 text-[#3E797F] mt-1" />
-                    <span>Creates a distinctive bright finish that powder coating cannot replicate</span>
+                    <span>Creates a distinctive bright finish that cannot be replicated by other methods</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="w-5 h-5 text-[#3E797F] mt-1" />
@@ -324,8 +324,8 @@ export default function DiamondCutRepair() {
                   <Sparkles className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-2">Powder Coating</h3>
-                  <p className="text-gray-400">Application of base powder coat finish to prevent corrosion and provide the perfect foundation.</p>
+                  <h3 className="text-xl font-bold mb-2">Surface Treatment</h3>
+                  <p className="text-gray-400">Professional preparation and treatment to ensure perfect adhesion and longevity.</p>
                 </div>
               </div>
 
@@ -401,13 +401,29 @@ export default function DiamondCutRepair() {
             Drag the slider to compare before and after results.
           </p>
 
-          <div className="max-w-2xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <BeforeAfterSlider
               before="/images/gallery/diamond-cut-before-2.jpg"
               after="/images/gallery/diamond-cut-after-2.jpg"
               title="Ford Diamond Cut Restoration"
               description="Full face diamond cut refurbishment"
-              damage="Lacquer peel and surface corrosion"
+              showLabels={false}
+            />
+
+            <BeforeAfterSlider
+              before="/images/services/diamond_before.jpg"
+              after="/images/services/diamond_after.jpg"
+              title="Diamond Cut Restoration"
+              description="Full face diamond cut refurbishment"
+              showLabels={false}
+            />
+
+            <BeforeAfterSlider
+              before="/images/services/diamond_berfore_1.jpg"
+              after="/images/services/diamond_after_1.jpg"
+              title="Another Diamond Cut Restoration"
+              description="Precision CNC machining"
+              showLabels={false}
             />
           </div>
 
@@ -476,7 +492,7 @@ export default function DiamondCutRepair() {
           <div className="max-w-3xl mx-auto space-y-4">
             <FAQItem 
               question="What is diamond cut alloy wheel repair?"
-              answer="Diamond cut alloy wheel repair is a precision process where we use a CNC lathe to machine the face of your wheel, removing a thin layer of alloy to create a perfectly smooth, mirror-like finish. This is followed by a protective powder coat base and clear lacquer to prevent corrosion."
+              answer="Diamond cut alloy wheel repair is a precision process where we use a CNC lathe to machine the face of your wheel, removing a thin layer of alloy to create a perfectly smooth, mirror-like finish. This is followed by our premium lacquer protection system to prevent corrosion."
             />
             
             <FAQItem 
@@ -500,8 +516,8 @@ export default function DiamondCutRepair() {
             />
             
             <FAQItem 
-              question="What's the difference between diamond cutting and powder coating?"
-              answer="Diamond cutting creates a distinctive bright, machined finish by removing a layer of alloy, exactly matching the original manufacturer's finish. Powder coating, while durable, applies a painted finish that doesn't replicate the metallic look of diamond cut wheels."
+              question="What makes diamond cutting unique?"
+              answer="Diamond cutting creates a distinctive bright, machined finish by removing a layer of alloy, exactly matching the original manufacturer's finish. This precision process achieves a unique metallic shine that perfectly replicates the original factory specification."
             />
             
             <FAQItem 
@@ -511,7 +527,7 @@ export default function DiamondCutRepair() {
             
             <FAQItem 
               question="Can all alloy wheels be diamond cut?"
-              answer="Not all wheels are suitable for diamond cutting. The wheel must have the right profile and sufficient material thickness. We'll assess your wheels and recommend the best refurbishment method. If diamond cutting isn't suitable, we offer premium powder coating alternatives."
+              answer="Not all wheels are suitable for diamond cutting. The wheel must have the right profile and sufficient material thickness. We'll assess your wheels and recommend the best refurbishment method. If diamond cutting isn't suitable, we'll suggest alternative solutions."
             />
             
             <FAQItem 
