@@ -10,10 +10,8 @@ export const MOBILE_COVERAGE: Feature<Polygon> = {
   geometry: {
     type: 'Polygon',
     coordinates: [[
-      [-4.7, 50.5],     // Bodmin
-      [-4.5, 50.5],     // East of Bodmin
-      [-4.3, 50.6],     // Following A30
-      [-4.1, 50.7],     // Launceston area
+      [-4.2, 50.4],     // Plymouth west
+      [-4.1, 50.5],     // North of Plymouth
       [-3.9, 50.85],    // Towards Tiverton
       [-3.7, 51.0],     // West of Tiverton
       [-3.55, 51.0],    // Tiverton
@@ -28,21 +26,8 @@ export const MOBILE_COVERAGE: Feature<Polygon> = {
       [-3.5, 50.3],     // Dartmouth area
       [-3.7, 50.2],     // Salcombe and Kingsbridge
       [-3.9, 50.2],     // South Devon coast
-      [-4.2, 50.2],     // Plymouth area
-      [-4.4, 50.15],    // Looe area
-      [-4.7, 50.1],     // Fowey
-      [-5.0, 50.0],     // Falmouth
-      [-5.2, 49.9],     // Lizard Point
-      [-5.4, 49.95],    // Penzance South
-      [-5.7, 49.95],    // Porthcurno
-      [-5.8, 50.1],     // Land's End
-      [-5.7, 50.2],     // St Just
-      [-5.5, 50.3],     // St Ives
-      [-5.3, 50.35],    // Hayle
-      [-5.1, 50.5],     // Newquay
-      [-4.9, 50.6],     // Wadebridge
-      [-4.8, 50.55],    // Towards Bodmin
-      [-4.7, 50.5],     // Back to Bodmin
+      [-4.2, 50.3],     // Plymouth area
+      [-4.2, 50.4],     // Back to start
     ]]
   }
 }
