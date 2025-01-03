@@ -1,6 +1,6 @@
 import type { Feature, Polygon, FeatureCollection } from 'geojson'
 
-// Define the mobile service coverage area
+// Define the mobile service coverage area (green zone)
 export const MOBILE_COVERAGE: Feature<Polygon> = {
   type: 'Feature',
   properties: {
@@ -10,50 +10,46 @@ export const MOBILE_COVERAGE: Feature<Polygon> = {
   geometry: {
     type: 'Polygon',
     coordinates: [[
-      [-3.7, 51.0],     // West of Tiverton
-      [-3.55, 51.0],    // Tiverton
-      [-3.4, 50.95],    // Northeast of Tiverton
-      [-3.35, 50.9],    // East of Tiverton
-      [-3.3, 50.85],    // Southeast
-      [-3.2, 50.8],     // Extended east of Exmouth
-      [-2.8, 50.75],    // Dorchester
-      [-2.5, 50.7],     // Poole
-      [-1.9, 50.8],     // Portsmouth
-      [-1.8, 50.9],     // North Portsmouth
-      [-2.0, 51.0],     // Winchester
-      [-2.2, 51.1],     // Andover
-      [-2.4, 51.2],     // Westbury
-      [-2.6, 51.2],     // Bath
-      [-2.8, 51.1],     // Bristol
-      [-3.0, 51.0],     // Bridgwater
-      [-3.2, 51.0],     // Taunton
-      [-3.4, 51.0],     // Wellington
-      [-3.7, 51.0],     // Back to start
+      [-3.5622329077768313, 50.98657903618871],  // North of Exeter (lowered)
+      [-3.6271844317002376, 50.911893220910315],  // Tiverton area (adjusted)
+      [-3.7271844317002376, 50.851893220910315],  // New point to smooth curve
+      [-3.913967437397474, 50.73756900656184],    // Dartmoor
+      [-4.100790619208453, 50.53645876569945],    // Plymouth North
+      [-4.183732493827108, 50.42843720187119],    // Plymouth
+      [-4.190275527553666, 50.3660534674336],     // Plymouth South
+      [-4.112054011391109, 50.3118747167473],     // Coast
+      [-4.003331695261323, 50.26460883600211],    // South coast
+      [-3.9011110021571085, 50.21454255369434],   // South Devon
+      [-3.7488758374622932, 50.18950308398712],   // Salcombe area
+      [-3.6031587167817634, 50.19365281491028],   // Start Point
+      [-3.55313709447168, 50.28545816376817],     // Dartmouth
+      [-3.470509543884617, 50.34796748292297],    // Brixham
+      [-3.3965476681091786, 50.436689141907664],  // Torquay
+      [-3.435707045740884, 50.48100143361481],    // Teignmouth
+      [-3.394372814965834, 50.54737787718577],    // Exeter South
+      [-3.398794476913764, 50.65229050125592],    // Exeter
+      [-3.420680147814494, 50.7967663159767],     // North of Exeter
+      [-3.4622329077768313, 50.88657903618871],   // New point to smooth curve
+      [-3.5622329077768313, 50.98657903618871],   // Back to start
     ]]
   }
 }
 
-// Define the collection coverage area (Tiverton to Portsmouth)
+// Define the collection coverage area (red zone) - adjusted to stay within green zone
 const COLLECTION_COORDINATES = [
-  [-3.55, 51.00],   // North of Tiverton
-  [-3.40, 50.95],   // Northeast of Tiverton
-  [-3.35, 50.90],   // East of Tiverton
-  [-3.30, 50.85],   // Southeast of Tiverton
-  [-3.25, 50.80],   // Towards Exmouth
-  [-3.00, 50.75],   // Sidmouth
-  [-2.70, 50.70],   // Weymouth
-  [-2.40, 50.70],   // Bournemouth
-  [-2.00, 50.75],   // Southampton
-  [-1.90, 50.80],   // Portsmouth
-  [-2.00, 50.90],   // Winchester
-  [-2.20, 51.00],   // Salisbury
-  [-2.40, 51.00],   // Warminster
-  [-2.60, 51.00],   // Bath
-  [-2.80, 51.00],   // Bristol
-  [-3.00, 51.00],   // Bridgwater
-  [-3.20, 51.00],   // Taunton
-  [-3.40, 51.00],   // Wellington
-  [-3.55, 51.00],   // Back to start
+  [-3.501137390748852, 50.75330179753982],    // North Exeter
+  [-3.6312193789269145, 50.69879655748164],   // West of Exeter
+  [-3.8400194945003534, 50.6454285425331],    // Dartmoor East
+  [-3.9433675988547066, 50.56648215423047],   // Dartmoor South
+  [-3.9381139261345197, 50.501877508892875],  // South Dartmoor
+  [-3.7540834344532925, 50.512665878017316],  // Newton Abbot North
+  [-3.625900194754678, 50.46018591331992],    // Newton Abbot
+  [-3.553811599798337, 50.41309868384954],    // Torquay North
+  [-3.4683239438801547, 50.43206368275071],   // Torquay (adjusted west)
+  [-3.4191018887595317, 50.54385655132967],   // Exeter South (adjusted west)
+  [-3.437762071585445, 50.63758222102064],    // East of Exeter (adjusted west)
+  [-3.4510103513022614, 50.69102756482016],   // Northeast Exeter (adjusted west)
+  [-3.501137390748852, 50.75330179753982],    // Back to start
 ]
 
 export const WHEEL_COLLECTION_COVERAGE: Feature<Polygon> = {
