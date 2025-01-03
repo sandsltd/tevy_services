@@ -1266,93 +1266,95 @@ export default function ServiceBooking({
         return
       }
 
-      // Create quote data
+      // Create quote data with default values for all fields
       const quoteData = { 
+        // Location details
         location,
         distance,
-        service: serviceType,
-        wheelCount: serviceDetails.wheelCount,
+        
+        // Service details
+        service: serviceType || '',
+        serviceTypes: serviceDetails.serviceTypes || [],
+        
+        // Wheel details
+        wheelCount: serviceDetails.wheelCount || 0,
         wheelDetails: {
-          size: serviceDetails.wheelSize,
-          // Only include paintColor if a painting service was selected
-          ...(serviceDetails.serviceTypes.includes('painted') && {
-            paintColor: serviceDetails.paintColor
-          })
+          size: serviceDetails.wheelSize || '',
+          paintColor: serviceDetails.paintColor || ''
         },
-        name: contactForm.name,
-        email: contactForm.email,
-        phone: contactForm.phone,
-        notes: contactForm.notes || '',
-        preferredContact: contactForm.preferredContact,
-        createdAt: serverTimestamp(),
-        status: 'pending',
-        serviceTypes: serviceDetails.serviceTypes,
+        
+        // Tyre details
         tyreDetails: {
-          vehicleType: tyreDetails.vehicleType,
-          tyreCount: tyreDetails.tyreCount,
-          tyreSize: tyreDetails.tyreSize || null,
+          vehicleType: tyreDetails.vehicleType || 'car',
+          tyreCount: tyreDetails.tyreCount || 0,
+          tyreSize: tyreDetails.tyreSize || '',
           wheelsOnly: tyreDetails.wheelsOnly || false,
           currentTyres: tyreDetails.currentTyres || '',
           preferredBrands: tyreDetails.preferredBrands || ''
         },
+        
+        // Contact details
+        name: contactForm.name,
+        email: contactForm.email,
+        phone: contactForm.phone,
+        notes: contactForm.notes || '',
+        preferredContact: contactForm.preferredContact || 'email',
+        
+        // Photo information
         hasPhotos: wheelPhotos.length > 0,
         photoCount: wheelPhotos.length,
-        submittedAt: new Date().toISOString()
+        noPhotosReason: noPhotosReason || '',
+        
+        // Metadata
+        createdAt: serverTimestamp(),
+        submittedAt: new Date().toISOString(),
+        status: 'pending'
       }
 
       // Save to Firestore
-      try {
-        const quotesRef = collection(db, 'quotes')
-        const docRef = await addDoc(quotesRef, quoteData)
-        console.log('Quote saved successfully with ID:', docRef.id)
+      const quotesRef = collection(db, 'quotes')
+      const docRef = await addDoc(quotesRef, quoteData)
+      console.log('Quote saved successfully with ID:', docRef.id)
 
-        // Prepare email data
-        const formData = new FormData()
-        formData.append('data', JSON.stringify({
-          serviceType,
-          serviceDetails: {
-            ...serviceDetails,
-            wheelDetails: {
-              size: serviceDetails.wheelSize,
-              paintColor: serviceDetails.paintColor
-            }
-          },
-          contact: {
-            name: contactForm.name,
-            email: contactForm.email,
-            phone: contactForm.phone,
-            preferredContact: contactForm.preferredContact,
-            notes: contactForm.notes
-          },
-          location,
-          distance,
-          noPhotosReason: noPhotosReason || null
-        }))
+      // Prepare email data
+      const formData = new FormData()
+      formData.append('data', JSON.stringify({
+        serviceType,
+        serviceDetails: {
+          ...serviceDetails,
+          wheelDetails: {
+            size: serviceDetails.wheelSize,
+            paintColor: serviceDetails.paintColor
+          }
+        },
+        contact: {
+          name: contactForm.name,
+          email: contactForm.email,
+          phone: contactForm.phone,
+          preferredContact: contactForm.preferredContact,
+          notes: contactForm.notes
+        },
+        location,
+        distance,
+        noPhotosReason: noPhotosReason || null
+      }))
 
-        // Add photos if any
-        wheelPhotos.forEach(photo => {
-          formData.append('photos', photo)
-        })
+      // Add photos if any
+      wheelPhotos.forEach(photo => {
+        formData.append('photos', photo)
+      })
 
-        // Send emails
-        const emailResponse = await fetch('/api/submit-quote', {
-          method: 'POST',
-          body: formData
-        })
+      // Send emails
+      const emailResponse = await fetch('/api/submit-quote', {
+        method: 'POST',
+        body: formData
+      })
 
-        if (!emailResponse.ok) {
-          console.warn('Email notification failed, but quote was saved')
-        }
-
-        setShowSuccess(true)
-      } catch (error) {
-        console.error('Submission error:', error)
-        if (error instanceof FirebaseError) {
-          setFormError(`Database error: ${error.code}`)
-        } else {
-          setFormError('Failed to save quote. Please try again.')
-        }
+      if (!emailResponse.ok) {
+        console.warn('Email notification failed, but quote was saved')
       }
+
+      setShowSuccess(true)
     } catch (error) {
       console.error('Submission error:', error)
       setFormError('An error occurred. Please try again.')
