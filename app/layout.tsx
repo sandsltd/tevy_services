@@ -2,6 +2,7 @@ import React from 'react'
 import './globals.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import GoogleAnalytics from './components/GoogleAnalytics'
 
 export const metadata = {
   title: 'Tevy Services',
@@ -23,6 +24,7 @@ export default function RootLayout({
           {children}
         </div>
         <SpeedInsights />
+        <GoogleAnalytics />
       </body>
     </html>
   )
