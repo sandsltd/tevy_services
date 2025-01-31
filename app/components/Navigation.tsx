@@ -10,7 +10,8 @@ import {
   Wrench,
   AlertTriangle,
   Menu,
-  X
+  X,
+  BookOpen
 } from 'lucide-react'
 
 interface NavigationProps {
@@ -131,6 +132,19 @@ const Navigation = ({ className }: NavigationProps) => {
                     <div>
                       <div className="font-semibold">TPMS Service</div>
                       <div className="text-sm text-gray-400">Sensor diagnostics</div>
+                    </div>
+                  </Link>
+                  
+                  <Link 
+                    href="/blog"
+                    className="flex items-center gap-3 px-4 py-3 text-white hover:bg-[#3E797F]/20 rounded-lg transition-all group/item"
+                  >
+                    <div className="p-2 bg-[#3E797F]/10 rounded-lg group-hover/item:bg-[#3E797F]/20 transition-colors">
+                      <BookOpen className="w-5 h-5 text-[#3E797F]" />
+                    </div>
+                    <div>
+                      <div className="font-semibold">Blog</div>
+                      <div className="text-sm text-gray-400">Latest insights & guides</div>
                     </div>
                   </Link>
                 </div>

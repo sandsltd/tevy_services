@@ -101,6 +101,18 @@ export default function Footer() {
               </a>
             </div>
           </div>
+
+          {/* Resources */}
+          <div>
+            <h3 className="text-xl font-bold mb-4">Resources</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/blog" className="hover:text-[#3E797F]">
+                  Blog
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div className="border-t border-[#3E797F]/20 mt-8 pt-8 text-center">
