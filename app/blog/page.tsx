@@ -6,6 +6,17 @@ import Footer from '@/app/components/Footer'
 
 const blogPosts = [
   {
+    slug: 'tyre-services-exeter',
+    title: 'Expert Tyre Services in Exeter: Your Complete Guide',
+    excerpt: 'Discover professional tyre services in Exeter from TEVY Services. Learn about tyre replacement, repairs, balancing, and why proper tyre maintenance is crucial for your vehicle\'s safety.',
+    coverImage: '/blog/tyres_exeter.png',
+    date: 'March 28, 2024',
+    author: 'TEVY Services',
+    readTime: '7 min read',
+    category: 'Tyre Services',
+    featured: true
+  },
+  {
     slug: 'complete-guide-alloy-wheel-refurbishment-exeter',
     title: 'Complete Guide to Alloy Wheel Refurbishment in Exeter: Costs, Process & Options',
     excerpt: 'Understand everything about alloy wheel refurbishment in Exeter, from costs and processes to available options. Expert insights from local specialists.',
@@ -14,7 +25,7 @@ const blogPosts = [
     author: 'TEVY Services',
     readTime: '8 min read',
     category: 'Wheel Restoration',
-    featured: true
+    featured: false
   },
   {
     slug: 'choosing-best-alloy-wheel-refurbishment-exeter',
@@ -24,7 +35,8 @@ const blogPosts = [
     date: 'March 22, 2024',
     author: 'TEVY Services',
     readTime: '7 min read',
-    category: 'Expert Advice'
+    category: 'Expert Advice',
+    featured: false
   },
   {
     slug: 'mobile-vs-workshop-alloy-wheel-refurbishment-exeter',
@@ -34,7 +46,8 @@ const blogPosts = [
     date: 'March 24, 2024',
     author: 'TEVY Services',
     readTime: '6 min read',
-    category: 'Service Comparison'
+    category: 'Service Comparison',
+    featured: false
   }
 ]
 
@@ -43,7 +56,8 @@ const categories = [
   'Expert Advice',
   'Service Comparison',
   'Industry News',
-  'Maintenance Tips'
+  'Maintenance Tips',
+  'Tyre Services'
 ]
 
 export default function BlogPage() {
@@ -149,48 +163,50 @@ export default function BlogPage() {
               <span className="text-[#3E797F]">Latest</span> Articles
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {blogPosts.map((post) => (
-                <Link 
-                  key={post.slug}
-                  href={`/blog/${post.slug}`}
-                  className="group bg-black/40 rounded-xl overflow-hidden hover:transform 
-                           hover:scale-[1.02] transition-all duration-300 border border-gray-800"
-                >
-                  <div className="relative h-48 w-full">
-                    <Image
-                      src={post.coverImage}
-                      alt={post.title}
-                      fill
-                      className="object-cover"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-sm 
-                                   text-[#3E797F] text-sm border border-[#3E797F]/30">
-                        {post.category}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-3 group-hover:text-[#3E797F] transition-colors">
-                      {post.title}
-                    </h3>
-                    <p className="text-gray-400 mb-4 line-clamp-2">
-                      {post.excerpt}
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4 text-sm text-gray-400">
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-4 h-4" />
-                          {post.date}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
-                          {post.readTime}
+              {blogPosts.map((post, index) => (
+                index !== 0 && (
+                  <Link 
+                    key={post.slug}
+                    href={`/blog/${post.slug}`}
+                    className="group bg-black/40 rounded-xl overflow-hidden hover:transform 
+                             hover:scale-[1.02] transition-all duration-300 border border-gray-800"
+                  >
+                    <div className="relative h-48 w-full">
+                      <Image
+                        src={post.coverImage}
+                        alt={post.title}
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute top-4 left-4">
+                        <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-sm 
+                                       text-[#3E797F] text-sm border border-[#3E797F]/30">
+                          {post.category}
                         </span>
                       </div>
                     </div>
-                  </div>
-                </Link>
+                    <div className="p-6">
+                      <h3 className="text-xl font-semibold mb-3 group-hover:text-[#3E797F] transition-colors">
+                        {post.title}
+                      </h3>
+                      <p className="text-gray-400 mb-4 line-clamp-2">
+                        {post.excerpt}
+                      </p>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-4 text-sm text-gray-400">
+                          <span className="flex items-center gap-1">
+                            <Calendar className="w-4 h-4" />
+                            {post.date}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Clock className="w-4 h-4" />
+                            {post.readTime}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                )
               ))}
             </div>
           </div>
