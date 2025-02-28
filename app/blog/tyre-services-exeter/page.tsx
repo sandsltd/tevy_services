@@ -77,7 +77,7 @@ export default function BlogPost() {
                     title="Tyre Repair"
                     icon="repair"
                     description="Fix punctures and minor damage to extend tyre life."
-                    benefits={["Efficient solution", "Quick service", "Extends tyre lifespan", "Environmentally friendly"]}
+                    benefits={["Effective solution", "Quick service", "Extends tyre lifespan", "Environmentally friendly"]}
                     limitations={["Not suitable for sidewall damage", "Limited repair zones", "Not for severely worn tyres", "Temporary for some damages"]}
                   />
                 </div>
@@ -178,6 +178,9 @@ export default function BlogPost() {
                     </div>
                   </div>
                 </div>
+
+                {/* NOTE: No pricing information should be displayed on this page.
+                    Any pricing guide or specific costs for services should be removed. */}
 
                 {/* Why Choose Professional Services */}
                 <div className="space-y-6">
