@@ -28,7 +28,7 @@ export default function BlogPost() {
                 <span className="px-3 py-1 rounded-full bg-[#3E797F]/10 text-[#3E797F] text-sm">
                   Expert Advice
                 </span>
-                <span className="text-gray-400 text-sm">March 22, 2024</span>
+                <span className="text-gray-400 text-sm">December 18, 2024</span>
               </div>
               
               <h1 className="text-4xl md:text-5xl font-bold mb-6">

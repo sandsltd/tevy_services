@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     title: 'Mobile vs Workshop Alloy Wheel Refurbishment in Exeter | Compare Services',
     description: 'Expert comparison of mobile and workshop-based alloy wheel refurbishment services in Exeter. Make an informed choice for your wheels.',
     type: 'article',
-    publishedTime: '2024-03-24T09:00:00.000Z',
+    publishedTime: '2024-11-22T09:00:00.000Z',
     authors: ['TEVY Services'],
   }
-} 
+}

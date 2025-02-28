@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     title: 'Complete Guide to Alloy Wheel Refurbishment in Exeter | TEVY Services',
     description: 'Expert guide to alloy wheel refurbishment in Exeter. Learn about costs, processes, and options from Exeter\'s leading wheel specialists.',
     type: 'article',
-    publishedTime: '2024-03-20T09:00:00.000Z',
+    publishedTime: '2025-01-15T09:00:00.000Z',
     authors: ['TEVY Services'],
   }
-} 
+}
