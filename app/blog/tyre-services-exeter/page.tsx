@@ -99,38 +99,81 @@ export default function BlogPost() {
                   </div>
                 </div>
 
-                {/* Price Comparison */}
-                <div className="p-8 bg-black/40 rounded-xl border border-gray-800">
-                  <h2 className="text-2xl font-bold mb-6">Exeter Tyre Services Pricing Guide</h2>
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <div className="space-y-4">
-                      <h3 className="text-xl font-semibold text-[#3E797F]">Standard Services</h3>
-                      <div className="space-y-3">
-                        {[
-                          { service: "Tyre fitting (per tyre)", price: "£15-£25" },
-                          { service: "Puncture repair", price: "£25-£35" },
-                          { service: "Wheel balancing", price: "£8-£12 per wheel" }
-                        ].map((item, index) => (
-                          <div key={index} className="flex justify-between items-center text-gray-300">
-                            <span>{item.service}</span>
-                            <span className="font-semibold">{item.price}</span>
-                          </div>
-                        ))}
+                {/* Maxxis Tyres Lifetime Guarantee */}
+                <div className="p-8 bg-gradient-to-b from-[#3E797F]/10 to-black/40 rounded-xl border border-[#3E797F]/20">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 rounded-full bg-[#3E797F]/20 flex items-center justify-center">
+                      <svg className="w-6 h-6 text-[#3E797F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
+                    </div>
+                    <h2 className="text-2xl font-bold">Maxxis Tyres Lifetime Guarantee</h2>
+                  </div>
+                  
+                  <div className="space-y-6">
+                    <div className="flex flex-col md:flex-row gap-8">
+                      <div className="md:w-2/3">
+                        <h3 className="text-xl font-semibold text-[#3E797F] mb-4">PEACE OF MIND AT NO EXTRA COST</h3>
+                        <p className="text-gray-300 mb-4">
+                          We are so confident in the quality, reliability and durability of Maxxis products that we have no hesitation in offering a lifetime guarantee if our road tyres are found wanting in terms of manufacture or materials. This confidence is based on the knowledge that Maxxis tyres undergo such a rigorous development process before being brought to market. This cornerstone of Maxxis corporate strategy has been pivotal in its success and continues to raise the bar for standards in the whole industry.
+                        </p>
+                      </div>
+                      <div className="md:w-1/3">
+                        <div className="rounded-lg overflow-hidden bg-black/20 h-full flex items-center justify-center">
+                          <Image 
+                            src="/blog/maxxis-tyres.jpg" 
+                            alt="Maxxis Tyres" 
+                            width={300} 
+                            height={200}
+                            className="object-cover"
+                          />
+                        </div>
                       </div>
                     </div>
+                    
                     <div className="space-y-4">
-                      <h3 className="text-xl font-semibold text-[#3E797F]">Premium Services</h3>
-                      <div className="space-y-3">
+                      <h3 className="text-xl font-semibold text-[#3E797F]">THE MAXXIS LIFETIME GUARANTEE</h3>
+                      <ul className="space-y-3">
                         {[
-                          { service: "Four wheel alignment", price: "£60-£80" },
-                          { service: "TPMS reset/programming", price: "£15-£30" },
-                          { service: "Run-flat tyre repair", price: "£40-£60" }
+                          "Maxxis will replace a road tyre which demonstrates a defect due to the manufacturing process or materials used.",
+                          "Maxxis will replace a road tyre which shows irreparable damage resulting from normal road use.",
+                          "This lifetime guarantee operates independently of the purchase date and is non-transferable from the party named on the guarantee certificate."
                         ].map((item, index) => (
-                          <div key={index} className="flex justify-between items-center text-gray-300">
-                            <span>{item.service}</span>
-                            <span className="font-semibold">{item.price}</span>
-                          </div>
+                          <li key={index} className="flex items-center gap-2 text-gray-300">
+                            <svg className="w-5 h-5 text-[#3E797F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            {item}
+                          </li>
                         ))}
+                      </ul>
+                      <p className="text-gray-300 mt-4">
+                        This lifetime guarantee does not affect your statutory rights. Replacement is based on dealer assessment where a replacement value is calculated based on the amount of tread used.
+                      </p>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <h3 className="text-xl font-semibold text-[#3E797F]">HOW TO CLAIM</h3>
+                      <p className="text-gray-300">
+                        To make a claim under the terms of your Maxxis Lifetime Guarantee, please take your tyre/s to your local Maxxis dealer. (The use of the Guarantee in respect of tyre/s invalidates any further claims).
+                      </p>
+                      <p className="text-gray-300">
+                        The Maxxis Lifetime Guarantee is offered by our UK Distributors, Stapleton's Tyre Services on car, van, 4×4 and van tyres. The Maxxis Lifetime Guarantee is offered by Maxxis International UK plc for road motorcycle tyres listed on this web site.
+                      </p>
+                    </div>
+                    
+                    <div className="mt-6">
+                      <div className="bg-black/30 rounded-lg p-4">
+                        <h4 className="text-lg font-semibold text-[#3E797F] mb-3">The Guarantee Coverage</h4>
+                        <p className="text-gray-300 mb-2">
+                          1. A tyre with 8mm or more tread remaining will be replaced with a new Maxxis tyre of the same size and type (or corresponding type if range has changed).
+                        </p>
+                        <p className="text-gray-300">
+                          2. Tyres with less than 8mm of the tread remaining will be replaced subject to charges based on a sliding scale.
+                        </p>
+                        <p className="text-gray-300 mt-4 italic">
+                          Note: The cost of your replacement tyre is covered, however, there may still be a charge for fitting and balancing. Please consult your Maxxis dealer for details.
+                        </p>
                       </div>
                     </div>
                   </div>

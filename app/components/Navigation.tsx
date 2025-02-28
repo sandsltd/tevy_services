@@ -105,7 +105,7 @@ const Navigation = ({ className }: NavigationProps) => {
                     </div>
                     <div>
                       <div className="font-semibold">Tyre Replacement</div>
-                      <div className="text-sm text-gray-400">Mobile fitting service</div>
+                      <div className="text-sm text-gray-400">Fitting service</div>
                     </div>
                   </Link>
                   
