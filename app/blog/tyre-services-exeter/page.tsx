@@ -70,14 +70,14 @@ export default function BlogPost() {
                     icon="replace"
                     description="Professional tyre fitting service for all vehicle types."
                     benefits={["New tyre installation", "Wide range of brands", "Proper disposal of old tyres", "Expert fitting"]}
-                    limitations={["Requires appointment", "Cost varies by tyre type", "May need wheel alignment", "Time for multiple tyres"]}
+                    limitations={["Requires appointment", "May need wheel alignment", "Time for multiple tyres"]}
                   />
                   
                   <ServiceCard 
                     title="Tyre Repair"
                     icon="repair"
                     description="Fix punctures and minor damage to extend tyre life."
-                    benefits={["Cost-effective solution", "Quick service", "Extends tyre lifespan", "Environmentally friendly"]}
+                    benefits={["Efficient solution", "Quick service", "Extends tyre lifespan", "Environmentally friendly"]}
                     limitations={["Not suitable for sidewall damage", "Limited repair zones", "Not for severely worn tyres", "Temporary for some damages"]}
                   />
                 </div>
@@ -119,13 +119,13 @@ export default function BlogPost() {
                         </p>
                       </div>
                       <div className="md:w-1/3">
-                        <div className="rounded-lg overflow-hidden bg-black/20 h-full flex items-center justify-center">
+                        <div className="rounded-lg overflow-hidden bg-black/20 h-full flex items-center justify-center p-4">
                           <Image 
-                            src="/blog/maxxis-tyres.jpg" 
-                            alt="Maxxis Tyres" 
-                            width={300} 
-                            height={200}
-                            className="object-cover"
+                            src="/images/tyre_brands/maxxis_tyres.png" 
+                            alt="Maxxis Tyres Logo" 
+                            width={250} 
+                            height={150}
+                            className="object-contain"
                           />
                         </div>
                       </div>
@@ -169,10 +169,10 @@ export default function BlogPost() {
                           1. A tyre with 8mm or more tread remaining will be replaced with a new Maxxis tyre of the same size and type (or corresponding type if range has changed).
                         </p>
                         <p className="text-gray-300">
-                          2. Tyres with less than 8mm of the tread remaining will be replaced subject to charges based on a sliding scale.
+                          2. Tyres with less than 8mm of the tread remaining will be replaced subject to assessment by the dealer.
                         </p>
                         <p className="text-gray-300 mt-4 italic">
-                          Note: The cost of your replacement tyre is covered, however, there may still be a charge for fitting and balancing. Please consult your Maxxis dealer for details.
+                          Note: Please consult your Maxxis dealer for details.
                         </p>
                       </div>
                     </div>
@@ -245,7 +245,7 @@ export default function BlogPost() {
                   </h2>
                   <p className="text-gray-300">
                     For professional tyre services in Exeter, TEVY Services offers comprehensive solutions 
-                    with competitive pricing and expert technicians. Whether you need a simple tyre repair or 
+                    with expert technicians. Whether you need a simple tyre repair or 
                     a complete set of new tyres, our team ensures your vehicle stays safe and performs at its best.
                   </p>
                   <div className="pt-4">
