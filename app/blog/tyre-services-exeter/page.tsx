@@ -11,7 +11,7 @@ export default function BlogPost() {
       <main className="min-h-screen bg-gradient-to-b from-black to-gray-900">
         {/* Hero Section */}
         <section className="relative pt-32 pb-16 overflow-hidden">
-          <div className="absolute inset-0 bg-[url('/blog/mobile-vs-workshop.jpg')] bg-cover bg-center">
+          <div className="absolute inset-0 bg-[url('/blog/tyre-services.jpg')] bg-cover bg-center">
             <div className="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
           </div>
           
@@ -27,13 +27,13 @@ export default function BlogPost() {
             <div className="max-w-4xl mx-auto">
               <div className="flex items-center gap-4 mb-6">
                 <span className="px-3 py-1 rounded-full bg-[#3E797F]/10 text-[#3E797F] text-sm">
-                  Service Comparison
+                  Tyre Services
                 </span>
-                <span className="text-gray-400 text-sm">November 22, 2024</span>
+                <span className="text-gray-400 text-sm">February 28, 2025</span>
               </div>
               
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                Mobile vs Workshop Alloy Wheel Refurbishment in Exeter: Which is Right for You?
+                Expert Tyre Services in Exeter: Your Complete Guide
               </h1>
               
               <div className="flex items-center justify-between">
@@ -43,7 +43,7 @@ export default function BlogPost() {
                   </div>
                   <div>
                     <div className="font-medium">TEVY Services</div>
-                    <div className="text-sm text-gray-400">6 min read</div>
+                    <div className="text-sm text-gray-400">7 min read</div>
                   </div>
                 </div>
               </div>
@@ -57,45 +57,161 @@ export default function BlogPost() {
             <div className="max-w-3xl mx-auto">
               <div className="space-y-12">
                 <p className="text-xl text-gray-300 leading-relaxed">
-                  If you're looking to restore your alloy wheels in Exeter, you have two main options:
-                  **mobile refurbishment** or **workshop-based services**. Each has its advantages, depending 
-                  on the damage level, convenience, and cost. Let's break down the key differences to help 
-                  you decide the best fit for your needs.
+                  Proper tyre maintenance is crucial for your vehicle's safety, performance, and fuel efficiency. 
+                  In Exeter, TEVY Services offers comprehensive tyre solutions to keep your vehicle running 
+                  smoothly. This guide explores the essential tyre services you need to know about and why 
+                  regular maintenance matters.
                 </p>
 
                 {/* Service Comparison Section */}
                 <div className="grid md:grid-cols-2 gap-8">
                   <ServiceCard 
-                    title="Mobile Service"
-                    icon="mobile"
-                    description="Best for minor repairs, convenience, and time-sensitive fixes."
-                    benefits={["Minor to moderate damage", "Single wheel repairs", "Convenient locations", "Time-sensitive repairs"]}
-                    limitations={["Weather dependent", "Limited repair types", "Basic equipment only", "Space requirements"]}
+                    title="Tyre Replacement"
+                    icon="replace"
+                    description="Professional tyre fitting service for all vehicle types."
+                    benefits={["New tyre installation", "Wide range of brands", "Proper disposal of old tyres", "Expert fitting"]}
+                    limitations={["Requires appointment", "Cost varies by tyre type", "May need wheel alignment", "Time for multiple tyres"]}
                   />
                   
                   <ServiceCard 
-                    title="Workshop Service"
-                    icon="workshop"
-                    description="Best for full restorations, multiple wheels, and premium finishes."
-                    benefits={["Complete restorations", "Diamond cut finish", "Multiple wheels", "Complex repairs"]}
-                    limitations={["Requires transport", "Longer turnaround", "Booking required", "Higher cost"]}
+                    title="Tyre Repair"
+                    icon="repair"
+                    description="Fix punctures and minor damage to extend tyre life."
+                    benefits={["Cost-effective solution", "Quick service", "Extends tyre lifespan", "Environmentally friendly"]}
+                    limitations={["Not suitable for sidewall damage", "Limited repair zones", "Not for severely worn tyres", "Temporary for some damages"]}
                   />
                 </div>
 
-                {/* Choosing the Right Service */}
+                {/* Additional Services Section */}
                 <div className="space-y-6">
                   <h2 className="text-3xl font-bold text-white">
-                    <span className="text-[#3E797F]">Making</span> Your Choice
+                    <span className="text-[#3E797F]">Additional</span> Tyre Services
                   </h2>
                   <div className="grid md:grid-cols-2 gap-6">
                     <ChoiceCard 
-                      title="Choose Mobile If:"
-                      points={["You need convenient repairs", "The damage is minor", "You have a suitable location", "Time is a priority"]}
+                      title="Wheel Balancing"
+                      points={["Eliminates vibration", "Improves ride comfort", "Extends tyre life", "Enhances fuel efficiency"]}
                     />
                     <ChoiceCard 
-                      title="Choose Workshop If:"
-                      points={["You want a diamond cut finish", "Multiple wheels need work", "Significant damage exists", "Premium results are a priority"]}
+                      title="Wheel Alignment"
+                      points={["Prevents uneven wear", "Improves handling", "Increases fuel economy", "Extends tyre lifespan"]}
                     />
+                  </div>
+                </div>
+
+                {/* Price Comparison */}
+                <div className="p-8 bg-black/40 rounded-xl border border-gray-800">
+                  <h2 className="text-2xl font-bold mb-6">Exeter Tyre Services Pricing Guide</h2>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div className="space-y-4">
+                      <h3 className="text-xl font-semibold text-[#3E797F]">Standard Services</h3>
+                      <div className="space-y-3">
+                        {[
+                          { service: "Tyre fitting (per tyre)", price: "£15-£25" },
+                          { service: "Puncture repair", price: "£25-£35" },
+                          { service: "Wheel balancing", price: "£8-£12 per wheel" }
+                        ].map((item, index) => (
+                          <div key={index} className="flex justify-between items-center text-gray-300">
+                            <span>{item.service}</span>
+                            <span className="font-semibold">{item.price}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="space-y-4">
+                      <h3 className="text-xl font-semibold text-[#3E797F]">Premium Services</h3>
+                      <div className="space-y-3">
+                        {[
+                          { service: "Four wheel alignment", price: "£60-£80" },
+                          { service: "TPMS reset/programming", price: "£15-£30" },
+                          { service: "Run-flat tyre repair", price: "£40-£60" }
+                        ].map((item, index) => (
+                          <div key={index} className="flex justify-between items-center text-gray-300">
+                            <span>{item.service}</span>
+                            <span className="font-semibold">{item.price}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Why Choose Professional Services */}
+                <div className="space-y-6">
+                  <h2 className="text-3xl font-bold text-white">
+                    <span className="text-[#3E797F]">Why Choose</span> Professional Tyre Services
+                  </h2>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div className="space-y-4">
+                      <List 
+                        title="Safety Benefits"
+                        items={[
+                          "Proper tread depth ensures grip",
+                          "Balanced wheels prevent handling issues",
+                          "Correct pressure improves braking",
+                          "Professional inspection catches hidden issues"
+                        ]}
+                        color="text-[#3E797F]"
+                      />
+                    </div>
+                    <div className="space-y-4">
+                      <List 
+                        title="Performance Benefits"
+                        items={[
+                          "Improved fuel efficiency",
+                          "Smoother, more comfortable ride",
+                          "Better handling in all conditions",
+                          "Reduced wear on suspension components"
+                        ]}
+                        color="text-[#3E797F]"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* When to Replace Your Tyres */}
+                <div className="p-8 bg-gradient-to-b from-[#3E797F]/10 to-black/40 rounded-xl border border-[#3E797F]/20">
+                  <h2 className="text-2xl font-bold mb-6">When to Replace Your Tyres</h2>
+                  <div className="space-y-4">
+                    <p className="text-gray-300">
+                      Even with the best maintenance, tyres eventually need replacement. Look for these warning signs:
+                    </p>
+                    <ul className="space-y-3">
+                      {[
+                        "Tread depth below 1.6mm (legal minimum)",
+                        "Visible damage like bulges, cuts, or cracks",
+                        "Uneven wear patterns",
+                        "Vibration while driving",
+                        "Tyres more than 5-6 years old"
+                      ].map((item, index) => (
+                        <li key={index} className="flex items-center gap-2 text-gray-300">
+                          <svg className="w-5 h-5 text-[#3E797F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                          </svg>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Conclusion */}
+                <div className="space-y-4">
+                  <h2 className="text-3xl font-bold text-white">
+                    <span className="text-[#3E797F]">Contact</span> TEVY Services
+                  </h2>
+                  <p className="text-gray-300">
+                    For professional tyre services in Exeter, TEVY Services offers comprehensive solutions 
+                    with competitive pricing and expert technicians. Whether you need a simple tyre repair or 
+                    a complete set of new tyres, our team ensures your vehicle stays safe and performs at its best.
+                  </p>
+                  <div className="pt-4">
+                    <Link
+                      href="/contact"
+                      className="inline-flex items-center px-6 py-3 bg-[#3E797F] text-white font-medium rounded-lg hover:bg-[#3E797F]/90 transition"
+                    >
+                      Book Your Tyre Service
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -110,20 +226,20 @@ export default function BlogPost() {
 
 // Types for Props
 interface ServiceCardProps {
-  title: string;
-  icon: string;
-  description: string;
-  benefits: string[];
-  limitations: string[];
+  title: string
+  icon: string
+  description: string
+  benefits: string[]
+  limitations: string[]
 }
 
 interface ChoiceCardProps {
-  title: string;
-  points: string[];
+  title: string
+  points: string[]
 }
 
 interface IconProps {
-  type: string;
+  type: string
 }
 
 // Service Card Component
@@ -136,11 +252,13 @@ function ServiceCard({ title, icon, description, benefits, limitations }: Servic
         </div>
         <h2 className="text-2xl font-bold">{title}</h2>
       </div>
-      <p className="text-gray-400 mb-4">{description}</p>
-      <List title="Perfect For" items={benefits} color="[#3E797F]" />
-      <List title="Limitations" items={limitations} color="red-500" />
+      <p className="text-gray-300 mb-4">{description}</p>
+      <div className="space-y-4">
+        <List title="Benefits" items={benefits} color="text-[#3E797F]" />
+        <List title="Considerations" items={limitations} color="text-yellow-500" />
+      </div>
     </div>
-  );
+  )
 }
 
 // Choice Card Component
@@ -148,37 +266,72 @@ function ChoiceCard({ title, points }: ChoiceCardProps) {
   return (
     <div className="p-6 bg-black/40 rounded-xl border border-gray-800">
       <h3 className="text-xl font-semibold mb-4">{title}</h3>
-      <ul className="space-y-3">
-        {points.map((point, i) => (
-          <li key={i} className="text-gray-300">• {point}</li>
+      <ul className="space-y-2">
+        {points.map((point, index) => (
+          <li key={index} className="flex items-center gap-2 text-gray-300">
+            <svg className="w-5 h-5 text-[#3E797F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+            {point}
+          </li>
         ))}
       </ul>
     </div>
-  );
+  )
 }
 
 // Icon Component
 function Icon({ type }: IconProps) {
-  if (type === "mobile") return <User className="w-6 h-6 text-[#3E797F]" />;
-  if (type === "workshop") return <Calendar className="w-6 h-6 text-[#3E797F]" />;
-  return null;
+  if (type === "replace") {
+    return (
+      <svg className="w-6 h-6 text-[#3E797F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+      </svg>
+    )
+  } else if (type === "repair") {
+    return (
+      <svg className="w-6 h-6 text-[#3E797F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    )
+  } else if (type === "mobile") {
+    return (
+      <svg className="w-6 h-6 text-[#3E797F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    )
+  } else if (type === "workshop") {
+    return (
+      <svg className="w-6 h-6 text-[#3E797F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+    )
+  } else {
+    return (
+      <svg className="w-6 h-6 text-[#3E797F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <circle cx="12" cy="12" r="10" strokeWidth="2" />
+      </svg>
+    )
+  }
 }
 
 // List Component
 interface ListProps {
-  title: string;
-  items: string[];
-  color: string;
+  title: string
+  items: string[]
+  color: string
 }
 
 function List({ title, items, color }: ListProps) {
   return (
     <div>
-      <h3 className={`text-${color} font-semibold mb-2`}>{title}</h3>
+      <h3 className={`${color} font-semibold mb-2`}>{title}</h3>
       <ul className="space-y-2">
         {items.map((item, index) => (
           <li key={index} className="flex items-center gap-2 text-gray-300">
-            <svg className={`w-4 h-4 text-${color}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className={`w-4 h-4 ${color}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
             {item}
@@ -186,5 +339,5 @@ function List({ title, items, color }: ListProps) {
         ))}
       </ul>
     </div>
-  );
+  )
 }
