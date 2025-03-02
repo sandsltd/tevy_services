@@ -115,7 +115,7 @@ export default function BlogPost() {
                       <div className="md:w-2/3">
                         <h3 className="text-xl font-semibold text-[#3E797F] mb-4">PEACE OF MIND AT NO EXTRA COST</h3>
                         <p className="text-gray-300 mb-4">
-                          We are so confident in the quality, reliability & durability of Maxxis products that we have no hesitation in offering a lifetime guarantee if our road tyres are found wanting in terms of manufacture or materials. This confidence is based on the knowledge that Maxxis tyres undergo such a rigorous development process before being brought to market. This cornerstone of Maxxis corporate strategy has been pivotal in its success and continues to raise the bar for standards in the whole industry.
+                          We are so confident in the quality, reliability and durability of Maxxis products that we have no hesitation in offering a lifetime guarantee if our road tyres are found wanting in terms of manufacture or materials. This confidence is based on the knowledge that Maxxis tyres undergo such a rigorous development process before being brought to market. This cornerstone of Maxxis corporate strategy has been pivotal in its success and continues to raise the bar for standards in the whole industry.
                         </p>
                       </div>
                       <div className="md:w-1/3">
