@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import Image from 'next/image'
 import Navigation from './components/Navigation'
 import { 
@@ -51,9 +51,55 @@ type ServiceCardProps = {
   style?: React.CSSProperties;
 }
 
+function useVideoPlayState() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  
+  const handlePlayClick = useCallback(() => {
+    setIsPlaying(true);
+    
+    // Try to programmatically click the Vimeo play button
+    if (iframeRef.current) {
+      // First approach: try to send a play command via postMessage
+      try {
+        const contentWindow = iframeRef.current.contentWindow;
+        if (contentWindow) {
+          contentWindow.postMessage('{"method":"play"}', '*');
+        }
+      } catch (e) {
+        console.error("Failed to send play command to iframe", e);
+      }
+      
+      // Second approach: try to simulate a click in the center of the iframe
+      try {
+        // Create and dispatch a click event on the iframe
+        const rect = iframeRef.current.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        const clickEvent = new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+          view: window,
+          clientX: centerX,
+          clientY: centerY
+        });
+        
+        iframeRef.current.dispatchEvent(clickEvent);
+      } catch (e) {
+        console.error("Failed to simulate click on iframe", e);
+      }
+    }
+  }, []);
+  
+  return { isPlaying, handlePlayClick, iframeRef };
+}
+
 export default function Home() {
   const parallaxRef = useRef<HTMLDivElement>(null)
   const { videoRef, overlayVideoRef } = useReversibleVideo()
+  const { isPlaying: isWelcomeVideoPlaying, handlePlayClick: handleWelcomePlayClick, iframeRef: welcomeVideoRef } = useVideoPlayState();
+  const { isPlaying: isServicesVideoPlaying, handlePlayClick: handleServicesPlayClick, iframeRef: servicesVideoRef } = useVideoPlayState();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -219,7 +265,8 @@ export default function Home() {
             <div className="relative rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(62,121,127,0.2)] border border-[#3E797F]/20 group">
               <div style={{padding:'56.25% 0 0 0', position:'relative'}}>
                 <iframe 
-                  src="https://player.vimeo.com/video/1062759053?h=f938cadcae&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;dnt=1&amp;transparent=1&amp;color=3E797F&amp;background=0&amp;muted=0&amp;controls=1" 
+                  ref={welcomeVideoRef}
+                  src="https://player.vimeo.com/video/1062759053?h=f938cadcae&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=welcome-video&amp;app_id=58479&amp;dnt=1&amp;transparent=1&amp;color=3E797F&amp;background=0&amp;muted=0&amp;controls=1" 
                   frameBorder="0" 
                   allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
                   style={{
@@ -234,14 +281,19 @@ export default function Home() {
                 ></iframe>
               </div>
               
-              {/* Custom play button overlay */}
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-20 h-20 bg-[#3E797F]/90 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-lg">
-                  <svg className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 5V19L19 12L8 5Z" fill="currentColor" />
-                  </svg>
+              {/* Custom play button overlay with click handler */}
+              {!isWelcomeVideoPlaying && (
+                <div 
+                  className="absolute inset-0 flex items-center justify-center cursor-pointer"
+                  onClick={handleWelcomePlayClick}
+                >
+                  <div className="w-20 h-20 bg-[#3E797F]/90 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-lg">
+                    <svg className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M8 5V19L19 12L8 5Z" fill="currentColor" />
+                    </svg>
+                  </div>
                 </div>
-              </div>
+              )}
               
               <div className="absolute inset-0 pointer-events-none border-[3px] border-[#3E797F]/0 hover:border-[#3E797F]/20 transition-all duration-500 rounded-2xl"></div>
             </div>
@@ -298,7 +350,8 @@ export default function Home() {
             <div className="relative rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(62,121,127,0.2)] border border-[#3E797F]/20 group">
               <div style={{padding:'56.25% 0 0 0', position:'relative'}}>
                 <iframe 
-                  src="https://player.vimeo.com/video/1062758602?h=290e210521&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;dnt=1&amp;transparent=1&amp;color=3E797F&amp;background=0&amp;muted=0&amp;controls=1" 
+                  ref={servicesVideoRef}
+                  src="https://player.vimeo.com/video/1062758602?h=290e210521&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=services-video&amp;app_id=58479&amp;dnt=1&amp;transparent=1&amp;color=3E797F&amp;background=0&amp;muted=0&amp;controls=1" 
                   frameBorder="0" 
                   allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
                   style={{
@@ -313,14 +366,19 @@ export default function Home() {
                 ></iframe>
               </div>
               
-              {/* Custom play button overlay */}
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-20 h-20 bg-[#3E797F]/90 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-lg">
-                  <svg className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 5V19L19 12L8 5Z" fill="currentColor" />
-                  </svg>
+              {/* Custom play button overlay with click handler */}
+              {!isServicesVideoPlaying && (
+                <div 
+                  className="absolute inset-0 flex items-center justify-center cursor-pointer"
+                  onClick={handleServicesPlayClick}
+                >
+                  <div className="w-20 h-20 bg-[#3E797F]/90 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-lg">
+                    <svg className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M8 5V19L19 12L8 5Z" fill="currentColor" />
+                    </svg>
+                  </div>
                 </div>
-              </div>
+              )}
               
               <div className="absolute inset-0 pointer-events-none border-[3px] border-[#3E797F]/0 hover:border-[#3E797F]/20 transition-all duration-500 rounded-2xl"></div>
             </div>
