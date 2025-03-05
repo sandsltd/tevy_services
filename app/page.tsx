@@ -100,6 +100,7 @@ export default function Home() {
   const { videoRef, overlayVideoRef } = useReversibleVideo()
   const { isPlaying: isWelcomeVideoPlaying, handlePlayClick: handleWelcomePlayClick, iframeRef: welcomeVideoRef } = useVideoPlayState();
   const { isPlaying: isServicesVideoPlaying, handlePlayClick: handleServicesPlayClick, iframeRef: servicesVideoRef } = useVideoPlayState();
+  const { isPlaying: isContactVideoPlaying, handlePlayClick: handleContactPlayClick, iframeRef: contactVideoRef } = useVideoPlayState();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -713,6 +714,54 @@ export default function Home() {
             <p className="text-sm text-[#3E797F]">
               Click anywhere on the map to check coverage and get a quote
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Video Section */}
+      <section className="py-20 bg-black/80">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-8">
+              <span className="text-white">How to </span>
+              <span className="text-[#3E797F]">Contact Us</span>
+            </h2>
+            
+            <div className="relative rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(62,121,127,0.2)] border border-[#3E797F]/20 group mb-8">
+              <div style={{padding:'56.25% 0 0 0', position:'relative'}}>
+                <iframe 
+                  ref={contactVideoRef}
+                  src="https://player.vimeo.com/video/1062809525?h=6701e7b6ec&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=contact-video&amp;app_id=58479&amp;dnt=1&amp;transparent=1&amp;color=3E797F&amp;background=0&amp;muted=0&amp;controls=1" 
+                  frameBorder="0" 
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+                  style={{
+                    position:'absolute', 
+                    top:0, 
+                    left:0, 
+                    width:'100%', 
+                    height:'100%',
+                    backgroundColor: 'transparent'
+                  }} 
+                  title="Contact Us"
+                ></iframe>
+              </div>
+              
+              {/* Custom play button overlay with click handler */}
+              {!isContactVideoPlaying && (
+                <div 
+                  className="absolute inset-0 flex items-center justify-center cursor-pointer"
+                  onClick={handleContactPlayClick}
+                >
+                  <div className="w-20 h-20 bg-[#3E797F]/90 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-lg">
+                    <svg className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M8 5V19L19 12L8 5Z" fill="currentColor" />
+                    </svg>
+                  </div>
+                </div>
+              )}
+              
+              <div className="absolute inset-0 pointer-events-none border-[3px] border-[#3E797F]/0 hover:border-[#3E797F]/20 transition-all duration-500 rounded-2xl"></div>
+            </div>
           </div>
         </div>
       </section>
