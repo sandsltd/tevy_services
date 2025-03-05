@@ -219,10 +219,17 @@ export default function Home() {
             <div className="relative rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(62,121,127,0.2)] border border-[#3E797F]/20">
               <div style={{padding:'56.25% 0 0 0', position:'relative'}}>
                 <iframe 
-                  src="https://player.vimeo.com/video/1062759053?h=f938cadcae&title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479" 
+                  src="https://player.vimeo.com/video/1062759053?h=f938cadcae&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;dnt=1&amp;transparent=1&amp;color=3E797F&amp;background=0&amp;muted=0&amp;controls=1" 
                   frameBorder="0" 
                   allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
-                  style={{position:'absolute', top:0, left:0, width:'100%', height:'100%'}} 
+                  style={{
+                    position:'absolute', 
+                    top:0, 
+                    left:0, 
+                    width:'100%', 
+                    height:'100%',
+                    backgroundColor: 'transparent'
+                  }} 
                   title="Intro"
                 ></iframe>
               </div>
