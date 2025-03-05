@@ -276,22 +276,25 @@ export default function Home() {
                     left:0, 
                     width:'100%', 
                     height:'100%',
-                    backgroundColor: 'transparent'
+                    backgroundColor: 'black'
                   }} 
                   title="Intro"
                 ></iframe>
               </div>
               
-              {/* Custom play button overlay with click handler */}
+              {/* Custom play button overlay with click handler - Enhanced version */}
               {!isWelcomeVideoPlaying && (
                 <div 
-                  className="absolute inset-0 flex items-center justify-center cursor-pointer"
+                  className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer bg-black/90 hover:bg-black/80 transition-all duration-300"
                   onClick={handleWelcomePlayClick}
                 >
-                  <div className="w-20 h-20 bg-[#3E797F]/90 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-lg">
-                    <svg className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <div className="w-24 h-24 bg-[#3E797F] rounded-full flex items-center justify-center transform hover:scale-110 transition-all duration-300 shadow-[0_0_30px_rgba(62,121,127,0.5)] animate-pulse">
+                    <svg className="w-12 h-12 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M8 5V19L19 12L8 5Z" fill="currentColor" />
                     </svg>
+                  </div>
+                  <div className="mt-6 bg-[#3E797F]/20 px-6 py-3 rounded-full border border-[#3E797F] animate-bounce-slow">
+                    <span className="text-white text-xl font-semibold">Watch Video</span>
                   </div>
                 </div>
               )}
@@ -361,7 +364,7 @@ export default function Home() {
                     left:0, 
                     width:'100%', 
                     height:'100%',
-                    backgroundColor: 'transparent'
+                    backgroundColor: 'black'
                   }} 
                   title="Services"
                 ></iframe>
@@ -370,14 +373,15 @@ export default function Home() {
               {/* Custom play button overlay with click handler */}
               {!isServicesVideoPlaying && (
                 <div 
-                  className="absolute inset-0 flex items-center justify-center cursor-pointer"
+                  className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer bg-black"
                   onClick={handleServicesPlayClick}
                 >
-                  <div className="w-20 h-20 bg-[#3E797F]/90 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-lg">
+                  <div className="w-20 h-20 bg-[#3E797F]/90 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-lg mb-4">
                     <svg className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M8 5V19L19 12L8 5Z" fill="currentColor" />
                     </svg>
                   </div>
+                  <span className="text-white text-lg font-medium">Click to Play</span>
                 </div>
               )}
               
@@ -740,7 +744,7 @@ export default function Home() {
                     left:0, 
                     width:'100%', 
                     height:'100%',
-                    backgroundColor: 'transparent'
+                    backgroundColor: 'black'
                   }} 
                   title="Contact Us"
                 ></iframe>
@@ -749,14 +753,15 @@ export default function Home() {
               {/* Custom play button overlay with click handler */}
               {!isContactVideoPlaying && (
                 <div 
-                  className="absolute inset-0 flex items-center justify-center cursor-pointer"
+                  className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer bg-black"
                   onClick={handleContactPlayClick}
                 >
-                  <div className="w-20 h-20 bg-[#3E797F]/90 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-lg">
+                  <div className="w-20 h-20 bg-[#3E797F]/90 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-lg mb-4">
                     <svg className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M8 5V19L19 12L8 5Z" fill="currentColor" />
                     </svg>
                   </div>
+                  <span className="text-white text-lg font-medium">Click to Play</span>
                 </div>
               )}
               
