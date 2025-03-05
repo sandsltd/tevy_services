@@ -181,8 +181,8 @@ const getPopupContent = (location: string, coverageTypes: CoverageType[], coordi
           <h3 class="font-bold text-xl text-[#3E797F] mb-2">${location}</h3>
           <p class="text-white/90 font-medium mb-2">Outside Service Area</p>
           <div class="flex items-center gap-2 mb-2">
-            <div class="w-2 h-2 rounded-full bg-[#3E797F]"></div>
-            <span class="text-white/80">Workshop Service Available</span>
+            <div className="w-2 h-2 rounded-full bg-[#3E797F]"></div>
+            <span className="text-white/80">Workshop Service Available</span>
           </div>
           <p class="text-sm text-white/60">
             Please visit our workshop in Marsh Barton, Exeter for our full range of services
@@ -210,8 +210,8 @@ const getPopupContent = (location: string, coverageTypes: CoverageType[], coordi
         <p class="text-white/90 font-medium mb-2">Available Services:</p>
         ${coverageTypes.map(type => `
           <div class="flex items-center gap-2 mb-2">
-            <div class="w-2 h-2 rounded-full bg-[#3E797F]"></div>
-            <span class="text-white/80">${type === 'mobile' ? 'Mobile Service' : 'Collection Service'}</span>
+            <div className="w-2 h-2 rounded-full bg-[#3E797F]"></div>
+            <span className="text-white/80">${type === 'mobile' ? 'Mobile Service' : 'Collection Service'}</span>
           </div>
         `).join('')}
       </div>
@@ -598,7 +598,7 @@ export default function CoverageMap() {
       setMapLoadingState('error')
       setErrorMessage('Failed to initialize map. Please refresh the page.')
     }
-  }, [isInView, showInitialOverlay])
+  }, [isInView, showInitialOverlay, searchResults.length])
 
   // Replace the popup click handler with this simpler version
   useEffect(() => {
