@@ -18,6 +18,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <script async src="https://www.tiktok.com/embed.js"></script>
+        <script async src="https://player.vimeo.com/api/player.js"></script>
       </head>
       <body suppressHydrationWarning>
         <div suppressHydrationWarning>

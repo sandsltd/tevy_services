@@ -75,19 +75,38 @@ export default function Home() {
         {/* Background container with parallax and subtle animation */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 scale-110" ref={parallaxRef}> 
-            <Image
-              src="/images/hero.jpg"
-              alt="Professional Wheel Restoration"
-              fill
-              style={{ objectFit: 'cover', objectPosition: 'center' }}
-              sizes="100vw"
-              priority
-              quality={100}
-              className="scale-105 animate-subtle-zoom"
-            />
-            {/* Enhanced gradient overlays with animation */}
-            <div className="absolute inset-0 -bottom-8 bg-gradient-to-r from-black/90 via-black/70 to-transparent animate-fade-in" />
-            <div className="absolute inset-0 -bottom-8 bg-gradient-to-b from-transparent via-black/80 to-black animate-fade-in delay-300" />
+            {/* Replace Image with Vimeo iframe - fixed for mobile fullscreen */}
+            <div className="absolute inset-0 w-full h-full">
+              <div className="absolute inset-0 w-full h-full overflow-hidden">
+                <div style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  padding: 0,
+                  overflow: 'hidden'
+                }}>
+                  <iframe 
+                    src="https://player.vimeo.com/video/1062772590?h=88cba384e5&title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1&quality=auto&dnt=1" 
+                    style={{
+                      position: 'absolute',
+                      top: '-50%',
+                      left: '-50%',
+                      width: '200%',
+                      height: '200%'
+                    }} 
+                    frameBorder="0" 
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+                    title="hero"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+            
+            {/* Enhanced gradient overlays with animation - strengthened for mobile */}
+            <div className="absolute inset-0 -bottom-8 bg-gradient-to-r from-black/80 md:from-black/70 via-black/50 md:via-black/40 to-transparent animate-fade-in" />
+            <div className="absolute inset-0 -bottom-8 bg-gradient-to-b from-transparent via-black/60 md:via-black/50 to-black animate-fade-in delay-300" />
             
             {/* Add subtle floating particles */}
             <div className="absolute inset-0 opacity-30">
