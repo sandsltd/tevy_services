@@ -207,6 +207,50 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Welcome Video Section */}
+      <section className="py-20 bg-black/80">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl font-bold text-center mb-8">
+              <span className="text-white">Welcome to </span>
+              <span className="text-[#3E797F]">TEVY Services</span>
+            </h2>
+            
+            <div className="relative rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(62,121,127,0.2)] border border-[#3E797F]/20">
+              <div style={{padding:'56.25% 0 0 0', position:'relative'}}>
+                <iframe 
+                  src="https://player.vimeo.com/video/1062759053?h=f938cadcae&title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479" 
+                  frameBorder="0" 
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+                  style={{position:'absolute', top:0, left:0, width:'100%', height:'100%'}} 
+                  title="Intro"
+                ></iframe>
+              </div>
+              
+              <div className="absolute inset-0 pointer-events-none border-[3px] border-[#3E797F]/0 hover:border-[#3E797F]/20 transition-all duration-500 rounded-2xl"></div>
+            </div>
+            
+            <div className="flex justify-center mt-8">
+              <button 
+                onClick={() => {
+                  const servicesSection = document.getElementById('services');
+                  if (servicesSection) {
+                    servicesSection.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
+                  }
+                }}
+                className="flex items-center gap-2 bg-[#3E797F]/10 hover:bg-[#3E797F]/20 px-6 py-3 rounded-full text-[#3E797F] font-medium transition-all"
+              >
+                Explore Our Services
+                <ChevronDown className="w-5 h-5 animate-bounce-slow" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Services Section */}
       <section id="services" className="py-20">
         <div className="container mx-auto px-6">
