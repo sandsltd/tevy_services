@@ -130,7 +130,7 @@ export default function Footer() {
               className="inline-block transition-opacity hover:opacity-80"
             >
               <Image
-                src="/images/saunders_simmons_logo.png"
+                src="/images/saunders_simmons_logo_2.png"
                 alt="Saunders & Simmons"
                 width={120}
                 height={40}
