@@ -7,6 +7,19 @@ import GoogleAnalytics from './components/GoogleAnalytics'
 export const metadata = {
   title: 'Tevy Services',
   description: 'Professional Wheel & Tyre Specialists',
+  icons: {
+    icon: [
+      { url: '/favicon_io-14/favicon.ico' },
+      { url: '/favicon_io-14/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon_io-14/favicon-32x32.png', sizes: '32x32', type: 'image/png' }
+    ],
+    apple: [
+      { url: '/favicon_io-14/apple-touch-icon.png' }
+    ],
+    other: [
+      { rel: 'manifest', url: '/favicon_io-14/site.webmanifest' }
+    ]
+  }
 }
 
 export default function RootLayout({
