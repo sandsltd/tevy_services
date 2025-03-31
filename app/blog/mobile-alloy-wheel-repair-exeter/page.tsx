@@ -286,18 +286,11 @@ export default function BlogPost() {
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Link 
-                      href="/contact"
+                      href="/#quote"
                       className="inline-block px-6 py-3 bg-[#3E797F] hover:bg-[#3E797F]/90 rounded-lg 
                                font-medium transition-colors text-center"
                     >
-                      Get a Quote
-                    </Link>
-                    <Link 
-                      href="/alloy-wheel-refurbishment-process"
-                      className="inline-block px-6 py-3 border border-[#3E797F] hover:bg-[#3E797F]/10 
-                               rounded-lg font-medium transition-colors text-center"
-                    >
-                      Learn More About Our Process
+                      Get Your Free Quote
                     </Link>
                   </div>
                 </div>
