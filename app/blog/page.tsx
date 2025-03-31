@@ -6,6 +6,17 @@ import Footer from '@/app/components/Footer'
 
 const blogPosts = [
   {
+    slug: 'mobile-alloy-wheel-repair-exeter',
+    title: 'Mobile Alloy Wheel Repair in Exeter – Fast, Convenient & Professional',
+    excerpt: 'Expert mobile alloy wheel repair service in Exeter. We come to you for fast, convenient wheel repairs. Professional service for scuffs, dents, and cracks. Serving Exeter & surrounding areas.',
+    coverImage: '/images/blog/staff_refurbing_Wheel.JPG',
+    date: 'March 31, 2024',
+    author: 'TEVY Services',
+    readTime: '6 min read',
+    category: 'Mobile Services',
+    featured: true
+  },
+  {
     slug: 'tyre-services-exeter',
     title: 'Expert Tyre Services in Exeter: Your Complete Guide',
     excerpt: 'Discover professional tyre services in Exeter from TEVY Services. Learn about tyre replacement, repairs, balancing, and why proper tyre maintenance is crucial for your vehicle\'s safety.',
@@ -14,7 +25,7 @@ const blogPosts = [
     author: 'TEVY Services',
     readTime: '7 min read',
     category: 'Tyre Services',
-    featured: true
+    featured: false
   },
   {
     slug: 'complete-guide-alloy-wheel-refurbishment-exeter',
@@ -52,6 +63,7 @@ const blogPosts = [
 ]
 
 const categories = [
+  'Mobile Services',
   'Wheel Restoration',
   'Expert Advice',
   'Service Comparison',
