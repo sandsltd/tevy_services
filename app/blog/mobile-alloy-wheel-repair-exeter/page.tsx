@@ -221,6 +221,64 @@ export default function BlogPost() {
                   </div>
                 </div>
 
+                <div className="p-8 bg-gradient-to-br from-[#3E797F]/10 to-black/40 rounded-xl border border-[#3E797F]/20">
+                  <h2 className="text-2xl font-bold mb-6">What Our Exeter Customers Say About Our Mobile Wheel Repairs</h2>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="p-6 bg-black/40 rounded-xl border border-gray-800">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 rounded-full bg-[#3E797F]/20 flex items-center justify-center flex-shrink-0">
+                          <User className="w-6 h-6 text-[#3E797F]" />
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-white">Jonathan Leck</h4>
+                          <p className="text-gray-300 mt-2">
+                            "Absolutely brilliant, they go above and beyond where others wouldn't. Can't fault them & they did an amazing job on my diamond cut RS6 wheel. Will use again. Fully mobile & they come to you with all of the correct kit to complete the repair & also a family business."
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6 bg-black/40 rounded-xl border border-gray-800">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 rounded-full bg-[#3E797F]/20 flex items-center justify-center flex-shrink-0">
+                          <User className="w-6 h-6 text-[#3E797F]" />
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-white">Neil Parker</h4>
+                          <p className="text-gray-300 mt-2">
+                            "Used Tevy Services to repair a scuff to my Audi TT wheel. From 1st enquiry, Ellie was really helpful. Professional mobile alloy wheel repair service in Exeter."
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6 bg-black/40 rounded-xl border border-gray-800">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 rounded-full bg-[#3E797F]/20 flex items-center justify-center flex-shrink-0">
+                          <User className="w-6 h-6 text-[#3E797F]" />
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-white">Lee Cornish</h4>
+                          <p className="text-gray-300 mt-2">
+                            "From first contact to completion, nothing was too much trouble. The wheel is as good as new and the cost was more than reasonable. If you need mobile alloy wheel repair in Exeter, look no further than Tevy Services."
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6 bg-black/40 rounded-xl border border-gray-800">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 rounded-full bg-[#3E797F]/20 flex items-center justify-center flex-shrink-0">
+                          <User className="w-6 h-6 text-[#3E797F]" />
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-white">Zoe Egan</h4>
+                          <p className="text-gray-300 mt-2">
+                            "I wouldn't go anywhere else!! Ellie and the team are amazing, very flexible and happy to help. They've turned our car around in 24 hours at short notice too - very honest and reliable mobile wheel repair service."
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="mt-16 p-8 bg-black/40 rounded-xl border border-gray-800">
                   <h2 className="text-2xl font-bold mb-4">Ready for Professional Mobile Wheel Repair?</h2>
                   <p className="text-gray-300 mb-6">

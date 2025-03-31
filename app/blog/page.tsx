@@ -9,7 +9,7 @@ const blogPosts = [
     slug: 'mobile-alloy-wheel-repair-exeter',
     title: 'Mobile Alloy Wheel Repair in Exeter – Fast, Convenient & Professional',
     excerpt: 'Expert mobile alloy wheel repair service in Exeter. We come to you for fast, convenient wheel repairs. Professional service for scuffs, dents, and cracks. Serving Exeter & surrounding areas.',
-    coverImage: '/blog/staff_refurbing_Wheel.jpg',
+    coverImage: '/blog/staff_refurbing_Wheel.JPG',
     date: 'March 31, 2025',
     author: 'TEVY Services',
     readTime: '6 min read',
