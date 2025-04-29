@@ -24,6 +24,7 @@ import {
 import ServiceBooking from '../../components/ServiceBooking'
 import dynamic from 'next/dynamic'
 import BeforeAfterSlider from '../../components/BeforeAfterSlider'
+import SchemaMarkup from '../../components/SchemaMarkup'
 
 type BeforeAfterImage = {
   id: string
@@ -86,6 +87,14 @@ export default function DiamondCutRepair() {
   return (
     <main className="min-h-screen bg-black">
       <Navigation className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm" />
+
+      <SchemaMarkup 
+        breadcrumbs={[
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services' },
+          { name: 'Diamond Cut Alloy Wheel Repair', path: '/services/diamond-cut' }
+        ]}
+      />
 
       {/* Hero Section with SEO-optimized H1 */}
       <section className="relative min-h-screen flex items-center">

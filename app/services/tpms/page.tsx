@@ -17,6 +17,7 @@ import {
   Settings
 } from 'lucide-react'
 import { contactInfo } from '../../constants/contact'
+import SchemaMarkup from '../../components/SchemaMarkup'
 
 // Dynamic import of map component
 const DynamicCoverageMap = dynamic(() => import('../../components/MapWrapper'), {
@@ -63,6 +64,14 @@ export default function TPMSService() {
   return (
     <main className="min-h-screen bg-black">
       <Navigation className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm" />
+
+      <SchemaMarkup 
+        breadcrumbs={[
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services' },
+          { name: 'TPMS Services', path: '/services/tpms' }
+        ]}
+      />
 
       {/* Hero Section */}
       <section className="relative min-h-screen bg-black">

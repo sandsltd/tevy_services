@@ -1,22 +1,22 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Diamond Cut Alloy Wheel Repair | Professional CNC Service',
-  description: 'Expert diamond cut alloy wheel repair using state-of-the-art CNC lathe technology. Factory-grade finish with premium lacquer protection. Same-day service available.',
+  title: 'Diamond Cut Alloy Wheel Repair Exeter | Tevy Services',
+  description: 'Premium diamond cut alloy wheel repair in Exeter. CNC precision, same-day service & lasting finish. Restore your wheels to showroom quality!',
   keywords: [
-    'diamond cut alloy wheel repair',
-    'diamond cut wheel refurbishment',
-    'alloy wheel restoration',
-    'diamond cutting service',
+    'diamond cut alloy wheel repair Exeter',
+    'diamond cut wheel refurbishment Exeter',
+    'alloy wheel restoration Exeter',
+    'diamond cutting service Exeter',
     'CNC lathe repair',
     'wheel corrosion prevention',
     'factory finish repair',
-    'alloy wheel refurbishment',
+    'alloy wheel refurbishment Exeter',
     'diamond cut finish'
   ].join(', '),
   openGraph: {
-    title: 'Diamond Cut Alloy Wheel Repair | CNC Lathe Technology',
-    description: 'Professional diamond cut wheel repair using state-of-the-art CNC technology. Factory-grade finish with premium lacquer protection.',
+    title: 'Diamond Cut Alloy Wheel Repair Exeter | CNC Technology',
+    description: 'Professional diamond cut wheel repair in Exeter. CNC precision, premium lacquer protection & mobile service. Book today!',
     images: [
       {
         url: '/images/services/diamond-cut-hero.jpg',
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Diamond Cut Alloy Wheel Repair',
-    description: 'Expert wheel restoration using CNC lathe technology. Factory-grade finish with corrosion protection.',
+    title: 'Diamond Cut Alloy Wheel Repair Exeter',
+    description: 'Expert wheel restoration in Exeter. CNC precision, factory-grade finish & mobile service available.',
     images: ['/images/services/diamond-cut-hero.jpg'],
   },
   alternates: {

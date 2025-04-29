@@ -25,6 +25,7 @@ import {
 import { contactInfo } from '../../constants/contact'
 import dynamic from 'next/dynamic'
 import BeforeAfterSlider from '../../components/BeforeAfterSlider'
+import SchemaMarkup from '../../components/SchemaMarkup'
 
 const DynamicCoverageMap = dynamic(() => import('../../components/MapWrapper'), {
   ssr: false,
@@ -523,6 +524,13 @@ export default function PaintedAlloys() {
 
   return (
     <main className="min-h-screen bg-black">
+      <SchemaMarkup 
+        breadcrumbs={[
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services' },
+          { name: 'Alloy Wheel Painting', path: '/services/painted-alloys' }
+        ]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}

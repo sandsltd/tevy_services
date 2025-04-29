@@ -1,0 +1,11 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow specific paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /dashboard/
+
+# Sitemap location
+Sitemap: https://www.tevyservices.com/sitemap.xml 

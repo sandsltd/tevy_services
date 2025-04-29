@@ -6,7 +6,15 @@ import * as jose from 'jose'
 const textEncoder = new TextEncoder()
 
 export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl
+  const { pathname, protocol, host } = request.nextUrl
+
+  // Force HTTPS redirection in production
+  if (protocol === 'http:' && process.env.NODE_ENV === 'production') {
+    return NextResponse.redirect(
+      `https://${host}${pathname}${request.nextUrl.search}`,
+      { status: 301 }
+    )
+  }
 
   // Get token from cookies
   const token = request.cookies.get('auth_token')?.value
@@ -56,5 +64,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/login']
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)']
 } 

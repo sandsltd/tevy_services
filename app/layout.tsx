@@ -3,10 +3,20 @@ import './globals.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import GoogleAnalytics from './components/GoogleAnalytics'
+import { Metadata } from 'next'
+import SchemaMarkup from './components/SchemaMarkup'
 
-export const metadata = {
-  title: 'Tevy Services',
-  description: 'Professional Wheel & Tyre Specialists',
+export const metadata: Metadata = {
+  title: 'Alloy Wheel Repair Exeter | Tevy Services | 5-Star Rated',
+  description: 'Expert alloy wheel repair in Exeter. Fast, affordable, and mobile service with 5-star reviews. Book now for same-day service!',
+  metadataBase: new URL('https://www.tevyservices.com'), // Replace with your actual domain
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
     icon: [
       { url: '/favicon_io-14/favicon.ico' },
@@ -32,6 +42,11 @@ export default function RootLayout({
       <head>
         <script async src="https://www.tiktok.com/embed.js"></script>
         <script async src="https://player.vimeo.com/api/player.js"></script>
+        <SchemaMarkup 
+          breadcrumbs={[
+            { name: 'Home', path: '/' }
+          ]}
+        />
       </head>
       <body suppressHydrationWarning>
         <div suppressHydrationWarning>
