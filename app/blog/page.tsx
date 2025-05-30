@@ -6,6 +6,17 @@ import Footer from '@/app/components/Footer'
 
 const blogPosts = [
   {
+    slug: 'signs-of-alloy-wheel-damage-exeter',
+    title: 'How to Spot Alloy Wheel Damage Before It Gets Worse',
+    excerpt: 'Learn how to identify early signs of alloy wheel damage, from scratches and cracks to vibrations. Expert advice on when to seek professional help.',
+    coverImage: '/blog/scuffed_alloy.png',
+    date: 'March 19, 2024',
+    author: 'TEVY Services',
+    readTime: '5 min read',
+    category: 'Expert Advice',
+    featured: true
+  },
+  {
     slug: 'tyre-services-exeter',
     title: 'Expert Tyre Services in Exeter: Your Complete Guide',
     excerpt: 'Discover professional tyre services in Exeter from TEVY Services. Learn about tyre replacement, repairs, balancing, and why proper tyre maintenance is crucial for your vehicle\'s safety.',
@@ -14,7 +25,7 @@ const blogPosts = [
     author: 'TEVY Services',
     readTime: '7 min read',
     category: 'Tyre Services',
-    featured: true
+    featured: false
   },
   {
     slug: 'complete-guide-alloy-wheel-refurbishment-exeter',
