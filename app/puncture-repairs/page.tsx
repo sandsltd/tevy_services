@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     images: [{ url: '/images/puncture-repair-og.jpg', width: 1200, height: 630 }],
   },
   alternates: {
-    canonical: 'https://www.tevyservices.com/puncture-repairs'
+    canonical: 'https://www.tevyservices.co.uk/puncture-repairs'
   }
 }
 
@@ -58,7 +58,7 @@ export default function PunctureRepairs() {
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a 
-                  href="tel:01392123456" 
+                  href="tel:07572634898" 
                   className="inline-flex items-center justify-center px-8 py-4 bg-[#3E797F] text-white font-semibold rounded-lg hover:bg-[#3E797F]/90 transition-colors"
                 >
                   <Phone className="w-5 h-5 mr-2" />
@@ -194,11 +194,11 @@ export default function PunctureRepairs() {
                   Stuck with a flat tyre? Call us now for rapid response emergency repairs throughout Exeter.
                 </p>
                 <a 
-                  href="tel:01392123456" 
+                  href="tel:07572634898" 
                   className="inline-flex items-center justify-center px-8 py-3 bg-[#3E797F] text-white font-semibold rounded-lg hover:bg-[#3E797F]/90 transition-colors"
                 >
                   <Phone className="w-5 h-5 mr-2" />
-                  Emergency Line: 01392 123456
+                  Emergency Line: 07572 634898
                 </a>
               </div>
             </div>

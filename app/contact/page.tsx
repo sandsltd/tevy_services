@@ -7,7 +7,7 @@ import SchemaMarkup from '../components/SchemaMarkup'
 
 export const metadata: Metadata = {
   title: 'Contact Tevy Services Exeter | Alloy Wheel Repair Quotes | Call Now',
-  description: 'Contact Tevy Services for alloy wheel repair quotes in Exeter. Call 01392 123456 for same-day service. Unit 10, Marsh Barton Trading Estate.',
+  description: 'Contact Tevy Services for alloy wheel repair quotes in Exeter. Call 07572 634898 for same-day service. Unit 10, Marsh Barton Trading Estate.',
   keywords: 'contact tevy services exeter, alloy wheel repair quotes, marsh barton exeter, mobile wheel repair contact',
   openGraph: {
     title: 'Contact Tevy Services | Alloy Wheel Repair Exeter',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     images: [{ url: '/images/contact-og.jpg', width: 1200, height: 630 }],
   },
   alternates: {
-    canonical: 'https://www.tevyservices.com/contact'
+    canonical: 'https://www.tevyservices.co.uk/contact'
   }
 }
 
@@ -67,10 +67,10 @@ export default function ContactPage() {
                   <h3 className="text-xl font-semibold mb-3 text-white">Call Us</h3>
                   <p className="text-gray-300 mb-4">Speak directly with our team</p>
                   <a 
-                    href="tel:01392123456" 
+                    href="tel:07572634898" 
                     className="text-[#3E797F] font-semibold text-lg hover:text-[#3E797F]/80"
                   >
-                    01392 123456
+                    07572 634898
                   </a>
                 </div>
 
@@ -139,7 +139,7 @@ export default function ContactPage() {
                       throughout Exeter and surrounding areas.
                     </p>
                     <a 
-                      href="tel:01392123456" 
+                      href="tel:07572634898" 
                       className="inline-flex items-center justify-center px-6 py-3 bg-[#3E797F] text-white font-semibold rounded-lg hover:bg-[#3E797F]/90 transition-colors"
                     >
                       <Phone className="w-5 h-5 mr-2" />
@@ -207,13 +207,13 @@ export default function ContactPage() {
                 Stranded with damaged alloys or punctured tyres? 
                 We offer emergency callout services throughout Exeter.
               </p>
-              <a 
-                href="tel:01392123456" 
-                className="inline-flex items-center justify-center px-8 py-4 bg-[#3E797F] text-white font-semibold rounded-lg hover:bg-[#3E797F]/90 transition-colors text-xl"
-              >
-                <Phone className="w-6 h-6 mr-3" />
-                Emergency Line: 01392 123456
-              </a>
+                              <a 
+                  href="tel:07572634898" 
+                  className="inline-flex items-center justify-center px-8 py-4 bg-[#3E797F] text-white font-semibold rounded-lg hover:bg-[#3E797F]/90 transition-colors text-xl"
+                >
+                  <Phone className="w-6 h-6 mr-3" />
+                  Emergency Line: 07572 634898
+                </a>
             </div>
           </div>
         </section>

@@ -20,7 +20,7 @@ const nextConfig = {
             value: 'http',
           },
         ],
-        destination: 'https://www.tevyservices.com/:path*',
+        destination: 'https://www.tevyservices.co.uk/:path*',
         permanent: true,
       },
     ]

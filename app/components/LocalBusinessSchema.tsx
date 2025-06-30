@@ -9,7 +9,7 @@ const LocalBusinessSchema = () => {
     url: 'https://www.tevyservices.com',
     logo: 'https://www.tevyservices.com/images/logo.png',
     image: 'https://www.tevyservices.com/images/og-image.jpg',
-    telephone: '01392 123456', // Replace with actual phone number
+    telephone: '07572 634898',
     email: 'info@tevyservices.com', // Replace with actual email
     priceRange: '££',
     address: {
