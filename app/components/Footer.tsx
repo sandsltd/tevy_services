@@ -52,6 +52,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/mobile-alloy-wheel-refurbishment" className="hover:text-[#3E797F]">
+                  Mobile Alloy Wheel Refurbishment
+                </Link>
+              </li>
+              <li>
                 <Link href="/services/tyres" className="hover:text-[#3E797F]">
                   Tyre Replacement
                 </Link>
@@ -59,6 +64,11 @@ export default function Footer() {
               <li>
                 <Link href="/services/tyre-repair" className="hover:text-[#3E797F]">
                   Tyre Repair
+                </Link>
+              </li>
+              <li>
+                <Link href="/puncture-repairs" className="hover:text-[#3E797F]">
+                  Puncture Repairs
                 </Link>
               </li>
               <li>
