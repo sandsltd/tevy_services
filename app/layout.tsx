@@ -9,13 +9,35 @@ import SchemaMarkup from './components/SchemaMarkup'
 export const metadata: Metadata = {
   title: 'Alloy Wheel Repair Exeter | Tevy Services | 5-Star Rated',
   description: 'Expert alloy wheel repair in Exeter. Fast, affordable, and mobile service with 5-star reviews. Book now for same-day service!',
-  metadataBase: new URL('https://www.tevyservices.com'), // Replace with your actual domain
+  metadataBase: new URL('https://www.tevyservices.co.uk'),
   alternates: {
-    canonical: '/',
+    canonical: 'https://www.tevyservices.co.uk',
   },
   robots: {
     index: true,
     follow: true,
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_GB',
+    url: 'https://www.tevyservices.co.uk',
+    siteName: 'Tevy Services',
+    title: 'Alloy Wheel Repair Exeter | Tevy Services | 5-Star Rated',
+    description: 'Expert alloy wheel repair in Exeter. Fast, affordable, and mobile service with 5-star reviews.',
+    images: [
+      {
+        url: '/images/services/workshop_exeter.jpeg',
+        width: 1200,
+        height: 630,
+        alt: 'Tevy Services - Alloy Wheel Repair Exeter',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Alloy Wheel Repair Exeter | Tevy Services',
+    description: 'Expert alloy wheel repair in Exeter. Mobile service available.',
+    images: ['/images/services/workshop_exeter.jpeg'],
   },
   icons: {
     icon: [

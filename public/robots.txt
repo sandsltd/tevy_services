@@ -1,11 +1,43 @@
-# Allow all crawlers
+# Tevy Services Robots.txt
+# Last Updated: August 2025
+
+# Allow all legitimate crawlers
 User-agent: *
 Allow: /
+Crawl-delay: 1
 
-# Disallow specific paths
+# Disallow private/system paths
 Disallow: /api/
 Disallow: /_next/
 Disallow: /dashboard/
+Disallow: /login/
+Disallow: /*.json$
+Disallow: /*?*
+Disallow: /404
+Disallow: /500
 
-# Sitemap location
-Sitemap: https://www.tevyservices.com/sitemap.xml 
+# Allow specific query parameters for SEO
+Allow: /*?page=
+Allow: /*?service=
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+# Sitemap location (updated to correct domain)
+Sitemap: https://www.tevyservices.co.uk/sitemap.xml
+
+# Host directive (specify preferred domain)
+Host: https://www.tevyservices.co.uk 
