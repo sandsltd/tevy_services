@@ -310,16 +310,16 @@ export default function TorquayAlloyWheelRefurbishment() {
           </div>
         </section>
 
-        {/* Special Offer for Torquay */}
+        {/* Why Choose TEVY for Torquay */}
         <section className="py-16 bg-gradient-to-b from-black/60 to-black">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto">
               <div className="bg-gradient-to-br from-[#3E797F]/20 to-black/40 rounded-2xl p-8 border border-[#3E797F]/30">
                 <h3 className="text-2xl font-bold text-center mb-4">
-                  <span className="text-[#3E797F]">Special Offer</span> for Torbay Customers
+                  <span className="text-[#3E797F]">Premium Service</span> for Torbay Customers
                 </h3>
                 <p className="text-gray-300 text-center mb-6 text-lg">
-                  Book 4 wheels and get 10% off total price
+                  Professional wheel restoration with guaranteed quality
                 </p>
                 <div className="grid md:grid-cols-3 gap-4 mb-6">
                   <div className="text-center p-4 bg-black/30 rounded-lg">
@@ -341,7 +341,7 @@ export default function TorquayAlloyWheelRefurbishment() {
                     className="inline-flex items-center justify-center px-8 py-4 bg-[#3E797F] text-white font-bold text-lg rounded-full hover:bg-[#3E797F]/90 transition-all transform hover:scale-105 gap-2"
                   >
                     <Phone className="w-5 h-5" />
-                    Claim Offer: 07572 634898
+                    Call Now: 07572 634898
                   </a>
                 </div>
               </div>
