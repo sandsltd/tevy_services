@@ -55,6 +55,20 @@
     <priority>0.9</priority>
   </url>
   
+  <!-- Location Pages - High Priority for Local SEO -->
+  <url>
+    <loc>https://www.tevyservices.co.uk/locations/newton-abbot</loc>
+    <lastmod>2025-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.tevyservices.co.uk/locations/torquay</loc>
+    <lastmod>2025-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
   <!-- Contact Page -->
   <url>
     <loc>https://www.tevyservices.co.uk/contact</loc>
