@@ -7,8 +7,8 @@ import { Metadata } from 'next'
 import SchemaMarkup from './components/SchemaMarkup'
 
 export const metadata: Metadata = {
-  title: 'Alloy Wheel Repair Exeter | Tevy Services | 5-Star Rated',
-  description: 'Expert alloy wheel repair in Exeter. Fast, affordable, and mobile service with 5-star reviews. Book now for same-day service!',
+  title: 'Alloy Wheel Refurbishment Exeter | Mobile & Workshop Service | Tevy Services',
+  description: 'Professional alloy wheel refurbishment in Exeter. Diamond cut restoration, mobile service & workshop repairs. 5-star rated, same-day service available.',
   metadataBase: new URL('https://www.tevyservices.co.uk'),
   alternates: {
     canonical: 'https://www.tevyservices.co.uk',
@@ -22,8 +22,8 @@ export const metadata: Metadata = {
     locale: 'en_GB',
     url: 'https://www.tevyservices.co.uk',
     siteName: 'Tevy Services',
-    title: 'Alloy Wheel Repair Exeter | Tevy Services | 5-Star Rated',
-    description: 'Expert alloy wheel repair in Exeter. Fast, affordable, and mobile service with 5-star reviews.',
+    title: 'Alloy Wheel Refurbishment Exeter | Mobile & Workshop Service | Tevy Services',
+    description: 'Professional alloy wheel refurbishment in Exeter. Diamond cut restoration, mobile service & workshop repairs.',
     images: [
       {
         url: '/images/services/workshop_exeter.jpeg',
@@ -35,8 +35,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Alloy Wheel Repair Exeter | Tevy Services',
-    description: 'Expert alloy wheel repair in Exeter. Mobile service available.',
+    title: 'Alloy Wheel Refurbishment Exeter | Tevy Services',
+    description: 'Professional alloy wheel refurbishment in Exeter. Mobile service available.',
     images: ['/images/services/workshop_exeter.jpeg'],
   },
   icons: {

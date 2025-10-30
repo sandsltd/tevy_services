@@ -6,9 +6,9 @@ import { Metadata } from 'next'
 import SchemaMarkup from '../components/SchemaMarkup'
 
 export const metadata: Metadata = {
-  title: 'Mobile Alloy Wheel Refurbishment Exeter | On-Site Service | Tevy Services',
-  description: 'Professional mobile alloy wheel refurbishment in Exeter. We come to you! Diamond cutting, painting & repairs at your location. Free quotes, same-day service.',
-  keywords: 'mobile alloy wheel refurbishment exeter, mobile wheel repair, on-site alloy refurbishment, mobile diamond cutting exeter',
+  title: 'Mobile Alloy Wheel Refurbishment Exeter | Diamond Cut & Repair | Tevy Services',
+  description: 'Expert mobile alloy wheel refurbishment in Exeter. Professional diamond cutting, painting & scuff repairs at your location. 5-star rated, same-day service available.',
+  keywords: 'mobile alloy wheel refurbishment exeter, alloy wheel refurbishment exeter, mobile wheel repair exeter, diamond cut refurbishment exeter',
   openGraph: {
     title: 'Mobile Alloy Wheel Refurbishment Exeter | On-Site Service',
     description: 'Professional mobile alloy wheel refurbishment in Exeter. We come to you! Free quotes, same-day service.',
@@ -53,7 +53,7 @@ export default function MobileAlloyWheelRefurbishment() {
               </h1>
               
               <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-                Professional alloy wheel refurbishment at your location. No need to travel - we bring our fully equipped mobile service to your home or workplace in Exeter and surrounding areas.
+                Exeter's premier mobile alloy wheel refurbishment service. Professional diamond cutting, painting and repairs at your location. No need to travel - we bring our fully equipped mobile workshop to your home or workplace across Exeter and surrounding areas.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
