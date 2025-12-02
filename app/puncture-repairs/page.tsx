@@ -1,10 +1,10 @@
-'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
-import { Phone, MapPin, Clock, CheckCircle2, Star, Wrench, Shield, Zap, ChevronDown } from 'lucide-react'
+import { Phone, MapPin, Clock, CheckCircle2, Star, Wrench, Shield, Zap } from 'lucide-react'
 import { Metadata } from 'next'
 import SchemaMarkup from '../components/SchemaMarkup'
+import FAQSection from '../components/FAQSection'
 
 export const metadata: Metadata = {
   title: 'Puncture Repairs Exeter | £25 Mobile Fix | Call 07572 634898 Now',
@@ -18,31 +18,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://www.tevyservices.co.uk/puncture-repairs'
   }
-}
-
-const FAQItem = ({ question, answer }: { question: string; answer: string | React.ReactNode }) => {
-  const [isOpen, setIsOpen] = useState(false)
-  
-  return (
-    <div className="border border-[#3E797F]/20 rounded-lg overflow-hidden">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full p-6 text-left flex items-center justify-between bg-black/20 hover:bg-black/30 transition-colors"
-      >
-        <span className="font-semibold text-lg">{question}</span>
-        <ChevronDown className={`w-5 h-5 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-      </button>
-      
-      <div className={`
-        overflow-hidden transition-all duration-300
-        ${isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}
-      `}>
-        <div className="p-6 pt-0 text-gray-300">
-          {answer}
-        </div>
-      </div>
-    </div>
-  )
 }
 
 export default function PunctureRepairs() {
@@ -232,72 +207,44 @@ export default function PunctureRepairs() {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-20 bg-gradient-to-b from-[#0A1A1B] to-[#0F2A2C]">
-          <div className="container mx-auto px-6">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-[#3E797F] to-[#5BA0A8] bg-clip-text text-transparent">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-gray-300 text-center mb-12 text-lg">
-                Everything you need to know about puncture repairs
-              </p>
-
-              <div className="space-y-4">
-                <FAQItem 
-                  question="Can all punctures be repaired?"
-                  answer="Not all punctures can be safely repaired. We follow BS AU159 guidelines which specify that punctures in the central 75% of the tyre tread can be repaired if they're under 6mm in diameter. Sidewall damage, large tears, or multiple punctures close together cannot be safely repaired and require tyre replacement."
-                />
-
-                <FAQItem 
-                  question="How long does a puncture repair take?"
-                  answer="A standard puncture repair typically takes 30-45 minutes from start to finish. This includes removing the wheel, inspecting the damage, preparing the area, applying the repair, and refitting the wheel. Our mobile service means we can complete this at your location without any hassle."
-                />
-
-                <FAQItem 
-                  question="Is a puncture repair permanent?"
-                  answer="Yes, when done correctly following BS AU159 standards, a puncture repair is permanent and will last the lifetime of the tyre. Our repairs use a combination patch and plug system that seals from both inside and outside, creating a permanent airtight seal."
-                />
-
-                <FAQItem 
-                  question="What's the difference between a plug and a proper repair?"
-                  answer={
-                    <div className="space-y-2">
-                      <p>A proper puncture repair involves:</p>
-                      <ul className="list-disc list-inside space-y-1">
-                        <li>Removing the tyre from the wheel</li>
-                        <li>Inspecting internal damage</li>
-                        <li>Preparing and cleaning the area</li>
-                        <li>Applying a combination patch/plug from inside</li>
-                        <li>Vulcanizing the repair for a permanent seal</li>
-                      </ul>
-                      <p className="mt-2">External plug-only repairs are temporary and not BS AU159 compliant.</p>
-                    </div>
-                  }
-                />
-
-                <FAQItem 
-                  question="Will a puncture repair affect my tyre warranty?"
-                  answer="A professional BS AU159 compliant repair should not affect your tyre warranty. However, it's worth checking with your tyre manufacturer. We provide documentation of all repairs which you can present if needed."
-                />
-
-                <FAQItem 
-                  question="How much does a puncture repair cost?"
-                  answer="Our puncture repairs start from £25 including VAT. This includes the call-out for our mobile service, full inspection, the repair itself, and wheel balancing if required. There are no hidden charges - if we can't repair it safely, we'll only charge a small inspection fee."
-                />
-
-                <FAQItem 
-                  question="Do you repair run-flat tyres?"
-                  answer="Run-flat tyres can sometimes be repaired, but it depends on the specific tyre and how far it was driven while flat. We need to inspect the tyre to determine if repair is safe. If the sidewall structure is compromised, replacement is necessary."
-                />
-
-                <FAQItem 
-                  question="What areas do you cover for mobile puncture repairs?"
-                  answer="We provide mobile puncture repair services throughout Exeter and surrounding areas including Exmouth, Sidmouth, Crediton, Tiverton, Newton Abbot, and Torquay. We can typically reach you within 30-60 minutes for emergency repairs."
-                />
-              </div>
-            </div>
-          </div>
-        </section>
+        <FAQSection 
+          title="Frequently Asked Questions"
+          subtitle="Everything you need to know about puncture repairs"
+          faqs={[
+            {
+              question: "Can all punctures be repaired?",
+              answer: "Not all punctures can be safely repaired. We follow BS AU159 guidelines which specify that punctures in the central 75% of the tyre tread can be repaired if they're under 6mm in diameter. Sidewall damage, large tears, or multiple punctures close together cannot be safely repaired and require tyre replacement."
+            },
+            {
+              question: "How long does a puncture repair take?",
+              answer: "A standard puncture repair typically takes 30-45 minutes from start to finish. This includes removing the wheel, inspecting the damage, preparing the area, applying the repair, and refitting the wheel. Our mobile service means we can complete this at your location without any hassle."
+            },
+            {
+              question: "Is a puncture repair permanent?",
+              answer: "Yes, when done correctly following BS AU159 standards, a puncture repair is permanent and will last the lifetime of the tyre. Our repairs use a combination patch and plug system that seals from both inside and outside, creating a permanent airtight seal."
+            },
+            {
+              question: "What's the difference between a plug and a proper repair?",
+              answer: "A proper puncture repair involves: Removing the tyre from the wheel, Inspecting internal damage, Preparing and cleaning the area, Applying a combination patch/plug from inside, Vulcanizing the repair for a permanent seal. External plug-only repairs are temporary and not BS AU159 compliant."
+            },
+            {
+              question: "Will a puncture repair affect my tyre warranty?",
+              answer: "A professional BS AU159 compliant repair should not affect your tyre warranty. However, it's worth checking with your tyre manufacturer. We provide documentation of all repairs which you can present if needed."
+            },
+            {
+              question: "How much does a puncture repair cost?",
+              answer: "Our puncture repairs start from £25 including VAT. This includes the call-out for our mobile service, full inspection, the repair itself, and wheel balancing if required. There are no hidden charges - if we can't repair it safely, we'll only charge a small inspection fee."
+            },
+            {
+              question: "Do you repair run-flat tyres?",
+              answer: "Run-flat tyres can sometimes be repaired, but it depends on the specific tyre and how far it was driven while flat. We need to inspect the tyre to determine if repair is safe. If the sidewall structure is compromised, replacement is necessary."
+            },
+            {
+              question: "What areas do you cover for mobile puncture repairs?",
+              answer: "We provide mobile puncture repair services throughout Exeter and surrounding areas including Exmouth, Sidmouth, Crediton, Tiverton, Newton Abbot, and Torquay. We can typically reach you within 30-60 minutes for emergency repairs."
+            }
+          ]}
+        />
       </main>
       
       <Footer />
