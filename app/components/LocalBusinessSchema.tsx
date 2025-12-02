@@ -102,7 +102,7 @@ const LocalBusinessSchema = () => {
           itemOffered: {
             '@type': 'Service',
             name: 'Mobile Tyre Replacement',
-            url: 'https://www.tevyservices.com/services/tyre-replacment'
+            url: 'https://www.tevyservices.com/services/tyre-replacement'
           }
         }
       ]

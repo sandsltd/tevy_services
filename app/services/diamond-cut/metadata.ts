@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Diamond Cut Alloy Wheel Repair Exeter | Tevy Services',
-  description: 'Premium diamond cut alloy wheel repair in Exeter. CNC precision, same-day service & lasting finish. Restore your wheels to showroom quality!',
+  title: 'Diamond Cut Alloy Wheel Repair Exeter | Same-Day | Call 07572 634898',
+  description: 'Diamond cut alloy wheel repair Exeter & Devon. CNC lathe restoration, same-day service, mobile available. Factory finish guaranteed. Marsh Barton workshop. Call now!',
   keywords: [
     'diamond cut alloy wheel repair Exeter',
     'diamond cut wheel refurbishment Exeter',
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
     'diamond cut finish'
   ].join(', '),
   openGraph: {
-    title: 'Diamond Cut Alloy Wheel Repair Exeter | CNC Technology',
-    description: 'Professional diamond cut wheel repair in Exeter. CNC precision, premium lacquer protection & mobile service. Book today!',
+    title: 'Diamond Cut Alloy Repair Exeter | Same-Day Service | Tevy Services',
+    description: 'Diamond cut wheel repair in Exeter. CNC lathe precision, mobile service available. Factory finish. Call 07572 634898!',
     images: [
       {
         url: '/images/services/diamond-cut-hero.jpg',
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     images: ['/images/services/diamond-cut-hero.jpg'],
   },
   alternates: {
-    canonical: 'https://tevyservices.com/services/diamond-cut'
+    canonical: 'https://www.tevyservices.co.uk/services/diamond-cut'
   },
   robots: {
     index: true,

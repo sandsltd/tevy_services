@@ -7,8 +7,8 @@ import { Metadata } from 'next'
 import SchemaMarkup from './components/SchemaMarkup'
 
 export const metadata: Metadata = {
-  title: 'Alloy Wheel Refurbishment Exeter | Mobile & Workshop Service | Tevy Services',
-  description: 'Professional alloy wheel refurbishment in Exeter. Diamond cut restoration, mobile service & workshop repairs. 5-star rated, same-day service available.',
+  title: 'Alloy Wheel Repair Exeter | Mobile Service | Call 07572 634898',
+  description: 'Alloy wheel refurbishment in Exeter & Devon. Diamond cut, painting, tyres. Mobile service or Marsh Barton workshop. Same-day repairs from £60. Call now!',
   metadataBase: new URL('https://www.tevyservices.co.uk'),
   alternates: {
     canonical: 'https://www.tevyservices.co.uk',

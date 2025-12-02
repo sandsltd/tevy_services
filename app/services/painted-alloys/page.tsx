@@ -15,6 +15,7 @@ import {
   Car, 
   CheckCircle2,
   ChevronRight,
+  ChevronDown,
   Star,
   MapPin,
   Phone,
@@ -87,6 +88,31 @@ type CustomImageInterface = {
   onAdd: () => void;
   render: () => boolean;
   context: CanvasRenderingContext2D | null;
+}
+
+const FAQItem = ({ question, answer }: { question: string; answer: string | React.ReactNode }) => {
+  const [isOpen, setIsOpen] = useState(false)
+  
+  return (
+    <div className="border border-[#3E797F]/20 rounded-lg overflow-hidden">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full p-6 text-left flex items-center justify-between bg-black/20 hover:bg-black/30 transition-colors"
+      >
+        <span className="font-semibold text-lg">{question}</span>
+        <ChevronDown className={`w-5 h-5 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+      
+      <div className={`
+        overflow-hidden transition-all duration-300
+        ${isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}
+      `}>
+        <div className="p-6 pt-0 text-gray-300">
+          {answer}
+        </div>
+      </div>
+    </div>
+  )
 }
 
 const createPulsingMarker = (map: mapboxgl.Map): CustomImageInterface => {
@@ -1103,6 +1129,85 @@ export default function PaintedAlloys() {
             Get Started
             <ChevronRight className="ml-2 w-5 h-5" />
           </a>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 bg-black/40 backdrop-blur-sm">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-[#3E797F] to-[#5BA0A8] bg-clip-text text-transparent">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-gray-300 text-center mb-12 text-lg">
+              Everything you need to know about our alloy wheel painting service
+            </p>
+
+            <div className="space-y-4">
+              <FAQItem 
+                question="What types of finishes can you achieve with painted alloys?"
+                answer="We offer a wide range of finishes including gloss, matte, satin, and metallic options. You can choose from standard colours like black, silver, and anthracite, or opt for custom colours to match your vehicle or personal preference. We can even colour-match to your car's bodywork for a seamless look."
+              />
+
+              <FAQItem 
+                question="How long does the wheel painting process take?"
+                answer="Standard service typically takes 2-3 working days from drop-off to collection. For our mobile service, we can complete most jobs in a single day. Express 24-hour service is available for urgent requirements. The exact time depends on the number of wheels and the complexity of the finish required."
+              />
+
+              <FAQItem 
+                question="How durable is powder coating compared to regular paint?"
+                answer={
+                  <div className="space-y-2">
+                    <p>Powder coating is significantly more durable than traditional paint:</p>
+                    <ul className="list-disc list-inside space-y-1">
+                      <li>3-4 times thicker than standard paint</li>
+                      <li>Highly resistant to chips, scratches, and corrosion</li>
+                      <li>UV stable - won't fade in sunlight</li>
+                      <li>Chemical resistant to brake dust and road salts</li>
+                      <li>Typically lasts 5+ years with proper care</li>
+                    </ul>
+                  </div>
+                }
+              />
+
+              <FAQItem 
+                question="Can you repair damage before painting?"
+                answer="Yes! We provide comprehensive repair services before painting. This includes fixing kerb damage, scratches, corrosion, and minor buckles. All repairs are completed to the highest standard before the painting process begins, ensuring a flawless finish."
+              />
+
+              <FAQItem 
+                question="What's included in your mobile service?"
+                answer="Our mobile service brings professional wheel painting directly to you. We arrive with all necessary equipment including portable spray booths and curing equipment. The service includes wheel removal, preparation, painting, curing, and refitting. We can work at your home or workplace for maximum convenience."
+              />
+
+              <FAQItem 
+                question="How do I maintain my newly painted wheels?"
+                answer={
+                  <div className="space-y-2">
+                    <p>To keep your wheels looking their best:</p>
+                    <ul className="list-disc list-inside space-y-1">
+                      <li>Use pH-neutral wheel cleaners only</li>
+                      <li>Avoid harsh chemicals and acid-based cleaners</li>
+                      <li>Clean wheels regularly to prevent brake dust build-up</li>
+                      <li>Use a soft brush or microfibre cloth</li>
+                      <li>Apply wheel sealant every 3-4 months for extra protection</li>
+                      <li>Avoid automatic car washes with harsh brushes</li>
+                    </ul>
+                  </div>
+                }
+              />
+
+              <FAQItem 
+                question="Do you offer a warranty on painted wheels?"
+                answer="Yes, we provide a comprehensive 12-month warranty on all our painted wheel services. This covers the paint finish against peeling, flaking, or premature fading under normal use. We also guarantee our workmanship, so if you're not completely satisfied, we'll make it right."
+              />
+
+              <FAQItem 
+                question="Can you paint split rim or multi-piece wheels?"
+                answer="Absolutely! We have extensive experience with split rim and multi-piece wheels. We can disassemble, refurbish each component separately, and reassemble with new seals if required. This allows us to achieve different colour combinations on the various wheel components for a truly custom look."
+              />
+            </div>
+          </div>
         </div>
       </section>
 

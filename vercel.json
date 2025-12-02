@@ -1,5 +1,16 @@
 {
-  "redirects": [],
+  "redirects": [
+    {
+      "source": "/services/tyre-replacment",
+      "destination": "/services/tyre-replacement",
+      "permanent": true
+    },
+    {
+      "source": "/services/tyre-replacment/:path*",
+      "destination": "/services/tyre-replacement/:path*",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

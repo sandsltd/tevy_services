@@ -1,12 +1,12 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Alloy Wheel Painting Exeter | Custom Colours | Tevy Services',
-  description: 'Professional alloy wheel painting in Exeter. Custom colours, mobile service & showroom finish. Transform your wheels today!',
-  keywords: 'alloy wheel painting Exeter, wheel repair Exeter, alloy wheel refurbishment, custom wheel colours, mobile wheel painting, alloy wheel repair Exeter',
+  title: 'Alloy Wheel Painting Exeter | Mobile Service | Call 07572 634898',
+  description: 'Alloy wheel painting & refurbishment in Exeter. Any colour, mobile service available. Professional powder coating at Marsh Barton. Same-day service. Call now!',
+  keywords: 'alloy wheel painting Exeter, powder coating wheels Devon, alloy refurbishment, custom wheel colours, mobile wheel painting, Marsh Barton alloys',
   openGraph: {
-    title: 'Alloy Wheel Painting & Refurbishment Exeter | Tevy Services',
-    description: 'Expert alloy wheel painting in Exeter with custom colours and mobile service. Transform your wheels today!',
+    title: 'Alloy Wheel Painting Exeter | Same-Day Service | Tevy Services',
+    description: 'Professional alloy wheel painting in Exeter & Devon. Any colour, mobile service, factory finish. Call 07572 634898!',
     images: [
       {
         url: '/images/services/painted-alloys-hero.jpg',
@@ -19,6 +19,6 @@ export const metadata: Metadata = {
     type: 'website',
   },
   alternates: {
-    canonical: 'https://tevyservices.com/services/painted-alloys'
+    canonical: 'https://www.tevyservices.co.uk/services/painted-alloys'
   }
 } 

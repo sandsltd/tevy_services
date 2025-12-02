@@ -97,7 +97,7 @@ const Navigation = ({ className }: NavigationProps) => {
                   </Link>
                   
                   <Link 
-                    href="/services/tyre-replacment"
+                    href="/services/tyre-replacement"
                     className="flex items-center gap-3 px-4 py-3 text-white hover:bg-[#3E797F]/20 rounded-lg transition-all group/item"
                   >
                     <div className="p-2 bg-[#3E797F]/10 rounded-lg group-hover/item:bg-[#3E797F]/20 transition-colors">
@@ -208,7 +208,7 @@ const Navigation = ({ className }: NavigationProps) => {
                 </Link>
                 
                 <Link 
-                  href="/services/tyre-replacment"
+                  href="/services/tyre-replacement"
                   className="flex items-center gap-3 px-4 py-3 text-white hover:bg-[#3E797F]/20 rounded-lg"
                   onClick={() => setMobileMenuOpen(false)}
                 >

@@ -1,12 +1,12 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Tyre Repair Exeter | Mobile Puncture Repair | Tevy Services',
-  description: 'Fast mobile tyre repair in Exeter. Professional puncture repairs, 24/7 emergency service & competitive pricing. Back on the road in no time!',
-  keywords: 'tyre repair Exeter, puncture repair Exeter, mobile tyre service, emergency tyre repair, alloy wheel repair Exeter, tyre puncture fix Exeter',
+  title: 'Puncture Repair Exeter | Same-Day Mobile Service | Call Now',
+  description: 'Puncture repair in Exeter & Devon. Same-day mobile service, BS AU159 certified repairs from £25. We come to you! Marsh Barton workshop available. Call 07572 634898.',
+  keywords: 'puncture repair Exeter, tyre repair Devon, mobile puncture fix, emergency tyre repair, same day puncture repair, Marsh Barton tyre repair',
   openGraph: {
-    title: 'Mobile Tyre Repair Service Exeter | Tevy Services',
-    description: 'Professional tyre repair in Exeter. Fast, reliable & mobile service with no callout fee. Emergency repairs available 24/7.',
+    title: 'Puncture Repair Exeter | Same-Day Service | Tevy Services',
+    description: 'Fast puncture repairs in Exeter. Mobile service or visit our Marsh Barton workshop. BS AU159 certified, from £25. Call 07572 634898 now!',
     images: [
       {
         url: '/images/services/tyre-repair-service.jpg',
@@ -19,6 +19,6 @@ export const metadata: Metadata = {
     type: 'website',
   },
   alternates: {
-    canonical: 'https://tevyservices.com/services/tyre-repair'
+    canonical: 'https://www.tevyservices.co.uk/services/tyre-repair'
   }
 } 

@@ -848,7 +848,7 @@ const services: Service[] = [
     description: "Professional tyre fitting and replacement service. We supply and fit all major tyre brands, with competitive pricing and expert fitting at our Marsh Barton facility.",
     icon: <Disc className="w-8 h-8" />,
     availability: { garage: true, mobile: false },
-    path: "/services/tyre-replacment"
+    path: "/services/tyre-replacement"
   },
   {
     title: "Tyre Repair",
