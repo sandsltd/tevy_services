@@ -6,6 +6,17 @@ import Footer from '@/app/components/Footer'
 
 const blogPosts = [
   {
+    slug: 'mobile-alloy-wheel-repair-guide',
+    title: 'Mobile Alloy Wheel Repair in Exeter: Everything You Need to Know',
+    excerpt: 'Discover the benefits of mobile alloy wheel repair in Exeter and Devon. Learn when mobile repair is right for your wheels and what to expect from our convenient doorstep service.',
+    coverImage: '/blog/mobile-repair.jpg',
+    date: 'December 19, 2024',
+    author: 'TEVY Services',
+    readTime: '8 min read',
+    category: 'Mobile Services',
+    featured: true
+  },
+  {
     slug: 'signs-of-alloy-wheel-damage-exeter',
     title: 'How to Spot Alloy Wheel Damage Before It Gets Worse',
     excerpt: 'Learn how to identify early signs of alloy wheel damage, from scratches and cracks to vibrations. Expert advice on when to seek professional help.',
@@ -14,7 +25,7 @@ const blogPosts = [
     author: 'TEVY Services',
     readTime: '5 min read',
     category: 'Expert Advice',
-    featured: true
+    featured: false
   },
   {
     slug: 'tyre-services-exeter',
@@ -68,7 +79,8 @@ const categories = [
   'Service Comparison',
   'Industry News',
   'Maintenance Tips',
-  'Tyre Services'
+  'Tyre Services',
+  'Mobile Services'
 ]
 
 export default function BlogPage() {
