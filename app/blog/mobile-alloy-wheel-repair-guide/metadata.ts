@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     title: 'Mobile Alloy Wheel Repair in Exeter: Everything You Need to Know',
     description: 'Expert guide to mobile alloy wheel repair services in Exeter. Learn the benefits, process, and when mobile repair is the right choice for your wheels.',
     type: 'article',
-    publishedTime: '2024-12-19T09:00:00.000Z',
+    publishedTime: '2025-12-19T09:00:00.000Z',
     authors: ['TEVY Services'],
   }
 }

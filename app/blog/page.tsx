@@ -6,15 +6,37 @@ import Footer from '@/app/components/Footer'
 
 const blogPosts = [
   {
+    slug: 'alloy-wheel-repair-exeter',
+    title: 'Alloy Wheel Repair in Exeter: Professional Restoration for Every Type of Damage',
+    excerpt: 'From kerb scuffs to diamond cut restoration, discover how professional alloy wheel repair in Exeter can save you hundreds compared to replacement.',
+    coverImage: '/blog/alloy-wheel-repair-exeter.png',
+    date: 'January 30, 2026',
+    author: 'TEVY Services',
+    readTime: '7 min read',
+    category: 'Wheel Repair',
+    featured: true
+  },
+  {
+    slug: 'alloy-wheel-refurbishment-near-me',
+    title: 'Alloy Wheel Refurbishment Near Me: Finding Quality Service in Exeter & Devon',
+    excerpt: 'Looking for alloy wheel refurbishment near you? Learn what to expect from a professional local service and why going local matters for your wheels.',
+    coverImage: '/blog/alloy-wheel-refurbishment-near-me.png',
+    date: 'January 30, 2026',
+    author: 'TEVY Services',
+    readTime: '6 min read',
+    category: 'Wheel Refurbishment',
+    featured: false
+  },
+  {
     slug: 'mobile-alloy-wheel-repair-guide',
     title: 'Mobile Alloy Wheel Repair in Exeter: Everything You Need to Know',
     excerpt: 'Discover the benefits of mobile alloy wheel repair in Exeter and Devon. Learn when mobile repair is right for your wheels and what to expect from our convenient doorstep service.',
     coverImage: '/blog/mobile-repair.jpg',
-    date: 'December 19, 2024',
+    date: 'December 19, 2025',
     author: 'TEVY Services',
     readTime: '8 min read',
     category: 'Mobile Services',
-    featured: true
+    featured: false
   },
   {
     slug: 'signs-of-alloy-wheel-damage-exeter',

@@ -28,7 +28,7 @@ export default function BlogPost() {
                 <span className="px-3 py-1 rounded-full bg-[#3E797F]/10 text-[#3E797F] text-sm">
                   Mobile Services
                 </span>
-                <span className="text-gray-400 text-sm">December 19, 2024</span>
+                <span className="text-gray-400 text-sm">December 19, 2025</span>
               </div>
 
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
@@ -270,7 +270,7 @@ export default function BlogPost() {
                   <p className="text-gray-300 text-center italic">
                     From all of us at TEVY Services, we wish you and your family a very Merry
                     Christmas and a Happy New Year! Thank you for your continued support throughout
-                    2024—here&apos;s to keeping your wheels looking fantastic in 2025!
+                    2025—here&apos;s to keeping your wheels looking fantastic in 2026!
                   </p>
                 </div>
 
