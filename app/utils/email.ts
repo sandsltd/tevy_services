@@ -1,10 +1,4 @@
-import * as postmark from 'postmark'
-
-if (!process.env.POSTMARK_API_TOKEN) {
-  throw new Error('Missing POSTMARK_API_TOKEN configuration')
-}
-
-const client = new postmark.ServerClient(process.env.POSTMARK_API_TOKEN!)
+import { Resend } from 'resend';
 
 // Email templates
 const getCustomerEmailContent = (name: string, hasPhotos: boolean) => {
@@ -73,31 +67,32 @@ const getAdminEmailContent = (data: any) => {
 
 export const sendEmails = async (formData: any, photos: File[]) => {
   try {
-    // Convert File objects to Postmark attachments (base64)
-    const photoAttachments: postmark.Attachment[] = await Promise.all(
+    const resend = new Resend(process.env.RESEND_API_KEY!)
+
+    // Convert File objects to Resend attachments (buffer)
+    const photoAttachments = await Promise.all(
       photos.map(async (photo) => ({
-        Name: photo.name,
-        Content: Buffer.from(await photo.arrayBuffer()).toString('base64'),
-        ContentType: photo.type || 'image/jpeg',
+        filename: photo.name,
+        content: Buffer.from(await photo.arrayBuffer()),
       }))
     )
 
     // Send both emails
     await Promise.all([
-      client.sendEmail({
-        From: process.env.EMAIL_FROM!,
-        To: process.env.EMAIL_TO!,
-        Subject: 'New Quote Request',
-        HtmlBody: getAdminEmailContent(formData),
-        TextBody: '',
-        Attachments: photoAttachments.length > 0 ? photoAttachments : undefined,
+      resend.emails.send({
+        from: 'web@saunders-simmons.co.uk',
+        to: process.env.EMAIL_TO!,
+        subject: 'New Quote Request',
+        html: getAdminEmailContent(formData),
+        text: '',
+        attachments: photoAttachments.length > 0 ? photoAttachments : undefined,
       }),
-      client.sendEmail({
-        From: process.env.EMAIL_FROM!,
-        To: formData.contact.email,
-        Subject: 'Your Wheel Refurbishment Quote Request',
-        HtmlBody: getCustomerEmailContent(formData.contact.name, photos.length > 0),
-        TextBody: '',
+      resend.emails.send({
+        from: 'web@saunders-simmons.co.uk',
+        to: formData.contact.email,
+        subject: 'Your Wheel Refurbishment Quote Request',
+        html: getCustomerEmailContent(formData.contact.name, photos.length > 0),
+        text: '',
       })
     ])
 

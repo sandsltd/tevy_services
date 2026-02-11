@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server'
-import * as postmark from 'postmark'
-
-const client = new postmark.ServerClient(process.env.POSTMARK_API_TOKEN!)
+import { Resend } from 'resend'
 
 const getCustomerEmailContent = (name: string, hasPhotos: boolean): string => {
   let content = `
@@ -207,7 +205,7 @@ const getAdminEmailContent = (data: any): string => {
 
       ${noPhotosReason ? `
         <div style="background: #FFF4E5; padding: 16px; border-radius: 8px; margin-bottom: 24px;">
-          <p style="color: #B76E00; margin: 0;">⚠️ Customer will send photos later</p>
+          <p style="color: #B76E00; margin: 0;">Customer will send photos later</p>
         </div>
       ` : ''}
     </div>
@@ -220,31 +218,32 @@ export async function POST(request: Request) {
     const data = JSON.parse(formData.get('data') as string)
     const photos = formData.getAll('photos') as File[]
 
-    // Convert File objects to Postmark attachments (base64)
-    const photoAttachments: postmark.Attachment[] = await Promise.all(
+    const resend = new Resend(process.env.RESEND_API_KEY!)
+
+    // Convert File objects to Resend attachments (buffer)
+    const photoAttachments = await Promise.all(
       photos.map(async (photo) => ({
-        Name: photo.name,
-        Content: Buffer.from(await photo.arrayBuffer()).toString('base64'),
-        ContentType: photo.type || 'image/jpeg',
+        filename: photo.name,
+        content: Buffer.from(await photo.arrayBuffer()),
       }))
     )
 
     // Send emails
     await Promise.all([
-      client.sendEmail({
-        From: process.env.EMAIL_FROM!,
-        To: process.env.EMAIL_TO!,
-        Subject: 'New Quote Request',
-        HtmlBody: getAdminEmailContent(data),
-        TextBody: '',
-        Attachments: photoAttachments.length > 0 ? photoAttachments : undefined,
+      resend.emails.send({
+        from: 'web@saunders-simmons.co.uk',
+        to: process.env.EMAIL_TO!,
+        subject: 'New Quote Request',
+        html: getAdminEmailContent(data),
+        text: '',
+        attachments: photoAttachments.length > 0 ? photoAttachments : undefined,
       }),
-      client.sendEmail({
-        From: process.env.EMAIL_FROM!,
-        To: data.contact.email,
-        Subject: 'Your Quote Request',
-        HtmlBody: getCustomerEmailContent(data.contact.name, photos.length > 0),
-        TextBody: '',
+      resend.emails.send({
+        from: 'web@saunders-simmons.co.uk',
+        to: data.contact.email,
+        subject: 'Your Quote Request',
+        html: getCustomerEmailContent(data.contact.name, photos.length > 0),
+        text: '',
       })
     ])
 
@@ -256,4 +255,4 @@ export async function POST(request: Request) {
       { status: 500 }
     )
   }
-} 
+}
