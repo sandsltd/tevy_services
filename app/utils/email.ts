@@ -1,21 +1,10 @@
-import nodemailer from 'nodemailer'
+import * as postmark from 'postmark'
 
-if (!process.env.EMAIL_HOST || 
-    !process.env.EMAIL_PORT || 
-    !process.env.EMAIL_USER || 
-    !process.env.EMAIL_PASS) {
-  throw new Error('Missing email configuration')
+if (!process.env.POSTMARK_API_TOKEN) {
+  throw new Error('Missing POSTMARK_API_TOKEN configuration')
 }
 
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: parseInt(process.env.EMAIL_PORT),
-  secure: true,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-})
+const client = new postmark.ServerClient(process.env.POSTMARK_API_TOKEN!)
 
 // Email templates
 const getCustomerEmailContent = (name: string, hasPhotos: boolean) => {
@@ -54,7 +43,7 @@ const getAdminEmailContent = (data: any) => {
 
   return `
     <h2>New Quote Request</h2>
-    
+
     <h3>Customer Details</h3>
     <p>Name: ${contact.name}</p>
     <p>Email: ${contact.email}</p>
@@ -66,9 +55,9 @@ const getAdminEmailContent = (data: any) => {
     <p>Service Type: ${serviceType}</p>
     <p>Location: ${location} (${distance} miles)</p>
     <p>Selected Services: ${serviceDetails.serviceTypes.join(', ')}</p>
-    
+
     ${serviceDetails.wheelCount ? `<p>Number of Wheels: ${serviceDetails.wheelCount}</p>` : ''}
-    
+
     ${serviceDetails.tyreDetails ? `
       <h3>Tyre Details</h3>
       <p>Vehicle Type: ${serviceDetails.tyreDetails.vehicleType}</p>
@@ -84,34 +73,32 @@ const getAdminEmailContent = (data: any) => {
 
 export const sendEmails = async (formData: any, photos: File[]) => {
   try {
-    // Convert File objects to Buffers for nodemailer
-    const photoAttachments = await Promise.all(
+    // Convert File objects to Postmark attachments (base64)
+    const photoAttachments: postmark.Attachment[] = await Promise.all(
       photos.map(async (photo) => ({
-        filename: photo.name,
-        content: await photo.arrayBuffer().then(buffer => Buffer.from(buffer))
+        Name: photo.name,
+        Content: Buffer.from(await photo.arrayBuffer()).toString('base64'),
+        ContentType: photo.type || 'image/jpeg',
       }))
     )
 
-    // Send email to admin
-    const adminMailOptions = {
-      from: process.env.EMAIL_FROM,
-      to: process.env.EMAIL_TO,
-      subject: 'New Quote Request',
-      html: getAdminEmailContent(formData),
-      attachments: photoAttachments
-    }
-
-    // Send email to customer
-    const customerMailOptions = {
-      from: process.env.EMAIL_FROM,
-      to: formData.contact.email,
-      subject: 'Your Wheel Refurbishment Quote Request',
-      html: getCustomerEmailContent(formData.contact.name, photos.length > 0)
-    }
-
+    // Send both emails
     await Promise.all([
-      transporter.sendMail(adminMailOptions),
-      transporter.sendMail(customerMailOptions)
+      client.sendEmail({
+        From: process.env.EMAIL_FROM!,
+        To: process.env.EMAIL_TO!,
+        Subject: 'New Quote Request',
+        HtmlBody: getAdminEmailContent(formData),
+        TextBody: '',
+        Attachments: photoAttachments.length > 0 ? photoAttachments : undefined,
+      }),
+      client.sendEmail({
+        From: process.env.EMAIL_FROM!,
+        To: formData.contact.email,
+        Subject: 'Your Wheel Refurbishment Quote Request',
+        HtmlBody: getCustomerEmailContent(formData.contact.name, photos.length > 0),
+        TextBody: '',
+      })
     ])
 
     return { success: true }
@@ -119,4 +106,4 @@ export const sendEmails = async (formData: any, photos: File[]) => {
     console.error('Email send error:', error)
     return { success: false, error: 'Failed to send emails' }
   }
-} 
+}

@@ -1,15 +1,7 @@
 import { NextResponse } from 'next/server'
-import nodemailer from 'nodemailer'
+import * as postmark from 'postmark'
 
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: parseInt(process.env.EMAIL_PORT || '465'),
-  secure: true,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-})
+const client = new postmark.ServerClient(process.env.POSTMARK_API_TOKEN!)
 
 const getCustomerEmailContent = (name: string, hasPhotos: boolean): string => {
   let content = `
@@ -228,34 +220,31 @@ export async function POST(request: Request) {
     const data = JSON.parse(formData.get('data') as string)
     const photos = formData.getAll('photos') as File[]
 
-    // Convert File objects to Buffers
-    const photoAttachments = await Promise.all(
+    // Convert File objects to Postmark attachments (base64)
+    const photoAttachments: postmark.Attachment[] = await Promise.all(
       photos.map(async (photo) => ({
-        filename: photo.name,
-        content: Buffer.from(await photo.arrayBuffer())
+        Name: photo.name,
+        Content: Buffer.from(await photo.arrayBuffer()).toString('base64'),
+        ContentType: photo.type || 'image/jpeg',
       }))
     )
 
     // Send emails
     await Promise.all([
-      transporter.sendMail({
-        from: {
-          name: 'Tevy Services',
-          address: process.env.EMAIL_FROM as string
-        },
-        to: process.env.EMAIL_TO,
-        subject: 'New Quote Request',
-        html: getAdminEmailContent(data),
-        attachments: photoAttachments
+      client.sendEmail({
+        From: process.env.EMAIL_FROM!,
+        To: process.env.EMAIL_TO!,
+        Subject: 'New Quote Request',
+        HtmlBody: getAdminEmailContent(data),
+        TextBody: '',
+        Attachments: photoAttachments.length > 0 ? photoAttachments : undefined,
       }),
-      transporter.sendMail({
-        from: {
-          name: 'Tevy Services',
-          address: process.env.EMAIL_FROM as string
-        },
-        to: data.contact.email,
-        subject: 'Your Quote Request',
-        html: getCustomerEmailContent(data.contact.name, photos.length > 0)
+      client.sendEmail({
+        From: process.env.EMAIL_FROM!,
+        To: data.contact.email,
+        Subject: 'Your Quote Request',
+        HtmlBody: getCustomerEmailContent(data.contact.name, photos.length > 0),
+        TextBody: '',
       })
     ])
 
