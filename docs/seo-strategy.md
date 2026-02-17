@@ -17,26 +17,26 @@
 ### Tier 1 — Primary (high priority)
 | # | Keyword | Current Position | Last Checked | Target Page | Notes |
 |---|---------|-----------------|--------------|-------------|-------|
-| 1 | alloy wheel repair exeter | Not indexed yet | 17 Feb 2026 | / | Homepage + service pages |
-| 2 | alloy wheel refurbishment exeter | Not indexed yet | 17 Feb 2026 | / | Core service term |
+| 1 | alloy wheel repair exeter | Position 6.6 | 17 Feb 2026 | / | Homepage + service pages |
+| 2 | alloy wheel refurbishment exeter | Position 8.9 | 17 Feb 2026 | / | Core service term |
 | 3 | diamond cut alloy wheels exeter | Not indexed yet | 17 Feb 2026 | /services/diamond-cut | Diamond cut service page |
-| 4 | mobile alloy wheel repair exeter | Not indexed yet | 17 Feb 2026 | /mobile-alloy-wheel-refurbishment | Dedicated landing page |
+| 4 | mobile alloy wheel repair exeter | Position 2.1 | 17 Feb 2026 | /mobile-alloy-wheel-refurbishment | Dedicated landing page |
 | 5 | tyre services exeter | Not indexed yet | 17 Feb 2026 | /services/tyre-repair | Tyre service pages |
 | 6 | alloy wheel repair devon | Not indexed yet | 17 Feb 2026 | / | Regional targeting |
-| 7 | tyre fitting exeter | Not indexed yet | 17 Feb 2026 | /services/tyre-replacement | Tyre replacement page |
+| 7 | tyre fitting exeter | Position 27.6 | 17 Feb 2026 | /services/tyre-replacement | Tyre replacement page |
 | 8 | wheel repair exeter | Not indexed yet | 17 Feb 2026 | / | Generic wheel repair |
 
 ### Tier 2 — Secondary
 | # | Keyword | Current Position | Last Checked | Target Page | Notes |
 |---|---------|-----------------|--------------|-------------|-------|
-| 1 | alloy wheel refurbishment near me | Not indexed yet | 17 Feb 2026 | /blog/alloy-wheel-refurbishment-near-me | Blog post |
-| 2 | mobile alloy wheel repair near me | Not indexed yet | 17 Feb 2026 | /mobile-alloy-wheel-refurbishment | Landing page |
+| 1 | alloy wheel refurbishment near me | Position 20.9 | 17 Feb 2026 | /blog/alloy-wheel-refurbishment-near-me | Blog post |
+| 2 | mobile alloy wheel repair near me | Position 3 | 17 Feb 2026 | /mobile-alloy-wheel-refurbishment | Landing page |
 | 3 | diamond cut alloy wheel repair devon | Not indexed yet | 17 Feb 2026 | /services/diamond-cut | Regional diamond cut |
 | 4 | alloy wheel painting exeter | Not indexed yet | 17 Feb 2026 | /services/painted-alloys | Painted alloys page |
-| 5 | tyre replacement exeter | Not indexed yet | 17 Feb 2026 | /services/tyre-replacement | Service page |
+| 5 | tyre replacement exeter | Position 25.2 | 17 Feb 2026 | /services/tyre-replacement | Service page |
 | 6 | kerbed alloy wheel repair exeter | Not indexed yet | 17 Feb 2026 | /blog/signs-of-alloy-wheel-damage-exeter | Blog post |
 | 7 | alloy wheel repair marsh barton | Not indexed yet | 17 Feb 2026 | / | Local area targeting |
-| 8 | puncture repair exeter | Not indexed yet | 17 Feb 2026 | /puncture-repairs | Dedicated landing page |
+| 8 | puncture repair exeter | Position 5 | 17 Feb 2026 | /puncture-repairs | Dedicated landing page |
 
 ### Tier 3 — Long-tail / Blog
 | # | Keyword | Current Position | Last Checked | Target Page | Notes |
@@ -102,6 +102,10 @@
 ## Session Log
 ### 17 Feb 2026 — Automated Monthly SEO Agent Run
 - **What was done:** Checked rankings for 28 keywords (0 indexed). Refreshed blog post: "Alloy Wheel Refurbishment Exeter: Complete Guide to Costs, Process & Options in 2026" targeting "alloy wheel refurbishment Exeter". Added 27 internal links across blog posts. 2 competitors have published new content recently. Generated 5 SEO recommendations.
+- **Run type:** Automated (GitHub Actions)
+
+### 17 Feb 2026 — Automated Monthly SEO Agent Run
+- **What was done:** Checked rankings for 28 keywords (8 indexed). Refreshed blog post: "Diamond Cut vs Painted Alloys: Which Finish Is Best for Your Car in 2026?" targeting "diamond cut vs painted alloys". Added 2 internal links across blog posts. 2 competitors have published new content recently. Generated 5 SEO recommendations.
 - **Run type:** Automated (GitHub Actions)
 
 > **Instructions for future sessions:** Always append new session entries below. Record what was done, rankings checked, and content published.
