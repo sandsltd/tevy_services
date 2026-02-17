@@ -16,6 +16,19 @@ interface PostInfo {
   description: string;
 }
 
+// Service and location pages to include as link targets
+const SITE_PAGES = [
+  { title: "Diamond Cut Alloy Wheel Repair", url: "/services/diamond-cut" },
+  { title: "Painted Alloy Wheel Refurbishment", url: "/services/painted-alloys" },
+  { title: "TPMS Sensor Services", url: "/services/tpms" },
+  { title: "Tyre Repair Services", url: "/services/tyre-repair" },
+  { title: "Tyre Replacement", url: "/services/tyre-replacement" },
+  { title: "Mobile Alloy Wheel Refurbishment", url: "/mobile-alloy-wheel-refurbishment" },
+  { title: "Puncture Repairs", url: "/puncture-repairs" },
+  { title: "Alloy Wheel Repair Newton Abbot", url: "/locations/newton-abbot" },
+  { title: "Alloy Wheel Repair Torquay", url: "/locations/torquay" },
+];
+
 function getAllPosts(): PostInfo[] {
   const blogDir = path.join(process.cwd(), CONFIG.blogContentDir);
   if (!fs.existsSync(blogDir)) return [];
@@ -66,9 +79,13 @@ export async function addInternalLinks(): Promise<LinkingResult> {
     const frontmatter = fileContent.slice(0, fmEnd + 3);
     const body = fileContent.slice(fmEnd + 3);
 
-    // Check how many internal blog links already exist
-    const existingLinks = (body.match(/\[([^\]]+)\]\(\/blog\//g) || []).length;
-    if (existingLinks >= 3) {
+    // Check how many internal links already exist (blog + service + location)
+    const existingBlogLinks = (body.match(/\[([^\]]+)\]\(\/blog\//g) || []).length;
+    const existingServiceLinks = (body.match(/\[([^\]]+)\]\(\/(services|mobile-alloy-wheel-refurbishment|puncture-repairs)/g) || []).length;
+    const existingLocationLinks = (body.match(/\[([^\]]+)\]\(\/locations\//g) || []).length;
+    const totalExisting = existingBlogLinks + existingServiceLinks + existingLocationLinks;
+
+    if (totalExisting >= 5) {
       continue;
     }
 
@@ -83,13 +100,19 @@ export async function addInternalLinks(): Promise<LinkingResult> {
       )
       .join("\n");
 
+    const sitePagesList = SITE_PAGES
+      .map((p) => `- ${p.title}: ${p.url}`)
+      .join("\n");
+
+    const maxNewLinks = Math.max(1, 5 - totalExisting);
+
     const response = await anthropic.messages.create({
       model: CONFIG.contentModel,
       max_tokens: 4096,
       messages: [
         {
           role: "user",
-          content: `You are adding internal links to a blog post. The goal is to naturally link to related posts where it makes sense contextually.
+          content: `You are adding internal links to a blog post for TEVY Services, an alloy wheel repair and tyre services company in Exeter, Devon. The goal is to naturally link to related content where it makes sense contextually.
 
 ## Current Post
 Title: "${post.title}"
@@ -98,16 +121,20 @@ Target keyword: "${post.targetKeyword}"
 ## Post Body (MDX)
 ${body}
 
-## Other Posts Available to Link To
+## Other Blog Posts Available to Link To
 ${otherPostsList}
 
+## Service & Location Pages Available to Link To
+${sitePagesList}
+
 ## Existing Internal Links
-This post already has ${existingLinks} internal blog links.
+This post already has ${totalExisting} internal links (${existingBlogLinks} blog, ${existingServiceLinks} service, ${existingLocationLinks} location).
 
 ## Rules
-- Add ${Math.max(1, 3 - existingLinks)} internal links to other blog posts where contextually relevant
+- Add up to ${maxNewLinks} internal links where contextually relevant
+- Prioritise service page links (e.g. /services/diamond-cut, /services/tyre-repair) and location page links (e.g. /locations/newton-abbot) over blog-to-blog links
 - Use natural anchor text that fits the sentence (not "click here" or the full title)
-- Use markdown link format: [anchor text](/blog/slug)
+- Use markdown link format: [anchor text](/path)
 - Only link where it genuinely makes sense — don't force links
 - Do NOT change any other content — keep everything exactly the same
 - Do NOT modify existing links
@@ -122,9 +149,11 @@ This post already has ${existingLinks} internal blog links.
       response.content[0].type === "text" ? response.content[0].text : "";
 
     // Count new links added
-    const newLinkCount = (newBody.match(/\[([^\]]+)\]\(\/blog\//g) || [])
-      .length;
-    const linksAdded = newLinkCount - existingLinks;
+    const newBlogLinks = (newBody.match(/\[([^\]]+)\]\(\/blog\//g) || []).length;
+    const newServiceLinks = (newBody.match(/\[([^\]]+)\]\(\/(services|mobile-alloy-wheel-refurbishment|puncture-repairs)/g) || []).length;
+    const newLocationLinks = (newBody.match(/\[([^\]]+)\]\(\/locations\//g) || []).length;
+    const newTotal = newBlogLinks + newServiceLinks + newLocationLinks;
+    const linksAdded = newTotal - totalExisting;
 
     if (linksAdded > 0) {
       fs.writeFileSync(filePath, frontmatter + "\n" + newBody.trim() + "\n");
