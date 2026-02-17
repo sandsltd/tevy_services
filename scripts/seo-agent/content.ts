@@ -250,7 +250,8 @@ Respond in EXACTLY this JSON format, nothing else:
 
   const text =
     response.content[0].type === "text" ? response.content[0].text : "";
-  const parsed = JSON.parse(text);
+  const cleaned = text.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
+  const parsed = JSON.parse(cleaned);
   return { keyword: parsed.keyword, context: parsed.context };
 }
 
