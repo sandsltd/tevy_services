@@ -232,7 +232,7 @@ export async function POST(request: Request) {
     await Promise.all([
       resend.emails.send({
         from: 'web@saunders-simmons.co.uk',
-        to: process.env.EMAIL_TO!,
+        to: process.env.EMAIL_TO!.split(',').map(e => e.trim()),
         subject: 'New Quote Request',
         html: getAdminEmailContent(data),
         text: '',
