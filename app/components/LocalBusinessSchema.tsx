@@ -14,16 +14,16 @@ const LocalBusinessSchema = () => {
     priceRange: '££',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Unit 10, Marsh Barton Trading Estate', // Replace with actual address
-      addressLocality: 'Exeter',
+      streetAddress: 'Unit 2, Quicks Units, Buttlands Industrial Estate, Totnes Road',
+      addressLocality: 'Ipplepen',
       addressRegion: 'Devon',
-      postalCode: 'EX2 8XX', // Replace with actual postcode
+      postalCode: 'TQ12 5UE',
       addressCountry: 'GB'
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: '50.7184', // Replace with actual coordinates
-      longitude: '-3.5339'  // Replace with actual coordinates
+      latitude: '50.4791',
+      longitude: '-3.6463'
     },
     openingHoursSpecification: [
       {
@@ -43,8 +43,8 @@ const LocalBusinessSchema = () => {
       '@type': 'GeoCircle',
       geoMidpoint: {
         '@type': 'GeoCoordinates',
-        latitude: '50.7184',
-        longitude: '-3.5339'
+        latitude: '50.4791',
+        longitude: '-3.6463'
       },
       geoRadius: '30000'
     },
@@ -56,8 +56,8 @@ const LocalBusinessSchema = () => {
       '@type': 'GeoCircle',
       geoMidpoint: {
         '@type': 'GeoCoordinates',
-        latitude: '50.7184',
-        longitude: '-3.5339'
+        latitude: '50.4791',
+        longitude: '-3.6463'
       },
       geoRadius: '30000'
     },
