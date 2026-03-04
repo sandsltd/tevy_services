@@ -18,7 +18,7 @@ export default function MovedBanner() {
   if (!visible) return null
 
   return (
-    <div className="bg-amber-500 text-black w-full z-50">
+    <div className="bg-amber-500 text-black w-full">
       <div className="container mx-auto px-4 py-2 flex items-center justify-between gap-4">
         <div className="flex items-center gap-2 text-sm font-medium">
           <MapPin className="w-4 h-4 flex-shrink-0" />
