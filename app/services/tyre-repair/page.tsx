@@ -98,7 +98,7 @@ export default function TyreRepairExeter() {
               <span className="block text-white">Professional</span>
               <span className="block text-[#3E797F]">Tyre Repair Exeter</span>
               <span className="block text-2xl md:text-3xl font-normal text-gray-400 mt-4">
-                Fast, Reliable Puncture Repairs at Our Marsh Barton Workshop
+                Fast, Reliable Puncture Repairs at Our Ipplepen Workshop
               </span>
             </h1>
 
@@ -109,7 +109,7 @@ export default function TyreRepairExeter() {
                 <span className="font-semibold text-red-500 animate-warning-flash">Got a Puncture?</span>
               </div>
               <p className="text-gray-400 text-sm">
-                Visit our workshop in Marsh Barton for quick, professional tyre repairs. 
+                Visit our Ipplepen workshop for quick, professional tyre repairs.
                 We aim to get you back on the road within 45 minutes.
               </p>
             </div>
@@ -194,7 +194,7 @@ export default function TyreRepairExeter() {
               },
               {
                 title: "Emergency Service",
-                description: "Quick response workshop service for urgent tyre repairs at our Marsh Barton facility.",
+                description: "Quick response workshop service for urgent tyre repairs at our Ipplepen facility.",
                 features: [
                   "Priority service",
                   "Expert technicians",
@@ -336,8 +336,8 @@ export default function TyreRepairExeter() {
             <div className="bg-[#3E797F]/10 border border-[#3E797F] rounded-xl p-6 mb-12 text-center">
               <h3 className="text-xl font-semibold mb-2">Workshop Service Only</h3>
               <p className="text-gray-400">
-                Our professional tyre fitting service is available exclusively at our 
-                fully-equipped Marsh Barton facility. We do not offer mobile tyre fitting, 
+                Our professional tyre fitting service is available exclusively at our
+                fully-equipped Ipplepen facility. We do not offer mobile tyre fitting,
                 ensuring the highest quality service and safety standards.
               </p>
             </div>
@@ -360,8 +360,8 @@ export default function TyreRepairExeter() {
                 <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
                   <h3 className="font-semibold mb-2">Workshop Address</h3>
                   <p className="text-sm text-gray-400">
-                    Marsh Barton Trading Estate<br />
-                    Exeter, Devon<br />
+                    Unit 2, Quicks Units<br />
+                    Buttlands Industrial Estate, Ipplepen, TQ12 5UE<br />
                     Free customer parking available
                   </p>
                 </div>
@@ -395,12 +395,12 @@ export default function TyreRepairExeter() {
           <div className="max-w-3xl mx-auto space-y-4">
             <FAQItem 
               question="How long does a tyre repair take in Exeter?"
-              answer="Most standard puncture repairs at our Marsh Barton workshop take around 45 minutes. This includes inspection, repair, and safety testing. We aim to get you back on the road as quickly as possible while ensuring all repairs meet safety standards."
+              answer="Most standard puncture repairs at our Ipplepen workshop take around 45 minutes. This includes inspection, repair, and safety testing. We aim to get you back on the road as quickly as possible while ensuring all repairs meet safety standards."
             />
             
             <FAQItem 
               question="Do you offer mobile tyre repairs in Exeter?"
-              answer="No, we exclusively perform tyre repairs at our Marsh Barton workshop. This allows us to maintain the highest safety standards and use our professional equipment in a controlled environment."
+              answer="No, we exclusively perform tyre repairs at our Ipplepen workshop. This allows us to maintain the highest safety standards and use our professional equipment in a controlled environment."
             />
             
             <FAQItem 

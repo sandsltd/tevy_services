@@ -95,7 +95,7 @@ export default function TyresExeter() {
               <span className="block text-white">Professional</span>
               <span className="block text-[#3E797F]">Tyres Exeter</span>
               <span className="block text-2xl md:text-3xl font-normal text-gray-400 mt-4">
-                Expert Tyre Fitting & Replacement Services at Our Marsh Barton Facility
+                Expert Tyre Fitting & Replacement Services at Our Ipplepen Facility
               </span>
             </h1>
 
@@ -225,7 +225,7 @@ export default function TyresExeter() {
                 </h2>
                 
                 <p className="text-gray-400 mb-6">
-                  Professional motorcycle tyre fitting service available at our Marsh Barton workshop. 
+                  Professional motorcycle tyre fitting service available at our Ipplepen workshop.
                   Bring us your loose wheels and we'll fit your new tyres with precision and care.
                 </p>
 
@@ -529,15 +529,15 @@ export default function TyresExeter() {
             <div className="bg-[#3E797F]/10 border border-[#3E797F] rounded-xl p-6 mb-12 text-center">
               <h3 className="text-xl font-semibold mb-2">Workshop Service Only</h3>
               <p className="text-gray-400">
-                Our professional tyre fitting service is available exclusively at our 
-                fully-equipped Marsh Barton facility. We do not offer mobile tyre fitting, 
+                Our professional tyre fitting service is available exclusively at our
+                fully-equipped Ipplepen facility. We do not offer mobile tyre fitting,
                 ensuring the highest quality service and safety standards.
               </p>
             </div>
 
             <div className="mb-8 text-center">
               <p className="text-lg md:text-xl text-gray-300">
-                Visit our state-of-the-art workshop in Marsh Barton, Exeter. 
+                Visit our state-of-the-art workshop in Ipplepen, Devon.
                 Equipped with the latest tyre fitting and balancing technology.
               </p>
             </div>
@@ -561,8 +561,8 @@ export default function TyresExeter() {
                 <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
                   <h3 className="font-semibold mb-2">Workshop Address</h3>
                   <p className="text-sm text-gray-400">
-                    Marsh Barton Trading Estate<br />
-                    Exeter, Devon<br />
+                    Unit 2, Quicks Units<br />
+                    Buttlands Industrial Estate, Ipplepen, TQ12 5UE<br />
                     Free customer parking available
                   </p>
                 </div>
@@ -633,12 +633,12 @@ export default function TyresExeter() {
           <div className="max-w-3xl mx-auto space-y-4">
             <FAQItem 
               question="Where is your tyre fitting workshop located?"
-              answer="Our workshop is located in the Marsh Barton Trading Estate, Exeter. We're easily accessible and offer free customer parking. All tyre services are performed at our fully-equipped workshop facility."
+              answer="Our workshop is located at Unit 2, Quicks Units, Buttlands Industrial Estate, Ipplepen, TQ12 5UE. We're easily accessible and offer free customer parking. All tyre services are performed at our fully-equipped workshop facility."
             />
             
             <FAQItem 
               question="Do you offer mobile tyre fitting in Exeter?"
-              answer="No, we exclusively provide our tyre services at our Marsh Barton workshop. This allows us to maintain the highest standards of service and safety, using our professional equipment and controlled environment."
+              answer="No, we exclusively provide our tyre services at our Ipplepen workshop. This allows us to maintain the highest standards of service and safety, using our professional equipment and controlled environment."
             />
             
             <FAQItem 
@@ -658,7 +658,7 @@ export default function TyresExeter() {
             
             <FAQItem 
               question="How long does tyre fitting take?"
-              answer="At our Marsh Barton workshop, a standard tyre fitting service typically takes 30-45 minutes for a full set. This includes balancing and safety checks. Same-day service is usually available, but we recommend booking in advance."
+              answer="At our Ipplepen workshop, a standard tyre fitting service typically takes 30-45 minutes for a full set. This includes balancing and safety checks. Same-day service is usually available, but we recommend booking in advance."
             />
             
             <FAQItem 
@@ -679,7 +679,7 @@ export default function TyresExeter() {
             
             <FAQItem 
               question="Do you offer wheel alignment in Exeter?"
-              answer="Yes, we provide professional wheel alignment services at our Marsh Barton workshop using the latest laser alignment equipment. This service helps ensure even tyre wear and optimal vehicle handling."
+              answer="Yes, we provide professional wheel alignment services at our Ipplepen workshop using the latest laser alignment equipment. This service helps ensure even tyre wear and optimal vehicle handling."
             />
           </div>
         </div>
@@ -723,8 +723,8 @@ export default function TyresExeter() {
 
                   <div className="bg-[#3E797F]/10 p-4 rounded-lg border border-[#3E797F]/20">
                     <p className="text-sm text-gray-300">
-                      <strong>Workshop Service Only:</strong> All tyre services are performed at our 
-                      fully-equipped Marsh Barton facility. We do not offer mobile fitting.
+                      <strong>Workshop Service Only:</strong> All tyre services are performed at our
+                      fully-equipped Ipplepen facility. We do not offer mobile fitting.
                     </p>
                   </div>
                 </div>

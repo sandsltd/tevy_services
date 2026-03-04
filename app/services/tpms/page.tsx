@@ -415,14 +415,14 @@ export default function TPMSService() {
             <div className="bg-[#3E797F]/10 border border-[#3E797F] rounded-xl p-6 mb-12 text-center">
               <h3 className="text-xl font-semibold mb-2">Workshop Service Only</h3>
               <p className="text-gray-400">
-                All TPMS services are performed at our fully-equipped Marsh Barton facility. 
+                All TPMS services are performed at our fully-equipped Ipplepen facility.
                 We do not offer mobile TPMS services to ensure accurate diagnostics and programming.
               </p>
             </div>
 
             <div className="mb-8 text-center">
               <p className="text-lg md:text-xl text-gray-300">
-                Visit our state-of-the-art workshop in Marsh Barton, Exeter. 
+                Visit our state-of-the-art workshop in Ipplepen, Devon.
                 Equipped with professional TPMS diagnostic and programming equipment.
               </p>
             </div>
@@ -447,8 +447,8 @@ export default function TPMSService() {
                 <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
                   <h3 className="font-semibold mb-2">Workshop Address</h3>
                   <p className="text-sm text-gray-400">
-                    Marsh Barton Trading Estate<br />
-                    Exeter, Devon<br />
+                    Unit 2, Quicks Units<br />
+                    Buttlands Industrial Estate, Ipplepen, TQ12 5UE<br />
                     Free customer parking available
                   </p>
                 </div>
