@@ -10,27 +10,26 @@ export const MOBILE_COVERAGE: Feature<Polygon> = {
   geometry: {
     type: 'Polygon',
     coordinates: [[
-      [-3.5622329077768313, 50.98657903618871],  // North of Exeter (lowered)
-      [-3.6271844317002376, 50.911893220910315],  // Tiverton area (adjusted)
-      [-3.7271844317002376, 50.851893220910315],  // New point to smooth curve
-      [-3.913967437397474, 50.73756900656184],    // Dartmoor
-      [-4.100790619208453, 50.53645876569945],    // Plymouth North
-      [-4.183732493827108, 50.42843720187119],    // Plymouth
-      [-4.190275527553666, 50.3660534674336],     // Plymouth South
-      [-4.112054011391109, 50.3118747167473],     // Coast
-      [-4.003331695261323, 50.26460883600211],    // South coast
-      [-3.9011110021571085, 50.21454255369434],   // South Devon
-      [-3.7488758374622932, 50.18950308398712],   // Salcombe area
-      [-3.6031587167817634, 50.19365281491028],   // Start Point
-      [-3.55313709447168, 50.28545816376817],     // Dartmouth
-      [-3.470509543884617, 50.34796748292297],    // Brixham
-      [-3.3965476681091786, 50.436689141907664],  // Torquay
-      [-3.435707045740884, 50.48100143361481],    // Teignmouth
-      [-3.394372814965834, 50.54737787718577],    // Exeter South
-      [-3.398794476913764, 50.65229050125592],    // Exeter
-      [-3.420680147814494, 50.7967663159767],     // North of Exeter
-      [-3.4622329077768313, 50.88657903618871],   // New point to smooth curve
-      [-3.5622329077768313, 50.98657903618871],   // Back to start
+      [-3.56, 50.78],   // Northwest Exeter
+      [-3.40, 50.76],   // Northeast Exeter
+      [-3.38, 50.69],   // Exmouth coast
+      [-3.43, 50.58],   // Dawlish / Teignmouth
+      [-3.38, 50.47],   // Torquay north coast
+      [-3.38, 50.38],   // Torquay / Paignton
+      [-3.47, 50.28],   // Dartmouth / Start Bay
+      [-3.62, 50.20],   // Start Point area
+      [-3.75, 50.19],   // Salcombe
+      [-3.90, 50.24],   // South coast PL8
+      [-4.02, 50.29],   // PL8 area
+      [-4.13, 50.36],   // Plymouth east
+      [-4.19, 50.38],   // Plymouth city
+      [-4.22, 50.43],   // Saltash / Plymouth NW
+      [-4.18, 50.50],   // PL5 / PL6 north
+      [-4.05, 50.49],   // PL7 / Ivybridge area
+      [-3.92, 50.50],   // TQ / PL north boundary
+      [-3.78, 50.57],   // Buckfastleigh / A38
+      [-3.68, 50.68],   // West Exeter approach
+      [-3.56, 50.78],   // Back to start
     ]]
   }
 }

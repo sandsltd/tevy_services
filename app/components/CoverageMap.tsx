@@ -185,7 +185,7 @@ const getPopupContent = (location: string, coverageTypes: CoverageType[], coordi
             <span className="text-white/80">Workshop Service Available</span>
           </div>
           <p class="text-sm text-white/60">
-            Please visit our workshop in Ipplepen, Devon for our full range of services
+            Outside our mobile area. Collection &amp; delivery may be available — please enquire.
           </p>
         </div>
 
@@ -211,7 +211,7 @@ const getPopupContent = (location: string, coverageTypes: CoverageType[], coordi
         ${coverageTypes.map(type => `
           <div class="flex items-center gap-2 mb-2">
             <div className="w-2 h-2 rounded-full bg-[#3E797F]"></div>
-            <span className="text-white/80">${type === 'mobile' ? 'Mobile Service' : 'Collection Service'}</span>
+            <span className="text-white/80">${type === 'mobile' ? 'Mobile Service' : 'Collection & Delivery (enquire to book)'}</span>
           </div>
         `).join('')}
       </div>
@@ -928,7 +928,7 @@ export default function CoverageMap() {
             <div className="bg-black/40 p-2 rounded-lg border border-[#3E797F]/30">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-sm bg-[#FF6B6B]" />
-                <span className="text-sm">Collection Area</span>
+                <span className="text-sm">Collection/Delivery (enquire)</span>
               </div>
             </div>
           </div>
