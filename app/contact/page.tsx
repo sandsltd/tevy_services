@@ -7,8 +7,8 @@ import SchemaMarkup from '../components/SchemaMarkup'
 
 export const metadata: Metadata = {
   title: 'Contact Tevy Services Exeter | Alloy Wheel Repair Quotes | Call Now',
-  description: 'Contact Tevy Services for alloy wheel repair quotes in Exeter. Call 07572 634898 for same-day service. Unit 10, Marsh Barton Trading Estate.',
-  keywords: 'contact tevy services exeter, alloy wheel repair quotes, marsh barton exeter, mobile wheel repair contact',
+  description: 'Contact Tevy Services for alloy wheel repair quotes. Call 07572 634898 for same-day service. Unit 2, Quicks Units, Ipplepen, TQ12 5UE.',
+  keywords: 'contact tevy services ipplepen, alloy wheel repair quotes, ipplepen devon, mobile wheel repair contact',
   openGraph: {
     title: 'Contact Tevy Services | Alloy Wheel Repair Exeter',
     description: 'Get in touch for professional alloy wheel repair services in Exeter. Same-day quotes available.',
@@ -112,9 +112,9 @@ export default function ContactPage() {
                       <div>
                         <h3 className="font-semibold text-white mb-1">Address</h3>
                         <p className="text-gray-300">
-                          Unit 10, Marsh Barton Trading Estate<br />
-                          Exeter, Devon<br />
-                          EX2 8XX
+                          Unit 2, Quicks Units<br />
+                          Buttlands Industrial Estate, Totnes Road<br />
+                          Ipplepen, TQ12 5UE
                         </p>
                       </div>
                     </div>
