@@ -5,6 +5,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import GoogleAnalytics from './components/GoogleAnalytics'
 import { Metadata } from 'next'
 import SchemaMarkup from './components/SchemaMarkup'
+import MovedBanner from './components/MovedBanner'
 
 export const metadata: Metadata = {
   title: 'Alloy Wheel Repair Exeter | Mobile Service | Call 07572 634898',
@@ -72,6 +73,7 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning>
         <div suppressHydrationWarning>
+          <MovedBanner />
           {children}
         </div>
         <SpeedInsights />
