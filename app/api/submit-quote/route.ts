@@ -60,9 +60,9 @@ const getCustomerEmailContent = (name: string, hasPhotos: boolean): string => {
       <div style="color: #333;">
         <p style="font-weight: bold; color: #3E797F; margin-bottom: 4px;">Tevy Services</p>
         <p style="margin: 0; line-height: 1.5;">
-          Unit 63, Yeoford Way<br>
-          Buttlands Industrial Estate, Ipplepen<br>
-          TQ12 5TZ
+          Unit 2, Quicks Units<br>
+          Buttlands Industrial Estate, Totnes Road, Ipplepen<br>
+          TQ12 5UE
         </p>
         <p style="margin: 16px 0;">
           <strong>Tel:</strong> <a href="tel:+447572634898" style="color: #3E797F; text-decoration: none;">+44 7572 634898</a><br>
