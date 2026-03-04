@@ -61,8 +61,8 @@ const getCustomerEmailContent = (name: string, hasPhotos: boolean): string => {
         <p style="font-weight: bold; color: #3E797F; margin-bottom: 4px;">Tevy Services</p>
         <p style="margin: 0; line-height: 1.5;">
           Unit 63, Yeoford Way<br>
-          Marsh Barton, Exeter<br>
-          EX2 8LB
+          Buttlands Industrial Estate, Ipplepen<br>
+          TQ12 5TZ
         </p>
         <p style="margin: 16px 0;">
           <strong>Tel:</strong> <a href="tel:+447572634898" style="color: #3E797F; text-decoration: none;">+44 7572 634898</a><br>

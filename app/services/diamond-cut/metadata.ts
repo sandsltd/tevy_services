@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Diamond Cut Alloy Wheel Repair Exeter | Same-Day | Call 07572 634898',
-  description: 'Diamond cut alloy wheel repair Exeter & Devon. CNC lathe restoration, same-day service, mobile available. Factory finish guaranteed. Marsh Barton workshop. Call now!',
+  description: 'Diamond cut alloy wheel repair Exeter & Devon. CNC lathe restoration, same-day service, mobile available. Factory finish guaranteed. Ipplepen workshop. Call now!',
   keywords: [
     'diamond cut alloy wheel repair Exeter',
     'diamond cut wheel refurbishment Exeter',
