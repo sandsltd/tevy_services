@@ -42,7 +42,7 @@ export default function NewtonAbbotAlloyWheelRefurbishment() {
               
               <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
                 Professional alloy wheel restoration serving Newton Abbot and surrounding areas. 
-                Mobile service available - we come to you, or visit our state-of-the-art Marsh Barton facility.
+                Mobile service available - we come to you, or visit our Ipplepen workshop.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -114,7 +114,7 @@ export default function NewtonAbbotAlloyWheelRefurbishment() {
                     Collection & Delivery Service
                   </h3>
                   <p className="text-gray-300 mb-4">
-                    We collect your vehicle from Newton Abbot, service at our Marsh Barton workshop, 
+                    We collect your vehicle from Newton Abbot, service at our Ipplepen workshop,
                     and deliver back the same day. Full insurance coverage included.
                   </p>
                   <ul className="space-y-2">
@@ -260,7 +260,7 @@ export default function NewtonAbbotAlloyWheelRefurbishment() {
                       <div>
                         <h3 className="font-semibold text-lg mb-2">Mobile or Workshop</h3>
                         <p className="text-gray-400">
-                          Choose mobile service at your Newton Abbot location, or visit our fully equipped Marsh Barton workshop.
+                          Choose mobile service at your Newton Abbot location, or visit our fully equipped Ipplepen workshop.
                         </p>
                       </div>
                     </div>
