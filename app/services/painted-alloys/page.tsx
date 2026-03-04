@@ -188,9 +188,9 @@ const structuredData = {
   "image": "https://tevyservices.com/images/services/custom_alloy_wheel_painting_exeter.png",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Marsh Barton",
-    "addressLocality": "Exeter",
-    "postalCode": "EX2",
+    "streetAddress": "Unit 2, Quicks Units, Buttlands Industrial Estate, Totnes Road",
+    "addressLocality": "Ipplepen",
+    "postalCode": "TQ12 5UE",
     "addressCountry": "GB"
   },
   "geo": {
@@ -839,7 +839,7 @@ export default function PaintedAlloys() {
           </h2>
           
           <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
-            We offer mobile wheel painting services across the South West, with our main facility located in Marsh Barton, Exeter.
+            We offer mobile wheel painting services across the South West, with our main facility located in Ipplepen, Devon.
           </p>
 
           <div className="max-w-5xl mx-auto">
@@ -852,7 +852,7 @@ export default function PaintedAlloys() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
                   <h3 className="font-semibold mb-2">Workshop Service</h3>
-                  <p className="text-sm text-gray-400">Full wheel painting service at our Marsh Barton facility</p>
+                  <p className="text-sm text-gray-400">Full wheel painting service at our Ipplepen facility</p>
                 </div>
                 
                 <div className="bg-black/20 p-6 rounded-xl border border-[#3E797F]/20">
@@ -1250,7 +1250,7 @@ export default function PaintedAlloys() {
                     <MapPin className="w-5 h-5 text-[#3E797F] mt-1" />
                     <div>
                       <p className="font-semibold text-white">Workshop Location</p>
-                      <p className="text-gray-300">Marsh Barton, Exeter</p>
+                      <p className="text-gray-300">Ipplepen, Devon</p>
                     </div>
                   </div>
                 </div>
