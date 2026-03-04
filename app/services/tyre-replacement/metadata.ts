@@ -1,12 +1,12 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Tyre Replacement Exeter | Same-Day Mobile Service | Call 07572 634898',
-  description: 'Need new tyres in Exeter? Same-day mobile tyre replacement at your location. All major brands, competitive prices. Professional fitting at our Ipplepen workshop. Call now!',
+  title: 'Tyre Replacement Devon | Same-Day Mobile Service | Call 07572 634898',
+  description: 'Need new tyres in Devon? Same-day mobile tyre replacement at your location. All major brands, competitive prices. Professional fitting at our Ipplepen workshop. Call now!',
   keywords: 'tyre replacement Exeter, mobile tyre fitting Devon, new tyres Exeter, emergency tyre service, same day tyre replacement, Ipplepen tyres',
   openGraph: {
-    title: 'Tyre Replacement Exeter | Same-Day Service | Tevy Services',
-    description: 'Professional tyre replacement in Exeter & Devon. Same-day service, all major brands, competitive pricing. Workshop at Ipplepen. Call 07572 634898!',
+    title: 'Tyre Replacement Devon | Same-Day Service | Tevy Services',
+    description: 'Professional tyre replacement in Devon. Same-day service, all major brands, competitive pricing. Workshop at Ipplepen. Call 07572 634898!',
     images: [
       {
         url: '/images/services/tyre-replacement-service.jpg',

@@ -568,7 +568,7 @@ export default function PaintedAlloys() {
         <div className="absolute inset-0">
           <Image
             src="/images/services/painting-alloy-wheels.jpg"
-            alt="Custom Alloy Wheel Painting in Exeter"
+            alt="Custom Alloy Wheel Painting in Devon"
             fill
             className="object-cover object-center"
             priority
@@ -587,7 +587,7 @@ export default function PaintedAlloys() {
                   <Star key={i} className="w-5 h-5 text-[#3E797F] fill-[#3E797F]" />
                 ))}
               </div>
-              <span className="text-white/80 text-sm">Exeter's Trusted Wheel Specialists</span>
+              <span className="text-white/80 text-sm">Devon's Trusted Wheel Specialists</span>
             </div>
 
             {/* SEO-Optimized H1 */}
@@ -595,7 +595,7 @@ export default function PaintedAlloys() {
               <span className="block text-white">Professional</span>
               <span className="block text-[#3E797F]">Alloy Painting</span>
               <span className="block text-2xl md:text-3xl font-normal text-gray-400 mt-4">
-                Expert Colour Changes & Custom Finishes in Exeter
+                Expert Colour Changes & Custom Finishes in Devon
               </span>
             </h1>
 
@@ -885,7 +885,7 @@ export default function PaintedAlloys() {
             {[
               {
                 name: "James H.",
-                location: "Exeter",
+                location: "Devon",
                 text: "Absolutely fantastic service. My alloys look better than new - the finish is perfect and the attention to detail is outstanding.",
                 rating: 5,
                 date: "2 weeks ago"
