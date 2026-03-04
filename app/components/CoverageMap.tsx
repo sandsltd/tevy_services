@@ -185,7 +185,7 @@ const getPopupContent = (location: string, coverageTypes: CoverageType[], coordi
             <span className="text-white/80">Workshop Service Available</span>
           </div>
           <p class="text-sm text-white/60">
-            Please visit our workshop in Marsh Barton, Exeter for our full range of services
+            Please visit our workshop in Ipplepen, Devon for our full range of services
           </p>
         </div>
 

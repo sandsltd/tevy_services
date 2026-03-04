@@ -9,7 +9,7 @@ import MovedBanner from './components/MovedBanner'
 
 export const metadata: Metadata = {
   title: 'Alloy Wheel Repair Exeter | Mobile Service | Call 07572 634898',
-  description: 'Alloy wheel refurbishment in Exeter & Devon. Diamond cut, painting, tyres. Mobile service or Marsh Barton workshop. Same-day repairs from £60. Call now!',
+  description: 'Alloy wheel refurbishment in Devon. Diamond cut, painting, tyres. Mobile service or our Ipplepen workshop. Same-day repairs from £60. Call now!',
   metadataBase: new URL('https://www.tevyservices.co.uk'),
   alternates: {
     canonical: 'https://www.tevyservices.co.uk',

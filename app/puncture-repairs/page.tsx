@@ -8,11 +8,11 @@ import FAQSection from '../components/FAQSection'
 
 export const metadata: Metadata = {
   title: 'Puncture Repairs Exeter | £25 Mobile Fix | Call 07572 634898 Now',
-  description: 'Got a puncture in Exeter? Mobile puncture repair from £25. Same-day service, we come to you! BS AU159 certified. Marsh Barton workshop. Call 07572 634898.',
+  description: 'Got a puncture in Exeter? Mobile puncture repair from £25. Same-day service, we come to you! BS AU159 certified. Ipplepen workshop. Call 07572 634898.',
   keywords: 'puncture repairs exeter, mobile puncture repair Devon, emergency puncture fix, same day puncture repair, £25 puncture repair',
   openGraph: {
     title: 'Puncture Repairs Exeter | £25 Mobile Service | Tevy Services',
-    description: 'Emergency puncture repairs in Exeter from £25. Mobile service or Marsh Barton workshop. Same-day repairs. Call 07572 634898!',
+    description: 'Emergency puncture repairs in Exeter from £25. Mobile service or Ipplepen workshop. Same-day repairs. Call 07572 634898!',
     images: [{ url: '/images/puncture-repair-og.jpg', width: 1200, height: 630 }],
   },
   alternates: {
@@ -170,7 +170,7 @@ export default function PunctureRepairs() {
               <div className="grid md:grid-cols-4 gap-4 mb-8">
                 {[
                   "Exeter City Centre",
-                  "Marsh Barton",
+                  "Ipplepen",
                   "Heavitree", 
                   "St Thomas",
                   "Whipton",

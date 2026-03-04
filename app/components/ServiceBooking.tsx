@@ -302,7 +302,7 @@ export default function ServiceBooking({
       {
         id: 'workshop',
         title: 'Come To Our Workshop',
-        description: 'Full service range including wheel refurbishment, tyres and TPMS at our Marsh Barton workshop',
+        description: 'Full service range including wheel refurbishment, tyres and TPMS at our Ipplepen workshop',
         icon: Car,
         available: true
       }

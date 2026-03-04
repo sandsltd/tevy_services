@@ -174,7 +174,7 @@ export default function MobileAlloyWheelRefurbishment() {
               <div className="grid md:grid-cols-3 gap-6 mb-8">
                 {[
                   "Exeter City Centre",
-                  "Marsh Barton",
+                  "Ipplepen",
                   "Heavitree",
                   "St Thomas", 
                   "Whipton",

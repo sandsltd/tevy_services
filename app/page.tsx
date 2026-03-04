@@ -193,7 +193,7 @@ export default function Home() {
               </h1>
 
               <p className="text-lg md:text-xl mb-8 text-gray-200 max-w-3xl animate-fade-in-up delay-300 font-medium leading-relaxed">
-                Expert alloy wheel refurbishment specialists in Exeter. Diamond cut restoration, custom paint finishes and complete wheel repairs. Mobile service across the South West or visit our state-of-the-art Marsh Barton facility.
+                Expert alloy wheel refurbishment specialists in Exeter. Diamond cut restoration, custom paint finishes and complete wheel repairs. Mobile service across the South West or visit our state-of-the-art Ipplepen facility.
               </p>
 
               {/* Service Types */}
@@ -420,7 +420,7 @@ export default function Home() {
             <div>
               <h3 className="text-2xl font-bold mb-6">Exeter's Leading Alloy Wheel Refurbishment Specialists</h3>
               <p className="text-gray-300 mb-6">
-                Based in Teignmouth with our advanced facility in Marsh Barton Exeter, 
+                Based in Teignmouth with our advanced facility in Ipplepen, Devon,
                 Tevy Services is the premier choice for alloy wheel refurbishment in Exeter and surrounding areas. 
                 Our expertise spans from precision diamond cut refurbishment to custom wheel painting, with 
                 comprehensive mobile services available across Exeter, Newton Abbot, Torquay and the South West.
@@ -450,7 +450,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-3">
                   <Check className="text-[#3E797F] w-5 h-5" />
-                  <span>State-of-the-art Marsh Barton facility</span>
+                  <span>State-of-the-art Ipplepen facility</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Check className="text-[#3E797F] w-5 h-5" />
@@ -831,7 +831,7 @@ export default function Home() {
 const services: Service[] = [
   {
     title: "Diamond Cut Refurbishment",
-    description: "State-of-the-art CNC lathe diamond cutting service at our Marsh Barton facility. We restore damaged alloy wheels to their original factory finish with precision and care.",
+    description: "State-of-the-art CNC lathe diamond cutting service at our Ipplepen facility. We restore damaged alloy wheels to their original factory finish with precision and care.",
     icon: <Diamond className="w-8 h-8" />,
     availability: { garage: true, mobile: true },
     path: "/services/diamond-cut"
@@ -845,7 +845,7 @@ const services: Service[] = [
   },
   {
     title: "Tyre Replacement",
-    description: "Professional tyre fitting and replacement service. We supply and fit all major tyre brands, with competitive pricing and expert fitting at our Marsh Barton facility.",
+    description: "Professional tyre fitting and replacement service. We supply and fit all major tyre brands, with competitive pricing and expert fitting at our Ipplepen facility.",
     icon: <Disc className="w-8 h-8" />,
     availability: { garage: true, mobile: false },
     path: "/services/tyre-replacement"
@@ -965,7 +965,7 @@ const ServiceCard = ({ service, className, style }: ServiceCardProps) => (
           <BadgeTooltip 
             icon={<Building2 className="w-4 h-4" />}
             label="Workshop Service"
-            tooltipText="Available at our state-of-the-art Marsh Barton facility. Professional equipment and expert service in a controlled environment."
+            tooltipText="Available at our state-of-the-art Ipplepen facility. Professional equipment and expert service in a controlled environment."
           />
         )}
         {service.availability.mobile && (
