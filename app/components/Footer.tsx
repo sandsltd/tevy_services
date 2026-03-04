@@ -28,9 +28,10 @@ export default function Footer() {
               <p className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-[#3E797F] mt-1" />
                 <span>
-                  Unit 63, Yeoford Way<br />
-                  Marsh Barton, Exeter<br />
-                  EX2 8LB<br />
+                  Unit 2, Quicks Units<br />
+                  Buttlands Industrial Estate<br />
+                  Totnes Road, Ipplepen<br />
+                  TQ12 5UE<br />
                   <span className="text-[#3E797F]">By Appointment Only</span>
                 </span>
               </p>
