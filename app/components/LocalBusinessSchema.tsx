@@ -5,7 +5,7 @@ const LocalBusinessSchema = () => {
     '@context': 'https://schema.org',
     '@type': 'AutoRepair',
     name: 'Tevy Services',
-    description: 'Professional alloy wheel repair and tyre specialists in Exeter, offering mobile service throughout Devon.',
+    description: 'Professional alloy wheel repair and tyre specialists in Devon, offering mobile service throughout the region.',
     url: 'https://www.tevyservices.com',
     logo: 'https://www.tevyservices.com/images/logo.png',
     image: 'https://www.tevyservices.com/images/og-image.jpg',

@@ -7,15 +7,15 @@ import Footer from "@/app/components/Footer";
 import { getAllPosts } from "@/src/lib/blog";
 
 export const metadata: Metadata = {
-  title: "Alloy Wheel & Tyre Blog Exeter | Expert Tips | TEVY Services",
+  title: "Alloy Wheel & Tyre Blog Devon | Expert Tips | TEVY Services",
   description:
-    "Expert advice on alloy wheel repair, tyre services & maintenance from Exeter specialists. Guides, tips & industry insights for car owners.",
+    "Expert advice on alloy wheel repair, tyre services & maintenance from Devon specialists. Guides, tips & industry insights for car owners.",
   keywords:
-    "alloy wheel repair blog, wheel refurbishment Exeter, tyre services Exeter, automotive blog, alloy wheel maintenance, car care tips Exeter",
+    "alloy wheel repair blog, wheel refurbishment Devon, tyre services Devon, automotive blog, alloy wheel maintenance, car care tips Devon",
   openGraph: {
-    title: "Alloy Wheel & Tyre Services Blog | TEVY Services Exeter",
+    title: "Alloy Wheel & Tyre Services Blog | TEVY Services Devon",
     description:
-      "Professional advice on wheel repair, refurbishment & tyre services from Exeter specialists. Read our expert guides and tips.",
+      "Professional advice on wheel repair, refurbishment & tyre services from Devon specialists. Read our expert guides and tips.",
     locale: "en_GB",
     type: "website",
   },
@@ -55,7 +55,7 @@ export default function BlogPage() {
             </h1>
             <p className="text-gray-300 text-center max-w-2xl mx-auto text-lg">
               Expert insights, industry updates, and practical guides about
-              alloy wheel refurbishment and automotive care in Exeter.
+              alloy wheel refurbishment and automotive care in Devon.
             </p>
           </div>
         </section>

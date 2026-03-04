@@ -7,12 +7,12 @@ import SchemaMarkup from '../components/SchemaMarkup'
 import FAQSection from '../components/FAQSection'
 
 export const metadata: Metadata = {
-  title: 'Puncture Repairs Exeter | £25 Mobile Fix | Call 07572 634898 Now',
-  description: 'Got a puncture in Exeter? Mobile puncture repair from £25. Same-day service, we come to you! BS AU159 certified. Ipplepen workshop. Call 07572 634898.',
+  title: 'Puncture Repairs Devon | £25 Mobile Fix | Call 07572 634898 Now',
+  description: 'Got a puncture in Devon? Mobile puncture repair from £25. Same-day service, we come to you! BS AU159 certified. Ipplepen workshop. Call 07572 634898.',
   keywords: 'puncture repairs exeter, mobile puncture repair Devon, emergency puncture fix, same day puncture repair, £25 puncture repair',
   openGraph: {
-    title: 'Puncture Repairs Exeter | £25 Mobile Service | Tevy Services',
-    description: 'Emergency puncture repairs in Exeter from £25. Mobile service or Ipplepen workshop. Same-day repairs. Call 07572 634898!',
+    title: 'Puncture Repairs Devon | £25 Mobile Service | Tevy Services',
+    description: 'Emergency puncture repairs in Devon from £25. Mobile service or Ipplepen workshop. Same-day repairs. Call 07572 634898!',
     images: [{ url: '/images/puncture-repair-og.jpg', width: 1200, height: 630 }],
   },
   alternates: {
@@ -50,11 +50,11 @@ export default function PunctureRepairs() {
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
                 <span className="text-white">Fast</span>{" "}
                 <span className="text-[#3E797F]">Puncture Repairs</span>{" "}
-                <span className="text-white">Exeter</span>
+                <span className="text-white">Devon</span>
               </h1>
-              
+
               <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-                Professional puncture repairs with same-day service. Mobile service available throughout Exeter. TPMS compatible repairs with 12-month guarantee.
+                Professional puncture repairs with same-day service. Mobile service available throughout Devon. TPMS compatible repairs with 12-month guarantee.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -89,7 +89,7 @@ export default function PunctureRepairs() {
                   {
                     icon: <Zap className="w-8 h-8" />,
                     title: "Emergency Repairs",
-                    description: "Stranded with a flat tyre? We offer emergency puncture repairs throughout Exeter with rapid response times.",
+                    description: "Stranded with a flat tyre? We offer emergency puncture repairs throughout Devon with rapid response times.",
                     price: "From £25"
                   },
                   {
@@ -101,7 +101,7 @@ export default function PunctureRepairs() {
                   {
                     icon: <Wrench className="w-8 h-8" />,
                     title: "Mobile Repairs",
-                    description: "We come to you! Mobile puncture repairs at your home, workplace, or roadside in Exeter.",
+                    description: "We come to you! Mobile puncture repairs at your home, workplace, or roadside across Devon.",
                     price: "From £30"
                   }
                 ].map((service, index) => (
@@ -192,7 +192,7 @@ export default function PunctureRepairs() {
               <div className="p-6 bg-[#3E797F]/10 border border-[#3E797F]/20 rounded-xl">
                 <h3 className="text-xl font-semibold mb-4 text-white">Need Emergency Puncture Repair?</h3>
                 <p className="text-gray-300 mb-4">
-                  Stuck with a flat tyre? Call us now for rapid response emergency repairs throughout Exeter.
+                  Stuck with a flat tyre? Call us now for rapid response emergency repairs throughout Devon.
                 </p>
                 <a 
                   href="tel:07572634898" 
@@ -241,7 +241,7 @@ export default function PunctureRepairs() {
             },
             {
               question: "What areas do you cover for mobile puncture repairs?",
-              answer: "We provide mobile puncture repair services throughout Exeter and surrounding areas including Exmouth, Sidmouth, Crediton, Tiverton, Newton Abbot, and Torquay. We can typically reach you within 30-60 minutes for emergency repairs."
+              answer: "We provide mobile puncture repair services throughout Devon including Ipplepen, Newton Abbot, Torquay, Exeter, Exmouth, Sidmouth, Crediton, and Tiverton. We can typically reach you within 30-60 minutes for emergency repairs."
             }
           ]}
         />
