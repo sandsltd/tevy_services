@@ -6,12 +6,12 @@ import { Metadata } from 'next'
 import SchemaMarkup from '../components/SchemaMarkup'
 
 export const metadata: Metadata = {
-  title: 'Contact Tevy Services Devon | Alloy Wheel Repair Quotes | Call Now',
+  title: 'Contact Tevy Services Exeter | Alloy Wheel Repair Quotes | Call Now',
   description: 'Contact Tevy Services for alloy wheel repair quotes. Call 07572 634898 for same-day service. Unit 2, Quicks Units, Ipplepen, TQ12 5UE.',
   keywords: 'contact tevy services ipplepen, alloy wheel repair quotes, ipplepen devon, mobile wheel repair contact',
   openGraph: {
-    title: 'Contact Tevy Services | Alloy Wheel Repair Devon',
-    description: 'Get in touch for professional alloy wheel repair services across Devon. Same-day quotes available.',
+    title: 'Contact Tevy Services | Alloy Wheel Repair Exeter',
+    description: 'Get in touch for professional alloy wheel repair services in Exeter. Same-day quotes available.',
     images: [{ url: '/images/contact-og.jpg', width: 1200, height: 630 }],
   },
   alternates: {
@@ -50,7 +50,7 @@ export default function ContactPage() {
               </h1>
               
               <p className="text-xl text-gray-300 mb-8">
-                Get in touch for professional alloy wheel repair and tyre services across Devon.
+                Get in touch for professional alloy wheel repair and tyre services in Exeter. 
                 Same-day quotes and mobile service available.
               </p>
             </div>
@@ -135,8 +135,8 @@ export default function ContactPage() {
                   <div className="mt-8 p-6 bg-[#3E797F]/10 border border-[#3E797F]/20 rounded-xl">
                     <h3 className="text-xl font-semibold mb-3 text-white">Mobile Service Available</h3>
                     <p className="text-gray-300 mb-4">
-                      Can't get to us? We'll come to you! Mobile service available
-                      throughout Devon and surrounding areas.
+                      Can't get to us? We'll come to you! Mobile service available 
+                      throughout Exeter and surrounding areas.
                     </p>
                     <a 
                       href="tel:07572634898" 
@@ -205,7 +205,7 @@ export default function ContactPage() {
               </h2>
               <p className="text-xl text-gray-300 mb-8">
                 Stranded with damaged alloys or punctured tyres? 
-                We offer emergency callout services throughout Devon.
+                We offer emergency callout services throughout Exeter.
               </p>
                               <a 
                   href="tel:07572634898" 

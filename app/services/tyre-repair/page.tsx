@@ -90,13 +90,13 @@ export default function TyreRepairExeter() {
                   <Star key={i} className="w-5 h-5 text-[#3E797F] fill-[#3E797F]" />
                 ))}
               </div>
-              <span className="text-white/80 text-sm">Devon's Trusted Tyre Repair Specialists</span>
+              <span className="text-white/80 text-sm">Exeter's Trusted Tyre Repair Specialists</span>
             </div>
 
             {/* SEO-Optimized H1 */}
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
               <span className="block text-white">Professional</span>
-              <span className="block text-[#3E797F]">Tyre Repair Devon</span>
+              <span className="block text-[#3E797F]">Tyre Repair Exeter</span>
               <span className="block text-2xl md:text-3xl font-normal text-gray-400 mt-4">
                 Fast, Reliable Puncture Repairs at Our Ipplepen Workshop
               </span>
@@ -389,22 +389,22 @@ export default function TyreRepairExeter() {
           </h2>
           
           <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
-            Find answers to common questions about our tyre repair service in Devon
+            Find answers to common questions about our tyre repair service in Exeter
           </p>
 
           <div className="max-w-3xl mx-auto space-y-4">
             <FAQItem 
-              question="How long does a tyre repair take in Devon?"
+              question="How long does a tyre repair take in Exeter?"
               answer="Most standard puncture repairs at our Ipplepen workshop take around 45 minutes. This includes inspection, repair, and safety testing. We aim to get you back on the road as quickly as possible while ensuring all repairs meet safety standards."
             />
             
             <FAQItem 
-              question="Do you offer mobile tyre repairs in Devon?"
+              question="Do you offer mobile tyre repairs in Exeter?"
               answer="No, we exclusively perform tyre repairs at our Ipplepen workshop. This allows us to maintain the highest safety standards and use our professional equipment in a controlled environment."
             />
             
             <FAQItem 
-              question="How much does a tyre repair cost in Devon?"
+              question="How much does a tyre repair cost in Exeter?"
               answer="Our standard puncture repair service is £25, which includes inspection, repair, wheel balance check, and pressure adjustment. We'll always assess your tyre for free first to confirm if a repair is possible and safe."
             />
             

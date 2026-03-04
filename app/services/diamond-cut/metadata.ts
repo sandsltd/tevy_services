@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Diamond Cut Alloy Wheel Repair Devon | Same-Day | Call 07572 634898',
-  description: 'Diamond cut alloy wheel repair in Devon. CNC lathe restoration, same-day service, mobile available. Factory finish guaranteed. Ipplepen workshop. Call now!',
+  title: 'Diamond Cut Alloy Wheel Repair Exeter | Same-Day | Call 07572 634898',
+  description: 'Diamond cut alloy wheel repair Exeter & Devon. CNC lathe restoration, same-day service, mobile available. Factory finish guaranteed. Ipplepen workshop. Call now!',
   keywords: [
     'diamond cut alloy wheel repair Exeter',
     'diamond cut wheel refurbishment Exeter',
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
     'diamond cut finish'
   ].join(', '),
   openGraph: {
-    title: 'Diamond Cut Alloy Repair Devon | Same-Day Service | Tevy Services',
-    description: 'Diamond cut wheel repair in Devon. CNC lathe precision, mobile service available. Factory finish. Call 07572 634898!',
+    title: 'Diamond Cut Alloy Repair Exeter | Same-Day Service | Tevy Services',
+    description: 'Diamond cut wheel repair in Exeter. CNC lathe precision, mobile service available. Factory finish. Call 07572 634898!',
     images: [
       {
         url: '/images/services/diamond-cut-hero.jpg',
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Diamond Cut Alloy Wheel Repair Devon',
-    description: 'Expert wheel restoration in Devon. CNC precision, factory-grade finish & mobile service available.',
+    title: 'Diamond Cut Alloy Wheel Repair Exeter',
+    description: 'Expert wheel restoration in Exeter. CNC precision, factory-grade finish & mobile service available.',
     images: ['/images/services/diamond-cut-hero.jpg'],
   },
   alternates: {

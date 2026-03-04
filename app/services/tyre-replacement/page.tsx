@@ -87,13 +87,13 @@ export default function TyresExeter() {
                   <Star key={i} className="w-5 h-5 text-[#3E797F] fill-[#3E797F]" />
                 ))}
               </div>
-              <span className="text-white/80 text-sm">Trusted Tyre Specialists in Devon</span>
+              <span className="text-white/80 text-sm">Trusted Tyre Specialists in Exeter</span>
             </div>
 
             {/* SEO-Optimized H1 */}
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
               <span className="block text-white">Professional</span>
-              <span className="block text-[#3E797F]">Tyres Devon</span>
+              <span className="block text-[#3E797F]">Tyres Exeter</span>
               <span className="block text-2xl md:text-3xl font-normal text-gray-400 mt-4">
                 Expert Tyre Fitting & Replacement Services at Our Ipplepen Facility
               </span>
@@ -627,7 +627,7 @@ export default function TyresExeter() {
           </h2>
           
           <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
-            Find answers to common questions about our tyre services in Devon
+            Find answers to common questions about our tyre services in Exeter
           </p>
 
           <div className="max-w-3xl mx-auto space-y-4">
@@ -637,12 +637,12 @@ export default function TyresExeter() {
             />
             
             <FAQItem 
-              question="Do you offer mobile tyre fitting in Devon?"
+              question="Do you offer mobile tyre fitting in Exeter?"
               answer="No, we exclusively provide our tyre services at our Ipplepen workshop. This allows us to maintain the highest standards of service and safety, using our professional equipment and controlled environment."
             />
             
             <FAQItem 
-              question="What brands of tyres do you stock in Devon?"
+              question="What brands of tyres do you stock in Exeter?"
               answer={
                 <div className="space-y-2">
                   <p>We stock all major tyre brands including:</p>
@@ -678,7 +678,7 @@ export default function TyresExeter() {
             />
             
             <FAQItem 
-              question="Do you offer wheel alignment in Devon?"
+              question="Do you offer wheel alignment in Exeter?"
               answer="Yes, we provide professional wheel alignment services at our Ipplepen workshop using the latest laser alignment equipment. This service helps ensure even tyre wear and optimal vehicle handling."
             />
           </div>

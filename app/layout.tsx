@@ -8,7 +8,7 @@ import SchemaMarkup from './components/SchemaMarkup'
 import MovedBanner from './components/MovedBanner'
 
 export const metadata: Metadata = {
-  title: 'Alloy Wheel Repair Devon | Mobile Service | Call 07572 634898',
+  title: 'Alloy Wheel Repair Exeter | Mobile Service | Call 07572 634898',
   description: 'Alloy wheel refurbishment in Devon. Diamond cut, painting, tyres. Mobile service or our Ipplepen workshop. Same-day repairs from £60. Call now!',
   metadataBase: new URL('https://www.tevyservices.co.uk'),
   alternates: {
@@ -23,21 +23,21 @@ export const metadata: Metadata = {
     locale: 'en_GB',
     url: 'https://www.tevyservices.co.uk',
     siteName: 'Tevy Services',
-    title: 'Alloy Wheel Refurbishment Devon | Mobile & Workshop Service | Tevy Services',
-    description: 'Professional alloy wheel refurbishment in Devon. Diamond cut restoration, mobile service & workshop repairs.',
+    title: 'Alloy Wheel Refurbishment Exeter | Mobile & Workshop Service | Tevy Services',
+    description: 'Professional alloy wheel refurbishment in Exeter. Diamond cut restoration, mobile service & workshop repairs.',
     images: [
       {
         url: '/images/services/workshop_exeter.jpeg',
         width: 1200,
         height: 630,
-        alt: 'Tevy Services - Alloy Wheel Repair Devon',
+        alt: 'Tevy Services - Alloy Wheel Repair Exeter',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Alloy Wheel Refurbishment Devon | Tevy Services',
-    description: 'Professional alloy wheel refurbishment in Devon. Mobile service available.',
+    title: 'Alloy Wheel Refurbishment Exeter | Tevy Services',
+    description: 'Professional alloy wheel refurbishment in Exeter. Mobile service available.',
     images: ['/images/services/workshop_exeter.jpeg'],
   },
   icons: {

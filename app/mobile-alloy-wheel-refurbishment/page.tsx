@@ -6,12 +6,12 @@ import { Metadata } from 'next'
 import SchemaMarkup from '../components/SchemaMarkup'
 
 export const metadata: Metadata = {
-  title: 'Mobile Alloy Wheel Refurbishment Devon | Diamond Cut & Repair | Tevy Services',
-  description: 'Expert mobile alloy wheel refurbishment in Devon. Professional diamond cutting, painting & scuff repairs at your location. 5-star rated, same-day service available.',
-  keywords: 'mobile alloy wheel refurbishment devon, alloy wheel refurbishment devon, mobile wheel repair devon, diamond cut refurbishment devon',
+  title: 'Mobile Alloy Wheel Refurbishment Exeter | Diamond Cut & Repair | Tevy Services',
+  description: 'Expert mobile alloy wheel refurbishment in Exeter. Professional diamond cutting, painting & scuff repairs at your location. 5-star rated, same-day service available.',
+  keywords: 'mobile alloy wheel refurbishment exeter, alloy wheel refurbishment exeter, mobile wheel repair exeter, diamond cut refurbishment exeter',
   openGraph: {
-    title: 'Mobile Alloy Wheel Refurbishment Devon | On-Site Service',
-    description: 'Professional mobile alloy wheel refurbishment in Devon. We come to you! Free quotes, same-day service.',
+    title: 'Mobile Alloy Wheel Refurbishment Exeter | On-Site Service',
+    description: 'Professional mobile alloy wheel refurbishment in Exeter. We come to you! Free quotes, same-day service.',
     images: [{ url: '/images/mobile-service-og.jpg', width: 1200, height: 630 }],
   },
   alternates: {
@@ -49,11 +49,11 @@ export default function MobileAlloyWheelRefurbishment() {
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
                 <span className="text-white">Mobile Alloy Wheel</span>{" "}
                 <span className="text-[#3E797F]">Refurbishment</span>{" "}
-                <span className="text-white">Devon</span>
+                <span className="text-white">Exeter</span>
               </h1>
-
+              
               <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-                Devon's premier mobile alloy wheel refurbishment service. Professional diamond cutting, painting and repairs at your location. No need to travel - we bring our fully equipped mobile workshop to your home or workplace across Devon.
+                Exeter's premier mobile alloy wheel refurbishment service. Professional diamond cutting, painting and repairs at your location. No need to travel - we bring our fully equipped mobile workshop to your home or workplace across Exeter and surrounding areas.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -191,7 +191,7 @@ export default function MobileAlloyWheelRefurbishment() {
               </div>
               
               <p className="text-gray-300 mb-8">
-                We also service surrounding areas across Devon. Call us to confirm coverage for your location.
+                We also service surrounding areas within 15 miles of Exeter. Call us to confirm coverage for your location.
               </p>
               
               <div className="p-6 bg-[#3E797F]/10 border border-[#3E797F]/20 rounded-xl">

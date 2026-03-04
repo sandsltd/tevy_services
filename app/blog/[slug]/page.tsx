@@ -187,7 +187,7 @@ export default async function BlogPostPage({
             </h2>
             <p className="text-gray-300 mb-6">
               TEVY Services offers expert alloy wheel repair, diamond cut
-              refurbishment, and tyre services across Devon. Get in
+              refurbishment, and tyre services across Exeter and Devon. Get in
               touch for a free, no-obligation quote.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">

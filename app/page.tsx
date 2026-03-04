@@ -185,7 +185,7 @@ export default function Home() {
                 <span className="text-4xl md:text-6xl lg:text-7xl font-bold block animate-slide-up">
                   <span className="text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Alloy Wheel</span>{" "}
                   <span className="text-[#3E797F] drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Refurbishment</span>{" "}
-                  <span className="text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Devon</span>
+                  <span className="text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Exeter</span>
                 </span>
                 <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#3E797F] block animate-slide-up delay-100 leading-tight mt-4 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
                   Restoring South West Alloys Since 2020
@@ -193,7 +193,7 @@ export default function Home() {
               </h1>
 
               <p className="text-lg md:text-xl mb-8 text-gray-200 max-w-3xl animate-fade-in-up delay-300 font-medium leading-relaxed">
-                Expert alloy wheel refurbishment specialists in Devon. Diamond cut restoration, custom paint finishes and complete wheel repairs. Mobile service across the South West or visit our state-of-the-art Ipplepen facility.
+                Expert alloy wheel refurbishment specialists in Exeter. Diamond cut restoration, custom paint finishes and complete wheel repairs. Mobile service across the South West or visit our state-of-the-art Ipplepen facility.
               </p>
 
               {/* Service Types */}
@@ -418,12 +418,12 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <h3 className="text-2xl font-bold mb-6">Devon's Leading Alloy Wheel Refurbishment Specialists</h3>
+              <h3 className="text-2xl font-bold mb-6">Exeter's Leading Alloy Wheel Refurbishment Specialists</h3>
               <p className="text-gray-300 mb-6">
                 Based in Teignmouth with our advanced facility in Ipplepen, Devon,
-                Tevy Services is the premier choice for alloy wheel refurbishment in Devon and surrounding areas.
-                Our expertise spans from precision diamond cut refurbishment to custom wheel painting, with
-                comprehensive mobile services available across Devon, Newton Abbot, Torquay and the South West.
+                Tevy Services is the premier choice for alloy wheel refurbishment in Exeter and surrounding areas. 
+                Our expertise spans from precision diamond cut refurbishment to custom wheel painting, with 
+                comprehensive mobile services available across Exeter, Newton Abbot, Torquay and the South West.
               </p>
               <p className="text-gray-300 mb-6">
                 Our recent expansion includes a dedicated unit equipped with cutting-edge Diamond Cut 

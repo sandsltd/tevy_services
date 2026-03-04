@@ -1,18 +1,18 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Alloy Wheel Repair Devon | Mobile Service | Tevy Services',
-  description: 'Expert alloy wheel repair in Devon. Diamond cutting, custom painting & TPMS. 5-star mobile service with same-day availability. Book now!',
-  keywords: 'alloy wheel repair Devon, wheel refurbishment Devon, mobile wheel repair, diamond cut alloys Devon, alloy wheel painting Devon, TPMS repair',
+  title: 'Alloy Wheel Repair Exeter | Mobile Service | Tevy Services',
+  description: 'Expert alloy wheel repair in Exeter. Diamond cutting, custom painting & TPMS. 5-star mobile service with same-day availability. Book now!',
+  keywords: 'alloy wheel repair Exeter, wheel refurbishment Exeter, mobile wheel repair, diamond cut alloys Exeter, alloy wheel painting Exeter, TPMS repair',
   openGraph: {
-    title: 'Alloy Wheel Repair & Refurbishment Devon | Tevy Services',
-    description: 'Expert alloy wheel repair in Devon with free callout. Diamond cutting, custom finishes & 5-star rated service. Book today!',
+    title: 'Alloy Wheel Repair & Refurbishment Exeter | Tevy Services',
+    description: 'Expert alloy wheel repair in Exeter with free callout. Diamond cutting, custom finishes & 5-star rated service. Book today!',
     images: [
       {
         url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Tevy Services Alloy Wheel Repair Devon'
+        alt: 'Tevy Services Alloy Wheel Repair Exeter'
       }
     ],
     locale: 'en_GB',
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Alloy Wheel Repair Devon | Mobile Service',
-    description: 'Professional wheel repair & refurbishment in Devon. Diamond cutting, custom painting & 5-star service.',
+    title: 'Alloy Wheel Repair Exeter | Mobile Service',
+    description: 'Professional wheel repair & refurbishment in Exeter. Diamond cutting, custom painting & 5-star service.',
     images: ['/images/og-image.jpg'],
   },
   alternates: {

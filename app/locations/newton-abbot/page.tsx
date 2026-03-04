@@ -99,7 +99,7 @@ export default function NewtonAbbotAlloyWheelRefurbishment() {
                     </li>
                     <li className="flex items-center gap-2 text-gray-400">
                       <CheckCircle2 className="w-4 h-4 text-[#3E797F]" />
-                      We come to you
+                      No need to travel to Exeter
                     </li>
                     <li className="flex items-center gap-2 text-gray-400">
                       <CheckCircle2 className="w-4 h-4 text-[#3E797F]" />
