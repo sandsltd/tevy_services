@@ -17,42 +17,42 @@
 ### Tier 1 — Primary (high priority)
 | # | Keyword | Current Position | Last Checked | Target Page | Notes |
 |---|---------|-----------------|--------------|-------------|-------|
-| 1 | alloy wheel repair exeter | Position 4.9 | 2 Mar 2026 | / | Homepage + service pages |
-| 2 | alloy wheel refurbishment exeter | Position 7 | 2 Mar 2026 | / | Core service term |
-| 3 | diamond cut alloy wheels exeter | Not indexed yet | 2 Mar 2026 | /services/diamond-cut | Diamond cut service page |
-| 4 | mobile alloy wheel repair exeter | Position 2 | 2 Mar 2026 | /mobile-alloy-wheel-refurbishment | Dedicated landing page |
-| 5 | tyre services exeter | Not indexed yet | 2 Mar 2026 | /services/tyre-repair | Tyre service pages |
-| 6 | alloy wheel repair devon | Not indexed yet | 2 Mar 2026 | / | Regional targeting |
-| 7 | tyre fitting exeter | Position 37.7 | 2 Mar 2026 | /services/tyre-replacement | Tyre replacement page |
-| 8 | wheel repair exeter | Position 4.5 | 2 Mar 2026 | / | Generic wheel repair |
+| 1 | alloy wheel repair exeter | Position 5.2 | 9 Mar 2026 | / | Homepage + service pages |
+| 2 | alloy wheel refurbishment exeter | Position 5.4 | 9 Mar 2026 | / | Core service term |
+| 3 | diamond cut alloy wheels exeter | Not indexed yet | 9 Mar 2026 | /services/diamond-cut | Diamond cut service page |
+| 4 | mobile alloy wheel repair exeter | Position 1.9 | 9 Mar 2026 | /mobile-alloy-wheel-refurbishment | Dedicated landing page |
+| 5 | tyre services exeter | Not indexed yet | 9 Mar 2026 | /services/tyre-repair | Tyre service pages |
+| 6 | alloy wheel repair devon | Not indexed yet | 9 Mar 2026 | / | Regional targeting |
+| 7 | tyre fitting exeter | Position 42.3 | 9 Mar 2026 | /services/tyre-replacement | Tyre replacement page |
+| 8 | wheel repair exeter | Position 4.5 | 9 Mar 2026 | / | Generic wheel repair |
 
 ### Tier 2 — Secondary
 | # | Keyword | Current Position | Last Checked | Target Page | Notes |
 |---|---------|-----------------|--------------|-------------|-------|
-| 1 | alloy wheel refurbishment near me | Position 8.2 | 2 Mar 2026 | /blog/alloy-wheel-refurbishment-near-me | Blog post |
-| 2 | mobile alloy wheel repair near me | Position 19.4 | 2 Mar 2026 | /mobile-alloy-wheel-refurbishment | Landing page |
-| 3 | diamond cut alloy wheel repair devon | Not indexed yet | 2 Mar 2026 | /services/diamond-cut | Regional diamond cut |
-| 4 | alloy wheel painting exeter | Not indexed yet | 2 Mar 2026 | /services/painted-alloys | Painted alloys page |
-| 5 | tyre replacement exeter | Position 27.9 | 2 Mar 2026 | /services/tyre-replacement | Service page |
-| 6 | kerbed alloy wheel repair exeter | Not indexed yet | 2 Mar 2026 | /blog/signs-of-alloy-wheel-damage-exeter | Blog post |
-| 7 | alloy wheel repair marsh barton | Not indexed yet | 2 Mar 2026 | / | Local area targeting |
-| 8 | puncture repair exeter | Position 5.3 | 2 Mar 2026 | /puncture-repairs | Dedicated landing page |
+| 1 | alloy wheel refurbishment near me | Position 8.8 | 9 Mar 2026 | /blog/alloy-wheel-refurbishment-near-me | Blog post |
+| 2 | mobile alloy wheel repair near me | Position 15.1 | 9 Mar 2026 | /mobile-alloy-wheel-refurbishment | Landing page |
+| 3 | diamond cut alloy wheel repair devon | Not indexed yet | 9 Mar 2026 | /services/diamond-cut | Regional diamond cut |
+| 4 | alloy wheel painting exeter | Not indexed yet | 9 Mar 2026 | /services/painted-alloys | Painted alloys page |
+| 5 | tyre replacement exeter | Position 29.8 | 9 Mar 2026 | /services/tyre-replacement | Service page |
+| 6 | kerbed alloy wheel repair exeter | Not indexed yet | 9 Mar 2026 | /blog/signs-of-alloy-wheel-damage-exeter | Blog post |
+| 7 | alloy wheel repair marsh barton | Not indexed yet | 9 Mar 2026 | / | Local area targeting |
+| 8 | puncture repair exeter | Position 5.5 | 9 Mar 2026 | /puncture-repairs | Dedicated landing page |
 
 ### Tier 3 — Long-tail / Blog
 | # | Keyword | Current Position | Last Checked | Target Page | Notes |
 |---|---------|-----------------|--------------|-------------|-------|
-| 1 | how much does alloy wheel repair cost uk | Not indexed yet | 2 Mar 2026 | Blog post (planned) | High search volume informational |
-| 2 | diamond cut vs painted alloys | Not indexed yet | 2 Mar 2026 | /blog/diamond-cut-vs-painted-alloys | Existing blog post |
-| 3 | can you repair diamond cut alloy wheels | Not indexed yet | 2 Mar 2026 | Blog post (planned) | FAQ-style query |
-| 4 | is alloy wheel repair worth it | Not indexed yet | 2 Mar 2026 | Blog post (planned) | Decision-stage query |
-| 5 | mobile vs workshop alloy wheel refurbishment | Not indexed yet | 2 Mar 2026 | /blog/mobile-vs-workshop-alloy-wheel-refurbishment-exeter | Existing blog post |
-| 6 | signs of alloy wheel damage | Not indexed yet | 2 Mar 2026 | /blog/signs-of-alloy-wheel-damage-exeter | Existing blog post |
-| 7 | alloy wheel repair before selling car | Not indexed yet | 2 Mar 2026 | Blog post (planned) | Commercial intent |
-| 8 | does alloy wheel damage affect mot | Not indexed yet | 2 Mar 2026 | Blog post (planned) | Regulatory query |
-| 9 | lease car alloy wheel repair exeter | Not indexed yet | 2 Mar 2026 | Blog post (planned) | High-value segment |
-| 10 | pothole damage alloy wheel repair devon | Not indexed yet | 2 Mar 2026 | Blog post (planned) | Local + seasonal |
-| 11 | how many times can you diamond cut alloy wheel | Not indexed yet | 2 Mar 2026 | Blog post (planned) | Technical query |
-| 12 | ev alloy wheel damage | Not indexed yet | 2 Mar 2026 | Blog post (planned) | Emerging market |
+| 1 | how much does alloy wheel repair cost uk | Not indexed yet | 9 Mar 2026 | Blog post (planned) | High search volume informational |
+| 2 | diamond cut vs painted alloys | Not indexed yet | 9 Mar 2026 | /blog/diamond-cut-vs-painted-alloys | Existing blog post |
+| 3 | can you repair diamond cut alloy wheels | Not indexed yet | 9 Mar 2026 | Blog post (planned) | FAQ-style query |
+| 4 | is alloy wheel repair worth it | Not indexed yet | 9 Mar 2026 | Blog post (planned) | Decision-stage query |
+| 5 | mobile vs workshop alloy wheel refurbishment | Not indexed yet | 9 Mar 2026 | /blog/mobile-vs-workshop-alloy-wheel-refurbishment-exeter | Existing blog post |
+| 6 | signs of alloy wheel damage | Not indexed yet | 9 Mar 2026 | /blog/signs-of-alloy-wheel-damage-exeter | Existing blog post |
+| 7 | alloy wheel repair before selling car | Not indexed yet | 9 Mar 2026 | Blog post (planned) | Commercial intent |
+| 8 | does alloy wheel damage affect mot | Not indexed yet | 9 Mar 2026 | Blog post (planned) | Regulatory query |
+| 9 | lease car alloy wheel repair exeter | Not indexed yet | 9 Mar 2026 | Blog post (planned) | High-value segment |
+| 10 | pothole damage alloy wheel repair devon | Not indexed yet | 9 Mar 2026 | Blog post (planned) | Local + seasonal |
+| 11 | how many times can you diamond cut alloy wheel | Not indexed yet | 9 Mar 2026 | Blog post (planned) | Technical query |
+| 12 | ev alloy wheel damage | Not indexed yet | 9 Mar 2026 | Blog post (planned) | Emerging market |
 
 ## Content Strategy
 
@@ -118,6 +118,10 @@
 
 ### 2 Mar 2026 — Automated Monthly SEO Agent Run
 - **What was done:** Checked rankings for 28 keywords (9 indexed). Refreshed blog post: "Diamond Cut vs Painted Alloys: The Ultimate UK Driver's Guide (2026)" targeting "diamond cut vs painted alloys". Added 3 internal links across blog posts. 2 competitors have published new content recently. Generated 5 SEO recommendations.
+- **Run type:** Automated (GitHub Actions)
+
+### 9 Mar 2026 — Automated Monthly SEO Agent Run
+- **What was done:** Checked rankings for 28 keywords (9 indexed). Refreshed blog post: "Diamond Cut vs Painted Alloys: Which Finish Lasts Longer in 2026?" targeting "diamond cut vs painted alloys". Added 1 internal links across blog posts. 2 competitors have published new content recently. Generated 5 SEO recommendations.
 - **Run type:** Automated (GitHub Actions)
 
 > **Instructions for future sessions:** Always append new session entries below. Record what was done, rankings checked, and content published.
